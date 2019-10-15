@@ -26,7 +26,7 @@ Dentro del acarpeta del proyecto
 ```
 >composer install 
 
->copy env.example .env
+>copy .env.example .env
 
 >php artisan key:generte
 ```
