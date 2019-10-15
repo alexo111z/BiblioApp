@@ -5,20 +5,20 @@ https://styde.net/laravel-5/
 
 
 **Instalar**
->-Composer: https://getcomposer.org/
+-Composer: https://getcomposer.org/
 
->-Laravel: https://laravel.com/docs/6.x
+-Laravel: https://laravel.com/docs/6.x
 
->-Git: https://git-scm.com/
+-Git: https://git-scm.com/
 
->-Php o un servidor con php (XAMP, ejemplo)
+-Php o un servidor con php (XAMP, ejemplo)
 
->-Editor de texto
+-Editor de texto
 
 
 **Usar Proyecto**
 
->En la consola y en la adireccion en la que se valla a guardar el proyecto
+En la consola y en la adireccion en la que se valla a guardar el proyecto
 
 `>git clone https://github.com/alexo111z/BiblioApp.git`
 
