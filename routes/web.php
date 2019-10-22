@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/carreras', 'CarreraController@show');
+
+Route::get('/carreras/agregar', 'CarreraController@formAdd');
+Route::post('/carreras/add', 'CarreraController@add');
