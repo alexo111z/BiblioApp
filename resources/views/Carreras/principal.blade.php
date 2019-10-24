@@ -6,13 +6,13 @@
 
     @forelse($carreras as $carrera)
         @if($carrera->Existe == '1')
-        <li>{{ $carrera->Nombre }}</li>
+        <li>{{ $carrera->Nombre }} - <a href="{{route('carrera.formEdit', $carrera->Clave)}}">Editar</a></li>
         @endif
     @empty
-        <li>No hay usuarios registrados.</li>
+        <li>No hay carreras registradas.</li>
     @endforelse
 
     <br>
-    <a href="{!! url('/carreras/agregar') !!}" >Agregar</a>
+    <a href="{{ route('carrera.nueva') }}" >Agregar</a>
 
 @endsection

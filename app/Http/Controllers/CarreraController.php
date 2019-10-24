@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Carrera;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CarreraController extends Controller
@@ -11,7 +10,6 @@ class CarreraController extends Controller
     function show(){
 
         $carreras = DB::table('tblcarreras')->get();
-
         $title = 'Listado carreras';
 
         return view('Carreras.principal', compact('carreras', 'title'));
@@ -19,6 +17,7 @@ class CarreraController extends Controller
 
     function formAdd(){
         $carrera = null;
+
         return view('Carreras.nueva', ['carrera' => $carrera]);
     }
 
@@ -29,8 +28,6 @@ class CarreraController extends Controller
         ],[
             'name.required' => 'El campo esta vacio'
         ]);
-
-//        dd($data);
 
         Carrera::create([
             'Clave' => $data['clave'],
@@ -43,16 +40,24 @@ class CarreraController extends Controller
 
     function formEdit(Carrera $carrera){
 
-        return view('Carreras.nueva', ['carrera' => $carrera]);
-
+        return view('Carreras.editar', ['carrera' => $carrera]);
     }
 
-    function update(Carrera $carrera){
+    function update(){
         $data = request()->all();
 
-        dd($data);
+        $carrera = Carrera::findOrFail($data['clave']);
+        $carrera->Nombre = $data['nombre'];
+        $carrera->save();
 
-        $carrera->update($data);
+        return redirect()->route('carrera.show');
+    }
+
+    function softDelete(Carrera $carrera){
+
+//        Carrera::destroy($carrera->Clave); //hard delete
+        $carrera->Existe = 0;
+        $carrera->save();
 
         return redirect()->route('carrera.show');
     }
