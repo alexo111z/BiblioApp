@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/carreras', 'CarreraController@show')->name('carrera.show');
 
-Route::get('/carreras', 'CarreraController@show');
+Route::get('/carreras/agregar', 'CarreraController@formAdd')->name('carrera.nueva');
+Route::post('/carreras/add', 'CarreraController@add')->name('carrera.add');
 
-Route::get('/carreras/agregar', 'CarreraController@formAdd');
-Route::post('/carreras/add', 'CarreraController@add');
+Route::get('/carreras/{carrera}/edit', 'CarreraController@formEdit')->name('carrera.edit-show');
+Route::put('/carreras/{carrera}', 'CarreraController@update')->name('carrera.edit');
