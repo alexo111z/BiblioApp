@@ -1,54 +1,83 @@
 # BiblioApp
 
-**Link curso laravel:**
-https://styde.net/laravel-5/
 
+## Instalación
 
-**Instalar**
--Composer: https://getcomposer.org/
+- Composer: https://getcomposer.org/
 
--Laravel: https://laravel.com/docs/6.x
+- Laravel: https://laravel.com/docs/6.x
 
--Git: https://git-scm.com/
+- Git: https://git-scm.com/
 
--Php o un servidor con php (XAMP, ejemplo)
+- Php o un servidor con php (XAMP, ejemplo)
 
--Editor de texto
+- Editor de texto
 
+- NodeJS y NPM: https://nodejs.org/en/download/
 
-**Usar Proyecto**
+## Uso del proyecto
 
-En la consola y en la adireccion en la que se valla a guardar el proyecto
+En la consola y en la adireccion en la que se vaya a guardar el proyecto
 
-`>git clone https://github.com/alexo111z/BiblioApp.git`
+`git clone https://github.com/alexo111z/BiblioApp.git`
 
-Dentro del acarpeta del proyecto
+Dentro del la carpeta del proyecto
+
+```bash
+composer install
+
+copy .env.example .env #windows
+cp .env.example .env #linux
+
+php artisan key:generate
+
+npm install
 ```
->composer install
 
->copy .env.example .env
+## Base de datos
 
->php artisan key:generate
+```bash
+# desplegar un servidor rápido con docker
+docker run -p 3306:3306 --name db -e MYSQL_ROOT_PASSWORD=secret -d mysql:5.6
+
+# Crear una base de datos con el mysql-client
+mysql -u root -P 3306 -h 127.0.0.1 -p #contraseña secret
+CREATE DATABASE bibliodb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# correr migraciones y seeders
+
+#
+# Usuario administrador
+# email: biblio-admin@gmail.com
+# contraseña: admin1234
+#
+
+php artisan migrate
+php artisan db:seed --class=UsersSeeder
 ```
 
-Ejecutar: 
-`>php artisan serve`
+## Ejecutar servidor
 
-Entrar a localhost:8000 o 127.0.0.1:8000, carga la pagina con el mensaje Laravel, todo listo
+`php artisan serve`
 
-**Comandos de git:**
+Entrar a localhost:8000 o 127.0.0.1:8000, carga la pagina con el mensaje Laravel, todo listo.
 
-`>git add .` ->
-agregar todos los archivos con cambios
+Si vas a hacer cambios en los scripts también correr en otra terminal, lo que hace es ver los cambios que se tienen en el código.
 
-`>git commit -m "first commit"` ->
-subir cambios al repositorio (despues del add)
+`npm run watch`
 
-`>git push -u [repositorio(origin)] [branch]` ->
-sube los commit al repositorio web en el branch especificado
+## Comandos de git
 
-`>git branch (nombre)` ->  
-permite crear un nuevo branch(rama)
 
-`>git checkout [branch]` -> 
-permite cambiar entre branchs
+agregar todos los archivos con cambios: `git add .`
+
+
+subir cambios al repositorio (ejecutar solamente despues del add): `git commit -m "first commit"`
+
+sube los commit al repositorio web en la rama especificada **(CUIDADO)**: `git push -u origin [branch]`
+
+permite crear una nueva rama: `git branch (nombre)`
+
+permite cambiar cambiar entre ramas: `git checkout [branch]`
+
+Una vez acabado el trabajo en la rama, hay que abrir un pull request
