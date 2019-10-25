@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Empleados;
+use App\Prestamos;
 use Illuminate\Http\Request;
+use DB;
 
-class EmpleadosController extends Controller
+class PrestamosController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,12 @@ class EmpleadosController extends Controller
      */
     public function index()
     {
-        //
+        //$prestamos = Prestamos::orderBy('Folio','DESC')->paginate();
+
+        $datas=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+        ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
+        ->select('tblalumnos.nombre')->get();
+        return view('Prestamos.index',compact('datas'));
     }
 
     /**
@@ -41,10 +47,10 @@ class EmpleadosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Empleados  $empleados
+     * @param  \App\Prestamos  $prestamos
      * @return \Illuminate\Http\Response
      */
-    public function show(Empleados $empleados)
+    public function show(Prestamos $prestamos)
     {
         //
     }
@@ -52,10 +58,10 @@ class EmpleadosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Empleados  $empleados
+     * @param  \App\Prestamos  $prestamos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Empleados $empleados)
+    public function edit(Prestamos $prestamos)
     {
         //
     }
@@ -64,10 +70,10 @@ class EmpleadosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Empleados  $empleados
+     * @param  \App\Prestamos  $prestamos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empleados $empleados)
+    public function update(Request $request, Prestamos $prestamos)
     {
         //
     }
@@ -75,10 +81,10 @@ class EmpleadosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Empleados  $empleados
+     * @param  \App\Prestamos  $prestamos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empleados $empleados)
+    public function destroy(Prestamos $prestamos)
     {
         //
     }
