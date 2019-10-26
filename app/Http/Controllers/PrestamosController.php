@@ -16,12 +16,51 @@ class PrestamosController extends Controller
     public function index()
     {
         //$prestamos = Prestamos::orderBy('Folio','DESC')->paginate();
+        
+        $dataa=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+        ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
+        ->select('tblprestamos.folio','tblalumnos.nombre','tblalumnos.apellidos','tblprestamos.fecha_inicio'
+        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
+        ->where('tblprestamos.existe','=','1');        
+        
+
+        $datab=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+        ->join('tbldocentes','tbldocentes.idusuario','=','tblusuarios.id')
+        ->select('tblprestamos.folio','tbldocentes.nombre','tbldocentes.apellidos','tblprestamos.fecha_inicio'
+        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
+        ->where('tblprestamos.existe','=','1');  
 
         $datas=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
-        ->select('tblalumnos.nombre')->get();
+        ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
+        ->select('tblprestamos.folio','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio'
+        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
+        ->where('tblprestamos.existe','=','1')
+        ->union($dataa)
+        ->union($datab)
+        ->orderby('folio')
+        ->paginate(2);
+
+
+        //$datas = $dataa->merge($datab); 
+       //var_dump($datas);
+        //die();  
+        
         return view('Prestamos.index',compact('datas'));
     }
+
+    public function buscarprestamos(Request $busqueda)
+    {
+        $nombre = $busqueda->input('name');
+        $datas=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+        ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
+        ->select('tblprestamos.folio','tblalumnos.nombre','tblalumnos.apellidos','tblprestamos.fecha_inicio'
+        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
+        ->where('tblalumnos.nombre','like',$nombre)
+        ->paginate(2);           
+
+        return view('Prestamos.index',compact('datas'));        
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +69,7 @@ class PrestamosController extends Controller
      */
     public function create()
     {
-        //
+        return view('Prestamos.create');
     }
 
     /**
@@ -39,9 +78,9 @@ class PrestamosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $busqueda)
     {
-        //
+    
     }
 
     /**
@@ -63,7 +102,7 @@ class PrestamosController extends Controller
      */
     public function edit(Prestamos $prestamos)
     {
-        //
+        return view('Prestamos.edit');
     }
 
     /**

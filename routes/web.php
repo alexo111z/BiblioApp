@@ -16,3 +16,5 @@ Route::get('/', function () {
 });
 
 Route::Resource('prestamos','PrestamosController');
+
+Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
