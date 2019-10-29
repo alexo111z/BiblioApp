@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Autores;
+use Illuminate\Support\Facades\DB;
 
 class AutoresController extends Controller
 {
@@ -11,19 +13,23 @@ class AutoresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $search = $request ->get("search");
+        $autores = Autores::orderBy('idAutor','DESC')
+        ->search($search)
+        ->paginate(10);
+        return [
+            'pagination' => [
+                'total'         => $autores->total(),
+                'current_page'  => $autores->currentPage(),
+                'per_page'      => $autores->perPage(),
+                'last_page'     => $autores->lastPage(),
+                'from'          => $autores->firstItem(),
+                'to'            => $autores->lastItem(),
+            ],
+            'autores' =>$autores
+        ];
     }
 
     /**
@@ -34,29 +40,12 @@ class AutoresController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $this ->validate($request,[
+            'nombre' => 'required',
+            'apellidos' => 'required'
+        ]);
+        Autores::create($request->all());
+        return;
     }
 
     /**
@@ -68,7 +57,12 @@ class AutoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this ->validate($request, [
+            'nombre' => 'required',
+            'apellidos' => 'required'
+        ]);
+
+        DB::table('autores')->where('idAutor', '=', $id)->update($request->all());
     }
 
     /**
@@ -79,6 +73,6 @@ class AutoresController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('autores')->where('idAutor', '=', $id)->delete();
     }
 }

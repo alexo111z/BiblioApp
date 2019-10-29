@@ -12,6 +12,6 @@ class autoresTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Autores::class, 30)->create();
+        factory(Autores::class, 100)->create();
     }
 }
