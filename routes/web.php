@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::Resource('prestamos','PrestamosController');
 
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
+Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');
+//Route::get('/prestamos/detalles/{id}', 'PrestamosController@detalles')->name('detalles');
+

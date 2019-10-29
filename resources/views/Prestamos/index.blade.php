@@ -20,9 +20,9 @@
 				<tr>
 					          <th>Folio</th>
                     <th>Prestatario</th>
-                    <th>F_inicio</th>
-                    <th>F_Final</th>
-                    <th>F_entrega</th>
+                    <th>Fecha Inicio</th>
+                    <th>Fecha Termino</th>
+                    <th>Estado</th>
                     <th>renovaciones</th> 
                     <th></th>                                     
                     <th colspan="2"><a class="btn btn-success" href="{{url('/prestamos/create')}}">Nuevo Prestamo</a></th>				</tr>
@@ -30,42 +30,53 @@
 			<tbody>
                 @if(isset($datas))
                     @foreach($datas as $data)
-				<tr>
+				      <tr>
                     <td>{{ $data->folio }}</td>
                     <td>{{ $data->nombre.' '.$data->apellidos }}</td>
                     <td>{{ $data->fecha_inicio }}</td>
                     <td>{{ $data->fecha_final }}</td>
-                    <td>{{ $data->fecha_entrega }}</td>
+
+                    @if( (($data->fecha_final) == date('Y-m-d')) || (($data->fecha_final) < date('Y-m-d')) )
+                    @php($vigente=1)
+                    <td>Prestamo Vigente</td>
+                    
+                      @else
+                      @php($vigente=0)
+                      <td>Prestamo Expirado</td>
+                      
+                      @endif
+
+                      
+                    
+                    
+                    
                     <td>{{ $data->renovaciones }}</td>
-                   
-            <td>
-                <a class="btn btn-secondary" href="{{url('/prestamos/'.$data->folio.'/ver')}}">
-                Detalles
-                </a>           </td>
+                                       
                     <td>
-                <a class="btn btn-primary" href="{{url('/prestamos/'.$data->folio.'/edit')}}">
-                Editar
-                </a>           </td>
-<td>            <form method="Post" action="{{url('/prestamos/'.$data->folio)}}">
-            {{csrf_field()}}
-            {{method_field('DELETE')}}
-            <button type="submit" onclick="return confirm('Borrar?');" class="btn btn-danger">Borrar</button>
-                
-            </form>
-            </td>
-            
-        </tr>
-        
+                      
+                        <a class="btn btn-secondary" href="{{url('prestamos/detalles/'.$data->folio.'/'.$data->nombre.' '.$data->apellidos).'/'.$vigente}}">
+                        Detalles
+                        </a>           
+                    </td>
+                    <td>
+
+                    @if($vigente==1)
+                    <a class="btn btn-primary" href="{{url('/prestamos/'.$data->folio.'/edit')}}">
+                    Renovar Prestamo
+                    </a>
+                    @endif
+                    
+                    
+
+                    </td>
+                    
+                    
+                  </tr>        
 				@endforeach
 			</tbody>
-        </table>
-        
+    </table>        
         {{$datas->links()}}
-
-                @endif
-
-        
-				       
-	</div>
+                @endif      
+</div>
 
 
