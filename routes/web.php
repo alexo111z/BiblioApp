@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/autors', function () {
     return view('crudAutores');
 });
 

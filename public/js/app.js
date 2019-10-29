@@ -28280,7 +28280,8 @@ new Vue({
                     closeEasing: false,
                     closeOnHover: true,
                     progressBar: true
-        }
+        };
+        $('[data-toggle="tooltip"]').tooltip();
 
     },
     data: {

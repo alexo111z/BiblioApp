@@ -26,7 +26,7 @@
                         <span v-for="error in errors" class="text-danger">@{{error}}</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Guardar</button>
+                        <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i class="fa fa-save"></i> Guardar</button>
                     </div>
                 </div>
             </div>

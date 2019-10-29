@@ -32,6 +32,7 @@
                 <tr>
                     <th width="10px">#</th>
                     <th>Nombre</th>
+                    <th width="10px">Libros</th>
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
             </thead>
@@ -42,7 +43,10 @@
                         @{{autor.nombre}} @{{autor.apellidos}}
                     </td>
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" v-on:click.prevent="editAutor(autor)"><i class="fa fa-edit"></i></a>
+                        5
+                    </td>
+                    <td width="10px">
+                        <a href="javascript:void()" class="btn btn-warning btn-sm" v-on:click.prevent="editAutor(autor)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                     </td>
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAutor(autor)"><i class="fa fa-user-times"></i></a>
