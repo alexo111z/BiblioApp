@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/autors', function () {
+    return view('crudAutores');
 });
+
+Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
 
 Route::get('/carreras', 'CarreraController@show')->name('carrera.show');
 
@@ -24,3 +26,5 @@ Route::get('/carreras/{carrera}/edit', 'CarreraController@formEdit')->name('carr
 Route::put('/carreras/{carrera}', 'CarreraController@update')->name('carrera.edit');
 
 Route::delete('/carreras/{carrera}','CarreraController@softDelete')->name('carrera.eliminar');
+
+

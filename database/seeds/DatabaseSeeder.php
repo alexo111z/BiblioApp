@@ -11,11 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
         $this->truncateTables([
             'tblcarreras',
+            'tblautores',
         ]);
 
         $this->call(CarrerasSeeder::class);
+        $this->call(autoresTableSeeder::class);
     }
 
     public function truncateTables(array $tables) {
@@ -25,6 +28,5 @@ class DatabaseSeeder extends Seeder
             DB::table($table)->truncate();
         }
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
-
     }
 }
