@@ -6,7 +6,7 @@
     </ol>
 
 {{--General--}}
-    <div class="row" id="crud" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
+    <div class="row" id="CarrerasCRUD" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
 {{--    Titulo--}}
         <div class="col-xs-12">
             <h1 class="page-header" style="margin-top: 0;">Carreras <small>Panel de control</small></h1>
@@ -17,80 +17,83 @@
             <div class="row">
                 <div class="col-sm-6">
 {{--                Boton de registro--}}
-                    <a href="" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">
+                    <a href="#" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">
                         <i class="fa fa-pencil"></i> Registrar carrera
                     </a>
-                    <!--Mostrar
-                        <select id="values" @change.prevent="changeListSize()">
-                            <option>10</option>
-                            <option>25</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                        Registros-->
+
                 </div>
 {{--            Buscador--}}
                 <div class="col-sm-6" style="text-align: right;">
-                    <input v-on:keyup="searchAutor()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
+                    <input v-on:keyup="searchCarrera()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
                 </div>
             </div>
+
 {{--        Tabla datos--}}
             <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
                 <thead>
                     <tr>
-                        <th width="20px">#</th>
+                        <th width="10px">Clave</th>
                         <th>Carrera</th>
-                        <th width="10px">Libros</th>
                         <th width="20px" colspan="2">Acciones</th>
                     </tr>
                 </thead>
-                <tbody v-for="autor in autores">
+                <tbody  v-for="carrera in carreras"><!-- v-for="carrera in carreras" -->
                 <tr>
-                    <th>@{{autor.idAutor}}</th>
+                    <th>
+                        @{{ carrera.Clave }}
+                    </th>
                     <td>
-                        @{{autor.nombre}} @{{autor.apellidos}}
+                        @{{ carrera.Nombre }}
                     </td>
                     <td width="10px">
-                        5
+                        <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                     </td>
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" v-on:click.prevent="editAutor(autor)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
-                    </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAutor(autor)"><i class="fa fa-user-times"></i></a>
+                        <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deleteCarrera(carrera)" ><i class="fa fa-user-times"></i></a>
                     </td>
                 </tr>
                 </tbody>
-            </table>
+            </table> <!--Fin tabla-->
 
-            <div class="row">
-                <div class="col-md-6 col-12">
-                    Mostrando autores del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} autores
-                </div>
-                <div class="col-md-6 col-12">
-                    <nav style="float: right;">
-                        <ul class="pagination" style="margin:0;">
-                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">
-                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>
-                                <a href="javascript:void();" v-else
-                                   @click.prevent="changePage(pagination.current_page - 1)">Atras</a>
-                            </li>
-                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">
-                                <a href="javascript:void();" @click.prevent="changePage(page)">
-                                    @{{page}}
-                                </a>
-                            </li>
-                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">
-                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>
-                                <a href="javascript:void();" v-else
-                                   @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+{{--         Pruebas--}}
+            <div class="col-sm-12">
+                <pre>
+                    @{{ $data }}
+                </pre>
             </div>
+
+{{--        Paginacion--}}
+{{--            <div class="row">--}}
+
+{{--                <div class="col-md-6 col-12">--}}
+{{--                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras--}}
+{{--                </div>--}}
+
+{{--                <div class="col-md-6 col-12">--}}
+{{--                    <nav style="float: right;">--}}
+{{--                        <ul class="pagination" style="margin:0;">--}}
+{{--                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">--}}
+{{--                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>--}}
+{{--                                <a href="javascript:void();" v-else--}}
+{{--                                   @click.prevent="changePage(pagination.current_page - 1)">Atras</a>--}}
+{{--                            </li>--}}
+{{--                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">--}}
+{{--                                <a href="javascript:void();" @click.prevent="changePage(page)">--}}
+{{--                                    @{{page}}--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">--}}
+{{--                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>--}}
+{{--                                <a href="javascript:void();" v-else--}}
+{{--                                   @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </nav>--}}
+{{--                </div>--}}
+{{--            </div><!--Fin Paginacion-->--}}
+
             @include('create')
             @include('edit')
-        </div>
+        </div> <!--Fin Contenido-->
     </div>
 @endsection

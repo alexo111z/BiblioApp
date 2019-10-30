@@ -19,8 +19,13 @@ new Vue({
         $('[data-toggle="tooltip"]').tooltip();
 
     },
+    el: '#CarrerasCRUD',
+    created: function () {
+        this.getCarreras();
+    },
     data: {
         autores: [],
+        carreras: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -136,6 +141,19 @@ new Vue({
             var search = $("#search").val();
             this.search = search;
             this.getAutores();
+        },
+        //Modulo Carreras
+        getCarreras: function () {
+            var urlCarreras = 'carreras';
+            axios.get(urlCarreras).then(response => {
+                this.carreras = response.data
+            });
+        },
+        deleteCarrera: function (carrera) {
+          var url = 'carreras/' + carrera.Clave;
+          axios.delete(url).then(response => {
+             this.getCarreras();
+          });
         },
     }
 });

@@ -16,4 +16,8 @@ class Carrera extends Model
         'Existe',
     ];
 
+    function existe(){
+        return $this->where('Existe', '=',1);
+    }
+
 }
