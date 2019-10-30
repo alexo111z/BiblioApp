@@ -2,64 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Carrera;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class CarreraController extends Controller
 {
-    function show(){
-
-        $carreras = DB::table('tblcarreras')->get();
-        $title = 'Listado carreras';
-
-        return view('Carreras.principal', compact('carreras', 'title'));
+    //Display a listing of the resource.
+    public function index()
+    {
+        //
     }
 
-    function formAdd(){
-        $carrera = null;
-
-        return view('Carreras.nueva', ['carrera' => $carrera]);
+    //Show the form for creating a new resource.
+    public function create()
+    {
+        //
     }
 
-    function add(){
-        $data = request()->validate([
-            'clave' => ['required', 'unique:tblcarreras,Clave'],
-            'nombre' => ['required', 'unique:tblcarreras,Nombre'],
-        ],[
-            'name.required' => 'El campo esta vacio'
-        ]);
-
-        Carrera::create([
-            'Clave' => $data['clave'],
-            'Nombre' => $data['nombre'],
-            'Existe' => 1,
-        ]);
-
-        return redirect()->route('carrera.show');
+    //Store a newly created resource in storage.
+    public function store(Request $request)
+    {
+        //
     }
 
-    function formEdit(Carrera $carrera){
-
-        return view('Carreras.editar', ['carrera' => $carrera]);
+    // Display the specified resource.
+    public function show($id)
+    {
+        //
     }
 
-    function update(){
-        $data = request()->all();
-
-        $carrera = Carrera::findOrFail($data['clave']);
-        $carrera->Nombre = $data['nombre'];
-        $carrera->save();
-
-        return redirect()->route('carrera.show');
+    // Show the form for editing the specified resource.
+    public function edit($id)
+    {
+        //
     }
 
-    function softDelete(Carrera $carrera){
-
-//        Carrera::destroy($carrera->Clave); //hard delete
-        $carrera->Existe = 0;
-        $carrera->save();
-
-        return redirect()->route('carrera.show');
+    //Update the specified resource in storage.
+    public function update(Request $request, $id)
+    {
+        //
     }
 
+   //Remove the specified resource from storage.
+    public function destroy($id)
+    {
+        //
+    }
 }

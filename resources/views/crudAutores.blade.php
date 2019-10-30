@@ -38,9 +38,9 @@
             </thead>
             <tbody v-for="autor in autores">
                 <tr>
-                    <th>@{{autor.idAutor}}</th>
+                    <th>@{{autor.IdAutor}}</th>
                     <td>
-                        @{{autor.nombre}} @{{autor.apellidos}}
+                        @{{autor.Nombre}} @{{autor.Apellidos}}
                     </td>
                     <td width="10px">
                         5
