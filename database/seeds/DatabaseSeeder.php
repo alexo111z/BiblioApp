@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(CarrerasSeeder::class);
-        $this->call(autoresTableSeeder::class);
+//        $this->call(autoresTableSeeder::class);
     }
 
     public function truncateTables(array $tables) {

@@ -17,6 +17,7 @@ Route::get('/autors', function () {
 
 Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
 
+
 Route::get('/carreras', 'CarreraController@show')->name('carrera.show');
 
 Route::get('/carreras/agregar', 'CarreraController@formAdd')->name('carrera.nueva');
@@ -27,4 +28,6 @@ Route::put('/carreras/{carrera}', 'CarreraController@update')->name('carrera.edi
 
 Route::delete('/carreras/{carrera}','CarreraController@softDelete')->name('carrera.eliminar');
 
+//Adeudos
+Route::get('/adeudos', 'AdeudoController@indexpag')->name('adeudo.index');
 

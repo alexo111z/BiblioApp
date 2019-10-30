@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Autores extends Model
 {
+    protected $table = 'tblautores';
+    public $timestamps = false;
     protected $fillable = ['nombre', 'apellidos'];
+
 
     public function scopeSearch($query, $search)
     {
