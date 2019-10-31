@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/autores', function () {
+    return view('autores.index');
+});
+
+Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
