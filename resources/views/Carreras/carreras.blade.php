@@ -57,39 +57,17 @@
 
 {{--        Paginacion--}}
             <div class="row">
-
+{{--            Mensaje del paginado--}}
                 <div class="col-md-6 col-12">
                     Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras
                 </div>
 
                 <div class="col-md-6 col-12">
-{{--                    <nav style="float: right;">--}}
-{{--                        <ul class="pagination" style="margin:0;">--}}
-{{--                            <li v-if="pagination.current_page > 1">--}}
-{{--                                <a href="#" @click.prevent="changePage(pagination.current_page - 1)">--}}
-{{--                                    <span>Atras</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">--}}
-{{--                                <a href="#" @click.prevent="changePage(page)">--}}
-{{--                                    @{{ page }}--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-
-{{--                            <li v-if="pagination.current_page < pagination.last_page">--}}
-{{--                                <a href="#" @click.prevent="changePage(pagination.current_page + 1)">--}}
-{{--                                    <span>Siguiente</span>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </nav>--}}
                     <nav style="float: right;">
                         <ul class="pagination" style="margin:0;">
                             <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">
                                 <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>
-                                <a href="javascript:void();" v-else
-                                   @click.prevent="changePage(pagination.current_page - 1)">Atras</a>
+                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page - 1)">Atras</a>
                             </li>
                             <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">
                                 <a href="javascript:void();" @click.prevent="changePage(page)">
@@ -98,8 +76,7 @@
                             </li>
                             <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">
                                 <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>
-                                <a href="javascript:void();" v-else
-                                   @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
+                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
                             </li>
                         </ul>
                     </nav>
