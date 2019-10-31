@@ -1,0 +1,101 @@
+// Mixins
+$item-color: #6d356c;
+$subitem-color: #2da19a;
+$white-color: #fbfbfb;
+$grey-darken: #363636;
+$grey-lighten: #dddddd;
+
+@mixin menu-item {
+  color: white !important;
+  background-color: $item-color !important;
+}
+
+// Bootstrap override styles
+body {
+  background-color: $grey-lighten !important;
+}
+
+main {
+  margin-bottom: 200px;
+}
+
+.navbar {
+  margin-bottom: 0 !important;
+}
+
+.navbar-brand{
+  & {
+    float: initial !important;
+    padding-top: 10px !important;
+    color: $grey-darken !important;
+  }
+
+  & > img {
+    width: 64px !important;
+    display: inline;
+  }
+}
+
+.navbar {
+  background-color: $white-color !important;
+}
+
+.navbar .navbar-nav {
+  & > li {
+    & > a {
+      color: $grey-darken !important;
+      padding: 10px !important;
+    }
+  }
+
+  & > .open > a,
+  & > .open > a:hover,
+  & > .open > a:focus,
+  & > li > a:hover {
+    @include menu-item; 
+  }
+}
+
+.dropdown-menu {
+  .dropdown-item:hover {
+    @include menu-item;
+  }
+}
+
+.pagination {
+  & > .active {
+    & > a,
+    & > a:hover,
+    & > a:focus,
+    & > a:active {
+      background-color: $item-color !important;
+      border-color: $item-color !important;
+    }
+  }
+
+  & > li > a {
+    color: $subitem-color !important;
+  }
+}
+
+.footer {
+  & {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    background-color: $grey-darken !important;
+    padding: 3rem 0 !important;
+    color: white !important;
+  }
+}
+
+.card {
+  form .label {
+    color: $grey-darken !important;
+  }
+
+  & > .card-header {
+    text-align: center;
+    font-size: 18px;
+  }
+}

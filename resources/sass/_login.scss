@@ -1,0 +1,21 @@
+.login {
+  & {
+    @media screen and (min-width: 768px){
+      width: 500px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-top: calc((272.062px / 2) * -1);
+      margin-left: -250px;
+    }
+  }
+
+  button[type=submit] {
+    background-color: $item-color;
+    border-color: $item-color;
+  }
+
+  .forgot-password {
+    color: $subitem-color;
+  }
+}
