@@ -1,0 +1,35 @@
+
+.dashboard {
+  & {
+    text-align: center;
+  }
+
+  & > h1 {
+    margin: 50px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: $grey-darken;
+  }
+  
+  .section:not(:first-child) {
+    margin-top: 50px;
+  }
+
+  .section-title {
+    & {
+      font-size: 25px;
+      text-transform: uppercase;
+    }
+
+    & > a {
+      color: $grey-darken !important;
+      text-decoration: none;
+    }
+  }
+
+  i.fa {
+    font-size: 100px;
+    margin-bottom: 30px;
+    color: $item-color;
+  }
+}

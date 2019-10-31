@@ -6,3 +6,10 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Application layout
+@import 'layout';
+
+@import 'login';
+
+@import 'dashboard';
