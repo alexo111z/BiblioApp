@@ -1,10 +1,7 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-<<<<<<< HEAD
-use App\User;
-=======
->>>>>>> AlanSanchezTics_branch
+
 use App\Autores;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
