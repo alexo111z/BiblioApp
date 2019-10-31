@@ -1,3 +1,26 @@
+
+new Vue({
+    el: '#reportes',
+    created: function(){
+        this.getreportes();
+    },
+    data:{
+        reportes: []
+    },
+    methods:{
+        getreportes: function(){
+            var urlreportes='reporte';
+            axios.get(urlreportes).then(response =>{
+                this.reportes= response.data
+            });
+        }
+    }
+   
+});
+
+
+
+
 new Vue({
     el: '#crud',
     created: function () {
