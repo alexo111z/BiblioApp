@@ -1,4 +1,5 @@
-@extends('app')
+@extends('layouts.dashboard')
+@section('titulo', "Carreras | BiblioApp")
 @section('content')
     <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
         <li><a href="javascript:void();">Inicio</a></li>
@@ -94,4 +95,5 @@
             @include('Carreras.edit')
         </div> <!--Fin Contenido-->
     </div>
+    <script src="{{asset('js/appCarrera.js')}}"></script>
 @endsection

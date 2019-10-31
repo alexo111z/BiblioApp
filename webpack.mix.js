@@ -18,9 +18,17 @@ mix.scripts([
     'resources/js/sweetalert.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/app.js',
-    'resources/js/carreras/carrera.js'], 'public/js/app.js')
+    'resources/js/app.js'], 'public/js/app.js')
     .styles([
     'resources/css/bootstrap.css',
     'resources/css/toastr.css',
     ], 'public/css/app.css');
+
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/sweetalert.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/carreras/carrera.js'], 'public/js/appCarrera.js');
