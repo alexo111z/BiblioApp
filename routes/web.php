@@ -17,12 +17,12 @@
 //Adeudos
 Route::get('/adeudos', 'AdeudoController@indexpag')->name('adeudo.index');
 
+//Carreras
+Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
 
-Route::get('/', function(){
+Route::get('/carrera', function(){
     return view('Carreras.carreras');
 });
-
-Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
 
 //Autores
 Route::get('/autores', function () {

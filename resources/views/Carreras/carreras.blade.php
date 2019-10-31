@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-sm-6">
 {{--                Boton de registro--}}
-                    <a href="#" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#createCarrera">
+                    <a href="#" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createCarrera">
                         <i class="fa fa-pencil"></i> Registrar carrera
                     </a>
 
@@ -47,10 +47,10 @@
                         @{{ carrera.Nombre }}
                     </td>
                     <td width="10px">
-                        <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
                     </td>
                     <td width="10px">
-                        <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deleteCarrera(carrera)" ><i class="fa fa-user-times"></i></a>
+                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteCarrera(carrera)" ><i class="fa fa-user-times"></i></a>
                     </td>
                 </tr>
                 </tbody>
