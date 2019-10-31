@@ -14,6 +14,7 @@
 Route::get('/autors', function () {
     return view('crudAutores');
 });
+<<<<<<< HEAD
 
 Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
 
@@ -26,3 +27,10 @@ Route::get('/', function(){
 });
 
 Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+=======
+Route::get('/autores', function () {
+    return view('autores.index');
+});
+
+Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
+>>>>>>> AlanSanchezTics_branch

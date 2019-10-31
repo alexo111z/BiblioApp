@@ -1,7 +1,10 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
+<<<<<<< HEAD
 use App\User;
+=======
+>>>>>>> AlanSanchezTics_branch
 use App\Autores;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -19,7 +22,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Autores::class, function (Faker $faker) {
     return [
-        'nombre' => $faker->firstName,
-        'apellidos' =>$faker->lastName
+        'Nombre' => $faker->firstName,
+        'Apellidos'=>$faker->lastName,
+        'Existe'=>1
     ];
 });
