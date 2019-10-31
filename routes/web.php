@@ -24,6 +24,7 @@ Route::get('/', function(){
 
 Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
 
+//Autores
 Route::get('/autores', function () {
     return view('autores.index');
 });
