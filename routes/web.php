@@ -37,4 +37,4 @@ Route::get('/', function(){
     return view('Carreras.carreras');
 });
 
-Route::resource('carreras', 'CarreraController');
+Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);

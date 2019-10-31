@@ -28291,6 +28291,9 @@ new Vue({
     data: {
         autores: [],
         carreras: [],
+        ClaveCarrera: '',
+        NombreCarrera: '',
+        fillCarrera: {'Clave': '', 'Nombre': ''},
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -28318,11 +28321,11 @@ new Vue({
             if (!this.pagination.to) {
                 return [];
             }
-            var from = this.pagination.current_page - this.offset//TODO offset
+            var from = this.pagination.current_page - this.offset; //TODO offset
             if (from < 1) {
                 from = 1;
             }
-            var to = from + (this.offset * 2);// TODO offset
+            var to = from + (this.offset * 2); //TODO offset
             if (to >= this.pagination.last_page) {
                 to = this.pagination.last_page;
             }
@@ -28407,19 +28410,62 @@ new Vue({
             this.search = search;
             this.getAutores();
         },
+
         //Modulo Carreras
-        getCarreras: function () {
-            var urlCarreras = 'carreras';
-            axios.get(urlCarreras).then(response => {
-                this.carreras = response.data
+        getCarreras: function (page) {
+            var url = 'carreras?page=' + page;
+            axios.get(url).then(response => {
+                this.carreras = response.data.carreras.data;
+                this.pagination = response.data.pagination;
             });
         },
         deleteCarrera: function (carrera) {
-          var url = 'carreras/' + carrera.Clave;
-          axios.delete(url).then(response => {
-             this.getCarreras();
+          if (confirm('¿Esta seguro de eliminar la carrera: ' + carrera.Nombre + '?')) {
+               var url = 'carreras/' + carrera.Clave;
+               axios.delete(url).then(response => {
+                   this.getCarreras();
+                   swal.close();
+                   toastr.success("La carrera ha sido eliminada con exito.", "Tarea completada!");
+               }).catch(ex => {
+                   toastr.error(ex.response.data.message, "Error!");
+               });
+          }
+        },
+        createCarrera: function () {
+          var url = 'carreras';
+          axios.post(url, {
+              Clave: this.ClaveCarrera,
+              Nombre: this.NombreCarrera,
+              Existe: 1
+          }).then(response => {
+              this.getCarreras();
+              this.ClaveCarrera = '';
+              this.NombreCarrera = '';
+              this.errors = [];
+              $('#createCarrera').modal('hide');
+              toastr.success("Carrera registrada con exito.", "Tarea completada!");
+          }).catch(error => {
+              this.errors = error.response.data;
           });
         },
+        editCarrera: function (carrera) {
+            this.fillCarrera.Clave  = carrera.Clave;
+            this.fillCarrera.Nombre = carrera.Nombre;
+            $('#editCarrera').modal('show');
+        },
+        updateCarrera: function (id) {
+            var url = 'carreras/' + id;
+            axios.put(url, this.fillCarrera).then(response => {
+                this.getCarreras();
+                this.fillCarrera = {'Clave': '', 'Nombre': ''};
+                this.errors = [];
+                $('#editCarrera').modal('hide');
+                toastr.success("Carrera actualizada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+            });
+        }
+
     }
 });
 

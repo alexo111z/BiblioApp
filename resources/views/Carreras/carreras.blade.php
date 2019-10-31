@@ -17,7 +17,7 @@
             <div class="row">
                 <div class="col-sm-6">
 {{--                Boton de registro--}}
-                    <a href="#" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">
+                    <a href="#" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#createCarrera">
                         <i class="fa fa-pencil"></i> Registrar carrera
                     </a>
 
@@ -37,7 +37,7 @@
                         <th width="20px" colspan="2">Acciones</th>
                     </tr>
                 </thead>
-                <tbody  v-for="carrera in carreras"><!-- v-for="carrera in carreras" -->
+                <tbody  v-for="carrera in carreras">
                 <tr>
                     <th>
                         @{{ carrera.Clave }}
@@ -46,7 +46,7 @@
                         @{{ carrera.Nombre }}
                     </td>
                     <td width="10px">
-                        <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
+                        <a href="#" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
                     </td>
                     <td width="10px">
                         <a href="#" class="btn btn-danger btn-sm" v-on:click.prevent="deleteCarrera(carrera)" ><i class="fa fa-user-times"></i></a>
@@ -55,45 +55,66 @@
                 </tbody>
             </table> <!--Fin tabla-->
 
-{{--         Pruebas--}}
-            <div class="col-sm-12">
-                <pre>
-                    @{{ $data }}
-                </pre>
-            </div>
-
 {{--        Paginacion--}}
-{{--            <div class="row">--}}
+            <div class="row">
 
-{{--                <div class="col-md-6 col-12">--}}
-{{--                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras--}}
-{{--                </div>--}}
+                <div class="col-md-6 col-12">
+                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras
+                </div>
 
-{{--                <div class="col-md-6 col-12">--}}
+                <div class="col-md-6 col-12">
 {{--                    <nav style="float: right;">--}}
 {{--                        <ul class="pagination" style="margin:0;">--}}
-{{--                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>--}}
-{{--                                <a href="javascript:void();" v-else--}}
-{{--                                   @click.prevent="changePage(pagination.current_page - 1)">Atras</a>--}}
-{{--                            </li>--}}
-{{--                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">--}}
-{{--                                <a href="javascript:void();" @click.prevent="changePage(page)">--}}
-{{--                                    @{{page}}--}}
+{{--                            <li v-if="pagination.current_page > 1">--}}
+{{--                                <a href="#" @click.prevent="changePage(pagination.current_page - 1)">--}}
+{{--                                    <span>Atras</span>--}}
 {{--                                </a>--}}
 {{--                            </li>--}}
-{{--                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>--}}
-{{--                                <a href="javascript:void();" v-else--}}
-{{--                                   @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>--}}
+
+{{--                            <li v-for="page in pagesNumber" v-bind:class="[ page == isActived ? 'active' : '']">--}}
+{{--                                <a href="#" @click.prevent="changePage(page)">--}}
+{{--                                    @{{ page }}--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+
+{{--                            <li v-if="pagination.current_page < pagination.last_page">--}}
+{{--                                <a href="#" @click.prevent="changePage(pagination.current_page + 1)">--}}
+{{--                                    <span>Siguiente</span>--}}
+{{--                                </a>--}}
 {{--                            </li>--}}
 {{--                        </ul>--}}
 {{--                    </nav>--}}
-{{--                </div>--}}
-{{--            </div><!--Fin Paginacion-->--}}
+                    <nav style="float: right;">
+                        <ul class="pagination" style="margin:0;">
+                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">
+                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>
+                                <a href="javascript:void();" v-else
+                                   @click.prevent="changePage(pagination.current_page - 1)">Atras</a>
+                            </li>
+                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">
+                                <a href="javascript:void();" @click.prevent="changePage(page)">
+                                    @{{page}}
+                                </a>
+                            </li>
+                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">
+                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>
+                                <a href="javascript:void();" v-else
+                                   @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div><!--Fin Paginacion-->
 
-            @include('create')
-            @include('edit')
+            {{--         Pruebas--}}
+{{--            <div class="col-sm-12">--}}
+{{--                <pre>--}}
+{{--                    @{{ $data }}--}}
+{{--                </pre>--}}
+{{--            </div>--}}
+
+            @include('Carreras.crear')
+            @include('Carreras.edit')
         </div> <!--Fin Contenido-->
     </div>
 @endsection
