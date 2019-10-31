@@ -22,3 +22,10 @@ mix.scripts([
     'resources/css/bootstrap.css',
     'resources/css/toastr.css'
     ], 'public/css/app.css');
+    mix.scripts([
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/editoriales/app.js'], 'public/js/editoriales/app.js');

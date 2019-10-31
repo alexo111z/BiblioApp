@@ -26,7 +26,7 @@ class AutoresController extends Controller
                 'to'            => $autores->lastItem(),
             ],
             'autores' =>$autores
-        ];;
+        ];
     }
 
     /**
@@ -60,7 +60,7 @@ class AutoresController extends Controller
             'Apellidos' => 'required'
         ]);
 
-        Autores::where('idAutor', '=', $id)->update($request->all());
+        Autores::where('IdAutor', '=', $id)->update($request->all());
     }
 
     /**
@@ -71,6 +71,6 @@ class AutoresController extends Controller
      */
     public function destroy($id)
     {
-        Autores::where('idAutor', '=', $id)->delete();
+        Autores::where('IdAutor', '=', $id)->delete();
     }
 }

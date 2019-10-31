@@ -33,7 +33,7 @@
                 <tr>
                     <th width="10px">#</th>
                     <th>Nombre</th>
-                    <th width="10px">Libros</th>
+                    <!--<th width="10px">Libros</th>-->
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
             </thead>
@@ -48,7 +48,7 @@
                     <td>
                         @{{autor.Nombre}} @{{autor.Apellidos}}
                     </td>
-                    <td width="10px">5</td>
+                    <!--<td width="10px">5</td>-->
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editAutor(autor)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                     </td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Editoriales;
 
 class EditorialesController extends Controller
 {
@@ -11,19 +12,21 @@ class EditorialesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $search = $request->get('search');
+        $editoriales = Editoriales::where('Existe','=',1)->search($search)->paginate(10);
+        return [
+            'pagination' => [
+                'total'         => $editoriales->total(),
+                'current_page'  => $editoriales->currentPage(),
+                'per_page'      => $editoriales->perPage(),
+                'last_page'     => $editoriales->lastPage(),
+                'from'          => $editoriales->firstItem(),
+                'to'            => $editoriales->lastItem(),
+            ],
+            'editoriales' =>$editoriales
+        ];
     }
 
     /**
@@ -34,29 +37,11 @@ class EditorialesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $this ->validate($request, [
+            'Nombre' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        Editoriales::create($request->all());
     }
 
     /**
@@ -68,7 +53,10 @@ class EditorialesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'Nombre' => 'required',
+        ]);
+        Editoriales::where('Id', '=', $id)->update($request->all());
     }
 
     /**
@@ -79,6 +67,6 @@ class EditorialesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Editoriales::where('Id', '=', $id)->delete();
     }
 }
