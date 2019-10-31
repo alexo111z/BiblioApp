@@ -11,7 +11,6 @@ class Prestamo extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'Folio',
         'IdPrestatario',
         'Fecha_inicio',
         'Fecha_final',
@@ -23,9 +22,9 @@ class Prestamo extends Model
     function detalles(){
         return $this->belongsTo(DetPrestamo::class, 'Folio');
     }
-    public function scopeSearch($query, $search)
-    {
-        if($search && $search != "")
-            return $query -> where('Folio', 'LIKE', "%$search%")->orWhere('IdPrestatario', 'LIKE', "%$search%");
-    }
+//    public function scopeSearch($query, $search)
+//    {
+//        if($search && $search != "")
+//            return $query -> where('Folio', 'LIKE', "%$search%")->orWhere('IdPrestatario', 'LIKE', "%$search%");
+//    }
 }

@@ -20,14 +20,7 @@
                     <a href="" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">
                         <i class="fa fa-pencil"></i> Registrar autor
                     </a>
-{{--                    Mostrar--}}
-{{--                        <select id="values" @change.prevent="changeListSize()">--}}
-{{--                            <option>10</option>--}}
-{{--                            <option>25</option>--}}
-{{--                            <option>50</option>--}}
-{{--                            <option>100</option>--}}
-{{--                        </select>--}}
-{{--                        Registros--}}
+
                 </div>
                 <div class="col-sm-6" style="text-align: right;">
                     <input v-on:keyup="searchAutor()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">

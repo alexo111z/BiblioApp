@@ -30,7 +30,8 @@ Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'ed
 
 
 //Adeudos
-Route::get('/adeudos', 'AdeudoController@indexpag')->name('adeudo.index');
+Route::resource('adeudos', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+;
 
 
 Route::get('/', function(){
