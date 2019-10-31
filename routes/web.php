@@ -14,8 +14,13 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/autores', function () {
     return view('autores.index');
 });
+Route::get('/editoriales', function () {
+    return view('editoriales.index');
+});
 
 Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
+Route::resource('editorials', 'EditorialesController',['except' =>'show', 'create', 'edit']);
