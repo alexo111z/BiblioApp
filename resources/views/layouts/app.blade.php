@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title') | Biblio App</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/LogoTec.png') }}"/>    
+                <img src="{{ asset('images/LogoTec.png') }}"/>
                 Biblio App ®
             </a>
 
@@ -35,11 +35,12 @@
                             <a class="nav-link" href="{{ route('login') }}">Iniciar sesión<span class="sr-only">(current)</span></a>
                         </li>
                     @else
+                        @if (Auth::user()->user_type === \App\User::TYPE_ADMIN || Auth::user()->user_type === \App\User::TYPE_COLLABORATOR)
                         <li class="nav-item active">
                             <a class="nav-link" href="{{ route('home') }}">Panel de control<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Usuarios<span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="{{ route('users') }}">Usuarios<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Clasificación<span class="sr-only">(current)</span></a>
@@ -59,18 +60,21 @@
                         <li class="nav-item active">
                             <a class="nav-link" href="#">Préstamos<span class="sr-only">(current)</span></a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Adeudos<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Reportes<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Carreras<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Código de libro<span class="sr-only">(current)</span></a>
-                        </li>
+                        @endif
+                        @if (Auth::user()->user_type === \App\User::TYPE_ADMIN)
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Adeudos<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Reportes<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Carreras<span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Código de libro<span class="sr-only">(current)</span></a>
+                            </li>
+                        @endif
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->name }} <span class="caret"></span>

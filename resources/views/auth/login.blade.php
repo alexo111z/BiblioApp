@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('title')
+Iniciar Sesión
+@endsection
+
 @section('content')
 <div class="card login">
     <div class="card-header">Iniciar Sesión</div>

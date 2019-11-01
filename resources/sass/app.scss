@@ -10,6 +10,6 @@
 // Application layout
 @import 'layout';
 
-@import 'login';
-
-@import 'dashboard';
+// Modules
+@import 'module/login';
+@import 'module/dashboard';

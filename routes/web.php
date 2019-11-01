@@ -17,4 +17,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'DashboardController@index')->name('home');
+
+/**
+ * Dashboard
+ */
+
+Route::get('/dashboard/users', 'Module\UserModuleController@index')->name('users');

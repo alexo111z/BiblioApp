@@ -10708,6 +10708,7 @@ main {
   background-color: #363636 !important;
   padding: 3rem 0 !important;
   color: white !important;
+  z-index: 100000;
 }
 
 .card form .label {
@@ -10717,6 +10718,72 @@ main {
 .card > .card-header {
   text-align: center;
   font-size: 18px;
+}
+
+a {
+  color: #2da19a;
+}
+
+.module {
+  margin: 50px 0;
+}
+
+.module > h1 {
+  text-align: center;
+  text-transform: uppercase;
+  color: #363636;
+}
+
+.module > .container {
+  margin-top: 50px;
+  background: white !important;
+  padding: 15px !important;
+  border-radius: 5px;
+}
+
+.module .breadcrumb {
+  background-color: #363636 !important;
+}
+
+.module .breadcrumb > .breadcrumb-item {
+  color: #fbfbfb !important;
+}
+
+.module .breadcrumb > .breadcrumb-item > a {
+  color: #dddddd !important;
+}
+
+.module .breadcrumb > .breadcrumb-item > a:hover {
+  color: #2da19a !important;
+  text-decoration: none;
+}
+
+.module .table {
+  margin-top: 50px;
+}
+
+.module .add-button {
+  margin-top: 30px;
+  color: white !important;
+  background-color: #2da19a !important;
+  border-color: #2da19a !important;
+  padding: 10px;
+}
+
+.module .add-button i.fa {
+  margin-right: 10px;
+}
+
+.module .pagination {
+  margin: 20px 0 !important;
+}
+
+.module .pagination .page-item > .page-link {
+  color: #363636 !important;
+}
+
+.module .pagination .page-item.active > .page-link {
+  color: #fbfbfb !important;
 }
 
 @media screen and (min-width: 768px) {

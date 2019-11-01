@@ -10,6 +10,12 @@ $grey-lighten: #dddddd;
   background-color: $item-color !important;
 }
 
+@mixin menu-subitem {
+    color: white !important;
+    background-color: $subitem-color !important;
+    border-color: $subitem-color !important;
+}
+
 // Bootstrap override styles
 body {
   background-color: $grey-lighten !important;
@@ -52,7 +58,7 @@ main {
   & > .open > a:hover,
   & > .open > a:focus,
   & > li > a:hover {
-    @include menu-item; 
+    @include menu-item;
   }
 }
 
@@ -86,6 +92,7 @@ main {
     background-color: $grey-darken !important;
     padding: 3rem 0 !important;
     color: white !important;
+    z-index: 100000;
   }
 }
 
@@ -98,4 +105,76 @@ main {
     text-align: center;
     font-size: 18px;
   }
+}
+
+a {
+    color: $subitem-color;
+}
+
+.module {
+    & {
+        margin: 50px 0;
+    }
+
+    & > h1 {
+        text-align: center;
+        text-transform: uppercase;
+        color: $grey-darken;
+    }
+
+    & > .container {
+        margin-top: 50px;
+        background: white !important;
+        padding: 15px !important;
+        border-radius: 5px;
+    }
+
+    .breadcrumb {
+        & {
+            background-color: $grey-darken !important;
+        }
+
+        & > .breadcrumb-item {
+            & {
+                color: $white-color !important;
+            }
+
+            & > a {
+                color: $grey-lighten !important;
+            }
+
+            & > a:hover {
+                color: $subitem-color !important;
+                text-decoration: none;
+            }
+        }
+    }
+
+    .table {
+        margin-top: 50px;
+    }
+
+    .add-button {
+        & {
+            margin-top: 30px;
+            @include menu-subitem;
+            padding: 10px;
+        }
+
+        i.fa {
+            margin-right: 10px;
+        }
+    }
+
+    .pagination {
+        margin: 20px 0 !important;
+
+        .page-item > .page-link {
+            color: $grey-darken !important;
+        }
+
+        .page-item.active > .page-link {
+            color: $white-color !important;
+        }
+    }
 }
