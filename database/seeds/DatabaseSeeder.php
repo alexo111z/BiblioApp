@@ -9,8 +9,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
-    {
+    public function run(){
 
         $this->truncateTables([
             'tblcarreras',
@@ -18,7 +17,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call(CarrerasSeeder::class);
-//        $this->call(autoresTableSeeder::class);
+        $this->call(AutoresTableSeeder::class);
     }
 
     public function truncateTables(array $tables) {

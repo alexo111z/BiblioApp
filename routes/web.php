@@ -11,20 +11,20 @@
 |
 */
 
-Route::get('/autors', function () {
-    return view('crudAutores');
-});
-
-Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
-
 
 //Adeudos
 Route::resource('adeudos', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
-;
 
+//Carreras
+Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
 
-Route::get('/', function(){
+Route::get('/carrera', function(){
     return view('Carreras.carreras');
 });
 
-Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+//Autores
+Route::get('/autores', function () {
+    return view('autores.index');
+});
+
+Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);

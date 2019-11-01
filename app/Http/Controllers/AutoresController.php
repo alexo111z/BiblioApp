@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Autores;
-use Illuminate\Support\Facades\DB;
 
 class AutoresController extends Controller
 {
@@ -15,10 +14,8 @@ class AutoresController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request ->get("search");
-        $autores = Autores::orderBy('idAutor','DESC')
-        ->search($search)
-        ->paginate(10);
+        $search = $request->get('search');
+        $autores = Autores::where('Existe','=',1)->search($search)->paginate(10);
         return [
             'pagination' => [
                 'total'         => $autores->total(),
@@ -29,7 +26,7 @@ class AutoresController extends Controller
                 'to'            => $autores->lastItem(),
             ],
             'autores' =>$autores
-        ];
+        ];;
     }
 
     /**
@@ -40,14 +37,15 @@ class AutoresController extends Controller
      */
     public function store(Request $request)
     {
-        $this ->validate($request,[
-            'nombre' => 'required',
-            'apellidos' => 'required'
+        $this ->validate($request, [
+            'Nombre' => 'required',
+            'Apellidos' => 'required'
         ]);
+
         Autores::create($request->all());
+
         return;
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -57,12 +55,12 @@ class AutoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this ->validate($request, [
-            'nombre' => 'required',
-            'apellidos' => 'required'
+        $this->validate($request, [
+            'Nombre' => 'required',
+            'Apellidos' => 'required'
         ]);
 
-        DB::table('autores')->where('idAutor', '=', $id)->update($request->all());
+        Autores::where('idAutor', '=', $id)->update($request->all());
     }
 
     /**
@@ -73,6 +71,6 @@ class AutoresController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('autores')->where('idAutor', '=', $id)->delete();
+        Autores::where('idAutor', '=', $id)->delete();
     }
 }
