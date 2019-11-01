@@ -111,6 +111,7 @@
             <span style="color: white; font-weight: 400;">Copyright © Tec MM campus Vallarta 2020 Todos los derechos reservados</span>
         </footer>
     <script src="{{asset('js/app.js')}}"></script>
+    
 </body>
 
 </html>

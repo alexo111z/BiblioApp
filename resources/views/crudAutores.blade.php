@@ -10,7 +10,7 @@
     </div>
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 " style="bottom: 2px;">
                 <a href="" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">
                     <i class="fa fa-pencil"></i> Registrar autor
                 </a>

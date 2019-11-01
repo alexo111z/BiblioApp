@@ -1,91 +1,133 @@
 @extends('app')
 @section('content')
+
+
 <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
     <li><a href="javascript:void();">Inicio</a></li>
     <li class="active">Reportes</li>
 </ol>
-<div class="row" id="reportes" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
-    <div class="row col-sm-12">
-        <div class="col-sm-4">
-            <h1 class="page-header" style="margin-top: 0;">Reportes <small>Panel de control</small></h1>
-        </div>
-        <div class="col-sm-8  align-items-center text-right mr-0">
-            <div class="col-sm-4 my-1">
-                <label>Periodo del:</label>
-                <input type="date"  style="padding: .5rem;" min="2018-01-01" max="2020-12-31">
-            </div>
-            <div class="col-sm-3 my-1">
-                <label>al:</label>
-                <input type="date"  style="padding: .5rem;" min="2018-01-01" max="2020-12-31">
-            </div>
-            <div class="col-sm-4 ">
-                <label>Reporte de:</label>
-                <select style="padding: .5rem;" >
-                    <option>Prestamos</option>
-                    <option>Libros</option>
-                    <option>Multas</option>
-                </select>
-            </div>
-            <div class="col-sm-1 ">
-                <a href="" class="btn btn-primary" style="background-color: #2da19a;" data-toggle="modal" data-target="#create">Aceptar
-                </a>
-            </div>
-        </div>
+<div class="row" id="reportes" style="min-width:600px!important; background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
+    <div class="row col-xs-12 "style="border-bottom: 1px solid #eee; margin-bottom:10px; padding-bottom:10px;">
+            <h1 style="margin-top: 0;">Reportes 
+            <small>Panel de control</small></h1>
     </div>
-    <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
-        <div class="row col-sm-12 ">
-                <div class="col-sm-4">
-                        <label>Seleccionar la clasificación</label><br>
-                        <select style="padding: .5rem;" >
-                                <option><p>000</p>-<p>Generales, computadoras</p></option>
-                                <option><p>000</p>-<p>Generales, computadoras</p></option>
-                                <option><p>000</p>-<p>Generales, computadoras</p></option>
-                                <option><p>000</p>-<p>Generales, computadoras</p></option>
-                                <option><p>000</p>-<p>Generales, computadoras</p></option>
-                        </select>
-                </div>
-                <div class="col-sm-4">
-                        <label>Seleccionar la carrera</label><br>
-                        <select style="padding: .5rem;" >
-                                <option><p>1</p>-<p>Ingeniería en sistemas Computacionales</p></option>
-                        </select>
-                </div>
+    <div class="row col-xs-12" style="margin-bottom:10px;">
+        <div class="col-sm-1" style="margin:0px; margin-right:20px;">
+               <h4 class="text-uppercase">Periodo</h4>
         </div>
-        <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
-            <thead>
-                <tr>
-                    <th width="10px">#</th>
-                    <th>Nombre</th>
-                    <th width="10px">Libros</th>
-                    <th width="20px" colspan="2">Acciones</th>
-                </tr>
-            </thead>
-            <tbody v-for="reporte in reportes">
-                <tr>
-                    <th>@{{reporte.id}}</th>
-                    <td>
-                    @{{reporte.keep}}
-                    </td>
-                    <td width="10px">
-                        5
-                    </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" v-on:click.prevent="editAutor(autor)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
-                    </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAutor(autor)"><i class="fa fa-user-times"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+        <div class="row col-sm-10">
             <div class="col-sm-5">
-               <pre> @{{ $data }}</pre>
+                <div class="col-sm-1" style="padding-top: .5rem;">
+                        <label>Del:</label>
+                </div>
+                <div class="col-sm-4" style="padding-top: .5rem; ">
+                        <input  type="date"  style="padding: .5rem;" min="2018-01-01" max="2020-12-31">
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="col-sm-1" style="padding-top: .5rem;">
+                        <label>Al:</label>
+                </div>
+                <div class="col-sm-3" style="padding-top: .5rem;">     
+                        <input  type="date"  style="padding: .5rem;" min="2018-01-01" max="2020-12-31">
+                </div>
+            </div> 
+           <!-- <div class="col-sm-2" style="padding-top: .5rem; padding-left:30px;">
+                <a href="#" class="btn btn-primary" style="background-color: #6d356c; width:145px" data-toggle="" data-target="#">Aceptar
+                </a>
+            </div> --> 
         </div>
+            
+        
+    </div>
+    <div class="row col-xs-13">
+        <div class="panel-group">
+            <div class="panel panel-default col-xs-12" style="padding:0; background-color: #fff;">
+                <div class="panel-heading "style="border:1px solid #eee; background-color: #fff;"> 
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#prestamos">Reporte de préstamos</a>
+                    </h4>
+                </div>
+                <div id="prestamos" class="panel-collapse collapse" style="background-color: #fbfbfb;">
+                    <div class="panel-body">
+                        @include('reportes.prestamos')
+                    </div>
+                </div>
+                <div class="panel-heading "style="border:1px solid #eee; background-color: #fff;"> 
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#P-alumnos">Reporte de alumnos con mas préstamos</a>
+                    </h4>
+                </div>
+                <div id="P-alumnos" class="panel-collapse collapse" style="background-color: #fbfbfb;">
+                    <div class="panel-body">
+                        @include('reportes.prestamos-alumnos')
+                    </div>
+                </div>
+                <div class="panel-heading "style="border:1px solid #eee; background-color: #fff;"> 
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#masmultas">Reporte de alumnos con más multas</a>
+                    </h4>
+                </div>
+                <div id="masmultas" class="panel-collapse collapse" style="background-color: #fbfbfb;">
+                    <div class="panel-body">
+                        @include('reportes.Masmultas')
+                    </div>
+                </div>
+                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#libros">Reporte de libros</a>
+                    </h4>
+                </div>
+                <div id="libros" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @include('reportes.libros')
+                    </div>
+                </div>
+                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#P-libros">Reporte de libros más prestados</a>
+                    </h4>
+                </div>
+                <div id="P-libros" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @include('reportes.masprestados')
+                    </div>
+                </div>
+                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#titulos">Reporte de títulos registrados por año</a>
+                    </h4>
+                </div>
+                <div id="titulos" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        @include('reportes.titulos')
+                    </div>
+                </div>
+                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse3">Reporte de Adeudos</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        klwdjdkjkjdkjdkljdjlkjd
+                    </div>
+                </div>
+                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse4">Catálogo de Libros</a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        klwdjdkjkjdkjdkljdjlkjd
+                    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
 </div>
-
-
-
-
 
 @endsection
