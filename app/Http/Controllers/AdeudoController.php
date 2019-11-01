@@ -52,6 +52,8 @@ class AdeudoController extends Controller
    //Remove the specified resource from storage.
     public function destroy($id)
     {
-        //
+        $deudor = Prestamo::findOrFail($id);
+        $deudor ->Existe = 0;
+        $deudor->save();
     }
 }

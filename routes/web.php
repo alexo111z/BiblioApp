@@ -11,9 +11,12 @@
 |
 */
 
-
 //Adeudos
-Route::resource('adeudos', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+
+Route::get('/adeudos', function (){
+    return view('Adeudos.principal');
+});
 
 //Carreras
 Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);

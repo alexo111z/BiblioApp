@@ -32,3 +32,12 @@ mix.scripts([
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/carreras/carrera.js'], 'public/js/appCarrera.js');
+
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/sweetalert.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/adeudos/adeudos.js'], 'public/js/appAdeudos.js');
