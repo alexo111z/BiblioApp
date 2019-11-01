@@ -53,16 +53,7 @@
                         @include('reportes.prestamos')
                     </div>
                 </div>
-                <div class="panel-heading "style="border:1px solid #eee; background-color: #fff;"> 
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#P-alumnos">Reporte de alumnos con mas préstamos</a>
-                    </h4>
-                </div>
-                <div id="P-alumnos" class="panel-collapse collapse" style="background-color: #fbfbfb;">
-                    <div class="panel-body">
-                        @include('reportes.prestamos-alumnos')
-                    </div>
-                </div>
+                
                 <div class="panel-heading "style="border:1px solid #eee; background-color: #fff;"> 
                     <h4 class="panel-title">
                         <a data-toggle="collapse" href="#masmultas">Reporte de alumnos con más multas</a>
