@@ -11,7 +11,9 @@ class AdeudoController extends Controller
 
     public function index()
     {
-        $adeudos = DB::table('tblprestamos')->whereRaw('Fecha_final < Fecha_entrega or Fecha_final < now() and Existe = 1')->get();
+        //        SELECT * FROM `tblprestamos` WHERE Fecha_final <= Fecha_entrega,
+        //        SELECT * FROM `tblprestamos` WHERE Fecha_final < now() and Fecha_entrega is null
+        $adeudos = Prestamo::whereRaw('(Fecha_final <= Fecha_entrega and Existe = 1) OR (Fecha_final < now() and Fecha_entrega is null and Existe = 1)')->get();
         return $adeudos;
     }
 
@@ -30,13 +32,15 @@ class AdeudoController extends Controller
     //Mostrar un elemento (mediante el id)
     public function show($id)
     {
-        //
+        //ROBARCELO A PALOMINO formato de detalles
     }
 
     //form para editar, id -> datos elemento editar
     public function edit($id)
     {
-        //
+        $deudor = Prestamo::findOrFail($id);
+        $deudor ->Existe = 0;
+        $deudor->save();
     }
 
     //Update the specified resource in storage.
