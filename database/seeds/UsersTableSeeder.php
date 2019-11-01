@@ -1,10 +1,11 @@
 <?php
 
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UsersSeeder extends Seeder
+class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +18,10 @@ class UsersSeeder extends Seeder
             'name' => 'Test Administrator',
             'email' => 'biblio-admin@gmail.com',
             'email_verified_at' => Carbon::now()->toDateTimeLocalString(),
-            'password' => bcrypt('admin1234')
+            'password' => bcrypt('admin1234'),
+            'user_type' => User::TYPE_ADMIN,
         ]);
+
+        factory(App\User::class, 500)->create();
     }
 }
