@@ -28325,6 +28325,28 @@ new Vue({
             }
             return pagesArray;
         },
+        totalAdeudo: function () {
+            const totales = [];
+            this.adeudos.forEach(adeudo => {
+                const fechaActual = new Date().getTime();
+                const fechaFinal = new Date(adeudo.Fecha_final).getTime();
+                const fechaEntrega = new Date(adeudo.Fecha_entrega).getTime();
+                
+                const diferencia = adeudo.Fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
+                const dias = Math.floor(diferencia/(1000*60*60*24));
+
+                let cantidad = 0;
+                if (dias > 0) {
+                    cantidad = dias * 25;
+                }
+                if (cantidad > 100) {
+                    cantidad = 100;
+                }
+
+                totales.push(cantidad);
+            });
+            return totales;
+        }
 
 
     },
@@ -28345,7 +28367,7 @@ new Vue({
             axios.get(url).then(response => {
                 aux = this.adeudos = response.data;//.carreras.data;
                 this.monto.push({
-                   ad: aux,
+                   ad: "asd",
                 });
                 //this.pagination = response.data.pagination;
             });

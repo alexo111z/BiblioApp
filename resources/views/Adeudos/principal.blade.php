@@ -43,7 +43,7 @@
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
                 </thead>
-                <tbody  v-for="adeudo in adeudos" id="tabla">
+                <tbody  v-for="(adeudo, index) in adeudos" id="tabla">
                 <tr>
                     <th>
                         @{{ adeudo.Folio }}
@@ -64,9 +64,7 @@
                         @{{ adeudo.Renovaciones }}
                     </td>
                     <td id="adeudo">
-                        @{{
-                            monto = adeudo.Fecha_final - adeudo.Fecha_entrega
-                        }}
+                        @{{totalAdeudo[index]}}
                     </td>
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
