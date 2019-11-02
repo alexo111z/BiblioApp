@@ -76,16 +76,6 @@
                 </div>
                 <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#P-libros">Reporte de libros más prestados</a>
-                    </h4>
-                </div>
-                <div id="P-libros" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        @include('reportes.masprestados')
-                    </div>
-                </div>
-                <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
-                    <h4 class="panel-title">
                         <a data-toggle="collapse" href="#titulos">Reporte de títulos registrados por año</a>
                     </h4>
                 </div>
@@ -96,12 +86,12 @@
                 </div>
                 <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#collapse3">Reporte de Adeudos</a>
+                        <a data-toggle="collapse" href="#collapse3">Reporte de multas</a>
                     </h4>
                 </div>
                 <div id="collapse3" class="panel-collapse collapse">
                     <div class="panel-body">
-                        klwdjdkjkjdkjdkljdjlkjd
+                    @include('reportes.multas')
                     </div>
                 </div>
                 <div class="panel-heading" style="border:1px solid #eee; background-color: #fff;">
@@ -111,8 +101,7 @@
                 </div>
                 <div id="collapse4" class="panel-collapse collapse">
                     <div class="panel-body">
-                        klwdjdkjkjdkjdkljdjlkjd
-                    
+                        @include('reportes.catalogo')
                     </div>
                 </div>
             </div>

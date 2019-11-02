@@ -48,11 +48,13 @@
             </table>
         </div>
         <!--FIN DE TABLA GENERAL DE PRESTAMOS-->
+
         <div class="col-sm-12">
+        <hr > 
             <div class="col-sm-8 text-center"><h3>Alumnos con más prestamos en el periodo:</h3></div>
             <div class="col-sm-4" >
                 <!-- boton para imprimir la tabla de alumnos con mas prestamos -->
-                <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:15px;" data-toggle="" data-target="#">Imprimir PDF</a>
+                <a href="#" class="btn btn-danger" style=" margin:15px;" data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
             </div>
         </div>
         <!--TABLA DE ALUMNOS CON MAS PRESTAMOS,SE IMPRIME, muestra los alumnos con mas prestamos del periodo
