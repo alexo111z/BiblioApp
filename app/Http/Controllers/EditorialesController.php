@@ -15,7 +15,7 @@ class EditorialesController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $editoriales = Editoriales::where('Existe','=',1)->search($search)->paginate(10);
+        $editoriales = Editoriales::where('Existe','=',1)->search($search)->paginate(50);
         return [
             'pagination' => [
                 'total'         => $editoriales->total(),

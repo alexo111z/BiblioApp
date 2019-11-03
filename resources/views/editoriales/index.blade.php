@@ -88,5 +88,5 @@
         @include('editoriales.edit')
     </div>
 </div>
-<script src="{{asset('js/editoriales/app.js')}}"></script>
+<script src="{{asset('js/editoriales/app.min.js')}}"></script>
 @endsection
