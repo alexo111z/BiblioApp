@@ -1,4 +1,5 @@
-@extends('app')
+@extends('layouts.dashboard')
+@section('titulo', 'Reportes | BiblioApp')
 @section('content')
 
 

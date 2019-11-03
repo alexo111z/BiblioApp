@@ -88,7 +88,7 @@
                         <li><a href="#">Carreras</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Reportes</a></li>
+                <li><a href="{{asset('reportes')}}">Reportes</a></li>
             </ul>
         </div>
     </nav>
