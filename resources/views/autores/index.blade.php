@@ -86,5 +86,5 @@
         @include('autores.edit')
     </div>
 </div>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/autores/app.js')}}"></script>
 @endsection

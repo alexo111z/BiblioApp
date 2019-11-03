@@ -10,22 +10,24 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+//Css general
+mix.styles([
+    'resources/css/bootstrap.css',
+    'resources/css/toastr.css'
+    ], 'public/css/app.css');
+//editoriales
 mix.scripts([
     'resources/js/jquery.js',
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/app.js'], 'public/js/app.js')
-    .styles([
-    'resources/css/bootstrap.css',
-    'resources/css/toastr.css'
-    ], 'public/css/app.css');
-    mix.scripts([
-        'resources/js/jquery.js',
-        'resources/js/bootstrap.js',
-        'resources/js/toastr.js',
-        'resources/js/vue.js',
-        'resources/js/axios.js',
-        'resources/js/editoriales/app.js'], 'public/js/editoriales/app.js');
+    'resources/js/editoriales/app.js'], 'public/js/editoriales/app.js');
+//autores
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/autores/app.js'], 'public/js/autores/app.js');
