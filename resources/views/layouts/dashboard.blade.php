@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Autores</title>
+    <title>@yield('titulo')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css">
     <style>
@@ -62,45 +62,33 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu 1 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Submenu 1</a></li>
-                        <li><a href="#">Submenu 2</a></li>
-                        <li><a href="#">Submenu 3</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Submenu 4</a></li>
+                        <li><a href="#">Prestamos</a></li>
+                        <li><a href="#">Adeudos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu 2 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Material Bibliografico   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Submenu 1</a></li>
-                        <li><a href="#">Submenu 2</a></li>
-                        <li><a href="#">Submenu 3</a></li>
+                        <li><a href="#">Libros</a></li>
+                        <li><a href="#">Materiales</a></li>
+                        <li><a href="#">Clasificación DEWEY</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Submenu 4</a></li>
+                        <li><a href="{{asset('autores')}}">Autores</a></li>
+                        <li><a href="{{asset('editoriales')}}">Editoriales</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu 3 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Control de usuarios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Submenu 1</a></li>
-                        <li><a href="#">Submenu 2</a></li>
-                        <li><a href="#">Submenu 3</a></li>
+                        <li><a href="#">Colaboradores</a></li>
+                        <li><a href="#">Prestatarios</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Submenu 4</a></li>
+                        <li><a href="#">Carreras</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu 4 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Submenu 1</a></li>
-                        <li><a href="#">Submenu 2</a></li>
-                        <li><a href="#">Submenu 3</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Submenu 4</a></li>
-                    </ul>
-                </li>
+                <li><a href="#">Reportes</a></li>
             </ul>
         </div>
     </nav>
