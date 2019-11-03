@@ -6,35 +6,29 @@
     <li><a href="javascript:void();">Inicio</a></li>
     <li class="active">Reportes</li>
 </ol>
-<div class="row" id="reportes" style="min-width:600px!important; background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
-    <div class="row col-xs-12 "style="border-bottom: 1px solid #eee; margin-bottom:10px; padding-bottom:10px;">
-            <h1 style="margin-top: 0;">Reportes
+<div class="row" id="reportes"
+    style="min-width:600px!important; background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
+    <div class="row col-xs-12 " style="border-bottom: 1px solid #eee; margin-bottom:10px; padding-bottom:10px;">
+        <h1 style="margin-top: 0;">Reportes
             <small>Panel de control</small></h1>
     </div>
-    <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
+    <div class="col-xs-12"
+        style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row col-xs-12" style="margin-bottom:10px;">
-            <div class="col-sm-1" style="margin:0px; margin-right:20px;">
-                    <h4 class="text-uppercase">Periodo</h4>
+            <div class="form-inline">
+                <label class="h4">Periodo </label>
+                <div class="input-group">
+                    <span class="input-group-addon">Del</span>
+                    <input type="date" class="input-sm form-control" name="start" />
+                    <span class="input-group-addon">al</span>
+                    <input type="date" class="input-sm form-control" name="end" />
+                </div>
             </div>
-            <div class="row col-sm-5">
-                    <div class="input-daterange input-group" id="datepicker">
-                            <span class="input-group-addon">De</span>
-                            <input type="date" class="input-sm form-control" name="start" />
-                            <span class="input-group-addon">a</span>
-                            <input type="date" class="input-sm form-control" name="end" />
-                        </div>
-               <!-- <div class="col-sm-2" style="padding-top: .5rem; padding-left:30px;">
-                    <a href="#" class="btn btn-primary" style="background-color: #6d356c; width:145px" data-toggle="" data-target="#">Aceptar
-                    </a>
-                </div> -->
-            </div>
-
-
         </div>
         <div class="row col-xs-12">
             <div class="panel-group">
                 <div class="panel panel-default col-xs-12" style="padding:0; background-color: #fff;">
-                    <div class="panel-heading "style="border:1px solid #eee; background-color: #f7f7f7;">
+                    <div class="panel-heading " style="border:1px solid #eee; background-color: #f7f7f7;">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" href="#prestamos">Reporte de préstamos</a>
                         </h4>
@@ -45,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="panel-heading "style="border:1px solid #eee; background-color: #f7f7f7;">
+                    <div class="panel-heading " style="border:1px solid #eee; background-color: #f7f7f7;">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" href="#masmultas">Reporte de alumnos con más multas</a>
                         </h4>
@@ -82,7 +76,7 @@
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                        @include('reportes.multas')
+                            @include('reportes.multas')
                         </div>
                     </div>
                     <div class="panel-heading" style="border:1px solid #eee; background-color: #f7f7f7;">
