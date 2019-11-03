@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/autors', function () {
-    return view('crudAutores');
+//Reportes
+Route::get('/reportes',function (){
+    return view('reportes.reportes');
 });
-Route::get('/reportes','ReportesController@show');
-
-Route::resource('reporte', 'ReportesController',['except' =>'show']);
-
-Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
+Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
