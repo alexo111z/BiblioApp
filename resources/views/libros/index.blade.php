@@ -13,7 +13,7 @@
             <h1 class="page-header" style="margin-top: 0;">Libros <small>Panel de control</small></h1>
         </div>
 
-        {{--Contenido--}}
+        //{{--Contenido--}}
         <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
             <div class="row">
                 <div class="col-sm-6">
@@ -26,107 +26,58 @@
             </div>
 
         {{--Tabla datos--}}
-            <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
-                <thead>
-                <tr>
-                    <th width="10px">ISBN</th>
-                    <th>Titulo</th>
-                    <th>Titulo</th>
-                    <th>Autor</th>
-                    <th>Editorial</th>
-                    <th>Carrera</th>
-                    <th>dewey</th>
-                    <th>Edicion</th>
-                    <th>Año</th>
-                    <th>Volumen</th>
-                    <th>Ejemplares</th>
-                    <th>Ejem. Disponibles</th>
-                    <th>imagen</th>
-                    <th>Fecha Registro</th>
-                    <th width="20px" colspan="2">Acciones</th>
-                </tr>
-                </thead>
-                <tbody  v-for="(adeudo, index) in adeudos" id="tabla">
-                <tr>
-                    <th>
-                        @{{ adeudo.Folio }}
-                    </th>
-                    <td>
-                        @{{ adeudo.IdPrestatario }}
-                    </td>
-                    <td>
-                        @{{ adeudo.Fecha_inicio }}
-                    </td>
-                    <td>
-                        @{{ adeudo.Fecha_final }}
-                    </td>
-                    <td>
-                        @{{ adeudo.Fecha_entrega }}
-                    </td>
-                    <td>
-                        @{{ adeudo.Renovaciones }}
-                    </td>
-                    <td id="adeudo">
-                        @{{totalAdeudo[index]}}
-                    </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
-                    </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo)" ><i class="fa fa-user-times"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table> <!--Fin tabla-->
+    <table class="table table-light">
+    <thead class="thead-light">
+        <tr>
+            <th>#</th>
+            <th>ISBN</th>
+            <th>Titulo</th>
+            <th>IdAutor</th>
+            <th>IdEditorial</th>
+            <th>IdCarrera</th>
+            <th>deway</th>
+            <th>Edicion</th>
+            <th>Año</th>
+            <th>Volumen</th>
+            <th>Ejemplares</th>
+            <th>Ejem. Disponibles</th>
+            <th>Imagen</th>
+            <th>Fecha Registro</th>
+            <th>Existe</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach($libro as $libro)    
+        <tr>
+            <td>{{$loop->iteration}}</td>
+            <td>{{$libro->ISBN}}</td>
+            <td>{{$libro->Titulo}}</td>
+            <td>{{$libro->IdAutor}}</td>
+            <td>{{$libro->IdEditorial}}</td>
+            <td>{{$libro->IdCarrera}}</td>
+            <td>{{$libro->deway}}</td>
+            <td>{{$libro->Edicion}}</td>
+            <td>{{$libro->Year}}</td>
+            <td>{{$libro->Volumen}}</td>
+            <td>{{$libro->Ejemplares}}</td>
+            <td>{{$libro->EjemDisp}}</td>
+            <td> <img src="{{ asset('storage').'/'.$libro->Imagen}}" alt="" width="100"></td>
+            <td>{{$libro->FechaRegistro}}</td>
+            <td>{{$libro->Existe}}</td>
+            <td>
+            
+            <a href="{{ url('/libros/'.$libro->ISBN.'/edit')}}">Editar</a>
 
-{{--            --}}{{--        Paginacion--}}
-{{--            <div class="row">--}}
-{{--                --}}{{--            Mensaje del paginado--}}
-{{--                <div class="col-md-6 col-12">--}}
-{{--                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras--}}
-{{--                </div>--}}
+            <form method="post" action="{{ url('/libros/'.$libro->ISBN) }}">
+            {{csrf_field()}}
+            {{method_field('DELETE')}}
+            <button type="submit" onclick="return confirm('¿Borrar?');">Borrar</button>
+            </form>
+            
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 
-{{--                <div class="col-md-6 col-12">--}}
-{{--                    <nav style="float: right;">--}}
-{{--                        <ul class="pagination" style="margin:0;">--}}
-{{--                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>--}}
-{{--                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page - 1)">Atras</a>--}}
-{{--                            </li>--}}
-{{--                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">--}}
-{{--                                <a href="javascript:void();" @click.prevent="changePage(page)">--}}
-{{--                                    @{{page}}--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>--}}
-{{--                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </nav>--}}
-{{--                </div>--}}
-{{--            </div><!--Fin Paginacion-->--}}
-
-                     Pruebas
-                        <div class="col-sm-12">
-                            <pre>
-                                @{{ $data }}
-                            </pre>
-                        </div>
-
-{{--            @include('Carreras.crear')--}}
-{{--            @include('Carreras.edit')--}}
-        </div> <!--Fin Contenido-->
-    </div>
-    <script src="{{asset('js/appAdeudos.js')}}"></script>
-{{--    <script>--}}
-{{--        var sumaID = document.getElementById('adeudos');--}}
-
-{{--        var sumar = (num1, num2) => {--}}
-{{--            var num3 = 10;--}}
-{{--            return num1+num2+num3;--}}
-{{--        }--}}
-
-{{--        sumaID.innerHTML += sumar(10,20);--}}
-{{--    </script>--}}
+  
 @endsection

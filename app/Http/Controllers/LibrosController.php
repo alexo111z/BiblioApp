@@ -14,7 +14,8 @@ class LibrosController extends Controller
      */
     public function index()
     {
-        return view('libros.index');
+        $datos['libro']=Libros::paginate(5);
+        return view('libros.index', $datos);
     }
 
     /**
@@ -85,8 +86,9 @@ class LibrosController extends Controller
      * @param  \App\libros  $libros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(libros $libros)
+    public function destroy($ISBN)
     {
-        //
+        Libros::destroy($ISBN);
+        return redirect('libros');
     }
 }

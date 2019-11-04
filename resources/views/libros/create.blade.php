@@ -28,7 +28,7 @@
 <input type="number" name="Edicion" id="Edicion" value="">
 <br/>
 
-<label for="Year">{{'Año'}}</label>
+<label for="Year">{{'Year'}}</label>
 <input type="number" name="Year" id="Year" value="">
 <br/>
 
@@ -40,7 +40,7 @@
 <input type="number" name="Ejemplares" id="Ejemplares" value="">
 <br/>
 
-<label for="EjemDisp">{{'Ejemplares Disponible'}}</label>
+<label for="EjemDisp">{{'EjemDisp'}}</label>
 <input type="number" name="EjemDisp" id="EjemDisp" value="">
 <br/>
 
@@ -48,7 +48,7 @@
 <input type="file" name="Imagen" id="Imagen" value="">
 <br/>
 
-<label for="FechaRegistro">{{'Fecha de Registro'}}</label>
+<label for="FechaRegistro">{{'FechaRegistro'}}</label>
 <input type="date" name="FechaRegistro" id="FechaRegistro" value="">
 <br/>
 
