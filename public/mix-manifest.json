@@ -2,5 +2,6 @@
     "/css/app.css": "/css/app.css",
     "/js/editoriales/app.js": "/js/editoriales/app.js",
     "/js/autores/app.js": "/js/autores/app.js",
-    "/js/dewey/app.js": "/js/dewey/app.js"
+    "/js/dewey/app.js": "/js/dewey/app.js",
+    "/js/reportes/app.js": "/js/reportes/app.js"
 }
