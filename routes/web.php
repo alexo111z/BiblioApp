@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Ruta default
 Route::get('/', function () {
     return view('welcome');
 });
