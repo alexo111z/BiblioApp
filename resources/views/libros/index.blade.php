@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('titulo', "Adeudos | BiblioApp")
+@section('titulo', "Libros | BiblioApp")
 @section('content')
     <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
         <li><a href="javascript:void();">Inicio</a></li>
