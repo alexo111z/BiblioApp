@@ -14,3 +14,19 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Autores
+Route::get('/autores', function () {
+    return view('autores.index');
+});
+Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
+//Editoriales
+Route::get('/editoriales', function () {
+    return view('editoriales.index');
+});
+Route::resource('editorials', 'EditorialesController',['except' =>'show', 'create', 'edit']);
+//DEWEY
+Route::get('/dewey', function () {
+    return view('dewey.index');
+});
+Route::resource('cdewey', 'DeweyController',['except' =>'create', 'edit', 'store', 'update', 'destroy']);
