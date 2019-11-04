@@ -87,9 +87,12 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $id)
     {
-        //
+        $search = $id ->get("numcontrol");
+        $prestamos=DB::table('tblprestamos')->where('IdPrestatario','=',$search)->get()
+        ->get();
+        return $prestamos; 
     }
 
     /**
@@ -113,14 +116,13 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        $this->validate($request,[
-            'renovaciones'=>'required',
-        ]);
-        $renovation = $request->input('renovaciones');
-
-        $tasks=DB::table('tblprestamos')->where('Folio','=',$id)->update(['renovaciones' => $renovation]);
-
+    {        
+        $moredays = $request->input('days');
+        $fecha_final = $request->input('fecha_final');
+        $renovaciones = $request->input('renovaciones');
+        $renovaciones=$renovaciones+1;
+        $fechaff=date('Y-m-d', strtotime($fecha_final. ' + '.$moredays.' days'));
+        $tasks=DB::table('tblprestamos')->where('Folio','=',$id)->update(['fecha_final' => $fechaff,'renovaciones' => $renovaciones]);
         return;
     }
 

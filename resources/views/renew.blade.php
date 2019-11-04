@@ -1,4 +1,4 @@
-<form method="POST" v-on:submit.prevent="renewmoredays(fillkeep.folio)">
+<form method="POST" v-on:submit.prevent="renewmoredays(fillrenew.folio)">
 <div class="modal fade bd-example-modal-centered" tabindex="-1" role="dialog" id="renew">
 <div class="modal-dialog modal-centered" role="document">
     
@@ -14,22 +14,27 @@
 </div>
        
         
-        <h5 class="font-weight-light">Renovar Prestamo Para xPalominox</h5>
+        <h5 class="font-weight-light">Renovar Prestamo Para @{{fillrenew.nombre+' '+fillrenew.apellidos}}</h5>
 
 
 <hr>
-        <h6>Fecha Actual</h6>
-        <input type="text" class="form-control" placeholder="2019-02-21">
+
+
+        <h6>Fecha Actual De Vencimiento</h6>
+        <input type="text" class="form-control" v-model="fillrenew.fecha_final" readonly> 
         <br/>    
 
    
   <h6 style="text-align:center;">Añadir Mas Dias De Prestamo</h6>
-  <select class="form-control">
+  <select id="selectdays" class="form-control">
         <option value="1">1</option>
-        <option value="1">2</option>
-        <option value="1">3</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>      
         </select>
-
         <br/>
         <input type="submit" value="Renovar" class="btn btn-success">
 </div>

@@ -31889,7 +31889,7 @@ return /******/ (function(modules) { // webpackBootstrap
 				keeps:[],
 				newkeep:'',
 				fillkeep:{'folio':'','renovaciones':''},
-				fillrenew:{'folio':'','days':''},
+				fillrenew:{'folio':'','days':'','fecha_final':'','nombre':'','apellidos':'','renovaciones':''},
 				errors:[]
 			},
 			methods:{
@@ -31901,7 +31901,20 @@ return /******/ (function(modules) { // webpackBootstrap
 					});
 				},
 
+				searchprestamo:function(){
+					var numcontrol = $("#numcontrol").val();					         
+					var urlsearch='tasks?id='+numcontrol;
+					fillkeep={'folio':'','renovaciones':''};
+														
+					axios.get(urlsearch).then(response=>{
+						this.keeps= response.data
+					}).catch(error=>{
+						this.errors=error.response.data;
+				});
+				},
+
 				editkeep: function(keep){
+					
 						this.fillkeep.folio=keep.folio;
 						this.fillkeep.renovaciones=keep.renovaciones;
 						$('#edit').modal('show');
@@ -31910,23 +31923,29 @@ return /******/ (function(modules) { // webpackBootstrap
 
 				renew: function(keep){
 					this.fillrenew.folio=keep.folio;
-					this.fillrenew.renovaciones=keep.days;								
-					$('#renew').modal('show');
+					this.fillrenew.fecha_final=keep.fecha_final;
+					this.fillrenew.nombre=keep.nombre;
+					this.fillrenew.apellidos=keep.apellidos;
+					this.fillrenew.renovaciones=keep.renovaciones;							
+					$('#renew').modal('show');			
 
 			},
 
 
 
-			renewprestamo:function(folio){
-				var url='tasks/'+folio;					
-				axios.patch(url,this.fillkeep).then(response=>{
+			renewmoredays:function(folio){
+				var url='tasks/'+folio;	
+				var days = $("#selectdays").val();
+				this.fillrenew.days=days;				
+				axios.patch(url,this.fillrenew).then(response=>{
 					this.getkeeps();
-					this.fillkeep={'folio':'','dias':''};
+					this.fillrenew={'folio':'','days':'','fecha_final':'','nombre':'','apellidos':'','renovaciones':''};
 					this.errors=[];
 					$('#renew').modal('hide');
 					toastr.success('Actualizado Correctamente');
 				}).catch(error=>{
 						this.errors=error.response.data;
+						toastr.error('no se Pudo actualizar');
 				});
 
 

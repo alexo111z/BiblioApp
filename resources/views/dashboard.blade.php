@@ -20,7 +20,7 @@
             
             </div>
             <div class="col-sm-6" style="text-align: right;">
-                <input v-on:keyup="searchAutor()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
+                <input type="text" name="numcontrol" id="numcontrol" v-on:keyup="searchprestamo()" placeholder="Buscar..." style="padding: .5rem;">
             </div>
         </div>
 
