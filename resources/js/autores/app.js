@@ -1,7 +1,6 @@
 new Vue({
     el: "#content",
     created: function () {
-        console.log("Hi! from Vue js");
         this.getAutores();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery

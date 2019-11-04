@@ -27067,9 +27067,9 @@ return /******/ (function(modules) { // webpackBootstrap
 //# sourceMappingURL=axios.map
 
 new Vue({
-    el: "#content",
+    el: '#content',
     created: function () {
-        this.getAutores();
+        this.inflateSelect();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -27081,8 +27081,11 @@ new Vue({
             progressBar: true
         };
     },
-    data: {
-        autores: [],
+    data:{
+        url:'cdewey',
+        items:[],
+        clasificacion:'',
+        lista:[],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27091,19 +27094,7 @@ new Vue({
             'from': 0,
             'to': 0,
         },
-        newAutor: {
-            'Nombre':'',
-            'Apellidos':'',
-            'Existe':1
-        },
-        offset: 3,
-        errors: [],
-        search: '',
-        fillAutor:{
-            'IdAutor':'',
-            'Nombre':'',
-            'Apellidos':''
-        }
+        offset: 4,
     },
     computed:{
         isActived:function () {
@@ -27132,79 +27123,27 @@ new Vue({
 
 
     },
-    methods: {
-        changePage: function (page) {
-            this.pagination.current_page = page;
-            this.getAutores(page);
+    methods:{
+        inflateSelect: function () {
+            axios.get(this.url).then(response => {
+                this.items = response.data;
+            }).catch(error =>{
+                toastr.error(error.response.data.message, "Error!");
+            });
         },
-        getAutores: function (page) {
-            var url = 'autors?page=' + page+'&search='+this.search;
-            //var url = 'autors';
-            axios.get(url).then(response => {
-                //this.autores = response.data;
-                this.autores = response.data.autores.data;
+        CambioClasification: function (page) {
+            this.clasificacion = $("#clasificacion").val();
+            var url = this.url+'/'+this.clasificacion+"?page="+page;
+            axios.get(url).then(response =>{
+                this.lista = response.data.lista.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error!");
             });
         },
-        createAutor: function () {
-            var url = 'autors';
-            axios.post(url, this.newAutor)
-            .then(response => {
-                this.getAutores();
-                this.newAutor = {
-                    'Nombre':'',
-                    'Apellidos':'',
-                    'Existe':1
-                };
-                this.errors = [];
-                $("#create").modal('hide');
-                toastr.success("Autor registrado con exito.", "Tarea completada!");
-            }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
-            });
-        },
-        editAutor: function (autor) {
-            this.fillAutor.IdAutor = autor.IdAutor;
-            this.fillAutor.Nombre = autor.Nombre;
-            this.fillAutor.Apellidos = autor.Apellidos;
-            $('#edit').modal('show');
-        },
-        updateAutor: function (id) {
-            var url = 'autors/'+id;
-            axios.put(url, this.fillAutor)
-            .then(response => {
-                this.getAutores();
-                this.fillAutor = {
-                    'IdAutor':'',
-                    'Nombre':'',
-                    'Apellidos':''
-                };
-                this.errors = [];
-                $("#edit").modal("hide");
-                toastr.success("Autor actualizado con exito.", "Tarea completada!");
-            })
-            .catch(error =>{
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
-            });
-        },
-        deleteAutor: function (autor) {
-            if (confirm('¿Esta seguro de eliminar al autor ' + autor.Nombre + ' ' + autor.Apellidos + '?')) {
-                var url = "autors/" + autor.IdAutor;
-                axios.delete(url).then(response => {
-                    this.getAutores();
-                    toastr.success("Autor eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
-                });
-            }
-        },
-        searchAutor: function () {
-            this.search = $('#search').val();
-            this.getAutores();
+        changePage: function (page) {
+            this.pagination.current_page = page;
+            this.CambioClasification(page);
         }
     }
 });

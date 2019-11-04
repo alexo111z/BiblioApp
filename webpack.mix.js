@@ -31,3 +31,11 @@ mix.scripts([
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/autores/app.js'], 'public/js/autores/app.js');
+//Dewey
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/dewey/app.js'], 'public/js/dewey/app.js');

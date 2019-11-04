@@ -73,7 +73,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="#">Libros</a></li>
                         <li><a href="#">Materiales</a></li>
-                        <li><a href="#">Clasificación DEWEY</a></li>
+                        <li><a href="{{asset('dewey')}}">Clasificación DEWEY</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{asset('autores')}}">Autores</a></li>
                         <li><a href="{{asset('editoriales')}}">Editoriales</a></li>
