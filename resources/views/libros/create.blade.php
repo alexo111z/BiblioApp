@@ -8,20 +8,20 @@
 <input type="text" name="Titulo" id="Titulo" value="">
 <br/>
 
-<label for="Autor">{{'Autor'}}</label>
-<input type="number" name="Autor" id="Autor" value="">
+<label for="IdAutor">{{'IdAutor'}}</label>
+<input type="number" name="IdAutor" id="IdAutor" value="">
 <br/>
 
-<label for="Editorial">{{'Editorial'}}</label>
-<input type="number" name="Editorial" id="Editorial" value="">
+<label for="IdEditorial">{{'IdEditorial'}}</label>
+<input type="number" name="IdEditorial" id="IdEditorial" value="">
 <br/>
 
-<label for="Carrera">{{'Carrera'}}</label>
-<input type="number" name="Carrera" id="Carrera" value="">
+<label for="IdCarrera">{{'IdCarrera'}}</label>
+<input type="number" name="IdCarrera" id="IdCarrera" value="">
 <br/>
 
-<label for="dewey">{{'dewey'}}</label>
-<input type="number" name="dewey" id="dewey" value="">
+<label for="deway">{{'deway'}}</label>
+<input type="number" name="deway" id="deway" value="">
 <br/>
 
 <label for="Edicion">{{'Edicion'}}</label>
@@ -29,7 +29,7 @@
 <br/>
 
 <label for="Year">{{'Año'}}</label>
-<input type="date" name="Year" id="Year" value="">
+<input type="number" name="Year" id="Year" value="">
 <br/>
 
 <label for="Volumen">{{'Volumen'}}</label>
@@ -40,16 +40,19 @@
 <input type="number" name="Ejemplares" id="Ejemplares" value="">
 <br/>
 
-<label for="EjemDisponible">{{'Ejemplares Disponible'}}</label>
-<input type="number" name="EjemDisponible" id="EjemDisponible" value="">
+<label for="EjemDisp">{{'Ejemplares Disponible'}}</label>
+<input type="number" name="EjemDisp" id="EjemDisp" value="">
 <br/>
 
 <label for="Imagen">{{'Imagen'}}</label>
-<input type="file" name="Imagen" id="Nombre" value="">
+<input type="file" name="Imagen" id="Imagen" value="">
 <br/>
 
 <label for="FechaRegistro">{{'Fecha de Registro'}}</label>
 <input type="date" name="FechaRegistro" id="FechaRegistro" value="">
+<br/>
+
+<input type="hidden" name="Existe" id="Existe" value="1">
 <br/>
 
 <input type="submit" value="Agregar">

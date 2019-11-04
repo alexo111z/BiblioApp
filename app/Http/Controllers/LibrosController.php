@@ -35,7 +35,14 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datosLibros=request()->except('_token');
+
+        if($request->hasFile('Imagen')){
+            $datosLibros['Imagen']=$request->file('Imagen')->store('uploaps','public');
+        }
+
+        Libros::insert($datosLibros);
+        return response()->json($datosLibros);
     }
 
     /**
