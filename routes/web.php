@@ -12,12 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard');
 });
 
 Route::Resource('prestamos','PrestamosController');
 
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
 Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');
+
+Route::Resource('tasks','TaskController');
 //Route::get('/prestamos/detalles/{id}', 'PrestamosController@detalles')->name('detalles');
 

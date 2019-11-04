@@ -21,7 +21,7 @@
   <div class="row">
     <div class="col-sm">
 
-    <div class="container"
+    <div class="container">
 <form>
 
     <div class="form-group"> 
