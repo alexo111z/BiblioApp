@@ -15,4 +15,6 @@ Route::get('/autors', function () {
     return view('crudAutores');
 });
 
+Route::resource('libros','LibrosController');
+
 Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
