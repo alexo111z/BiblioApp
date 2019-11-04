@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('/autors', function () {
-    return view('crudAutores');
+Route::get('/', function () {
+    return view('welcome');
 });
-
-Route::resource('autores', 'AutoresController',['except' =>'show', 'create', 'edit']);
