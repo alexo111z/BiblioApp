@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class libros extends Model
 {
-    //
+    public $table = "tbllibros";
 }
