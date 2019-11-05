@@ -34,3 +34,5 @@ Route::get('/reportes',function (){
     return view('reportes.reportes');
 });
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
+//Libros
+Route::resource('libros','LibrosController');
