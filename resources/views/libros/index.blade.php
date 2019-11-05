@@ -47,7 +47,7 @@
         </tr>
     </thead>
     <tbody>
-    @foreach($libro as $libro)    
+    @foreach($libro as $libro)
         <tr>
             <td>{{$loop->iteration}}</td>
             <td>{{$libro->ISBN}}</td>
@@ -65,7 +65,7 @@
             <td>{{$libro->FechaRegistro}}</td>
             <td>{{$libro->Existe}}</td>
             <td>
-            
+
             <a href="{{ url('/libros/'.$libro->ISBN.'/edit')}}">Editar</a>
 
             <form method="post" action="{{ url('/libros/'.$libro->ISBN) }}">
@@ -73,11 +73,11 @@
             {{method_field('DELETE')}}
             <button type="submit" onclick="return confirm('¿Borrar?');">Borrar</button>
             </form>
-            
+
         </tr>
     @endforeach
     </tbody>
 </table>
 
-  
+<script src="{{asset('js/reportes/app.js')}}"></script>
 @endsection
