@@ -65,7 +65,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Prestamos</a></li>
-                        <li><a href="#">Adeudos</a></li>
+                        <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -85,7 +85,7 @@
                         <li><a href="#">Colaboradores</a></li>
                         <li><a href="#">Prestatarios</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Carreras</a></li>
+                        <li><a href="{{asset('carrera')}}">Carreras</a></li>
                     </ul>
                 </li>
                 <li><a href="{{asset('reportes')}}">Reportes</a></li>

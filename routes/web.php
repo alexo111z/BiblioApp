@@ -36,3 +36,13 @@ Route::get('/reportes',function (){
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
 //Libros
 Route::resource('libros','LibrosController');
+//Adeudos
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+Route::get('/adeudos', function (){
+    return view('Adeudos.principal');
+});
+//Carreras
+Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+Route::get('/carrera', function(){
+    return view('Carreras.carreras');
+});
