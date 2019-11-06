@@ -1,5 +1,5 @@
 <form method="POST" v-on:submit.prevent="renewmoredays(fillrenew.folio)">
-<div class="modal fade bd-example-modal-centered" tabindex="-1" role="dialog" id="renew">
+<div class="modal fade" id="renew">
 <div class="modal-dialog modal-centered" role="document">
     
         <div class="modal-content p-4">

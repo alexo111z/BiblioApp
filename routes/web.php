@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard');
+Route::get('/prestamos', function () {
+    return view('prestamos/index');
 });
 
-Route::Resource('prestamos','PrestamosController');
+//Route::Resource('prestamos','PrestamosController');
 
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
 Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');

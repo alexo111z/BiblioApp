@@ -35,7 +35,7 @@
 					
 						this.fillkeep.folio=keep.folio;
 						this.fillkeep.renovaciones=keep.renovaciones;
-						$('#edit').modal('show');
+						$('#detalles').modal('show');
 
 				},
 

@@ -15,7 +15,6 @@ mix.scripts(['resources/js/Jquery.js',
 'resources/js/Bootstrap.js',
 'resources/js/Toastr.js',
 'resources/js/vue.js',
-
                 'resources/js/axios.js',
                     'resources/js/app.js',
             ], 'public/js/app.js')
