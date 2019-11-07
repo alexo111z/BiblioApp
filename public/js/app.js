@@ -2058,16 +2058,16 @@ var usersEndpoint = new _util_ApiUsers__WEBPACK_IMPORTED_MODULE_0__["default"]()
       var userToCreate = Object.assign({}, this.modal.inputData);
       var userId = userToCreate.id;
       userToCreate = _.unset(userToCreate, 'id');
-      return JSON.stringify(userToCreate);
+      userToCreate = _.pick(userToCreate, _.identity);
+      return userToCreate;
     },
     add: function add() {
-      axios.post(usersEndpoint.baseUrl, this.serializeData(), {
-        headers: {
-          'Accept': 'application/json',
-          'content-type': 'application/json'
-        }
-      }).then(function () {
-        swal("¡Eliminado!", "\xA1El usuario ha sido creado correctamente!", "success");
+      var user = this.serializeData();
+      console.log(user);
+      axios.post(usersEndpoint.baseUrl, user).then(function () {
+        swal("¿Agregado!", "\xA1El usuario ha sido creado correctamente!", "success").then(function () {
+          window.location.href = window.location.href;
+        });
       })["catch"](function () {
         swal("¡Error!", "\xA1El usuario no pudo ser creado!", "error");
       });
