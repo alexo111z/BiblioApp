@@ -1,8 +1,16 @@
 <template>
     <div id="users">
-        <div class="row">
+        
+        <div class="title">
+            <h1>Autores <small>Panel de control</small></h1>
+        </div>
+
+        <div class="divisor"></div>
+
+        <div class="container inner-section">
+            <div class="row">
             <div class="col-sm">
-                <button type="button" class="add-button btn btn-primary btn-lg" @click="onAdd()" data-toggle="modal" data-target="#usersModal">
+                <button type="button" class="add-button btn btn-primary" @click="onAdd()" data-toggle="modal" data-target="#usersModal">
                     <i class="fa fa-pencil"></i>Registrar Usuario
                 </button>
             </div>
@@ -91,9 +99,9 @@
                         {{value}}
                     </td>
                     <td>
-                        <div class="btn-group d-flex justify-content-center" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-secondary btn-info" @click="onEdit(user)" data-toggle="modal" data-target="#usersModal">Editar</button>
-                            <button type="button" class="btn btn-secondary btn-danger" @click="onDelete(user)">Eliminar</button>
+                        <div class="buttons" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-info" @click="onEdit(user)" data-toggle="modal" data-target="#usersModal"><i class="fa fa-pencil-square-o"></i></button>
+                            <button type="button" class="btn btn-danger" @click="onDelete(user)"><i class="fa fa-times"></i></button>
                         </div>
                     </td>
                 </tr>
@@ -107,6 +115,7 @@
                     <span slot="next-nav">Adelante &gt;</span>
                 </pagination>
             </div>
+        </div>
         </div>
     </div>
 </template>

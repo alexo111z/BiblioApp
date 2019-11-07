@@ -8,6 +8,8 @@ $grey-lighten: #dddddd;
 @mixin menu-item {
   color: white !important;
   background-color: $item-color !important;
+  border-color: none !important;
+  box-shadow: none !important;
 }
 
 @mixin menu-subitem {
@@ -116,6 +118,22 @@ a {
         margin: 50px 0;
     }
 
+    .title {
+      margin-left: 30px;
+      margin-bottom: 40px;
+      border-bottom: 3px solid $white-color;
+    }
+
+    .buttons > button {
+      & {
+        margin-right: 15px;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+
     & > h1 {
         text-align: center;
         text-transform: uppercase;
@@ -123,29 +141,28 @@ a {
     }
 
     & > .container {
-        margin-top: 50px;
+        margin-top: 20px;
         background: white !important;
-        padding: 15px !important;
+        padding: 30px !important;
         border-radius: 5px;
+    }
+
+    .inner-section {
+      padding: 20px;
+      border: 1px solid;
+      border-color: $white-color;
+      box-shadow: 0 0 15px 10px $white-color;
+      border-radius: 5px;
     }
 
     .breadcrumb {
         & {
-            background-color: $grey-darken !important;
+            background-color: white !important;
         }
 
         & > .breadcrumb-item {
             & {
-                color: $white-color !important;
-            }
-
-            & > a {
-                color: $grey-lighten !important;
-            }
-
-            & > a:hover {
-                color: $subitem-color !important;
-                text-decoration: none;
+                color: $grey-darken !important;
             }
         }
     }
@@ -157,7 +174,7 @@ a {
     .add-button {
         & {
             margin-top: 30px;
-            @include menu-subitem;
+            @include menu-item;
             padding: 10px;
         }
 
