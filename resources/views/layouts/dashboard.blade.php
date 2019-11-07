@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('titulo')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
