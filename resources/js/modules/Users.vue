@@ -228,16 +228,26 @@ export default {
             const userId = userToCreate.id;
 
             userToCreate = _.unset(userToCreate, 'id');
+            userToCreate = _.pick(userToCreate, _.identity);
 
-            return JSON.stringify(userToCreate);
+            return userToCreate;
         },
         add() {
+            const user = this.serializeData();
+
+            console.log(user);
+
             axios.post(
                 usersEndpoint.baseUrl,
-                this.serializeData(),
-                {headers: {'Accept': 'application/json', 'content-type': 'application/json'}}
+                user
             ).then(() => {
-                swal("¡Eliminado!", `¡El usuario ha sido creado correctamente!`, "success");
+                swal(
+                    "¿Agregado!", 
+                    `¡El usuario ha sido creado correctamente!`,
+                    "success"
+                ).then(() => {
+                    window.location.href = window.location.href;
+                });
             }).catch(() => {
                 swal("¡Error!", `¡El usuario no pudo ser creado!`, "error");
             });
