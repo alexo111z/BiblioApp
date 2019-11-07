@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//Ruta default
 Route::get('/', function () {
     return view('welcome');
 });
@@ -30,3 +30,20 @@ Route::get('/dewey', function () {
     return view('dewey.index');
 });
 Route::resource('cdewey', 'DeweyController',['except' =>'create', 'edit', 'store', 'update', 'destroy']);
+//Reportes
+Route::get('/reportes',function (){
+    return view('reportes.reportes');
+});
+Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
+//Libros
+Route::resource('libros','LibrosController');
+//Adeudos
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+Route::get('/adeudos', function (){
+    return view('Adeudos.principal');
+});
+//Carreras
+Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+Route::get('/carrera', function(){
+    return view('Carreras.carreras');
+});

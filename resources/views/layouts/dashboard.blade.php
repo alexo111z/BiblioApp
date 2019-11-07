@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{asset('favicon.ico')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('titulo')</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -65,13 +66,13 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Prestamos</a></li>
-                        <li><a href="#">Adeudos</a></li>
+                        <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Material Bibliografico   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Libros</a></li>
+                        <li><a href="{{asset('libros')}}">Libros</a></li>
                         <li><a href="#">Materiales</a></li>
                         <li><a href="{{asset('dewey')}}">Clasificación DEWEY</a></li>
                         <li role="separator" class="divider"></li>
@@ -85,10 +86,10 @@
                         <li><a href="#">Colaboradores</a></li>
                         <li><a href="#">Prestatarios</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">Carreras</a></li>
+                        <li><a href="{{asset('carrera')}}">Carreras</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Reportes</a></li>
+                <li><a href="{{asset('reportes')}}">Reportes</a></li>
             </ul>
         </div>
     </nav>

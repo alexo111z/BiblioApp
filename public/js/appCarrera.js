@@ -27067,23 +27067,31 @@ return /******/ (function(modules) { // webpackBootstrap
 //# sourceMappingURL=axios.map
 
 new Vue({
-    el: "#content",
+    el: '#CarrerasCRUD',
     created: function () {
-        console.log("Hi! from Vue js");
-        this.getAutores();
-        toastr.options = {
+        this.getCarreras();
+        toastr.options ={
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
             showEasing: 'swing',
             hideMethod: 'fadeOut',
-            hideDuration: 500,
+            hideDuration: 1000,
             hideEasing: 'swing',
+            onHidden: undefined,
+            closeMethod: false,
+            closeDuration: false,
+            closeEasing: false,
             closeOnHover: true,
             progressBar: true
         };
+        $('[data-toggle="tooltip"]').tooltip();
     },
+
     data: {
-        autores: [],
+        carreras: [],
+        ClaveCarrera: '',
+        NombreCarrera: '',
+        fillCarrera: {'Clave': '', 'Nombre': ''},
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27092,39 +27100,29 @@ new Vue({
             'from': 0,
             'to': 0,
         },
-        newAutor: {
-            'Nombre':'',
-            'Apellidos':'',
-            'Existe':1
-        },
         offset: 3,
         errors: [],
         search: '',
-        fillAutor:{
-            'IdAutor':'',
-            'Nombre':'',
-            'Apellidos':''
-        }
     },
-    computed:{
-        isActived:function () {
+    computed: {
+        isActived: function () {
             return this.pagination.current_page;
         },
-        pageNumber:function () {
-            if(!this.pagination.to){
+        pageNumber: function () {
+            if (!this.pagination.to) {
                 return [];
             }
-            var from = this.pagination.current_page - this.offset//TODO offset
-            if(from < 1){
+            var from = this.pagination.current_page - this.offset; //TODO offset
+            if (from < 1) {
                 from = 1;
             }
-            var to = from + (this.offset * 2);// TODO offset
-            if(to >= this.pagination.last_page){
+            var to = from + (this.offset * 2); //TODO offset
+            if (to >= this.pagination.last_page) {
                 to = this.pagination.last_page;
             }
 
             var pagesArray = [];
-            while(from <= to){
+            while (from <= to) {
                 pagesArray.push(from);
                 from++;
             }
@@ -27136,76 +27134,68 @@ new Vue({
     methods: {
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getAutores(page);
+            this.getCarreras(page);
         },
-        getAutores: function (page) {
-            var url = 'autors?page=' + page+'&search='+this.search;
-            //var url = 'autors';
+        searchAutor: function () {
+            var search = $("#search").val();
+            this.search = search;
+            this.getCarreras();
+        },
+
+        //Modulo Carreras
+        getCarreras: function (page) {
+            var url = 'carreras?page=' + page;
             axios.get(url).then(response => {
-                //this.autores = response.data;
-                this.autores = response.data.autores.data;
+                this.carreras = response.data.carreras.data;
                 this.pagination = response.data.pagination;
-            }).catch(error =>{
-                toastr.error(error.response.data.message, "Error!");
             });
         },
-        createAutor: function () {
-            var url = 'autors';
-            axios.post(url, this.newAutor)
-            .then(response => {
-                this.getAutores();
-                this.newAutor = {
-                    'Nombre':'',
-                    'Apellidos':'',
-                    'Existe':1
-                };
-                this.errors = [];
-                $("#create").modal('hide');
-                toastr.success("Autor registrado con exito.", "Tarea completada!");
-            }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
-            });
-        },
-        editAutor: function (autor) {
-            this.fillAutor.IdAutor = autor.IdAutor;
-            this.fillAutor.Nombre = autor.Nombre;
-            this.fillAutor.Apellidos = autor.Apellidos;
-            $('#edit').modal('show');
-        },
-        updateAutor: function (id) {
-            var url = 'autors/'+id;
-            axios.put(url, this.fillAutor)
-            .then(response => {
-                this.getAutores();
-                this.fillAutor = {
-                    'IdAutor':'',
-                    'Nombre':'',
-                    'Apellidos':''
-                };
-                this.errors = [];
-                $("#edit").modal("hide");
-                toastr.success("Autor actualizado con exito.", "Tarea completada!");
-            })
-            .catch(error =>{
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
-            });
-        },
-        deleteAutor: function (autor) {
-            if (confirm('¿Esta seguro de eliminar al autor ' + autor.Nombre + ' ' + autor.Apellidos + '?')) {
-                var url = "autors/" + autor.IdAutor;
+        deleteCarrera: function (carrera) {
+            if (confirm('¿Esta seguro de eliminar la carrera: ' + carrera.Nombre + '?')) {
+                var url = 'carreras/' + carrera.Clave;
                 axios.delete(url).then(response => {
-                    this.getAutores();
-                    toastr.success("Autor eliminado con exito.", "Tarea completada!");
+                    this.getCarreras();
+                    swal.close();
+                    toastr.success("La carrera ha sido eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error!");
                 });
             }
         },
-        searchAutor: function () {
-            this.search = $('#search').val();
-            this.getAutores();
+        createCarrera: function () {
+            var url = 'carreras';
+            axios.post(url, {
+                Clave: this.ClaveCarrera,
+                Nombre: this.NombreCarrera,
+                Existe: 1
+            }).then(response => {
+                this.getCarreras();
+                this.ClaveCarrera = '';
+                this.NombreCarrera = '';
+                this.errors = [];
+                $('#createCarrera').modal('hide');
+                toastr.success("Carrera registrada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+            });
+        },
+        editCarrera: function (carrera) {
+            this.fillCarrera.Clave  = carrera.Clave;
+            this.fillCarrera.Nombre = carrera.Nombre;
+            $('#editCarrera').modal('show');
+        },
+        updateCarrera: function (id) {
+            var url = 'carreras/' + id;
+            axios.put(url, this.fillCarrera).then(response => {
+                this.getCarreras();
+                this.fillCarrera = {'Clave': '', 'Nombre': ''};
+                this.errors = [];
+                $('#editCarrera').modal('hide');
+                toastr.success("Carrera actualizada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+            });
         }
+
     }
 });
