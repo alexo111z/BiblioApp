@@ -233,13 +233,18 @@ export default {
                 });
         },
         serializeData() {
-            let userToCreate = Object.assign({}, this.modal.inputData);
-            const userId = userToCreate.id;
+            let user = {
+                user_type: this.userType,
+                name: this.modal.inputData.name,
+                email: this.modal.inputData.email,
+                password: this.modal.inputData.password,
+                payroll: this.modal.inputData.payroll,
+                control_number: this.modal.inputData.control_number,
+                career: this.modal.inputData.career,
+                position: this.modal.inputData.position,
+            };
 
-            userToCreate = _.unset(userToCreate, 'id');
-            userToCreate = _.pick(userToCreate, _.identity);
-
-            return userToCreate;
+            return user;
         },
         add() {
             const user = this.serializeData();
@@ -251,7 +256,7 @@ export default {
                 user
             ).then(() => {
                 swal(
-                    "¿Agregado!", 
+                    "¡Agregado!", 
                     `¡El usuario ha sido creado correctamente!`,
                     "success"
                 ).then(() => {
@@ -266,13 +271,14 @@ export default {
                 usersEndpoint.byId(this.modal.inputData.id),
                 this.serializeData()
             ).then(() => {
-                swal("¡Eliminado!", `¡El usuario ha sido editado correctamente!`, "success");
+                swal("¡Editado!", `¡El usuario ha sido editado correctamente!`, "success");
             }).catch(() => {
                 swal("¡Error!", `¡El usuario no pudo ser editado!`, "error");
             });
         },
         onAdd() {
-            //this.clearModal();
+            this.clearModal();
+
             this.modal.operation = 'add';
             this.modal.title = 'Agregar Usuario';
         },
@@ -283,27 +289,27 @@ export default {
 
             this.modal.title = 'Editar Usuario';
             this.modal.modalUser = this.userType;
-
+            
             this.modal.inputData.id = user.id;
             this.modal.inputData.user_type = this.userType;
             this.modal.inputData.name = user.name;
             this.modal.inputData.email = user.email;
-            this.modal.inputData.password = user.password;
-            this.modal.inputData.payroll = user.payroll;
-            this.modal.inputData.control_number = user.control_number;
-            this.modal.inputData.career = user.career;
-            this.modal.inputData.position = user.position;
+            this.modal.inputData.password = '' || '';
+            this.modal.inputData.payroll = user.payroll || '';
+            this.modal.inputData.control_number = user.control_number || '';
+            this.modal.inputData.career = user.career || '';
+            this.modal.inputData.position = user.position || '';
         },
         clearModal() {
-            this.id = '';
-            this.inputData.user_type = '';
-            this.inputData.name = '';
-            this.inputData.email = '';
-            this.inputData.password = '';
-            this.inputData.payroll = '';
-            this.inputData.control_number = '';
-            this.inputData.career = '';
-            this.inputData.position = '';
+            this.modal.inputData.id = '';
+            this.modal.inputData.user_type = '';
+            this.modal.inputData.name = '';
+            this.modal.inputData.email = '';
+            this.modal.inputData.password = '';
+            this.modal.inputData.payroll = '';
+            this.modal.inputData.control_number = '';
+            this.modal.inputData.career = '';
+            this.modal.inputData.position = '';
             this.modal.modalUser = 'Administrador';
         },
         onDelete(user) {
