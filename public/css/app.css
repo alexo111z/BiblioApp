@@ -11138,11 +11138,15 @@ main {
 .navbar .navbar-nav > li > a:hover {
   color: white !important;
   background-color: #6d356c !important;
+  border-color: none !important;
+  box-shadow: none !important;
 }
 
 .dropdown-menu .dropdown-item:hover {
   color: white !important;
   background-color: #6d356c !important;
+  border-color: none !important;
+  box-shadow: none !important;
 }
 
 .pagination > .active > a,
@@ -11184,6 +11188,20 @@ a {
   margin: 50px 0;
 }
 
+.module .title {
+  margin-left: 30px;
+  margin-bottom: 40px;
+  border-bottom: 3px solid #fbfbfb;
+}
+
+.module .buttons > button {
+  margin-right: 15px;
+}
+
+.module .buttons > button:last-child {
+  margin-right: 0;
+}
+
 .module > h1 {
   text-align: center;
   text-transform: uppercase;
@@ -11191,27 +11209,26 @@ a {
 }
 
 .module > .container {
-  margin-top: 50px;
+  margin-top: 20px;
   background: white !important;
-  padding: 15px !important;
+  padding: 30px !important;
+  border-radius: 5px;
+}
+
+.module .inner-section {
+  padding: 20px;
+  border: 1px solid;
+  border-color: #fbfbfb;
+  box-shadow: 0 0 15px 10px #fbfbfb;
   border-radius: 5px;
 }
 
 .module .breadcrumb {
-  background-color: #363636 !important;
+  background-color: white !important;
 }
 
 .module .breadcrumb > .breadcrumb-item {
-  color: #fbfbfb !important;
-}
-
-.module .breadcrumb > .breadcrumb-item > a {
-  color: #dddddd !important;
-}
-
-.module .breadcrumb > .breadcrumb-item > a:hover {
-  color: #2da19a !important;
-  text-decoration: none;
+  color: #363636 !important;
 }
 
 .module .table {
@@ -11221,8 +11238,9 @@ a {
 .module .add-button {
   margin-top: 30px;
   color: white !important;
-  background-color: #2da19a !important;
-  border-color: #2da19a !important;
+  background-color: #6d356c !important;
+  border-color: none !important;
+  box-shadow: none !important;
   padding: 10px;
 }
 
