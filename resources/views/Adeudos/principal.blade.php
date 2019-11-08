@@ -25,7 +25,7 @@
                 </div>
                 {{--            Buscador--}}
                 <div class="col-sm-6" style="text-align: right;">
-                    <input v-on:keyup="searchCarrera()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
+                    <input v-on:keyup="searchAdeudo()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
                 </div>
             </div>
 
@@ -40,6 +40,7 @@
                     <th>Fecha entregado</th>
                     <th>Renovaciones</th>
                     <th>Adeudo</th>
+                    <th>No Libros</th>
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
                 </thead>
@@ -63,11 +64,16 @@
                     <td>
                         @{{ adeudo.Renovaciones }}
                     </td>
-                    <td id="adeudo">
-                        @{{totalAdeudo[index]}}
+                    <td>
+                        @{{  totalAdeudo[index] }}
                     </td>
+{{--                Cantidad libros prestados--}}
+                    <td>
+                        @{{  contarLibros[index] }}
+                    </td>
+
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-edit"></i></a>
+                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-list"></i></a>
                     </td>
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo)" ><i class="fa fa-user-times"></i></a>
@@ -76,54 +82,43 @@
                 </tbody>
             </table> <!--Fin tabla-->
 
-{{--            --}}{{--        Paginacion--}}
-{{--            <div class="row">--}}
-{{--                --}}{{--            Mensaje del paginado--}}
-{{--                <div class="col-md-6 col-12">--}}
-{{--                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras--}}
-{{--                </div>--}}
+{{--        Paginacion--}}
+            <div class="row">
+{{--            Mensaje del paginado--}}
+                <div class="col-md-6 col-12">
+                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras
+                </div>
 
-{{--                <div class="col-md-6 col-12">--}}
-{{--                    <nav style="float: right;">--}}
-{{--                        <ul class="pagination" style="margin:0;">--}}
-{{--                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>--}}
-{{--                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page - 1)">Atras</a>--}}
-{{--                            </li>--}}
-{{--                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">--}}
-{{--                                <a href="javascript:void();" @click.prevent="changePage(page)">--}}
-{{--                                    @{{page}}--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">--}}
-{{--                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>--}}
-{{--                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </nav>--}}
-{{--                </div>--}}
-{{--            </div><!--Fin Paginacion-->--}}
+                <div class="col-md-6 col-12">
+                    <nav style="float: right;">
+                        <ul class="pagination" style="margin:0;">
+                            <li v-bind:class="[pagination.current_page == 1 ? 'disabled':'']">
+                                <a href="javascript:void();" v-if="pagination.current_page == 1">Atras</a>
+                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page - 1)">Atras</a>
+                            </li>
+                            <li v-for="page in pageNumber" v-bind:class="[page == isActived ? 'active':'']">
+                                <a href="javascript:void();" @click.prevent="changePage(page)">
+                                    @{{page}}
+                                </a>
+                            </li>
+                            <li v-bind:class="[pagination.current_page == pagination.last_page ? 'disabled':'']">
+                                <a href="javascript:void();" v-if="pagination.current_page == pagination.last_page">Siguiente</a>
+                                <a href="javascript:void();" v-else @click.prevent="changePage(pagination.current_page + 1)">Siguiente</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div><!--Fin Paginacion-->
 
-                     Pruebas
+{{--                    Pruebas--}}
                         <div class="col-sm-12">
                             <pre>
                                 @{{ $data }}
                             </pre>
                         </div>
 
-{{--            @include('Carreras.crear')--}}
-{{--            @include('Carreras.edit')--}}
+{{--            @include('Adeudos.show')--}}
         </div> <!--Fin Contenido-->
     </div>
     <script src="{{asset('js/appAdeudos.js')}}"></script>
-{{--    <script>--}}
-{{--        var sumaID = document.getElementById('adeudos');--}}
-
-{{--        var sumar = (num1, num2) => {--}}
-{{--            var num3 = 10;--}}
-{{--            return num1+num2+num3;--}}
-{{--        }--}}
-
-{{--        sumaID.innerHTML += sumar(10,20);--}}
-{{--    </script>--}}
 @endsection

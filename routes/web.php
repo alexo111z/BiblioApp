@@ -12,7 +12,9 @@
 */
 
 //Adeudos
-Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit']);
+
+Route::get('adeudo/count/{adeudo}', 'AdeudoController@count');
 
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');

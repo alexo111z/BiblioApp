@@ -28333,7 +28333,7 @@ new Vue({
             this.pagination.current_page = page;
             this.getCarreras(page);
         },
-        searchAutor: function () {
+        searchCarrera: function () {
             var search = $("#search").val();
             this.search = search;
             this.getCarreras();

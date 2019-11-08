@@ -20,7 +20,7 @@ class Prestamo extends Model
     ];
 
     function detalles(){
-        return $this->belongsTo(DetPrestamo::class, 'Folio');
+        return $this->hasMany(DetPrestamo::class, 'Folio');
     }
 //    public function scopeSearch($query, $search)
 //    {

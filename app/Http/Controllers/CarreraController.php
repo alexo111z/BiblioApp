@@ -21,10 +21,7 @@ class CarreraController extends Controller
             ],
             'carreras' => $carreras,
         ];
-//        $search = $request ->get("search");
-//        $carreras = Carrera::orderBy('Nombre','DESC')
-//            ->search($search)
-//            ->paginate(10);
+
     }
 
     //Store a newly created resource in storage.
