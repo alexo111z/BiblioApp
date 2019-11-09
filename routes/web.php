@@ -29,12 +29,14 @@ Route::resource('editorials', 'EditorialesController',['except' =>'show', 'creat
 Route::get('/dewey', function () {
     return view('dewey.index');
 });
+Route::get('cdewey/select/{id}', 'DeweyController@obtenerTopico')->name('obtenerTopico');
 Route::resource('cdewey', 'DeweyController',['except' =>'create', 'edit', 'store', 'update', 'destroy']);
 //Reportes
 Route::get('/reportes',function (){
     return view('reportes.reportes');
 });
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
+Route::get('reporte/carreras', 'ReportesController@getCarreras')->name('getCarreras');
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos

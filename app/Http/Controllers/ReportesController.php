@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reportes;
+use App\Carrera;
 
 class ReportesController extends Controller
 {
@@ -17,6 +18,13 @@ class ReportesController extends Controller
         $reportes = Reportes::get();
         return $reportes;
     }
+
+    public function getCarreras()
+    {
+        $carreras = Carrera::orderBy('Clave')->where('Existe', 1)->get();
+        return $carreras;
+    }
+
 
     /**
      * Show the form for creating a new resource.

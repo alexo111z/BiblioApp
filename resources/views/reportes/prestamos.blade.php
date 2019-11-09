@@ -1,27 +1,37 @@
-
-<div class="col-xs-12" style="background-color: #FFF; padding: 1rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
-    <div class="row col-xs-12" style="margin-bottom:10px;">
-        <!--FILTRADO -->
-        <div class="row col-sm-6 "style="margin-right:10px;">
-            <div class="row col-sm-4" style="min-width: max-content;">
-                <label>Seleccionar clasificación:</label><br>
-                <div class="col-sm-3" style="padding-top: .5rem; ">
-                    <select style="padding: .5rem;" > <!--enlazar select a la tabla clasificacion-->
-                            <option><p>000</p>-<p>Generales, computadoras</p></option>
-                    </select>
+<div class="col-xs-12"
+    style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
+    <div class="row">
+        <div class="col-sm-6">
+            <form  method="POST" v-on:submit.prevent="obtenerConcentrado">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <label>Seleccionar clasificación:</label>
+                        <select name="clasificacion" id="clasificacion" class="form-control"
+                            v-on:change.prevent="getTopic()">
+                            <!--enlazar select a la tabla clasificacion-->
+                            <option v-for="item in concentrado" :value="item.Id" v-if="item.Id < 10">00@{{item.Id}} -
+                                @{{item.Nombre}}</option>
+                            <option :value="item.Id" v-else>@{{item.Id}} - @{{item.Nombre}}</option>
+                        </select>
+                        <select name="topic" id="topic" class="form-control" style="margin-top:1rem;" v-model="ConsultaPrestamos.clasificacion">
+                            <!--enlazar select a la tabla clasificacion-->
+                            <option v-for="item in topic" :value="item.Id" v-if="item.Id < 10">00@{{item.Id}} -
+                                @{{item.Nombre}}</option>
+                            <option :value="item.Id" v-else-if="item.Id >= 10 && item.Id < 100">0@{{item.Id}} -
+                                @{{item.Nombre}}</option>
+                            <option :value="item.Id" v-else>@{{item.Id}} - @{{item.Nombre}}</option>
+                        </select>
+                        <label>Seleccionar la carrera</label>
+                        <select name="carrera" id="carreras" class="form-control" v-model="ConsultaPrestamos.carrera">
+                            <!-- enlazar select a tabla carreras -->
+                            <option  v-for="carrera in carreras" :value="carrera.Clave">@{{carrera.Nombre}}</option>
+                        </select>
+                        <button type="submit" class="btn btn-primary btn-block"
+                            style="background-color: #6d356c; padding: 6px 40px; margin-top:20px;">consultar <i class="fa fa-search"></i></a>
+                    </div>
                 </div>
-            </div>
-            <div class="row col-sm-4"  style="min-width: max-content;">
-                <label>Seleccionar la carrera</label><br>
-                <div class="col-sm-3" style="padding-top: .5rem; ">
-                    <select style="padding: .5rem;" > <!-- enlazar select a tabla carreras -->
-                        <option>Ingeniería en sistemas Computacionales</option>
-                    </select>
-                </div>
-            </div>
-            <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:145px;" data-toggle="" data-target="#">consultar</a>
-        </div> 
-        <!--FIN FILTRADO -->
+            </form>
+        </div>
         <!--TABLA GENERAL PRESTAMOS, NO SE IMPRIMIME, muestra lo datos según  el
         peiodo establecido arriba y tambien segun la clasificación y carrera seleccionada -->
         <div class="col-sm-6">
@@ -38,30 +48,27 @@
                     </tr>
                     <tr>
                         <td>Préstamos por clasificación</td>
-                        <td>11111</td><!--numero de Préstamos por Clasificación -->
+                        <td>11111</td>
+                        <!--numero de Préstamos por Clasificación -->
                     </tr>
                     <tr>
                         <td>Préstamos totales</td>
-                        <td>111111</td><!--numero de Préstamos Totales -->
+                        <td>111111</td>
+                        <!--numero de Préstamos Totales -->
                     </tr>
                 </tbody>
             </table>
+            <!-- boton para imprimir la tabla de alumnos con mas prestamos -->
+            <a href="#" class="btn btn-danger pull-right">Imprimir reporte <i class="fa fa-file-pdf-o"></i></a>
         </div>
-        <!--FIN DE TABLA GENERAL DE PRESTAMOS-->
-
+    </div>
+    <div class="row">
         <div class="col-sm-12">
-        <hr > 
-            <div class="col-sm-8 text-center"><h3>Alumnos con más prestamos en el periodo:</h3></div>
-            <div class="col-sm-4" >
-                <!-- boton para imprimir la tabla de alumnos con mas prestamos -->
-                <a href="#" class="btn btn-danger" style=" margin:15px;" data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
-            </div>
+            <hr>
+            <h4>Alumnos con mas prestamos en el periodo</h4>
         </div>
-        <!--TABLA DE ALUMNOS CON MAS PRESTAMOS,SE IMPRIME, muestra los alumnos con mas prestamos del periodo
-         sin importar la clasificación o carrera seleccionada. -->
-
-        <div class="row col-xs-12" style="margin-bottom:10px;max-height:350px; overflow:auto;">
-            <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+        <div class="col-sm-12">
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
                         <th style="padding:3px;">#</th>
@@ -72,18 +79,68 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
-                        <td style="padding:3px;">1</td> <!--#-->
-                        <td style="padding:3px;">23</td> <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td><!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td> <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td><!--Carrera-->
+                        <td style="padding:3px;">1</td>
+                        <!--#-->
+                        <td style="padding:3px;">23</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">15021049</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <!--Carrera-->
+                    </tr>
+                    <tr>
+                        <td style="padding:3px;">2</td>
+                        <!--#-->
+                        <td style="padding:3px;">23</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">15021049</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <!--Carrera-->
+                    </tr>
+                    <tr>
+                        <td style="padding:3px;">3</td>
+                        <!--#-->
+                        <td style="padding:3px;">23</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">15021049</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <!--Carrera-->
+                    </tr>
+                    <tr>
+                        <td style="padding:3px;">4</td>
+                        <!--#-->
+                        <td style="padding:3px;">23</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">15021049</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <!--Carrera-->
+                    </tr>
+                    <tr>
+                        <td style="padding:3px;">5</td>
+                        <!--#-->
+                        <td style="padding:3px;">23</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">15021049</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <!--Carrera-->
                     </tr>
                 </tbody>
-                
             </table>
-        </div>  
-        <!--FIN DE TABLA ALUMNOS CON MAS PRESTAMOS -->
-    </div>    
+        </div>
+    </div>
 </div>
