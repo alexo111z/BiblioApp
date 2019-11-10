@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use DateTime;
+
 class TaskController extends Controller
 {
     /**
@@ -11,33 +13,200 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dataa=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
-        ->select('tblprestamos.folio','tblalumnos.nombre','tblalumnos.apellidos','tblprestamos.fecha_inicio'
-        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
-        ->where('tblprestamos.existe','=','1');        
-        
+        $search = $request->get('search');
 
-        $datab=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tbldocentes','tbldocentes.idusuario','=','tblusuarios.id')
-        ->select('tblprestamos.folio','tbldocentes.nombre','tbldocentes.apellidos','tblprestamos.fecha_inicio'
-        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
-        ->where('tblprestamos.existe','=','1');  
+        if (is_null($search)) {
+            $dataa = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tblalumnos.nombre',
+                    'tblalumnos.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1');
 
-        $datas=DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
-        ->select('tblprestamos.folio','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio'
-        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones')
-        ->where('tblprestamos.existe','=','1')
-        ->union($dataa)
-        ->union($datab)
-        ->orderby('folio')
-        ->get();   
+
+            $datab = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tbldocentes', 'tbldocentes.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tbldocentes.nombre',
+                    'tbldocentes.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1');
+
+            $datas = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tbladministrativos', 'tbladministrativos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tbladministrativos.nombre',
+                    'tbladministrativos.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1')
+                ->union($dataa)
+                ->union($datab)
+                ->orderby('folio')
+                ->get();
+        } else {
+            $dataa = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tblalumnos.nombre',
+                    'tblalumnos.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1')->where('tblalumnos.NoControl', 'like', $search . '%')
+                ->orWhere('tblalumnos.Apellidos', 'like', $search . '%');
+
+
+            $datab = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tbldocentes', 'tbldocentes.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tbldocentes.nombre',
+                    'tbldocentes.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1')->where('tbldocentes.NoNomina', 'like', $search . '%')
+                ->orWhere('tbldocentes.Apellidos', 'like', $search . '%');
+
+            $datas = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+                ->join('tbladministrativos', 'tbladministrativos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblprestamos.folio',
+                    'tbladministrativos.nombre',
+                    'tbladministrativos.apellidos',
+                    'tblprestamos.fecha_inicio',
+                    'tblprestamos.fecha_final',
+                    'tblprestamos.fecha_entrega',
+                    'tblprestamos.renovaciones'
+                )
+                ->where('tblprestamos.existe', '=', '1')->where('tbladministrativos.NoNomina', 'like', $search . '%')
+                ->orWhere('tbladministrativos.Apellidos', 'like', $search . '%')
+                ->union($dataa)
+                ->union($datab)
+                ->orderby('folio')
+                ->get();
+        }
+
+
+        foreach ($datas as $prestamo) {
+            $fechaf=strtotime($prestamo->fecha_final);
+            $now = strtotime('today');
+            if($fechaf < $now) {
+                $prestamo->Estado = 'Expirado';
+            }else{
+                $prestamo->Estado = 'Vigente';
+            }             
+        }
+
+
+
+
+
 
         return $datas;
+    }
 
+
+    public function getdetails($folio)
+    {
+        $detailsdata = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
+            ->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
+            ->join('tbldetprestamos', 'tbldetprestamos.Folio', '=', 'tblprestamos.Folio')
+            ->join('tblejemplares', 'tblejemplares.codigo', '=', 'tbldetprestamos.codigo')
+            ->join('tbllibros', 'tbllibros.isbn', '=', 'tblejemplares.isbn')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->select(
+                'tblprestamos.folio',
+                'tblalumnos.nombre',
+                'tblalumnos.apellidos',
+                'tblprestamos.fecha_inicio',
+                'tblprestamos.fecha_final',
+                'tblprestamos.fecha_entrega',
+                'tblprestamos.renovaciones',
+                'tbldetprestamos.codigo',
+                'tbllibros.titulo',
+                'tbllibros.imagen',
+                'tbllibros.year',
+                'tbleditoriales.nombre AS nombreeditorial',
+                'tblautores.nombre AS nombreautor',
+                'tblautores.apellidos AS apellidoautor'
+            )
+            ->where('tblprestamos.folio', '=', $folio)
+            ->where('tblprestamos.existe', '=', '1')
+            ->get();
+        return $detailsdata;
+    }
+
+    public function array()
+    {
+
+        $listbooks = DB::table('tblprestamos')
+            ->get();
+            foreach ($listbooks as $prestamo) {
+                $fechaf=strtotime($prestamo->Fecha_final);
+                $now = strtotime('today');
+                if($fechaf > $now) {
+                    $prestamo->Estado = 'Expirado';
+                }else{
+                    $prestamo->Estado = 'Vigente';
+                }             
+            }
+        
+        echo ($fechaf);
+        echo('<br/>');
+        echo($now);
+       //return $now;
+    }
+
+    public function getlistbooks($codigolibro)
+    {
+        if (is_null($codigolibro)) { } else {
+            $listbooks = DB::table('tbllibros')
+                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                ->where('tbllibros.existe', '=', '1')
+                ->where('tblejemplares.existe', '=', '1')
+                ->where('tblejemplares.codigo', 'like', $codigolibro . '%')
+                ->orWhere('tbllibros.titulo', 'like', $codigolibro . '%')
+                ->get();
+        }
+        return $listbooks;
+    }
+
+    public function getselectedbook($codigolibro)
+    {
+        if (is_null($codigolibro)) { } else {
+            $listbooks = DB::table('tbllibros')
+                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                ->where('tbllibros.existe', '=', '1')
+                ->where('tblejemplares.existe', '=', '1')
+                ->where('tblejemplares.codigo', '=', $codigolibro)
+                ->get();
+        }
+        return $listbooks;
     }
 
     /**
@@ -58,27 +227,25 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-                'Renovation'=>'required'
+        $this->validate($request, [
+            'Renovation' => 'required'
 
         ]);
 
         $renovation = $request->input('Renovation');
 
-        
+
         DB::table('tblprestamos')->insert([
-            'Folio'=>241,
-            'idprestatario'=>'1',
-            'fecha_inicio'=>'2019-12-12',
-            'fecha_final'=>'2019-12-12',
-            'fecha_entrega'=>'2019-12-12',
-            'renovaciones'=>$renovation,
-            'existe'=>1,
+            'Folio' => 241,
+            'idprestatario' => '1',
+            'fecha_inicio' => '2019-12-12',
+            'fecha_final' => '2019-12-12',
+            'fecha_entrega' => '2019-12-12',
+            'renovaciones' => $renovation,
+            'existe' => 1,
         ]);
 
         return;
-
-
     }
 
     /**
@@ -89,10 +256,10 @@ class TaskController extends Controller
      */
     public function show(Request $id)
     {
-        $search = $id ->get("numcontrol");
-        $prestamos=DB::table('tblprestamos')->where('IdPrestatario','=',$search)->get()
-        ->get();
-        return $prestamos; 
+        $search = $id->get("numcontrol");
+        $prestamos = DB::table('tblprestamos')->where('IdPrestatario', '=', $search)->get()
+            ->get();
+        return $prestamos;
     }
 
     /**
@@ -103,7 +270,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $tasks=DB::table('tblprestamos')->where('Folio','=',$id)->get();
+        $tasks = DB::table('tblprestamos')->where('Folio', '=', $id)->get();
 
         return $tasks;
     }
@@ -116,13 +283,13 @@ class TaskController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {
         $moredays = $request->input('days');
         $fecha_final = $request->input('fecha_final');
         $renovaciones = $request->input('renovaciones');
-        $renovaciones=$renovaciones+1;
-        $fechaff=date('Y-m-d', strtotime($fecha_final. ' + '.$moredays.' days'));
-        $tasks=DB::table('tblprestamos')->where('Folio','=',$id)->update(['fecha_final' => $fechaff,'renovaciones' => $renovaciones]);
+        $renovaciones = $renovaciones + 1;
+        $fechaff = date('Y-m-d', strtotime($fecha_final . ' + ' . $moredays . ' days'));
+        $tasks = DB::table('tblprestamos')->where('Folio', '=', $id)->update(['fecha_final' => $fechaff, 'renovaciones' => $renovaciones]);
         return;
     }
 
@@ -134,8 +301,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        $tasks=DB::table('tblprestamos')->where('Folio','=',$id)->update(['Existe' => 0]);
+        $tasks = DB::table('tblprestamos')->where('Folio', '=', $id)->update(['Existe' => 0]);
         return $tasks;
-        
     }
 }

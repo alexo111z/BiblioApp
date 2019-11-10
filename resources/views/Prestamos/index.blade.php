@@ -14,13 +14,13 @@
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
             <div class="col-sm-6">
-            <a href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#create">
+            <a v-on:click="limpiartodo()" href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#create">
                     <i class="fa fa-pencil"></i> Nuevo Prestamo
                 </a>
             
             </div>
             <div class="col-sm-6" style="text-align: right;">
-                <input type="text" name="numcontrol" id="numcontrol" v-on:keyup="searchprestamo()" placeholder="Buscar..." style="padding: .5rem;">
+                <input v-on:keyup="searchprestamo()" type="text" name="control" id="control"  placeholder="No.Control / Apellidos" style="padding: .5rem;">
             </div>
         </div>
 
@@ -46,10 +46,10 @@
 <td>@{{keep.nombre+' '+keep.apellidos}}</td>
 <td>@{{keep.fecha_inicio}}</td>
 <td>@{{keep.fecha_final}}</td>
-<td>@{{'Estadito'}}</td>
+<td>@{{keep.Estado}}</td>
 <td>@{{keep.renovaciones}}</td>
-<td width="10px"><a href="#" class="btn btn-secondary btn-sm" v-on:click.prevent="editkeep(keep)">Detalles</a></td>
-<td colspan="2" width="10px"><a href="#" class="btn btn-primary btn-sm" v-on:click.prevent="renew(keep)">Renovar Prestamo</a></td>
+<td><a href="#" class="btn btn-sm" style="background:#363636;color:white;" v-on:click.prevent="details(keep)">Detalles</a></td>
+<td colspan="2"><a href="#" class="btn btn-sm" style="background:#2da19a;color:white;" v-on:click.prevent="renew(keep)">Renovar Prestamo</a></td>
 </tr>
 </tbody>
 </table>
@@ -92,5 +92,5 @@
         @include('prestamos.renew')      
     </div>
 </div>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{asset('js/prestamos/app.js')}}"></script>
 @endsection

@@ -9,56 +9,36 @@
           </button>
           <h1>Detalles De Prestamo</h1>
         </div>
-        <h3 class="font-weight-light" style="margin-left:2rem;">Libros Prestados A Hector Palomino Con Folio Numero: 554 </h3>
-        <h4 class="font-weight-light" style="color:green;margin-left:2rem">Estado: Vigente </h4>
+        <h3 style="margin-left:2rem;">Libros Prestados A @{{filldetails.nombre+' '+filldetails.apellidos}} Con Folio Numero: @{{filldetails.folio}} </h3>
+        
+        <h4 style="color:green;margin-left:2rem" v-if="filldetails.nombre=='Hector'">Estado: Vigente </h4>
+        <h4 style="color:red;margin-left:2rem" v-else>Estado: Cancelado </h4>
 
+
+        <h5 style="font-weight:light;margin-left:2rem">Fecha De Inicio: @{{filldetails.fecha_inicio}}</h5>
+        <h5 style="font-weight:light;margin-left:2rem">Fecha De Término: @{{filldetails.fecha_final}}</h5>
         <div class="modal-body">                  
 
             
 
 <div class="row">
 
-  <div class="col-md-4 col-md-4">
+  <div v-for="detail in detailsdata" class="col-md-4 col-md-4">
     <div class="thumbnail ">          
-      <img src="https://images-na.ssl-images-amazon.com/images/I/81LeWXJMmIL.jpg" alt="...">
+      <img :src="detail.imagen">
       <div class="caption">
-        <h4 style="font-weight:bold;">50 Sombras De Grey</h4>
+        <h4 style="font-weight:bold;">@{{detail.titulo}}</h4>
         <hr>
-        <h5>Codigo Libro: 144453454</h5>
-        <h5>Editorial: Purrua</h5>
-        <h5>Autor: john Green</h5>
-        <h5>Año: 1997</h5>
+        <h5>Codigo Libro: @{{detail.codigo}}</h5>
+        <h5>Editorial: @{{detail.nombreeditorial}}</h5>
+        <h5>Autor: @{{detail.nombreautor+' '+detail.apellidoautor}}</h5>
+        <h5>Año: @{{detail.year}}</h5>
       </div>
     </div>
   </div>
 
-  <div class="col-md-6 col-md-4">
-    <div class="thumbnail ">          
-      <img src="https://www.rollingstone.com/wp-content/uploads/2019/10/Alaska.jpg?resize=900,600&w=450" alt="...">
-      <div class="caption">
-        <h4 style="font-weight:bold;">Los Amigos Magicos</h4>
-        <hr>
-        <h5>Codigo Libro: 144453454</h5>
-        <h5>Editorial: Purrua</h5>
-        <h5>Autor: john Green</h5>
-        <h5>Año: 1997</h5>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-md-6 col-md-4">
-    <div class="thumbnail">           
-      <img src="https://images-na.ssl-images-amazon.com/images/I/71iR7BPeGHL.jpg" alt="...">
-      <div class="caption">
-        <h4 style="font-weight:bold;">Raza Vaga Locochona</h4>
-        <hr>
-        <h5>Codigo Libro: 144453454</h5>
-        <h5>Editorial: Purrua</h5>
-        <h5>Autor: john Green</h5>
-        <h5>Año: 1997</h5>
-      </div>
-    </div>
-  </div>
+  
 
 
 
@@ -69,6 +49,8 @@
         </div>
       </div>
     </div>
+
+    
 
 </form>
 

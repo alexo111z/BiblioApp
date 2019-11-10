@@ -16,9 +16,9 @@ mix.scripts(['resources/js/Jquery.js',
 'resources/js/Toastr.js',
 'resources/js/vue.js',
                 'resources/js/axios.js',
-                    'resources/js/app.js',
-            ], 'public/js/app.js')
+                'resources/js/prestamos/app.js',
+            ], 'public/js/prestamos/app.js')
             .styles([
                 'resources/css/Bootstrap.css',
-                'resources/css/Toastr.css',
+                'resources/css/Toastr.css',                
             ],'public/css/app.css');
