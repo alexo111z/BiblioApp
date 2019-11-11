@@ -13,16 +13,23 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-3" id="col2">
-
-              <div class="form-group group control">
-                <label for="full_name_id" class="control-label">Numero De Control</label>
-                <input type="text" class="form-control" id="full_name_id" name="full_name" placeholder="Num. de control/Num. de nomina">
-              </div>
+                        
+                <div class="form-group">
+                  <label for="ctrl111">Buscar Libro:</label>
+                  <input v-on:keyup="getctrl()" type="text" class="form-control" id="searchcontrol" placeholder="Num. de control/Num. de nomina">
+                </div>
+                <div style="margin-top:-18px;">
+                <div v-for="control in listcontrol">
+                      <button v-on:click="getselectedcontrol(control)" :value="control.control1" class="list-group-item list-group-item-action broder-1">@{{control.nombre+' '+control.apellidos}}</button>
+                    </div>
+                
+                </div>   
+                      
               <br />
 
               <div class="form-group">
                 <label for="street1_id" class="control-label">Fecha De Inicio</label>
-                <input type="text" class="form-control" id="f_inicio" name="street1" value="{{$ldate = date('d-m-Y')}}" placeholder="{{$ldate = date('d-m-Y')}}" readonly>
+                <input type="text" class="form-control" id="f_inicio" name="street1" value="{{$ldate = date('Y-m-d')}}" placeholder="{{$ldate = date('d-m-Y')}}" readonly>
               </div>
               <br />
               <div class="form-group">
@@ -51,10 +58,7 @@
                     <div v-for="libro in listlibros">
                       <button v-on:click="getselectedbook(libro)" :value="libro.Codigo" class="list-group-item list-group-item-action broder-1">@{{'Codigo: '+libro.Codigo+' Titulo: '+libro.Titulo}}</button>
                     </div>
-
-
                   </div>
-
                 </div>
               </form>
 

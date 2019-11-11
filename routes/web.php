@@ -29,6 +29,7 @@ Route::Resource('tasks','TaskController');
 Route::get('prestamos/array/', 'TaskController@array')->name('array');
 Route::get('prestamos/getdetails/{folio}', 'TaskController@getdetails')->name('getdetails');
 Route::get('prestamos/getlistbooks/{codigolibro}', 'TaskController@getlistbooks')->name('getlistbooks');
+Route::get('prestamos/getlistcontrol/{codigolibro}', 'TaskController@getlistcontrol')->name('getlistcontrol');
 Route::get('prestamos/getselectedbook/{codigolibro}', 'TaskController@getselectedbook')->name('getselectedbook');
 
 

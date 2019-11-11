@@ -28982,6 +28982,7 @@ new Vue({
 				keeps:[],
 				detailsdata:[],
 				listlibros:[],
+				listcontrol:[],
 				cardlibros:[],
 				newkeep:'',
 				fillkeep:{'folio':'','renovaciones':''},
@@ -28990,17 +28991,21 @@ new Vue({
 				errors:[],
 				control:'',
 				codigolibro:'',
+				numcontrol:'',
 				cuantoslibros:0,
 			},
 			methods:{
+				
+
 				limpiartodo:function(){					
 					this.limpiardatos();
 					this.limpiarselecteds();
+					$('#control').val("");
 				},	
 				limpiardatos:function(){					
 					this.listlibros=[];
+					this.listcontrol=[];
 					$('#codigolibro').val("");
-
 				},
 				limpiarselecteds:function(){					
 					this.cardlibros=[];
@@ -29044,7 +29049,6 @@ new Vue({
 					this.getlistbooks();
 				},
 
-
 				getlistbooks:function(){					
 					var urllistbooks='prestamos/getlistbooks/'+this.codigolibro;
 					axios.get(urllistbooks).then(response=>{
@@ -29055,7 +29059,35 @@ new Vue({
 					});
 				},
 
-				editkeep: function(keep){					
+				getctrl:function() {			
+					var searchcontrol = $('#searchcontrol').val();
+					this.numcontrol=searchcontrol;
+					this.getlistcontrol();
+				},
+
+				
+
+				getlistcontrol:function(){					
+					var urllistcontrol='prestamos/getlistcontrol/'+this.numcontrol;
+					axios.get(urllistcontrol).then(response=>{
+						this.listcontrol= response.data				
+
+					}).catch(error =>{						
+						console.log(error.response.data.message);
+					});
+				},
+
+				getselectedcontrol: function(control){
+					$('#searchcontrol').val(control.control1);
+					this.limpiardatos();					
+										
+					
+				},
+
+
+				
+
+				editkeep:function(keep){					
 						this.fillkeep.folio=keep.folio;
 						this.fillkeep.renovaciones=keep.renovaciones;
 						$('#detalles').modal('show');

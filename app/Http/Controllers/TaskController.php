@@ -112,13 +112,13 @@ class TaskController extends Controller
 
 
         foreach ($datas as $prestamo) {
-            $fechaf=strtotime($prestamo->fecha_final);
+            $fechaf = strtotime($prestamo->fecha_final);
             $now = strtotime('today');
-            if($fechaf < $now) {
+            if ($fechaf < $now) {
                 $prestamo->Estado = 'Expirado';
-            }else{
+            } else {
                 $prestamo->Estado = 'Vigente';
-            }             
+            }
         }
 
 
@@ -166,20 +166,20 @@ class TaskController extends Controller
 
         $listbooks = DB::table('tblprestamos')
             ->get();
-            foreach ($listbooks as $prestamo) {
-                $fechaf=strtotime($prestamo->Fecha_final);
-                $now = strtotime('today');
-                if($fechaf > $now) {
-                    $prestamo->Estado = 'Expirado';
-                }else{
-                    $prestamo->Estado = 'Vigente';
-                }             
+        foreach ($listbooks as $prestamo) {
+            $fechaf = strtotime($prestamo->Fecha_final);
+            $now = strtotime('today');
+            if ($fechaf > $now) {
+                $prestamo->Estado = 'Expirado';
+            } else {
+                $prestamo->Estado = 'Vigente';
             }
-        
+        }
+
         echo ($fechaf);
-        echo('<br/>');
-        echo($now);
-       //return $now;
+        echo ('<br/>');
+        echo ($now);
+        //return $now;
     }
 
     public function getlistbooks($codigolibro)
@@ -194,6 +194,41 @@ class TaskController extends Controller
                 ->get();
         }
         return $listbooks;
+    }
+
+    public function getlistcontrol($numcontrol)
+    {
+        if (is_null($numcontrol)) { } else {
+            $dataalumn = DB::table('tblusuarios')->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblusuarios.id',
+                    'tblalumnos.nocontrol AS control1',
+                    'tblalumnos.nombre',
+                    'tblalumnos.apellidos',
+                )->where('tblalumnos.existe', '=', '1')->where('tblalumnos.NoControl', 'like', $numcontrol . '%');
+
+
+            $datadoc = DB::table('tblusuarios')->join('tbldocentes', 'tbldocentes.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblusuarios.id',
+                    'tbldocentes.nonomina AS control1',
+                    'tbldocentes.nombre',
+                    'tbldocentes.apellidos',
+                )->where('tbldocentes.existe', '=', '1')->where('tbldocentes.NoNomina', 'like', $numcontrol . '%');
+
+            $listcontrol = DB::table('tblusuarios')->join('tbladministrativos', 'tbladministrativos.idusuario', '=', 'tblusuarios.id')
+                ->select(
+                    'tblusuarios.id',
+                    'tbladministrativos.nonomina AS control1',
+                    'tbladministrativos.nombre',
+                    'tbladministrativos.apellidos',
+                )->where('tbladministrativos.existe', '=', '1')->where('tbladministrativos.NoNomina', 'like', $numcontrol . '%')
+                ->union($dataalumn)
+                ->union($datadoc)
+                ->orderby('id')
+                ->get();
+        }
+        return $listcontrol;
     }
 
     public function getselectedbook($codigolibro)
