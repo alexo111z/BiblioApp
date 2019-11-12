@@ -27149,7 +27149,6 @@ new Vue({
                 totales.push(cantidad);
             });
             return totales;
-<<<<<<< HEAD
         },
         contarLibros: function () {
             // var count = [];
@@ -27165,9 +27164,6 @@ new Vue({
             count = this.cantidad
             return count;
         },
-=======
-        }
->>>>>>> Avances-1
     },
     methods: {
         changePage: function (page) {
