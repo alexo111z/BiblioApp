@@ -31,7 +31,7 @@
                    </a>
                </div>
 
-               <ul class="collapse navbar-collapse" id="navbarSupportedContent">
+               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                    <ul class="nav navbar-nav navbar-right">
                        @guest
                            <li>

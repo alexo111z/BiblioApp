@@ -1,14 +1,14 @@
 <template>
     <div id="users">
         <div class="title">
-            <h1>Autores <small>Panel de control</small></h1>
+            <h1>Usuarios <small>Panel de control</small></h1>
         </div>
 
         <div class="divisor"></div>
 
         <div class="container inner-section">
             <div class="row">
-            <div class="col-sm">
+            <div class="col-md-12">
                 <button type="button" class="add-button btn btn-primary" @click="onAdd()" data-toggle="modal" data-target="#usersModal">
                     <i class="fa fa-pencil"></i>Registrar Usuario
                 </button>
@@ -74,7 +74,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4 col-md-offset-4">
                 <select class="form-control" @change="onSelectUserType($event)">
                     <option value="Administrador" selected>Administrador</option>
                     <option value="Docente">Docente</option>
@@ -85,30 +85,34 @@
             </div>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th v-for="columnHeader of this.columns[this.userType]">{{columnHeader}}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(user, index) of this.users">
-                    <td>{{index + 1}}</td>
-                    <td v-for="(value, key) of user" v-if="key !== 'id'">
-                        {{value}}
-                    </td>
-                    <td>
-                        <div class="buttons" role="group" aria-label="Basic example">
-                            <button type="button" class="btn btn-info" @click="onEdit(user)" data-toggle="modal" data-target="#usersModal"><i class="fa fa-pencil-square-o"></i></button>
-                            <button type="button" class="btn btn-danger" @click="onDelete(user)"><i class="fa fa-times"></i></button>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th v-for="columnHeader of this.columns[this.userType]">{{columnHeader}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr v-for="(user, index) of this.users">
+                        <td>{{index + 1}}</td>
+                        <td v-for="(value, key) of user" v-if="key !== 'id'">
+                            {{value}}
+                        </td>
+                        <td>
+                            <div class="buttons" role="group" aria-label="Basic example">
+                                <button type="button" class="btn btn-info" @click="onEdit(user)" data-toggle="modal" data-target="#usersModal"><i class="fa fa-pencil-square-o"></i></button>
+                                <button type="button" class="btn btn-danger" @click="onDelete(user)"><i class="fa fa-times"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <div class="row">
-            <div class="col-sm">
+            <div class="col-md-12 paginator-container">
                 <pagination :data="paginatorData" :align="'center'" @pagination-change-page="getResults">
                     <span slot="prev-nav">&lt; Atras</span>
                     <span slot="next-nav">Adelante &gt;</span>
@@ -259,7 +263,7 @@ export default {
                     `¡El usuario ha sido creado correctamente!`,
                     "success"
                 ).then(() => {
-                    window.location.href = window.location.href;
+                   console.log('User added');
                 });
             }).catch(() => {
                 swal("¡Error!", `¡El usuario no pudo ser creado!`, "error");
