@@ -25,7 +25,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form autocomplete="off">
                             <input type="hidden" name="id" v-bind="modal.inputData.id">
                             <select class="form-control" @change="onSelectModalUser($event)" :value="modal.modalUser" name="user_type">
                                 <option value="Administrador" selected>Administrador</option>
@@ -40,7 +40,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="email">Correo electrónico</label>
-                                <input type="email" class="form-control" id="email" name="email" v-model="modal.inputData.email">
+                                <input type="email" class="form-control" id="email" name="email" v-model="modal.inputData.email" autocomplete="off">
                             </div>
                             <div class="form-group">
                                 <label for="password">Contraseña</label>

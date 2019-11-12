@@ -16,7 +16,7 @@ Iniciar Sesión
                 <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo electrónico') }}</label>
 
                 <div class="col-md-6">
-                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" autocomplete="off" value="{{ old('email') }}" required autocomplete="off" autofocus>
 
                     @error('email')
                         <span class="invalid-feedback" role="alert">
