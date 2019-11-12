@@ -34,8 +34,7 @@ Route::get('/reportes',function (){
     return view('reportes.reportes');
 });
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
-//Libros
-Route::resource('libros','LibrosController');
+
 //Adeudos
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
 Route::get('/adeudos', function (){
