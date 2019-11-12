@@ -22,79 +22,84 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
-                <img src="{{ asset('images/LogoTec.png') }}"/>
-                Biblio App ®
-            </a>
+        <nav class="navbar navbar-default">
+           <div class="container-fluid">
+               <div class="navbar-header">
+                   <a class="navbar-brand" href="#">
+                       <img src="{{ asset('images/LogoTec.png') }}"/>
+                       Biblio App ®
+                   </a>
+               </div>
 
-            <div class="collapse navbar-collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent">
-                <ul class="nav navbar-nav ml-auto">
-                    @guest
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('login') }}">Iniciar sesión<span class="sr-only">(current)</span></a>
-                        </li>
-                    @else
-                        @if (Auth::user()->user_type === \App\User::TYPE_ADMIN || Auth::user()->user_type === \App\User::TYPE_COLLABORATOR)
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('home') }}">Panel de control<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ route('users') }}">Usuarios<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Clasificación<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Libros<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Materiales<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Editoriales<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Autores<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Préstamos<span class="sr-only">(current)</span></a>
-                        </li>
-                        @endif
-                        @if (Auth::user()->user_type === \App\User::TYPE_ADMIN)
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Adeudos<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Reportes<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Carreras<span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Código de libro<span class="sr-only">(current)</span></a>
-                            </li>
-                        @endif
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+               <ul class="collapse navbar-collapse" id="navbarSupportedContent">
+                   <ul class="nav navbar-nav navbar-right">
+                       @guest
+                           <li>
+                               <a href="{{ route('login') }}">Iniciar sesión<span class="sr-only">(current)</span></a>
+                           </li>
+                       @else
+                           @if (Auth::user()->user_type === \App\User::TYPE_ADMIN || Auth::user()->user_type === \App\User::TYPE_COLLABORATOR)
+                               <li>
+                                   <a href="{{ route('home') }}">Panel de control<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="{{ route('users') }}">Usuarios<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Clasificación<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Libros<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Materiales<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Editoriales<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Autores<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Préstamos<span class="sr-only">(current)</span></a>
+                               </li>
+                           @endif
+                           @if (Auth::user()->user_type === \App\User::TYPE_ADMIN)
+                               <li>
+                                   <a href="#">Adeudos<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Reportes<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Carreras<span class="sr-only">(current)</span></a>
+                               </li>
+                               <li>
+                                   <a href="#">Código de libro<span class="sr-only">(current)</span></a>
+                               </li>
+                           @endif
+                           <li class="dropdown">
+                               <a id="navbarDropdown" class="dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                   {{ Auth::user()->name }} <span class="caret"></span>
+                               </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Cerrar sesión') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+                               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                            {{ __('Cerrar sesión') }}
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                               </ul>
+                           </li>
+                       @endguest
+                   </ul>
+               </div>
+           </div>
         </nav>
 
         <main class="py-4">

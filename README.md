@@ -55,7 +55,7 @@ source respaldobibiotec.sql
 #
 
 php artisan migrate
-php artisan db:seed --class=UsersSeeder
+php artisan db:seed --class=UsersTableSeeder
 ```
 
 ## Ejecutar servidor

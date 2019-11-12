@@ -1,6 +1,5 @@
 <template>
     <div id="users">
-        
         <div class="title">
             <h1>Autores <small>Panel de control</small></h1>
         </div>
@@ -74,7 +73,7 @@
             </div>
         </div>
 
-        <div class="row d-flex justify-content-center">
+        <div class="row">
             <div class="col-md-3">
                 <select class="form-control" @change="onSelectUserType($event)">
                     <option value="Administrador" selected>Administrador</option>
@@ -256,7 +255,7 @@ export default {
                 user
             ).then(() => {
                 swal(
-                    "¡Agregado!", 
+                    "¡Agregado!",
                     `¡El usuario ha sido creado correctamente!`,
                     "success"
                 ).then(() => {
@@ -289,7 +288,7 @@ export default {
 
             this.modal.title = 'Editar Usuario';
             this.modal.modalUser = this.userType;
-            
+
             this.modal.inputData.id = user.id;
             this.modal.inputData.user_type = this.userType;
             this.modal.inputData.name = user.name;
