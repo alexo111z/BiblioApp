@@ -22,6 +22,7 @@ new Vue({
     data: {
         adeudos: [],
         cantidad: [],
+        usuario: [],
         fillAdeudos: '',
         urlAdeudos: 'adeudo',
         pagination: {
@@ -93,9 +94,13 @@ new Vue({
             //     });
             //
             // });
-            count = this.cantidad
+            count = this.cantidad;
             return count;
         },
+        codUsuario: function () {
+            usu = this.usuario;
+            return usu;
+        }
     },
     methods: {
         changePage: function (page) {
@@ -110,11 +115,12 @@ new Vue({
 
         //Modulo Carreras
         getAdeudos: function (page) { //param: page
-            var url = this.urlAdeudos+'?page=' + page;
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search;
             axios.get(url).then(response => {
                 aux = this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
                 this.getCount();
+                this.getUsu();
             });
         },
         getCount: function() {
@@ -127,7 +133,16 @@ new Vue({
                 });
             });
         },
-
+        getUsu: function() {
+            var count = [];
+            this.adeudos.forEach(adeudo => {
+                const url = this.urlAdeudos + '/usu/' + adeudo.IdPrestatario;
+                axios.get(url).then(response => {
+                    count.push(response.data);
+                    this.usuario = count;
+                });
+            });
+        },
         deleteAdeudo: function (adeudo) {
             if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.Folio + '?')) {
                 var url = this.urlAdeudos + '/' + adeudo.Folio;
@@ -139,6 +154,10 @@ new Vue({
                     toastr.error(ex.response.data.message, "Error!");
                 });
             }
+        },
+        searchAdeudo: function () {
+            this.search = $('#search').val();
+            this.getAdeudos();
         },
         // editCarrera: function (carrera) {
         //     this.fillCarrera.Clave  = carrera.Clave;

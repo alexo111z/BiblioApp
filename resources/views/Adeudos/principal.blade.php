@@ -25,7 +25,7 @@
                 </div>
                 {{--            Buscador--}}
                 <div class="col-sm-6" style="text-align: right;">
-                    <input v-on:keyup="searchAdeudo()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
+                    <input v-on:keyup="searchAdeudo()" type="text" id="search" placeholder="Buscar folio..." style="padding: .5rem;">
                 </div>
             </div>
 
@@ -50,7 +50,7 @@
                         @{{ adeudo.Folio }}
                     </th>
                     <td>
-                        @{{ adeudo.IdPrestatario }}
+                        @{{ codUsuario[index] }}
                     </td>
                     <td>
                         @{{ adeudo.Fecha_inicio }}
