@@ -53,7 +53,13 @@ class UsersController extends Controller
     {
         $user = User::where('id', $id)->first();
 
-        $user->update($request->all());
+        $userToCreate = $request->all();
+
+        if(isset($userToCreate['password'])) {
+            $userToCreate['password'] = bcrypt($userToCreate['password']);
+        }
+
+        $user->update($userToCreate);
 
         $userUpdatedResponse = (new UserResource($user))->toResponse($request);
 

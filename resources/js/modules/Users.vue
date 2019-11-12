@@ -263,7 +263,17 @@ export default {
                     `¡El usuario ha sido creado correctamente!`,
                     "success"
                 ).then(() => {
-                   console.log('User added');
+                    let createdUser = Object.create(user);
+
+                    createdUser.user_type = '';
+                    createdUser.password = '';
+
+                    createdUser = _.pickBy(createdUser, _.identity);
+
+                    console.log(createdUser);
+
+                    this.users.unshift(createdUser);
+                    this.users.pop();
                 });
             }).catch(() => {
                 swal("¡Error!", `¡El usuario no pudo ser creado!`, "error");
