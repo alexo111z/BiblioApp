@@ -24,11 +24,11 @@ En la consola y en la adireccion en la que se valla a guardar el proyecto
 
 Dentro del acarpeta del proyecto
 ```
->composer install
+>composer install 
 
 >copy .env.example .env
 
->php artisan key:generate
+>php artisan key:generte
 ```
 
 Ejecutar: 

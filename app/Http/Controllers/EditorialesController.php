@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Autores;
+use App\Editoriales;
 
-class AutoresController extends Controller
+class EditorialesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,17 +15,17 @@ class AutoresController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $autores = Autores::where('Existe','=',1)->search($search)->paginate(50);
+        $editoriales = Editoriales::where('Existe','=',1)->search($search)->paginate(50);
         return [
             'pagination' => [
-                'total'         => $autores->total(),
-                'current_page'  => $autores->currentPage(),
-                'per_page'      => $autores->perPage(),
-                'last_page'     => $autores->lastPage(),
-                'from'          => $autores->firstItem(),
-                'to'            => $autores->lastItem(),
+                'total'         => $editoriales->total(),
+                'current_page'  => $editoriales->currentPage(),
+                'per_page'      => $editoriales->perPage(),
+                'last_page'     => $editoriales->lastPage(),
+                'from'          => $editoriales->firstItem(),
+                'to'            => $editoriales->lastItem(),
             ],
-            'autores' =>$autores
+            'editoriales' =>$editoriales
         ];
     }
 
@@ -39,13 +39,11 @@ class AutoresController extends Controller
     {
         $this ->validate($request, [
             'Nombre' => 'required',
-            'Apellidos' => 'required'
         ]);
 
-        Autores::create($request->all());
-
-        return;
+        Editoriales::create($request->all());
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -57,10 +55,8 @@ class AutoresController extends Controller
     {
         $this->validate($request, [
             'Nombre' => 'required',
-            'Apellidos' => 'required'
         ]);
-
-        Autores::where('IdAutor', '=', $id)->update($request->all());
+        Editoriales::where('Id', '=', $id)->update($request->all());
     }
 
     /**
@@ -71,6 +67,6 @@ class AutoresController extends Controller
      */
     public function destroy($id)
     {
-        Autores::where('IdAutor', '=', $id)->delete();
+        Editoriales::where('Id', '=', $id)->delete();
     }
 }

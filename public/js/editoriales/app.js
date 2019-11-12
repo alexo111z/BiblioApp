@@ -27067,31 +27067,22 @@ return /******/ (function(modules) { // webpackBootstrap
 //# sourceMappingURL=axios.map
 
 new Vue({
-    el: '#adeudosCRUD',
-    created: function () {
-        this.getAdeudos();
-        toastr.options ={
+    el:"#content",
+    created:function(){
+        toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
             showEasing: 'swing',
             hideMethod: 'fadeOut',
-            hideDuration: 1000,
+            hideDuration: 500,
             hideEasing: 'swing',
-            onHidden: undefined,
-            closeMethod: false,
-            closeDuration: false,
-            closeEasing: false,
             closeOnHover: true,
             progressBar: true
         };
-        $('[data-toggle="tooltip"]').tooltip();
+        this.getEditoriales();
     },
-
     data: {
-        adeudos: [],
-        cantidad: [],
-        fillAdeudos: '',
-        urlAdeudos: 'adeudo',
+        editoriales: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27100,135 +27091,113 @@ new Vue({
             'from': 0,
             'to': 0,
         },
+        newEditorial: {
+            'Nombre':'',
+            'Existe':1
+        },
         offset: 3,
         errors: [],
         search: '',
+        fillEditorial:{
+            'Id':'',
+            'Nombre':''
+        }
     },
-    computed: {
-        isActived: function () {
+    computed:{
+        isActived:function () {
             return this.pagination.current_page;
         },
-        pageNumber: function () {
-            if (!this.pagination.to) {
+        pageNumber:function () {
+            if(!this.pagination.to){
                 return [];
             }
-            var from = this.pagination.current_page - this.offset;
-            if (from < 1) {
+            var from = this.pagination.current_page - this.offset//TODO offset
+            if(from < 1){
                 from = 1;
             }
-            var to = from + (this.offset * 2);
-            if (to >= this.pagination.last_page) {
+            var to = from + (this.offset * 2);// TODO offset
+            if(to >= this.pagination.last_page){
                 to = this.pagination.last_page;
             }
 
             var pagesArray = [];
-            while (from <= to) {
+            while(from <= to){
                 pagesArray.push(from);
                 from++;
             }
             return pagesArray;
         },
-        totalAdeudo: function () {
-            const totales = [];
-            this.adeudos.forEach(adeudo => {
-                const fechaActual = new Date().getTime();
-                const fechaFinal = new Date(adeudo.Fecha_final).getTime();
-                const fechaEntrega = new Date(adeudo.Fecha_entrega).getTime();
 
-                const diferencia = adeudo.Fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
-                const dias = Math.floor(diferencia/(1000*60*60*24));
 
-                let cantidad = 0;
-                if (dias > 0) {
-                    cantidad = dias * 25;
-                }
-                if (cantidad > 100) {
-                    cantidad = 100;
-                }
-
-                totales.push(cantidad);
-            });
-            return totales;
-<<<<<<< HEAD
-        },
-        contarLibros: function () {
-            // var count = [];
-            // this.adeudos.forEach(adeudo => {
-            //
-            //     const url = this.urlAdeudos + '/count/' + adeudo.Folio;
-            //     axios.get(url).then(response => {
-            //        count.push(response.data);
-            //        this.cantidad = count;
-            //     });
-            //
-            // });
-            count = this.cantidad
-            return count;
-        },
-=======
-        }
->>>>>>> Avances-1
     },
-    methods: {
+    methods:{
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getAdeudos(page);
+            this.getEditoriales(page);
         },
-        searchAdeudo: function () {
-            var search = $("#search").val();
-            this.search = search;
-            this.getAdeudos();
+        searchEditorial: function () {
+            this.search = $('#search').val();
+            this.getEditoriales();
         },
-
-        //Modulo Carreras
-        getAdeudos: function (page) { //param: page
-            var url = this.urlAdeudos+'?page=' + page;
-            axios.get(url).then(response => {
-                aux = this.adeudos = response.data.adeudos.data;//.carreras.data;
+        getEditoriales: function (page) {
+            var url = 'editorials?page='+page+"&search="+this.search;
+            axios.get(url).then(response =>{
+                this.editoriales = response.data.editoriales.data;
                 this.pagination = response.data.pagination;
-                this.getCount();
+            }).catch(error =>{
+                toastr.error(error, "Error!");
             });
         },
-        getCount: function() {
-            var count = [];
-            this.adeudos.forEach(adeudo => {
-                const url = this.urlAdeudos + '/count/' + adeudo.Folio;
-                axios.get(url).then(response => {
-                    count.push(response.data);
-                    this.cantidad = count;
-                });
+        createEditorial: function () {
+            var url = 'editorials';
+            axios.post(url, this.newEditorial)
+            .then(response => {
+                this.getEditoriales();
+                this.newEditorial = {
+                    'Nombre':'',
+                    'Existe':1
+                };
+                this.errors = [];
+                $("#create").modal('hide');
+                toastr.success("Editorial registrada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
         },
-
-        deleteAdeudo: function (adeudo) {
-            if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.Folio + '?')) {
-                var url = this.urlAdeudos + '/' + adeudo.Folio;
+        editEditorial: function (editorial) {
+            this.fillEditorial.Id = editorial.Id;
+            this.fillEditorial.Nombre = editorial.Nombre;
+            $('#edit').modal('show');
+        },
+        updateEditorial: function (id) {
+            var url = 'editorials/'+id;
+            axios.put(url, this.fillEditorial)
+            .then(response => {
+                this.getEditoriales();
+                this.fillEditorial = {
+                    'Id':'',
+                    'Nombre':''
+                };
+                this.errors = [];
+                $("#edit").modal("hide");
+                toastr.success("Editorial actualizada con exito.", "Tarea completada!");
+            })
+            .catch(error =>{
+                this.errors = error;
+                toastr.error(error, "Error!");
+            });
+        },
+        deleteEditorial: function (editorial) {
+            if (confirm('¿Esta seguro de eliminar al autor ' + editorial.Nombre + '?')) {
+                var url = "editorials/" + editorial.Id;
                 axios.delete(url).then(response => {
-                    this.getAdeudos();
-                    swal.close();
-                    toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
+                    this.getEditoriales();
+                    toastr.success("Editorial eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    toastr.error(ex, "Error!");
                 });
             }
         },
-        // editCarrera: function (carrera) {
-        //     this.fillCarrera.Clave  = carrera.Clave;
-        //     this.fillCarrera.Nombre = carrera.Nombre;
-        //     $('#editCarrera').modal('show');
-        // },
-        // updateCarrera: function (id) {
-        //     var url = 'carreras/' + id;
-        //     axios.put(url, this.fillCarrera).then(response => {
-        //         this.getCarreras();
-        //         this.fillCarrera = {'Clave': '', 'Nombre': ''};
-        //         this.errors = [];
-        //         $('#editCarrera').modal('hide');
-        //         toastr.success("Carrera actualizada con exito.", "Tarea completada!");
-        //     }).catch(error => {
-        //         this.errors = error.response.data;
-        //     });
-        // }
-
     }
 });

@@ -1,9 +1,6 @@
 new Vue({
-
-    el: "#content",
-    created: function () {
-        console.log("Hi! from Vue js");
-        this.getAutores();
+    el:"#content",
+    created:function(){
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -14,9 +11,10 @@ new Vue({
             closeOnHover: true,
             progressBar: true
         };
+        this.getEditoriales();
     },
     data: {
-        autores: [],
+        editoriales: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -25,19 +23,16 @@ new Vue({
             'from': 0,
             'to': 0,
         },
-
-        newAutor: {
+        newEditorial: {
             'Nombre':'',
-            'Apellidos':'',
             'Existe':1
         },
         offset: 3,
         errors: [],
         search: '',
-        fillAutor:{
-            'IdAutor':'',
-            'Nombre':'',
-            'Apellidos':''
+        fillEditorial:{
+            'Id':'',
+            'Nombre':''
         }
     },
     computed:{
@@ -67,79 +62,74 @@ new Vue({
 
 
     },
-    methods: {
+    methods:{
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getAutores(page);
+            this.getEditoriales(page);
         },
-        getAutores: function (page) {
-            var url = 'autors?page=' + page+'&search='+this.search;
-            //var url = 'autors';
-            axios.get(url).then(response => {
-                //this.autores = response.data;
-                this.autores = response.data.autores.data;
+        searchEditorial: function () {
+            this.search = $('#search').val();
+            this.getEditoriales();
+        },
+        getEditoriales: function (page) {
+            var url = 'editorials?page='+page+"&search="+this.search;
+            axios.get(url).then(response =>{
+                this.editoriales = response.data.editoriales.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
-                toastr.error(error.response.data.message, "Error!");
+                toastr.error(error, "Error!");
             });
         },
-        createAutor: function () {
-            var url = 'autors';
-            axios.post(url, this.newAutor)
+        createEditorial: function () {
+            var url = 'editorials';
+            axios.post(url, this.newEditorial)
             .then(response => {
-                this.getAutores();
-                this.newAutor = {
+                this.getEditoriales();
+                this.newEditorial = {
                     'Nombre':'',
-                    'Apellidos':'',
                     'Existe':1
                 };
                 this.errors = [];
                 $("#create").modal('hide');
-                toastr.success("Autor registrado con exito.", "Tarea completada!");
+                toastr.success("Editorial registrada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
         },
-        editAutor: function (autor) {
-            this.fillAutor.IdAutor = autor.IdAutor;
-            this.fillAutor.Nombre = autor.Nombre;
-            this.fillAutor.Apellidos = autor.Apellidos;
+        editEditorial: function (editorial) {
+            this.fillEditorial.Id = editorial.Id;
+            this.fillEditorial.Nombre = editorial.Nombre;
             $('#edit').modal('show');
         },
-        updateAutor: function (id) {
-            var url = 'autors/'+id;
-            axios.put(url, this.fillAutor)
+        updateEditorial: function (id) {
+            var url = 'editorials/'+id;
+            axios.put(url, this.fillEditorial)
             .then(response => {
-                this.getAutores();
-                this.fillAutor = {
-                    'IdAutor':'',
-                    'Nombre':'',
-                    'Apellidos':''
+                this.getEditoriales();
+                this.fillEditorial = {
+                    'Id':'',
+                    'Nombre':''
                 };
                 this.errors = [];
                 $("#edit").modal("hide");
-                toastr.success("Autor actualizado con exito.", "Tarea completada!");
+                toastr.success("Editorial actualizada con exito.", "Tarea completada!");
             })
             .catch(error =>{
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
+                this.errors = error;
+                toastr.error(error, "Error!");
             });
         },
-        deleteAutor: function (autor) {
-            if (confirm('¿Esta seguro de eliminar al autor ' + autor.Nombre + ' ' + autor.Apellidos + '?')) {
-                var url = "autors/" + autor.IdAutor;
+        deleteEditorial: function (editorial) {
+            if (confirm('¿Esta seguro de eliminar al autor ' + editorial.Nombre + '?')) {
+                var url = "editorials/" + editorial.Id;
                 axios.delete(url).then(response => {
-                    this.getAutores();
-                    toastr.success("Autor eliminado con exito.", "Tarea completada!");
+                    this.getEditoriales();
+                    toastr.success("Editorial eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    toastr.error(ex, "Error!");
                 });
             }
         },
-        searchAutor: function () {
-            this.search = $('#search').val();
-            this.getAutores();
-        }
     }
 });

@@ -10,34 +10,62 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+//Css general
+mix.styles([
+    'resources/css/bootstrap.css',
+    'resources/css/toastr.css'], 'public/css/app.css');
+//editoriales
 mix.scripts([
     'resources/js/jquery.js',
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
-    'resources/js/sweetalert.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/app.js'], 'public/js/app.js')
-    .styles([
-    'resources/css/bootstrap.css',
-    'resources/css/toastr.css',
-    ], 'public/css/app.css');
-
+    'resources/js/editoriales/app.js'], 'public/js/editoriales/app.js');
+//autores
 mix.scripts([
     'resources/js/jquery.js',
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
-    'resources/js/sweetalert.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/autores/app.js'], 'public/js/autores/app.js');
+//Dewey
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/dewey/app.js'], 'public/js/dewey/app.js');
+//Reportes
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/reportes/app.js'], 'public/js/reportes/app.js');
+//Carreras
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/carreras/carrera.js'], 'public/js/appCarrera.js');
-
+//Adeudos
 mix.scripts([
     'resources/js/jquery.js',
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
-    'resources/js/sweetalert.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/adeudos/adeudos.js'], 'public/js/appAdeudos.js');
+//Libros
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',], 'public/js/libros/app.js');

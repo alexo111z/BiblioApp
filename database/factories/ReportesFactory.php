@@ -1,9 +1,6 @@
 <?php
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-use App\Autores;
-use Faker\Generator as Faker;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +13,8 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(Autores::class, function (Faker $faker) {
+$factory->define(App\Reportes::class, function (Faker\Generator $faker) {
     return [
-        'Nombre' => $faker->firstName,
-        'Apellidos'=>$faker->lastName,
-        'Existe'=>1
+        'keep' => $faker->sentence
     ];
 });

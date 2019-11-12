@@ -9,15 +9,14 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run(){
-
+    public function run()
+    {
+        $this->call(AutoresTableSeeder::class);
+        $this->call(EditorialesTableSeeder::class);
+        $this->call(ReportesTableSeeder::class);
         $this->truncateTables([
             'tblcarreras',
-            'tblautores',
         ]);
-
-        $this->call(CarrerasSeeder::class);
-        $this->call(AutoresTableSeeder::class);
     }
 
     public function truncateTables(array $tables) {
