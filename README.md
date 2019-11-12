@@ -42,10 +42,11 @@ php artisan key:generate
 docker run -p 3306:3306 --name db -e MYSQL_ROOT_PASSWORD=secret -d mysql:5.6
 
 # Crear una base de datos con el mysql-client
-mysql -u root -P 3306 -h 127.0.0.1 -p #contraseña secret
+#contraseña secret
+mysql -u root -P 3306 -h 127.0.0.1 -p 
 CREATE DATABASE bibliodb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-# correr migraciones y seeders
+use bibliodb
+source respaldobibiotec.sql
 
 #
 # Usuario administrador
