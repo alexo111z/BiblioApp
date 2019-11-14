@@ -155,10 +155,7 @@ new Vue({
                 });
             }
         },
-        searchAdeudo: function () {
-            this.search = $('#search').val();
-            this.getAdeudos();
-        },
+
         // editCarrera: function (carrera) {
         //     this.fillCarrera.Clave  = carrera.Clave;
         //     this.fillCarrera.Nombre = carrera.Nombre;

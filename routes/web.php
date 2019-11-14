@@ -45,7 +45,7 @@ Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
 //Carreras
-Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
-Route::get('/carrera', function(){
+Route::resource('carrera', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+Route::get('/carreras', function(){
     return view('Carreras.carreras');
 });

@@ -9,7 +9,8 @@ class CarreraController extends Controller
 {
     //Display a listing of the resource.    Request $request
     public function index(Request $request){
-        $carreras = Carrera::orderBy('Clave')->where('Existe', 1)->paginate(10);
+        $search = $request->get('search');
+        $carreras = Carrera::orderBy('Clave')->where('Existe', 1)->search($search)->paginate(10);
         return [
             'pagination' => [
                 'total'         => $carreras->total(),
