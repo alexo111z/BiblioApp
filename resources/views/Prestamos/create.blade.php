@@ -15,7 +15,7 @@
             <div class="col-md-3" id="col2">
                         
                 <div class="form-group">
-                  <label for="ctrl111">Buscar Libro:</label>
+                  <label for="ctrl111">Buscar Prestatario:</label>
                   <input v-on:keyup="getctrl()" type="text" class="form-control" id="searchcontrol" placeholder="Num. de control/Num. de nomina">
                 </div>
                 <div style="margin-top:-18px;">
@@ -56,7 +56,7 @@
                 <div style="margin-top:-18px;">
                   <div class="listgroup" id="listabusqueda">
                     <div v-for="libro in listlibros">
-                      <button v-on:click="getselectedbook(libro)" :value="libro.Codigo" class="list-group-item list-group-item-action broder-1">@{{'Codigo: '+libro.Codigo+' Titulo: '+libro.Titulo}}</button>
+                      <button v-on:click="getselectedbook(libro)" :value="libro.codigo" class="list-group-item list-group-item-action broder-1">@{{'Codigo: '+libro.Codigo+' Titulo: '+libro.Titulo}}</button>
                     </div>
                   </div>
                 </div>
@@ -68,17 +68,17 @@
 
                 <div v-for="card in cardlibros" class="col-md-4 col-md-4" style="margin-top:10px;">
                   <div class="thumbnail ">
-                    <button v-on:click="limpiarselecteds()" type="button" class="close" style="margin-bottom:8px;" >
+                    <button v-on:click="limpiarselecteds(card)" type="button" class="close" style="margin-bottom:8px;" >
                       <span>&times;</span>
                     </button>
-                    <img src="https://images-na.ssl-images-amazon.com/images/I/81LeWXJMmIL.jpg" alt="...">
+                    <img :src="card.imagen">
                     <div class="caption">
-                      <h4 style="font-weight:bold;">50 Sombras De Grey</h4>
+                      <h4 style="font-weight:bold;">@{{card.titulo}}</h4>
                       <hr>
-                      <h5>Codigo Libro: 144453454</h5>
-                      <h5>Editorial: Purrua</h5>
-                      <h5>Autor: john Green</h5>
-                      <h5>Año: 1997</h5>
+                      <h5>Codigo Libro: @{{card.codigo}}</h5>
+                      <h5>Editorial: @{{card.enombre}}</h5>
+                      <h5>Autor: @{{card.nautor+' '+card.aautor}}</h5>
+                      <h5>Año: @{{card.year}}</h5>
                     </div>
                   </div>
                 </div>

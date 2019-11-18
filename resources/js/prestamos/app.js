@@ -1,9 +1,13 @@
 new Vue({
+			
 			el: '#prestamosindex',
+			
 			created: function(){
+				
 				this.getkeeps();
 			},
-			data:{
+			data:{		
+				colalibros:[],
 				keeps:[],
 				detailsdata:[],
 				listlibros:[],
@@ -32,8 +36,19 @@ new Vue({
 					this.listcontrol=[];
 					$('#codigolibro').val("");
 				},
-				limpiarselecteds:function(){					
-					this.cardlibros=[];
+				limpiarselecteds:function(card){
+										
+					var index = this.colalibros.indexOf(card.codigo);
+					if (index !== -1) this.colalibros.splice(index, 1);
+					var urlselectedbook='prestamos/getselectedbook/'+this.colalibros;								
+								axios.get(urlselectedbook).then(response=>{				
+								this.cardlibros= response.data
+								}).catch(error =>{						
+									console.log(error.response.data.message);
+									});
+
+					
+							
 				},
 
 				getkeeps:function(){					
@@ -55,20 +70,36 @@ new Vue({
 				
 
 
-				getselectedbook:function(libro){					
-					var urlselectedbook='prestamos/getselectedbook/'+libro.Codigo;					
-					axios.get(urlselectedbook).then(response=>{
-						
-						this.limpiardatos();
+				getselectedbook:function(libro){
+					if(this.colalibros.length<3){
+						let yes=1;
+						for(i = 0; i <this.colalibros.length; i++){
+							if(this.colalibros[i]==libro.Codigo){
+									alert('No puede seleccionar 2 veces el mismo ejemplar');
+									this.limpiardatos();
+									yes=0;
+							}	
+						}
+						if(yes==1){
+							this.colalibros.push(libro.Codigo);							
+								var urlselectedbook='prestamos/getselectedbook/'+this.colalibros;								
+								axios.get(urlselectedbook).then(response=>{						
+								this.limpiardatos();
+								this.cardlibros= response.data						
+								}).catch(error =>{						
+								console.log(error.response.data.message);
+								});
+						}					
 
-						this.cardlibros= response.data
-						
-					}).catch(error =>{						
-						console.log(error.response.data.message);
-					});
+					}else{
+						alert('Solo Pueden Prestarse 3 Libros');
+						this.limpiardatos();
+					}					
 				},
 
-				searchlibros:function() {					
+				searchlibros:function() {	
+					this.listcontrol=[];
+					
 					var search2 = $('#codigolibro').val();
 					this.codigolibro=search2;
 					this.getlistbooks();
@@ -84,7 +115,9 @@ new Vue({
 					});
 				},
 
-				getctrl:function() {			
+				getctrl:function() {
+					this.listlibros=[];
+					
 					var searchcontrol = $('#searchcontrol').val();
 					this.numcontrol=searchcontrol;
 					this.getlistcontrol();

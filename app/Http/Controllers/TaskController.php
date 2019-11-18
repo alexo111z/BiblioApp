@@ -233,17 +233,147 @@ class TaskController extends Controller
 
     public function getselectedbook($codigolibro)
     {
+
         if (is_null($codigolibro)) { } else {
-            $listbooks = DB::table('tbllibros')
+
+            $pedimento = explode(",", $codigolibro);
+            if(count($pedimento)==1){
+            $finalbook = DB::table('tbllibros')
+            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->select(
+                'tblejemplares.codigo',                
+                'tbllibros.titulo',
+                'tbllibros.year',
+                'tbllibros.imagen',
+                'tblautores.nombre AS nautor',
+                'tblautores.apellidos AS aautor',
+                'tbleditoriales.nombre AS enombre')
+            ->where('tbllibros.existe', '=', '1')
+            ->where('tblejemplares.existe', '=', '1')
+            ->where('tblejemplares.codigo', '=', $pedimento[0])
+            ->orderby('Codigo')
+            ->get();
+
+            }
+
+
+            if(count($pedimento)==2){
+
+                $book1 = DB::table('tbllibros')
+            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->select(
+                'tblejemplares.codigo',                
+                'tbllibros.titulo',
+                'tbllibros.year',
+                'tbllibros.imagen',
+                'tblautores.nombre AS nautor',
+                'tblautores.apellidos AS aautor',
+                'tbleditoriales.nombre AS enombre')
+            ->where('tbllibros.existe', '=', '1')
+            ->where('tblejemplares.existe', '=', '1')
+            ->where('tblejemplares.codigo', '=', $pedimento[0]); 
+
+
+                $finalbook = DB::table('tbllibros')
                 ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->select(
+                'tblejemplares.codigo',                
+                'tbllibros.titulo',
+                'tbllibros.year',
+                'tbllibros.imagen',
+                'tblautores.nombre AS nautor',
+                'tblautores.apellidos AS aautor',
+                'tbleditoriales.nombre AS enombre')
                 ->where('tbllibros.existe', '=', '1')
                 ->where('tblejemplares.existe', '=', '1')
-                ->where('tblejemplares.codigo', '=', $codigolibro)
+                ->where('tblejemplares.codigo', '=', $pedimento[1])
+                ->union($book1)
+                ->orderby('Codigo')
                 ->get();
+    
+                }
+
+
+
+
+
+            if(count($pedimento)==3){
+                $book1 = DB::table('tbllibros')
+            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->select(
+                'tblejemplares.codigo',                
+                'tbllibros.titulo',
+                'tbllibros.year',
+                'tbllibros.imagen',
+                'tblautores.nombre AS nautor',
+                'tblautores.apellidos AS aautor',
+                'tbleditoriales.nombre AS enombre')
+            ->where('tbllibros.existe', '=', '1')
+            ->where('tblejemplares.existe', '=', '1')
+            ->where('tblejemplares.codigo', '=', $pedimento[0]);                   
+            
+
+
+            $book2 = DB::table('tbllibros')
+                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+            ->select(
+                'tblejemplares.codigo',                
+                'tbllibros.titulo',
+                'tbllibros.year',
+                'tbllibros.imagen',
+                'tblautores.nombre AS nautor',
+                'tblautores.apellidos AS aautor',
+                'tbleditoriales.nombre AS enombre')
+                ->where('tbllibros.existe', '=', '1')
+                ->where('tblejemplares.existe', '=', '1')
+                ->where('tblejemplares.codigo', '=', $pedimento[1]);
+                
+
+                $finalbook = DB::table('tbllibros')
+                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                ->select(
+                    'tblejemplares.codigo',                
+                    'tbllibros.titulo',
+                    'tbllibros.year',
+                    'tbllibros.imagen',
+                    'tblautores.nombre AS nautor',
+                    'tblautores.apellidos AS aautor',
+                    'tbleditoriales.nombre AS enombre')
+                ->where('tbllibros.existe', '=', '1')
+                ->where('tblejemplares.existe', '=', '1')
+                ->where('tblejemplares.codigo', '=', $pedimento[2])
+                ->union($book1)
+                ->union($book2)
+                ->orderby('Codigo')
+                ->get();
+
+            }    
+
+
+
+
+
         }
-        return $listbooks;
+        return $finalbook;
+
     }
 
+    public function getselectedbook1()
+    {
+        
+    }
     /**
      * Show the form for creating a new resource.
      *

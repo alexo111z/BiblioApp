@@ -31,6 +31,7 @@ Route::get('prestamos/getdetails/{folio}', 'TaskController@getdetails')->name('g
 Route::get('prestamos/getlistbooks/{codigolibro}', 'TaskController@getlistbooks')->name('getlistbooks');
 Route::get('prestamos/getlistcontrol/{codigolibro}', 'TaskController@getlistcontrol')->name('getlistcontrol');
 Route::get('prestamos/getselectedbook/{codigolibro}', 'TaskController@getselectedbook')->name('getselectedbook');
+Route::get('prestamos/getselectedbook/', 'TaskController@getselectedbook1')->name('getselectedbook1');
 
 
 //Route::get('/prestamos/detalles/{id}', 'PrestamosController@detalles')->name('detalles');
