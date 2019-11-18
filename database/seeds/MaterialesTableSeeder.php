@@ -12,6 +12,6 @@ class MaterialesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Materiales::class, 5)-> create();
+        factory(Materiales::class, 80)-> create();
     }
 }
