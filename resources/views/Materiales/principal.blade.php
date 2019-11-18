@@ -3,7 +3,7 @@
 @section('content')
    
     
-   
+   desde principal
 
     <script src="{{asset('js/appMateriales.js')}}"></script>
 

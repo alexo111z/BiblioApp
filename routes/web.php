@@ -45,3 +45,8 @@ Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 
 Route::get('/carrera', function(){
     return view('Carreras.carreras');
 });
+//Materiales
+Route::resource('material', 'MaterialesController', ['except' =>'show']);
+Route::get('/materiales', function (){
+    return view('Materiales.principal');
+});
