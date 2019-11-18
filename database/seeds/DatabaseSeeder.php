@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(AutoresTableSeeder::class);
+        $this->call(MaterialesTableSeeder::class);
+        /*$this->call(AutoresTableSeeder::class);
         $this->call(EditorialesTableSeeder::class);
         $this->call(ReportesTableSeeder::class);
         $this->truncateTables([
@@ -25,6 +26,6 @@ class DatabaseSeeder extends Seeder
         foreach ($tables as $table) {
             DB::table($table)->truncate();
         }
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1;');*/
     }
 }

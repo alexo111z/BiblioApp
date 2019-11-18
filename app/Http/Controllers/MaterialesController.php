@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Materiales;
 
-class MAterialesController extends Controller
+class MaterialesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,8 @@ class MAterialesController extends Controller
      */
     public function index()
     {
-        //
+        $materiales1 = Materiales::get();
+        return $materiales1;
     }
 
     /**
@@ -56,7 +58,9 @@ class MAterialesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $materiales1 = Materiales::findOrFail($id);
+        //Formulario
+        return $materiales1;
     }
 
     /**
@@ -79,6 +83,7 @@ class MAterialesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $materiales1 = Materiales::findOrFail($id);
+        $materiales1->delete();
     }
 }
