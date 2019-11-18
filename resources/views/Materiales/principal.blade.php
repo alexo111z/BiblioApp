@@ -88,7 +88,8 @@
                 </nav>
             </div>
         </div>
-        
+        @include('materiales.create')
+      
     </div>
 </div>
 

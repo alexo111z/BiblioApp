@@ -77,6 +77,6 @@ mix.scripts([
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/materiales/materiales.js'], 
-    'public/js/appMateriales.js');
+    'public/js/appMateriales.js') ;
  
     

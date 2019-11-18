@@ -27148,7 +27148,7 @@ new Vue({
             //var url = 'material';
             axios.get(url).then(response => {
                 //this.materiales = response.data;
-                this.materiales = response.data
+                this.materiales = response.data.materiales.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
