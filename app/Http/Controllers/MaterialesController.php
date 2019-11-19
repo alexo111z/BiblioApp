@@ -69,7 +69,8 @@ class MaterialesController extends Controller
             'Tipo' => 'required'
             ]);
 
-            Materiales::where('Id', '=', $id)->update($request->all());
+            Materiales::findOrFail($id)->update($request->all());
+            return;
     }
 
     /**
@@ -81,7 +82,6 @@ class MaterialesController extends Controller
     public function destroy($id)
     {
         Materiales::where('Id', '=', $id)->delete();
-        //Materiales::where('Id', '=', $id)->update(set Exite->"0");
         
     }
 }
