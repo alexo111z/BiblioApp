@@ -16,7 +16,7 @@ class MaterialesController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $materiales = Materiales::where('Existe','=',1)->search($search)->paginate(50);
+        $materiales = Materiales::where('Existe','=',1)->search($search)->orderBy('id','DESC')->paginate(30);
         return [
             'pagination' => [
                 'total'         => $materiales->total(),

@@ -27144,11 +27144,11 @@ new Vue({
             this.getMateriales(page);
         },
         getMateriales: function (page) {
-            var url = 'material?page=' + page+'&search='+this.search;
+            var url = 'material?page=' + page +'&search='+this.search;
             //var url = 'material';
             axios.get(url).then(response => {
                 //this.materiales = response.data;
-                this.materiales = response.data.materiales.data;
+                this.materiales = response.data.material.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
