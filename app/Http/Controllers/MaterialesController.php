@@ -61,7 +61,16 @@ class MaterialesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'Titulo' => 'required',
+            'Clave' => 'required',
+            'Year' => 'required',
+            'Ejemplares' => 'required',
+            'Tipo' => 'required'
+        ]);
+
+        Materiales::find($id)->update($request->all());
+        return;
     }
 
     /**
