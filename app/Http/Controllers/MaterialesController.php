@@ -14,21 +14,11 @@ class MaterialesController extends Controller
      */
     public function index()
     {
-        $materiales1 = Materiales::get();
-        return $materiales1;
+        $materiales = Materiales::orderBy('id','DESC')->get();
+        return $materiales;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
+        /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,34 +26,21 @@ class MaterialesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, [
+        'Titulo' => 'required',
+        'Clave' => 'required',
+        'Year' => 'required',
+        'Ejemplares' => 'required',
+        'Tipo' => 'required'
+      ]);
+
+      Materiales::create($request->all());
+
+      return;
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $materiales1 = Materiales::findOrFail($id);
-        //Formulario
-        return $materiales1;
-    }
-
-    /**
+        /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

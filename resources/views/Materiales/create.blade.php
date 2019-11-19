@@ -12,19 +12,23 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                 <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" v-model="newMaterial.Titulo">
+                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
-                                <select name="clave" id="clave" class="form-control" v-model="newMaterial.Clave"></select>
+                                <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                <select name="clave" id="clave" class="form-control" v-model="newMaterial.Clave">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                 <?php
                                 $cont = date('Y');
                                 ?>
@@ -37,7 +41,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
+                                <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
                                 <input type="number" name="ejemplares" id="ejemplares" class="form-control" placeholder="Ejemplares" v-model="newMaterial.Ejemplares">
                             </div>
                         </div>
