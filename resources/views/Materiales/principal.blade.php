@@ -89,6 +89,8 @@
             </div>
         </div>
         @include('materiales.create')
+        @include('materiales.edit')
+        
       
     </div>
 </div>

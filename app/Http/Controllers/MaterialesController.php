@@ -12,10 +12,22 @@ class MaterialesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+   
+    public function index(Request $request)
     {
-        $materiales = Materiales::orderBy('id','DESC')->get();
-        return $materiales;
+        $search = $request->get('search');
+        $materiales = Materiales::where('Existe','=',1)->search($search)->paginate(50);
+        return [
+            'pagination' => [
+                'total'         => $materiales->total(),
+                'current_page'  => $materiales->currentPage(),
+                'per_page'      => $materiales->perPage(),
+                'last_page'     => $materiales->lastPage(),
+                'from'          => $materiales->firstItem(),
+                'to'            => $materiales->lastItem(),
+            ],
+            'material' =>$materiales
+        ];
     }
 
         /**

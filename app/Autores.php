@@ -13,7 +13,7 @@ class Autores extends Model
     public function scopeSearch($query,$search)
     {
         if($search && $search != "")
-            return $query -> where('Titulo', 'LIKE', "%$search%")->orWhere('Apellidos', 'LIKE', "%$search%");
+            return $query -> where('Nombre', 'LIKE', "%$search%")->orWhere('Apellidos', 'LIKE', "%$search%");
     }
     
 }
