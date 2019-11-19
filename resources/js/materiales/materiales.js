@@ -51,11 +51,11 @@ new Vue({
             if(!this.pagination.to){
                 return [];
             }
-            var from = this.pagination.current_page - this.offset//TODO offset
+            var from = this.pagination.current_page - this.offset
             if(from < 1){
                 from = 1;
             }
-            var to = from + (this.offset * 2);// TODO offset
+            var to = from + (this.offset * 2);
             if(to >= this.pagination.last_page){
                 to = this.pagination.last_page;
             }
@@ -140,7 +140,7 @@ new Vue({
         },
         deleteMaterial: function (material) {
             if (confirm('¿Esta seguro de eliminar el material ' + material.Titulo + '?')) {
-                var url = "material/" + material.Id;
+                var url = 'material/' + material.Id;
                 axios.delete(url).then(response => {
                     this.getMateriales();
                     toastr.success("Material eliminado con exito.", "Tarea completada!");

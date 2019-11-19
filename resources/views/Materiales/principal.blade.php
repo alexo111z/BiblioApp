@@ -30,7 +30,7 @@
                 <input v-on:keyup="searchMaterial()" type="text" id="search" placeholder="Buscar..." style="padding: .5rem;">
             </div>
         </div>
-        <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+        <table class="table table-striped table-hover" style="margin-top: 1.5rem;">
             <thead>
                 <tr>
                     <th width="10px">#</th>

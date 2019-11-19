@@ -81,7 +81,6 @@ class MaterialesController extends Controller
      */
     public function destroy($id)
     {
-        $materiales1 = Materiales::findOrFail($id);
-        $materiales1->delete();
+        Materiales::where('Id', '=', $id)->delete();
     }
 }
