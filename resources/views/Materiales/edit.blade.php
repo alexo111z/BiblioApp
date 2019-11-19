@@ -1,4 +1,4 @@
-<form method="POST" v-on:submit.prevent="updateMaterial(fillKeep.id)">
+<form method="POST" v-on:submit.prevent="updateMaterial(fillMaterial.id)">
     <div class="modal fade" id="edit">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -56,7 +56,7 @@
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i class="fa fa-save"></i>Actualizar</button>
+                    <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i class="fa fa-save"></i> Actualizar</button>
                 </div>
             </div>
         </div>

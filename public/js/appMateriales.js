@@ -27177,7 +27177,7 @@ new Vue({
         },
         editMaterial: function (material) {
             this.fillMaterial.Id = material.Id;
-            this.fillMaterial.Nombre = material.Titulo;
+            this.fillMaterial.Titulo = material.Titulo;
             this.fillMaterial.Clave = material.Clave;
             this.fillMaterial.Year = material.Year;
             this.fillMaterial.Ejemplares = material.Ejemplares;
@@ -27195,7 +27195,7 @@ new Vue({
                     'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
-                    'Tipo':''
+                    'Tipo':''                    
                 };
                 this.errors = [];
                 $("#edit").modal("hide");
@@ -27203,9 +27203,10 @@ new Vue({
             })
             .catch(error =>{
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error3!");
+                toastr.error(error.response.data.message, "Error!");
             });
         },
+              
         deleteMaterial: function (material) {
             if (confirm('¿Esta seguro de eliminar el material ' + material.Titulo + '?')) {
                 var url = 'material/' + material.Id;
@@ -27217,6 +27218,7 @@ new Vue({
                 });
             }
         },
+
         searchMaterial: function () {
             this.search = $('#search').val();
             this.getMateriales();
