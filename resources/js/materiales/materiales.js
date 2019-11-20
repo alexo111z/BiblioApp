@@ -117,7 +117,7 @@ new Vue({
             $('#edit').modal('show');
         },
         updateMaterial: function (id) {
-            var url = 'material/'+id;
+            var url = 'material/'+ id;
             axios.put(url, this.fillMaterial)
             .then(response => {
                 this.getMateriales();
@@ -128,7 +128,7 @@ new Vue({
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':''
-                };
+                };alert(url);
                 this.errors = [];
                 $("#edit").modal("hide");
                 toastr.success("Material actualizado con exito.", "Tarea completada!");
