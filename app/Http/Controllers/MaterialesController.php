@@ -67,10 +67,9 @@ class MaterialesController extends Controller
             'Year' => 'required',
             'Ejemplares' => 'required',
             'Tipo' => 'required'
-            ]);
+        ]);
 
-            Materiales::findOrFail($id)->update($request->all());
-            return;
+        Materiales::where('Id', '=', $id)->update($request->all());
     }
 
     /**

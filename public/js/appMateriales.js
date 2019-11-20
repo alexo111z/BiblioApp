@@ -27186,7 +27186,8 @@ new Vue({
         },
         updateMaterial: function (id) {
             var url = 'material/'+id;
-            axios.put(url, this.fillMaterial).then(response => {
+            axios.put(url, this.fillMaterial)
+            .then(response => {
                 this.getMateriales();
                 this.fillMaterial = {
                     'Id':'',
@@ -27194,7 +27195,7 @@ new Vue({
                     'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
-                    'Tipo':''                    
+                    'Tipo':''
                 };
                 this.errors = [];
                 $("#edit").modal("hide");
