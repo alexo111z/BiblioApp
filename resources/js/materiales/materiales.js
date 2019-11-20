@@ -128,7 +128,7 @@ new Vue({
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':''
-                };alert(url);
+                };
                 this.errors = [];
                 $("#edit").modal("hide");
                 toastr.success("Material actualizado con exito.", "Tarea completada!");
