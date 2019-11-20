@@ -11,38 +11,46 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" v-model="fillMaterial.Titulo">
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-book"></i></div>
+                                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" v-model="fillMaterial.Titulo">
+                                    <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                <select name="clave" id="clave" class="form-control" v-model="fillMaterial.Clave">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                </select>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                                    <select name="clave" id="clave" class="form-control" v-model="fillMaterial.Clave">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                <?php
-                                $cont = date('Y');
-                                ?>
-                                <select name="year" id="year" class="form-control" v-model="fillMaterial.Year">
-                                <?php while ($cont >= 1950) { ?>
-                                <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
-                                <?php $cont = ($cont-1); } ?>
-                                </select>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <?php
+                                    $cont = date('Y');
+                                    ?>
+                                    <select name="year" id="year" class="form-control" v-model="fillMaterial.Year">
+                                    <?php while ($cont >= 1950) { ?>
+                                    <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
+                                    <?php $cont = ($cont-1); } ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                <input type="number" name="ejemplares" id="ejemplares" class="form-control" placeholder="Ejemplares" v-model="fillMaterial.Ejemplares">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" placeholder="Ejemplares" v-model="fillMaterial.Ejemplares">
+                                </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -51,7 +59,6 @@
                                 <input type="text" name="tipo" id="tipo" class="form-control" placeholder="Tipo" v-model="fillMaterial.Tipo">
                             </div>
                         </div>
-                        
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
