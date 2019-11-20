@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Materiales extends Model
 {
     public $table = "tblmateriales";
+    protected $primaryKey = 'Id';
     protected $fillable = ['Titulo','Clave','Year','Ejemplares','Tipo', 'Existe'];
     public $timestamps = false;
 
