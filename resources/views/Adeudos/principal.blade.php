@@ -111,11 +111,11 @@
             </div><!--Fin Paginacion-->
 
 {{--                    Pruebas--}}
-                        <div class="col-sm-12">
-                            <pre>
-                                @{{ $data }}
-                            </pre>
-                        </div>
+{{--                        <div class="col-sm-12">--}}
+{{--                            <pre>--}}
+{{--                                @{{ $data }}--}}
+{{--                            </pre>--}}
+{{--                        </div>--}}
 
 {{--            @include('Adeudos.show')--}}
         </div> <!--Fin Contenido-->
