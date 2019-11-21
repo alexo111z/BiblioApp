@@ -10,7 +10,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
@@ -56,7 +56,11 @@
                         <div class="col-sm-6">
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
-                                <input type="text" name="tipo" id="tipo" class="form-control" placeholder="Tipo" v-model="newMaterial.Tipo">
+                                    <select name="tipo" id="tipo" class="form-control" v-model="newMaterial.Tipo">
+                                    <option value="Cd">Cd</option>
+                                    <option value="Revista">Revista</option>
+                                    <option value="Tesis">Tesis</option>
+                                    </select>
                             </div>
                         </div>    
                     </div>
