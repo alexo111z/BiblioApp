@@ -12,6 +12,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
+                                <label for="titulo">Titulo</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" v-model="newMaterial.Titulo">
@@ -21,6 +22,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label for="titulo">Clave de carrera</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                      <select name="clave" id="clave" class="form-control" v-model="newMaterial.Clave">
@@ -32,6 +34,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
+                                <label for="titulo">Año</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                      <?php
@@ -47,6 +50,7 @@
                         </div>
                         <div class="col-sm-6">
                              <div class="form-group">
+                                <label for="titulo">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
                                     <input type="number" name="ejemplares" id="ejemplares" class="form-control" placeholder="Ejemplares" v-model="newMaterial.Ejemplares">
@@ -54,6 +58,7 @@
                              </div>
                         </div>
                         <div class="col-sm-6">
+                            <label for="titulo">Tipo</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
                                     <select name="tipo" id="tipo" class="form-control" v-model="newMaterial.Tipo">
