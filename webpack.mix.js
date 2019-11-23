@@ -62,13 +62,6 @@ mix.scripts([
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/adeudos/adeudos.js'], 'public/js/appAdeudos.js');
-//Libros
-mix.scripts([
-    'resources/js/jquery.js',
-    'resources/js/bootstrap.js',
-    'resources/js/toastr.js',
-    'resources/js/vue.js',
-    'resources/js/axios.js',], 'public/js/libros/app.js');
 //Materiales
 mix.scripts([
     'resources/js/jquery.js',
@@ -78,5 +71,15 @@ mix.scripts([
     'resources/js/axios.js',
     'resources/js/materiales/materiales.js'], 
     'public/js/appMateriales.js') ;
+//Libros
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/libros/Libros.js'], 
+    'public/js/appLibros.js') ;
+ 
  
     
