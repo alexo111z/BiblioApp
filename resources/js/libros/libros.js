@@ -24,6 +24,7 @@ new Vue({
             'to': 0,
         },
         newLibro: {
+            'ISBN':'',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -106,6 +107,7 @@ new Vue({
             .then(response => {
                 this.getLibros();
                 this.newLibro = {
+                    'ISBN':'',
                     'Titulo':'',
                     'IdAutor':'',
                     'IdEditorial':'',
@@ -148,6 +150,7 @@ new Vue({
             var url = 'libro/'+ ISBN;
             axios.put(url, this.fillLibro)
             .then(response => {
+                alert (url);
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',

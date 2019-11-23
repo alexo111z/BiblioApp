@@ -8,7 +8,7 @@ class Libros extends Model
 {
     public $table = "tbllibros";
     protected $primaryKey = 'ISBN';
-    public $incrementing = false;
+    //public $incrementing = false;
     protected $fillable = ['Titulo','IdAutor','IdEditorial','IdCarrera','dewey','Edicion','Year','Volumen','Ejemplares','EjemDisp','Imagen','FechaRegistro', 'Existe'];
     public $timestamps = false;
 

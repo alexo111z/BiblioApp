@@ -38,11 +38,12 @@ class LibrosController extends Controller
     public function store(Request $request)
     {
       $this->validate($request, [
+        'ISBN' => 'required',
         'Titulo' => 'required',
         'IdAutor' => 'required',
         'IdEditorial' => 'required',
         'IdCarrera' => 'required',
-        'deway' => 'required',
+        'dewey' => 'required',
         'Edicion' => 'required',
         'Year' => 'required',
         'Volumen' => 'required',
@@ -68,11 +69,12 @@ class LibrosController extends Controller
     public function update(Request $request, $ISBN)
     {
         $this->validate($request, [
+            'ISBN' => 'required',
             'Titulo' => 'required',
             'IdAutor' => 'required',
             'IdEditorial' => 'required',
             'IdCarrera' => 'required',
-            'deway' => 'required',
+            'dewey' => 'required',
             'Edicion' => 'required',
             'Year' => 'required',
             'Volumen' => 'required',
