@@ -133,7 +133,7 @@ new Vue({
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.IdAutor;
             this.fillLibro.IdCarrera = libro.IdCarrera;
-            this.fillLibro.deway = libro.dewey;
+            this.fillLibro.dewey = libro.dewey;
             this.fillLibro.Edicion = libro.Edicion;
             this.fillLibro.Year = libro.Year;
             this.fillLibro.Volumen = libro.Volumen;
