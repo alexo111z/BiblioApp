@@ -34,7 +34,7 @@
         </div>
         <!--TABLA GENERAL PRESTAMOS, NO SE IMPRIMIME, muestra lo datos según  el
         peiodo establecido arriba y tambien segun la clasificación y carrera seleccionada -->
-        <div class="col-sm-6">
+        <div class="col-sm-6" style="border-left: 1px solid rgb(221, 221, 221);">
             <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
                 <thead>
                     <tr>

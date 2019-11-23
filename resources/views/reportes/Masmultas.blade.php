@@ -1,18 +1,12 @@
 <div class="col-xs-12" style="background-color: #FFF; padding: 1rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
-    <div class="row col-xs-12" style="margin-bottom:10px;">
-        <div class="row col-sm-12">
-            <!--Al dar click se mostrarán la tabla con la información -->
-            <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:145px;" data-toggle="" data-target="#">Consultar</a> 
-        </div> 
+    <div class="row">
+
+    </div>
+    <div class="row">
         <div class="col-sm-12">
-                <div class="col-sm-8 text-center"><h3>Alumnos con más multas en el periodo:</h3></div>
-                <div class="col-sm-4" >
-                    <!-- boton para imprimir la tabla de alumnos con mas multas -->
-                    <a href="#" class="btn btn-danger" style=" margin:15px;" data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
-                </div>
+            <h4>Alumnos con mas multas en el periodo</h4>
         </div>
-        <!--TABLA DE ALUMNOS CON MAS MULTAS EN EL PERIODO, se imprime -->
-        <div class="row col-xs-12" style="margin-bottom:10px;max-height:300px; overflow:auto;">
+        <div class="col-sm-12">
             <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
                 <thead>
                     <tr>
@@ -34,6 +28,9 @@
                 </tbody>
             </table>
         </div>
-        <!--FIN DE LA TABLA -->
-    </div>    
+        <div class="col-sm-12  text-center">
+                <a href="#" class="btn btn-primary" style="background-color: #6d356c;" >Consultar <i class="fa fa-search"></i></a>
+                <a href="#" class="btn btn-danger">Imprimir <i class="fa fa-file-pdf-o"></i></a>
+        </div>
+    </div>
 </div>
