@@ -1,4 +1,4 @@
-<form method="POST" v-on:submit.prevent="createkeep">
+<form method="POST" v-on:submit.prevent="crearprestamo">
   <div class="modal fade" id="create">
     <div class="modal-dialog modal-lg" style="width:90%;">
       <div class="modal-content">
@@ -20,7 +20,7 @@
                 </div>
                 <div style="margin-top:-18px;">
                 <div v-for="control in listcontrol">
-                      <button v-on:click="getselectedcontrol(control)" :value="control.control1" class="list-group-item list-group-item-action broder-1">@{{control.nombre+' '+control.apellidos}}</button>
+                      <button v-on:click.prevent="getselectedcontrol(control)" :value="control.control1" class="list-group-item list-group-item-action broder-1">@{{control.nombre+' '+control.apellidos}}</button>
                     </div>
                 
                 </div>   
@@ -29,12 +29,12 @@
 
               <div class="form-group">
                 <label for="street1_id" class="control-label">Fecha De Inicio</label>
-                <input type="text" class="form-control" id="f_inicio" name="street1" value="{{$ldate = date('Y-m-d')}}" placeholder="{{$ldate = date('d-m-Y')}}" readonly>
+                <input type="text" class="form-control" id="f_inicio" name="f_inicio" value="{{$ldate = date('Y-m-d')}}" placeholder="{{$ldate = date('d-m-Y')}}" readonly>
               </div>
               <br />
               <div class="form-group">
                 <label for="diasselect">Dias De prestamo</label>
-                <select class="form-control button-md " name="diasselect">
+                <select class="form-control button-md " name="diasselect" id="diasselect">
                   <option value="1">1 día</option>
                   <option value="2">2 días</option>
                   <option value="3">3 días</option>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="col-md-9" id="col1 ">
-              <form>
+              
                 <div class="form-group">
                   <label for="exampleInputEmail1">Buscar Libro:</label>
                   <input v-on:keyup="searchlibros()" type="text" class="form-control" id="codigolibro" aria-describedby="emailHelp" placeholder="Codigo de libro">
@@ -56,11 +56,11 @@
                 <div style="margin-top:-18px;">
                   <div class="listgroup" id="listabusqueda">
                     <div v-for="libro in listlibros">
-                      <button v-on:click="getselectedbook(libro)" :value="libro.codigo" class="list-group-item list-group-item-action broder-1">@{{'Codigo: '+libro.Codigo+' Titulo: '+libro.Titulo}}</button>
+                      <button v-on:click.prevent="getselectedbook(libro)" :value="libro.codigo" class="list-group-item list-group-item-action broder-1">@{{'Codigo: '+libro.Codigo+' Titulo: '+libro.Titulo}}</button>
                     </div>
                   </div>
                 </div>
-              </form>
+              
 
 
 

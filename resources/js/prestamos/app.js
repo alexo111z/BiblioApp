@@ -1,254 +1,323 @@
 new Vue({
-			
-			el: '#prestamosindex',
-			
-			created: function(){
-				
-				this.getkeeps();
-			},
-			data:{		
-				colalibros:[],
-				keeps:[],
-				detailsdata:[],
-				listlibros:[],
-				listcontrol:[],
-				cardlibros:[],
-				newkeep:'',
-				fillkeep:{'folio':'','renovaciones':''},
-				fillrenew:{'folio':'','days':'','fecha_final':'','nombre':'','apellidos':'','renovaciones':''},
-				filldetails:{'folio':'','days':'','fecha_final':'','fecha_inicial':'','nombre':'','apellidos':'','renovaciones':''},
-				errors:[],
-				control:'',
-				codigolibro:'',
-				numcontrol:'',
-				cuantoslibros:0,
-			},
-			methods:{
-				
 
-				limpiartodo:function(){					
-					this.limpiardatos();
-					this.limpiarselecteds();
-					$('#control').val("");
-				},	
-				limpiardatos:function(){					
-					this.listlibros=[];
-					this.listcontrol=[];
-					$('#codigolibro').val("");
-				},
-				limpiarselecteds:function(card){
-										
-					var index = this.colalibros.indexOf(card.codigo);
-					if (index !== -1) this.colalibros.splice(index, 1);
-					var urlselectedbook='prestamos/getselectedbook/'+this.colalibros;								
-								axios.get(urlselectedbook).then(response=>{				
-								this.cardlibros= response.data
-								}).catch(error =>{						
-									console.log(error.response.data.message);
-									});
+    el: '#prestamosindex',
 
-					
-							
-				},
+    created: function () {
 
-				getkeeps:function(){					
-					var urlkeeps='tasks?search='+this.control;
-					axios.get(urlkeeps).then(response=>{
-						this.keeps= response.data
-					}).catch(error =>{						
-						console.log(error.response.data.message);
-					});
-				},
-
-				searchprestamo:function() {
-					console.log(event.key);
-					var search1 = $('#control').val();
-					this.control=search1;					
-					this.getkeeps();
-				},
-
-				
+        this.getkeeps();
+    },
+    data: {
+        colalibros: [],
+        keeps: [],
+        detailsdata: [],
+        listlibros: [],
+        listcontrol: [],
+        cardlibros: [],
+        newkeep: '',
+        fillkeep: {
+            'folio': '',
+            'renovaciones': ''
+        },
+        fillrenew: {
+            'folio': '',
+            'days': '',
+            'fecha_final': '',
+            'nombre': '',
+            'apellidos': '',
+            'renovaciones': ''
+        },
+        filldetails: {
+            'folio': '',
+            'days': '',
+            'fecha_final': '',
+            'fecha_inicial': '',
+            'fecha_entrega': '',
+            'nombre': '',
+            'apellidos': '',
+            'estado': '',
+            'renovaciones': ''
+        },
+        fillcreate: {
+            'codigos': '',
+            'ncontrol': '',
+            'fecha_inicial': '',
+            'dias': ''
+        },
+        errors: [],
+        control: '',
+        codigolibro: '',
+        numcontrol: '',
+        cuantoslibros: 0,
+    },
+    methods: {
 
 
-				getselectedbook:function(libro){
-					if(this.colalibros.length<3){
-						let yes=1;
-						for(i = 0; i <this.colalibros.length; i++){
-							if(this.colalibros[i]==libro.Codigo){
-									alert('No puede seleccionar 2 veces el mismo ejemplar');
-									this.limpiardatos();
-									yes=0;
-							}	
-						}
-						if(yes==1){
-							this.colalibros.push(libro.Codigo);							
-								var urlselectedbook='prestamos/getselectedbook/'+this.colalibros;								
-								axios.get(urlselectedbook).then(response=>{						
-								this.limpiardatos();
-								this.cardlibros= response.data						
-								}).catch(error =>{						
-								console.log(error.response.data.message);
-								});
-						}					
+        limpiartodo: function () {
+            this.limpiardatos();
+            this.limpiarselecteds();
+            $('#control').val("");
+        },
+        limpiardatos: function () {
+            this.listlibros = [];
+            this.listcontrol = [];
+            $('#codigolibro').val("");
+        },
+        limpiarselecteds: function (card) {
 
-					}else{
-						alert('Solo Pueden Prestarse 3 Libros');
-						this.limpiardatos();
-					}					
-				},
-
-				searchlibros:function() {	
-					this.listcontrol=[];
-					
-					var search2 = $('#codigolibro').val();
-					this.codigolibro=search2;
-					this.getlistbooks();
-				},
-
-				getlistbooks:function(){					
-					var urllistbooks='prestamos/getlistbooks/'+this.codigolibro;
-					axios.get(urllistbooks).then(response=>{
-						this.listlibros= response.data				
-
-					}).catch(error =>{						
-						console.log(error.response.data.message);
-					});
-				},
-
-				getctrl:function() {
-					this.listlibros=[];
-					
-					var searchcontrol = $('#searchcontrol').val();
-					this.numcontrol=searchcontrol;
-					this.getlistcontrol();
-				},
-
-				
-
-				getlistcontrol:function(){					
-					var urllistcontrol='prestamos/getlistcontrol/'+this.numcontrol;
-					axios.get(urllistcontrol).then(response=>{
-						this.listcontrol= response.data				
-
-					}).catch(error =>{						
-						console.log(error.response.data.message);
-					});
-				},
-
-				getselectedcontrol: function(control){
-					$('#searchcontrol').val(control.control1);
-					this.limpiardatos();					
-										
-					
-				},
+            var index = this.colalibros.indexOf(card.codigo);
+            if (index !== -1) this.colalibros.splice(index, 1);
+            var urlselectedbook = 'prestamos/getselectedbook/' + this.colalibros;
+            axios.get(urlselectedbook).then(response => {
+                this.cardlibros = response.data
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
 
 
-				
 
-				editkeep:function(keep){					
-						this.fillkeep.folio=keep.folio;
-						this.fillkeep.renovaciones=keep.renovaciones;
-						$('#detalles').modal('show');
-				},
+        },
 
-				renew: function(keep){
-					this.fillrenew.folio=keep.folio;
-					this.fillrenew.fecha_final=keep.fecha_final;
-					this.fillrenew.nombre=keep.nombre;
-					this.fillrenew.apellidos=keep.apellidos;
-					this.fillrenew.renovaciones=keep.renovaciones;							
-					$('#renew').modal('show');
-				},
+        getkeeps: function () {
+            var urlkeeps = 'tasks?search=' + this.control;
+            axios.get(urlkeeps).then(response => {
+                this.keeps = response.data
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
+        },
 
-				renewmoredays:function(folio){
-				var url='tasks/'+folio;	
-				var days = $("#selectdays").val();
-				this.fillrenew.days=days;				
-				axios.patch(url,this.fillrenew).then(response=>{
-					this.getkeeps();
-					this.fillrenew={'folio':'','days':'','fecha_final':'','nombre':'','apellidos':'','renovaciones':''};
-					this.errors=[];
-					$('#renew').modal('hide');
-					toastr.success('Actualizado Correctamente');
-				}).catch(error=>{
-						this.errors=error.response.data;
-						toastr.error('no se Pudo actualizar');
-				});
-			},
+        searchprestamo: function () {
+            console.log(event.key);
+            var search1 = $('#control').val();
+            this.control = search1;
+            this.getkeeps();
+        },
 
 
-			details: function(keep){
-				this.filldetails.folio=keep.folio;
-				this.filldetails.fecha_inicio=keep.fecha_inicio;
-				this.filldetails.fecha_final=keep.fecha_final;
-				this.filldetails.nombre=keep.nombre;
-				this.filldetails.apellidos=keep.apellidos;
-				this.filldetails.renovaciones=keep.renovaciones;
-				this.getdetails();			
-				$('#detalles').modal('show');
-			},
-
-			getdetails:function(){					
-				var urlkeeps='prestamos/getdetails/'+this.filldetails.folio;				
-				axios.get(urlkeeps).then(response=>{
-					this.detailsdata= response.data
-				}).catch(error =>{						
-					console.log(error.response.data.message);
-				});
-			},
-		
 
 
-				updatekeep:function(folio){
-					var url='tasks/'+folio;					
-					axios.put(url,this.fillkeep).then(response=>{
-						this.getkeeps();
-						this.fillkeep={'folio':'','renovaciones':''};
-						this.errors=[];
-						$('#edit').modal('hide');
-						toastr.success('Actualizado Correctamente');
-					}).catch(error=>{
-							this.errors=error.response.data;
-					});
+        getselectedbook: function (libro) {
+            if (this.colalibros.length < 3) {
+                let yes = 1;
+                for (i = 0; i < this.colalibros.length; i++) {
+                    if (this.colalibros[i] == libro.Codigo) {
+                        alert('No puede seleccionar 2 veces el mismo ejemplar');
+                        this.limpiardatos();
+                        yes = 0;
+                    }
+                }
+                if (yes == 1) {
+                    this.colalibros.push(libro.Codigo);
+                    var urlselectedbook = 'prestamos/getselectedbook/' + this.colalibros;
+                    axios.get(urlselectedbook).then(response => {
+                        this.limpiardatos();
+                        this.cardlibros = response.data
+                    }).catch(error => {
+                        console.log(error.response.data.message);
+                    });
+                }
+
+            } else {
+                alert('Solo Pueden Prestarse 3 Libros');
+                this.limpiardatos();
+            }
+        },
+
+        searchlibros: function () {
+            this.listcontrol = [];
+
+            var search2 = $('#codigolibro').val();
+            this.codigolibro = search2;
+            this.getlistbooks();
+        },
+
+        getlistbooks: function () {
+            var urllistbooks = 'prestamos/getlistbooks/' + this.codigolibro;
+            axios.get(urllistbooks).then(response => {
+                this.listlibros = response.data
+
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
+        },
+
+        getctrl: function () {
+            this.listlibros = [];
+            this.fillcreate.ncontrol = '';
+            var searchcontrol = $('#searchcontrol').val();
+            this.numcontrol = searchcontrol;
+            this.getlistcontrol();
+        },
 
 
-				},
 
-				renovarprestamo: function(keep){
-					var url='tasks/' + keep.folio;
-					console.log(url);
-					
-					axios.delete(url).then(response=>{
-						this.getkeeps();
-						toastr.success('Eliminado Correctamente');
-					}).catch(error=>{
-						console.log(this.errors);
-						this.errors=error.response.data;
+        getlistcontrol: function () {
+            var urllistcontrol = 'prestamos/getlistcontrol/' + this.numcontrol;
+            axios.get(urllistcontrol).then(response => {
+                this.listcontrol = response.data
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
+        },
 
-					});
-				},
-
-				createkeep:function(){
-					var url='tasks';
-					axios.post(url,{
-						Renovation:this.newkeep
-
-					}).then(response=>{
-						this.getkeeps();
-						this.newkeep='';
-						this.errors=[];
-						$('#create').modal('hide');
-						toastr.success('Nueva Tarea Creada Con Exito');
+        getselectedcontrol: function (control) {
+            $('#searchcontrol').val(control.control1);
+            this.fillcreate.ncontrol = control.id;
+            this.limpiardatos();
+        },
 
 
-					}).catch(error=>{
-						console.log();
-						this.errors=error.response.data;
 
-					})
-				}
 
-			}
-		});
+        editkeep: function (keep) {
+            this.fillkeep.folio = keep.folio;
+            this.fillkeep.renovaciones = keep.renovaciones;
+            $('#detalles').modal('show');
+        },
 
-	
+        renew: function (keep) {
+            this.fillrenew.folio = keep.folio;
+            this.fillrenew.fecha_final = keep.fecha_final;
+            this.fillrenew.nombre = keep.nombre;
+            this.fillrenew.apellidos = keep.apellidos;
+            this.fillrenew.renovaciones = keep.renovaciones;
+            $('#renew').modal('show');
+        },
+
+        renewmoredays: function (folio) {
+            var url = 'tasks/' + folio;
+            var days = $("#selectdays").val();
+            this.fillrenew.days = days;
+            axios.patch(url, this.fillrenew).then(response => {
+                this.getkeeps();
+                this.fillrenew = {
+                    'folio': '',
+                    'days': '',
+                    'fecha_final': '',
+                    'nombre': '',
+                    'apellidos': '',
+                    'renovaciones': ''
+                };
+                this.errors = [];
+                $('#renew').modal('hide');
+                toastr.success('Actualizado Correctamente');
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error('no se Pudo actualizar');
+            });
+        },
+
+
+        details: function (keep) {
+            this.filldetails.folio = keep.folio;
+            this.filldetails.fecha_inicio = keep.fecha_inicio;
+            this.filldetails.fecha_final = keep.fecha_final;
+            this.filldetails.fecha_entrega = keep.fecha_entrega;
+            this.filldetails.nombre = keep.nombre;
+            this.filldetails.apellidos = keep.apellidos;
+            this.filldetails.estado = keep.Estado;
+            this.filldetails.renovaciones = keep.renovaciones;
+            this.getdetails();
+            $('#detalles').modal('show');
+        },
+
+        getdetails: function () {
+            var urlkeeps = 'prestamos/getdetails/' + this.filldetails.folio;
+            axios.get(urlkeeps).then(response => {
+                this.detailsdata = response.data
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
+        },
+
+        terminarprestamo: function (folio) {
+            var urlkeeps = 'prestamos/endprestamo/' + folio;
+            axios.get(urlkeeps).then(response => {
+                this.getkeeps();
+                $('#detalles').modal('hide');
+                alert("Libros Devueltos correctamente");
+                //console.log(response.data.entrega);
+                //toastr.warning(response.data.entrega);
+            }).catch(error => {
+                alert(error.response.data.message);
+                console.log(error.response.data.message);
+                //toastr.error(error.response.data.message);
+            });
+        },
+
+
+        renovarprestamo: function (keep) {
+            var url = 'tasks/' + keep.folio;
+            console.log(url);
+
+            axios.delete(url).then(response => {
+                this.getkeeps();
+                toastr.success('Eliminado Correctamente');
+            }).catch(error => {
+                console.log(this.errors);
+                this.errors = error.response.data;
+
+            });
+        },
+
+        crearprestamo: function () {
+            var iduser = $("#searchcontrol").val();
+            var fecha_i = $("#f_inicio").val();
+            var diass = $("#diasselect").val();
+            if (iduser == "") {
+                toastr.warning('Agregue Un Prestatario');
+                return;
+            } else {
+                if (this.fillcreate.ncontrol == "") {
+                    toastr.warning('Seleccione un prestatario de la lista');
+                    return;
+                } else {
+                    if (this.colalibros.length < 1) {
+                        toastr.warning('Agregue Uno O Mas Libros Por Prestar');
+                        return;
+                    } else {
+                        var url = 'tasks';
+
+                        axios.post(url, {
+                            iduser: this.fillcreate.ncontrol,
+                            codigos: this.colalibros,
+                            fecha_i: fecha_i,
+                            dias: diass
+
+                        }).then(response => {
+                            
+                            console.log(response.data.id);
+
+                            if (response.data.id === '1') {
+                                this.colalibros = [];
+                                this.limpiardatos();
+                                this.getkeeps();
+                                this.cardlibros = [];
+                                $('#searchcontrol').val("");
+                                $('#create').modal('hide');
+                                toastr.success('Libros Prestados Correctamente');
+
+                            } else {
+                                alert(response.data.id);
+                                console.log(response.data.id);
+                            }
+
+                            
+                        }).catch(error => {
+                            console.log(error.response.data.message);
+                            this.errors = error.response.data.message;
+                            toastr.error(error.response.data.message);
+                        })
+                    }
+
+                }
+
+
+
+            }
+
+
+        },
+
+    }
+});

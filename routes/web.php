@@ -21,7 +21,7 @@ Route::get('/prestamos/filter', function () {
 
 
 //Route::Resource('prestamos','PrestamosController');
-
+Route::post('prestamos/nuevoprestamo/', 'TaskController@nuevoprestamo')->name('nuevoprestamo');
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
 Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');
 
@@ -32,6 +32,9 @@ Route::get('prestamos/getlistbooks/{codigolibro}', 'TaskController@getlistbooks'
 Route::get('prestamos/getlistcontrol/{codigolibro}', 'TaskController@getlistcontrol')->name('getlistcontrol');
 Route::get('prestamos/getselectedbook/{codigolibro}', 'TaskController@getselectedbook')->name('getselectedbook');
 Route::get('prestamos/getselectedbook/', 'TaskController@getselectedbook1')->name('getselectedbook1');
+Route::get('prestamos/endprestamo/{folio}', 'TaskController@endprestamo')->name('endprestamo');
+
+
 
 
 //Route::get('/prestamos/detalles/{id}', 'PrestamosController@detalles')->name('detalles');

@@ -59,7 +59,7 @@ class TaskController extends Controller
                 ->where('tblprestamos.existe', '=', '1')
                 ->union($dataa)
                 ->union($datab)
-                ->orderby('folio')
+                ->orderby('fecha_final', 'DESC')
                 ->get();
         } else {
             $dataa = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
@@ -106,18 +106,23 @@ class TaskController extends Controller
                 ->orWhere('tbladministrativos.Apellidos', 'like', $search . '%')
                 ->union($dataa)
                 ->union($datab)
-                ->orderby('folio')
+                ->orderby('fecha_final', 'DESC')
                 ->get();
         }
 
 
         foreach ($datas as $prestamo) {
             $fechaf = strtotime($prestamo->fecha_final);
+            $entregado = $prestamo->fecha_entrega;
             $now = strtotime('today');
-            if ($fechaf < $now) {
-                $prestamo->Estado = 'Expirado';
+            if (is_null($entregado)) {
+                if ($now <= $fechaf) {
+                    $prestamo->Estado = 'Vigente';
+                } else {
+                    $prestamo->Estado = 'Expirado';
+                }
             } else {
-                $prestamo->Estado = 'Vigente';
+                $prestamo->Estado = 'Entregado';
             }
         }
 
@@ -237,143 +242,138 @@ class TaskController extends Controller
         if (is_null($codigolibro)) { } else {
 
             $pedimento = explode(",", $codigolibro);
-            if(count($pedimento)==1){
-            $finalbook = DB::table('tbllibros')
-            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-            ->select(
-                'tblejemplares.codigo',                
-                'tbllibros.titulo',
-                'tbllibros.year',
-                'tbllibros.imagen',
-                'tblautores.nombre AS nautor',
-                'tblautores.apellidos AS aautor',
-                'tbleditoriales.nombre AS enombre')
-            ->where('tbllibros.existe', '=', '1')
-            ->where('tblejemplares.existe', '=', '1')
-            ->where('tblejemplares.codigo', '=', $pedimento[0])
-            ->orderby('Codigo')
-            ->get();
-
+            if (count($pedimento) == 1) {
+                $finalbook = DB::table('tbllibros')
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[0])
+                    ->orderby('Codigo')
+                    ->get();
             }
 
 
-            if(count($pedimento)==2){
+            if (count($pedimento) == 2) {
 
                 $book1 = DB::table('tbllibros')
-            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-            ->select(
-                'tblejemplares.codigo',                
-                'tbllibros.titulo',
-                'tbllibros.year',
-                'tbllibros.imagen',
-                'tblautores.nombre AS nautor',
-                'tblautores.apellidos AS aautor',
-                'tbleditoriales.nombre AS enombre')
-            ->where('tbllibros.existe', '=', '1')
-            ->where('tblejemplares.existe', '=', '1')
-            ->where('tblejemplares.codigo', '=', $pedimento[0]); 
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[0]);
 
 
                 $finalbook = DB::table('tbllibros')
-                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-            ->select(
-                'tblejemplares.codigo',                
-                'tbllibros.titulo',
-                'tbllibros.year',
-                'tbllibros.imagen',
-                'tblautores.nombre AS nautor',
-                'tblautores.apellidos AS aautor',
-                'tbleditoriales.nombre AS enombre')
-                ->where('tbllibros.existe', '=', '1')
-                ->where('tblejemplares.existe', '=', '1')
-                ->where('tblejemplares.codigo', '=', $pedimento[1])
-                ->union($book1)
-                ->orderby('Codigo')
-                ->get();
-    
-                }
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[1])
+                    ->union($book1)
+                    ->orderby('Codigo')
+                    ->get();
+            }
 
 
 
 
 
-            if(count($pedimento)==3){
+            if (count($pedimento) == 3) {
                 $book1 = DB::table('tbllibros')
-            ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-            ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-            ->select(
-                'tblejemplares.codigo',                
-                'tbllibros.titulo',
-                'tbllibros.year',
-                'tbllibros.imagen',
-                'tblautores.nombre AS nautor',
-                'tblautores.apellidos AS aautor',
-                'tbleditoriales.nombre AS enombre')
-            ->where('tbllibros.existe', '=', '1')
-            ->where('tblejemplares.existe', '=', '1')
-            ->where('tblejemplares.codigo', '=', $pedimento[0]);                   
-            
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[0]);
 
 
-            $book2 = DB::table('tbllibros')
-                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-            ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-            ->select(
-                'tblejemplares.codigo',                
-                'tbllibros.titulo',
-                'tbllibros.year',
-                'tbllibros.imagen',
-                'tblautores.nombre AS nautor',
-                'tblautores.apellidos AS aautor',
-                'tbleditoriales.nombre AS enombre')
-                ->where('tbllibros.existe', '=', '1')
-                ->where('tblejemplares.existe', '=', '1')
-                ->where('tblejemplares.codigo', '=', $pedimento[1]);
-                
+
+                $book2 = DB::table('tbllibros')
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[1]);
+
 
                 $finalbook = DB::table('tbllibros')
-                ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
-                ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
-                ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
-                ->select(
-                    'tblejemplares.codigo',                
-                    'tbllibros.titulo',
-                    'tbllibros.year',
-                    'tbllibros.imagen',
-                    'tblautores.nombre AS nautor',
-                    'tblautores.apellidos AS aautor',
-                    'tbleditoriales.nombre AS enombre')
-                ->where('tbllibros.existe', '=', '1')
-                ->where('tblejemplares.existe', '=', '1')
-                ->where('tblejemplares.codigo', '=', $pedimento[2])
-                ->union($book1)
-                ->union($book2)
-                ->orderby('Codigo')
-                ->get();
-
-            }    
-
-
-
-
-
+                    ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
+                    ->join('tblautores', 'tblautores.idautor', '=', 'tbllibros.idautor')
+                    ->join('tbleditoriales', 'tbleditoriales.id', '=', 'tbllibros.ideditorial')
+                    ->select(
+                        'tblejemplares.codigo',
+                        'tbllibros.titulo',
+                        'tbllibros.year',
+                        'tbllibros.imagen',
+                        'tblautores.nombre AS nautor',
+                        'tblautores.apellidos AS aautor',
+                        'tbleditoriales.nombre AS enombre'
+                    )
+                    ->where('tbllibros.existe', '=', '1')
+                    ->where('tblejemplares.existe', '=', '1')
+                    ->where('tblejemplares.codigo', '=', $pedimento[2])
+                    ->union($book1)
+                    ->union($book2)
+                    ->orderby('Codigo')
+                    ->get();
+            }
         }
         return $finalbook;
-
     }
 
     public function getselectedbook1()
-    {
-        
-    }
+    { }
     /**
      * Show the form for creating a new resource.
      *
@@ -392,25 +392,95 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+        $respuesta = "1";
         $this->validate($request, [
-            'Renovation' => 'required'
-
+            'iduser' => 'required',
+            'codigos' => 'required',
+            'fecha_i' => 'required',
+            'dias' => 'required'
         ]);
+        $iduser = $request->input('iduser');
+        $codigos = $request->input('codigos');
+        $fecha_i = $request->input('fecha_i');
+        $dias = $request->input('dias');
 
-        $renovation = $request->input('Renovation');
+        $fechaf = date('Y-m-d', strtotime($fecha_i . ' + ' . $dias . ' days'));
 
+        $prestamos = DB::table('tblprestamos')->select('Folio')
+            ->where('idprestatario', '=', $iduser)
+            ->where('existe', '=', '1')                       
+            ->where('fecha_final', '>=', DB::raw('curdate()'))
+            ->whereNull('fecha_entrega') 
+            ->get();
+            
+        $lprestados = 0;
+        foreach ($prestamos as $prestamo) {
+            $lprestadoos1 = DB::table('tbldetprestamos')
+                ->where('folio', '=', $prestamo->Folio)
+                ->groupBy('folio')->count();
+            $lprestados = $lprestados + $lprestadoos1;
+        }
 
-        DB::table('tblprestamos')->insert([
-            'Folio' => 241,
-            'idprestatario' => '1',
-            'fecha_inicio' => '2019-12-12',
-            'fecha_final' => '2019-12-12',
-            'fecha_entrega' => '2019-12-12',
-            'renovaciones' => $renovation,
-            'existe' => 1,
-        ]);
+        
 
-        return;
+        if ($lprestados < 3) {
+            if ($lprestados + count($codigos) <= 3) {
+                $stock = 1;
+                for ($i = 0; $i < count($codigos); $i++) {
+                    $isbn = DB::table('tblejemplares')
+                        ->select('ISBN')
+                        ->where('Codigo', '=', $codigos[$i])
+                        ->where('existe', '=', '1')
+                        ->get();
+
+                    $stocklibro = DB::table('tbllibros')
+                        ->select('ejemdisp')
+                        ->where('ISBN', '=', $isbn[0]->ISBN)
+                        ->where('existe', '=', '1')
+                        ->get();
+                    if ($stocklibro[0]->ejemdisp < 2) {
+                        $respuesta = "El Ejemplar " . $codigos[$i] . " Es unico ejemplar, no se puede prestar";
+                        $stock = 0;
+                    }
+                }
+
+                if ($stock == 1) {
+                    $id = DB::table('tblprestamos')->insertGetId([
+                        'idprestatario' => $iduser,
+                        'fecha_inicio' => $fecha_i,
+                        'fecha_final' => $fechaf,
+                        'renovaciones' => 0,
+                        'existe' => 1,
+                    ]);
+                    for ($i = 0; $i < count($codigos); $i++) {
+                        DB::table('tbldetprestamos')->insert([
+                            'folio' => $id,
+                            'codigo' => $codigos[$i],
+                        ]);
+
+                        $isbnstock = DB::table('tblejemplares')
+                            ->select('ISBN')
+                            ->where('Codigo', '=', $codigos[$i])
+                            ->where('existe', '=', '1')
+                            ->get();
+
+                        DB::table('tbllibros')
+                            ->where('ISBN', '=', $isbnstock[0]->ISBN)
+                            ->decrement('EjemDisp', 1);
+
+                        DB::table('tblejemplares')
+                            ->where('Codigo', '=', $codigos[$i])
+                            ->update(['Existe' => 0]);
+                    }
+                    $respuesta = "1";
+                }
+            } else {
+                $respuesta = "Usted excede el limite de prestamo, quite libros";
+            }
+        } else {
+            $respuesta = "No podemos prestarle más de 3 libros a la vez";
+        }
+        return response()->json(['id' => $respuesta]);
     }
 
     /**
@@ -435,9 +505,46 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        $tasks = DB::table('tblprestamos')->where('Folio', '=', $id)->get();
+        $run = "hola";
 
-        return $tasks;
+        return response()->json(['entrega' => $run]);
+    }
+
+    public function endprestamo($folio)
+    {
+        DB::table('tblprestamos')
+            ->where('Folio', '=', $folio)
+            ->update(['Fecha_entrega' => DB::raw('curdate()')]);
+
+        $libros = DB::table('tbldetprestamos')
+            ->select('Codigo')
+            ->where('Folio', '=', $folio)
+            ->get();
+
+        foreach ($libros as $librito) {
+            DB::table('tblejemplares')
+                ->where('Codigo', '=', $librito->Codigo)
+                ->update(['Existe' => 1]);
+            
+            $isbns = DB::table('tblejemplares')
+                ->select('ISBN')
+                ->where('Codigo', '=', $librito->Codigo)
+                ->get();
+
+            DB::table('tbllibros')
+                ->where('ISBN', '=', $isbns[0]->ISBN)
+                ->increment('EjemDisp', 1);
+                
+        }
+
+
+
+
+
+
+
+
+        return response()->json(['entrega' => $libros]);
     }
 
     /**
