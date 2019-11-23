@@ -132,6 +132,7 @@ new Vue({
             this.fillLibro.ISBN = libro.ISBN;
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.IdAutor;
+            this.fillLibro.IdEditorial = libro.IdEditorial;
             this.fillLibro.IdCarrera = libro.IdCarrera;
             this.fillLibro.dewey = libro.dewey;
             this.fillLibro.Edicion = libro.Edicion;
@@ -174,7 +175,7 @@ new Vue({
         },
               
         deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el Libro ' + libro.Titulo + '?')) {
+            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
                 var url = 'libro/' + libro.ISBN;
                 axios.delete(url).then(response => {
                     this.getLibros();

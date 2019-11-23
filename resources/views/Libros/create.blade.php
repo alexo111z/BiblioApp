@@ -11,6 +11,15 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-6">
+                             <div class="form-group">
+                             <label for="isbn">ISBN</label>
+                                <div class="input-group">
+                                    <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
+                                    <input type="number" name="isbn" id="isbn" class="form-control" placeholder="ISBN" v-model="newLibro.ISBN">
+                                </div>
+                             </div>
+                        </div>
+                        <div class="col-sm-6">
                         <label for="titulo">Titulo</label>
                             <div class="form-group">
                                 <div class="input-group">
@@ -34,7 +43,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                            <label for="editorial">Editorial</label>
+                            <label for="idEeditorial">Editorial</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                      <select name="idEditorial" id="idEditorial" class="form-control" v-model="newLibro.IdEditorial">
@@ -134,7 +143,7 @@
                              <label for="fechaRegistro">Fecha de Registro</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" placeholder="Fecga de Registro" v-model="newLibro.FechaRegistro">
+                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" placeholder="Fecha de Registro" v-model="newLibro.FechaRegistro">
                                 </div>
                              </div>
                         </div>
