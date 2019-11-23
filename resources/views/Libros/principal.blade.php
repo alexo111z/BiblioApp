@@ -32,8 +32,7 @@
         <table class="table table-striped table-hover" style="margin-top: 1.5rem;">
             <thead>
                 <tr>
-                    <th width="10px">#</th>
-                    <th>ISBN</th>
+                    <th width="10px">ISBN</th>
                     <th>Titulo</th>
                     <th>Autor</th>
                     <th>Editorial</th>

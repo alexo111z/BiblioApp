@@ -27092,6 +27092,7 @@ new Vue({
             'to': 0,
         },
         newLibro: {
+            'ISBN':'',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -27174,6 +27175,7 @@ new Vue({
             .then(response => {
                 this.getLibros();
                 this.newLibro = {
+                    'ISBN':'',
                     'Titulo':'',
                     'IdAutor':'',
                     'IdEditorial':'',
@@ -27200,8 +27202,9 @@ new Vue({
             this.fillLibro.ISBN = libro.ISBN;
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.IdAutor;
+            this.fillLibro.IdEditorial = libro.IdEditorial;
             this.fillLibro.IdCarrera = libro.IdCarrera;
-            this.fillLibro.deway = libro.deway;
+            this.fillLibro.dewey = libro.dewey;
             this.fillLibro.Edicion = libro.Edicion;
             this.fillLibro.Year = libro.Year;
             this.fillLibro.Volumen = libro.Volumen;
@@ -27215,6 +27218,7 @@ new Vue({
             var url = 'libro/'+ ISBN;
             axios.put(url, this.fillLibro)
             .then(response => {
+                alert (url);
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',
@@ -27242,7 +27246,7 @@ new Vue({
         },
               
         deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el Libro ' + libro.Titulo + '?')) {
+            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
                 var url = 'libro/' + libro.ISBN;
                 axios.delete(url).then(response => {
                     this.getLibros();
