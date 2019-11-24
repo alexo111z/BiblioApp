@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Autores;
+
 class AutoresTableSeeder extends Seeder
 {
     /**
