@@ -19,6 +19,96 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+        <style>
+            body {
+                background-color: #dddddd !important;
+            }
+
+            main {
+                margin-bottom: 200px;
+            }
+
+            .navbar {
+                margin-bottom: 0 !important;
+            }
+
+            .navbar-brand{
+                float: initial !important;
+                padding-top: 10px !important;
+                color: #363636 !important;
+            }
+
+            .navbar-brand > img {
+                width: 64px !important;
+                display: inline;
+            }
+
+            .navbar {
+                background-color: #fbfbfb !important;
+            }
+
+            .navbar-collapse {
+                margin: 0 !important;
+            }
+
+            .navbar .navbar-nav > li > a {
+                color: #363636 !important;
+                padding: 10px !important;
+                margin-top: 11px;
+            }
+
+            .navbar .navbar-nav > .open > a,
+            .navbar .navbar-nav > .open > a:hover,
+            .navbar .navbar-nav > .open > a:focus,
+            .navbar .navbar-nav > li > a:hover {
+                color: white !important;
+                background-color: #6d356c !important;
+                border-color: none !important;
+                box-shadow: none !important;
+            }
+
+            .footer {
+                width: 100%;
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                background-color: #363636 !important;
+                padding: 3rem 0 !important;
+                color: white !important;
+                font-size: 16px;
+                z-index: 100000;
+            }
+
+            .card form .label {
+                color: #363636 !important;
+            }
+
+            .card > .card-header {
+                text-align: center;
+                font-size: 18px;
+            }
+
+            a {
+                color: #2da19a;
+            }
+
+            @media screen and (min-width: 768px) {
+                .login {
+                    width: 500px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    margin-top: calc((272.062px / 2) * -1);
+                    margin-left: -250px;
+                }
+            }
+
+            .login button[type=submit] {
+                background-color: #6d356c;
+                border-color: #6d356c;
+            }
+        </style>
     </head>
     <body>
         <div id="app">
@@ -29,14 +119,6 @@
                             <img src="{{ asset('images/LogoTec.png') }}"/>
                             Biblio App ®
                         </a>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <a href="">Iniciar sesión<span class="sr-only">(current)</span></a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </nav>
