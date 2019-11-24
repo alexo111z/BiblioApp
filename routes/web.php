@@ -12,47 +12,62 @@
 */
 //Ruta default
 Route::get('/', function () {
-    return view('welcome');
+    return view('login.index');
 });
+
 //Autores
 Route::get('/autores', function () {
     return view('autores.index');
 });
+
 Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
+
 //Editoriales
 Route::get('/editoriales', function () {
     return view('editoriales.index');
 });
+
 Route::resource('editorials', 'EditorialesController',['except' =>'show', 'create', 'edit']);
+
 //DEWEY
 Route::get('/dewey', function () {
     return view('dewey.index');
 });
+
 Route::resource('cdewey', 'DeweyController',['except' =>'create', 'edit', 'store', 'update', 'destroy']);
+
 //Reportes
 Route::get('/reportes',function (){
     return view('reportes.reportes');
 });
+
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
 
 //Adeudos
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
+
 //Carreras
 Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+
 Route::get('/carrera', function(){
     return view('Carreras.carreras');
 });
+
 //Materiales
 Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
+
 Route::get('/materiales', function (){
     return view('Materiales.principal');
 });
+
 Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
 
 Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
+
 //Libros
 Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
 
