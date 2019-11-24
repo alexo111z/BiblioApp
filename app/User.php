@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace App;
 
 use \DomainException;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Support\Facades\DB;
 
-class User
+class User implements Authenticatable
 {
     const TYPE_ADMIN = 1;
     const TYPE_COLLABORATOR = 2;
@@ -20,22 +22,54 @@ class User
         self::TYPE_STUDENT,
         self::TYPE_ADMINISTRATIVE,
     ];
+
+    const FIELD_NAME = 'Nombre';
+    const FIELD_LAST_NAME = 'Apellidos';
+    const FIELD_USER_ID = 'IdUsuario';
+    const FIELD_EMAIL = 'Correo';
+    const FIELD_PHONE = 'Telefono';
+    const FIELD_EXISTS = 'Existe';
+
     const TABLE_USERS = 'tblusuarios';
+    const USERS_FIELD_ID = 'Id';
+    const USERS_FIELD_PASSWORD = 'Password';
+
     const TABLE_ADMIN = 'tblbibliotecarios';
     const TABLE_COLLABORATOR = 'tblbibliotecarios';
+    const ADMINS_FIELD_NICK = 'Nick';
+    const ADMINS_FIELD_TYPE = 'Tipo';
+
     const TABLE_TEACHER = 'tbldocentes';
+    const TEACHERS_FIELD_PAYROLL = 'NoNomina';
+
     const TABLE_STUDENT = 'tblalumnos';
+    const STUDENTS_CONTROL_NUMBER = 'NoControl';
+    const STUDENTS_FIELD_CAREER = 'IdCarrera';
+
     const TABLE_ADMINISTRATIVE = 'tbladministrativos';
-    /** @var array */
+    const ADMINISTRATIVES_FIELD_JOB = 'Puesto';
+    const ADMINISTRATIVES_FIELD_PAYROLL = 'NoNomina';
+
+    /**
+     * @var array
+     */
     private $data;
-    /** @var int */
+
+    /**
+     * @var int
+     */
     public $userType;
 
-    public function __construct(int $userType)
+    public function __construct(int $userType = 1)
     {
         $this->data = [];
 
         $this->setUserType($userType);
+    }
+
+    public static function getDbField(string $tableName, string $fieldName): string
+    {
+        return sprintf('%s.%s', $tableName, $fieldName);
     }
 
     /**
@@ -85,5 +119,113 @@ class User
         ];
 
         $this->data = array_filter($paramsToFilter);
+    }
+
+    public function fetchUserByCredentials(array $credentials): ?Authenticatable
+    {
+        if (empty($credentials)) {
+            return null;
+        }
+
+        $user = DB::table(User::TABLE_ADMIN)
+            ->join(
+                User::TABLE_USERS,
+                static::getDbField(User::TABLE_USERS, self::USERS_FIELD_ID),
+                '=',
+                static::getDbField(User::TABLE_ADMIN ,self::FIELD_USER_ID)
+            )
+            ->select(
+                [
+                    static::getDbField(User::TABLE_ADMIN, self::FIELD_USER_ID),
+                    static::getDbField(User::TABLE_ADMIN, self::FIELD_NAME),
+                    static::getDbField(User::TABLE_ADMIN, self::FIELD_LAST_NAME),
+                    static::getDbField(User::TABLE_ADMIN, self::ADMINS_FIELD_NICK),
+                    static::getDbField(User::TABLE_ADMIN, self::ADMINS_FIELD_TYPE),
+                ]
+            )
+            ->where(
+                static::getDbField(User::TABLE_USERS, self::USERS_FIELD_PASSWORD),
+                $credentials['Password']
+            )
+            ->where(
+                static::getDbField(User::TABLE_ADMIN, self::ADMINS_FIELD_NICK),
+                $credentials['Nick']
+            )
+            ->first();
+
+        if ($user !== null) {
+            $this->data[User::USERS_FIELD_PASSWORD] = $credentials['Password'];
+            $this->data[User::FIELD_USER_ID] = $user->IdUsuario;
+            $this->data[User::FIELD_NAME] = $user->Nombre;
+            $this->data[User::FIELD_LAST_NAME] = $user->Apellidos;
+            $this->data[User::ADMINS_FIELD_NICK] = $user->Nick;
+            $this->data[User::ADMINS_FIELD_TYPE] = $user->Tipo;
+        }
+
+        return ($user === null)
+            ? null
+            : $this;
+    }
+
+    /**
+     * Get the name of the unique identifier for the user.
+     *
+     * @return string
+     */
+    public function getAuthIdentifierName()
+    {
+        return self::ADMINS_FIELD_NICK;
+    }
+
+    /**
+     * Get the unique identifier for the user.
+     *
+     * @return mixed
+     */
+    public function getAuthIdentifier()
+    {
+        return $this->data[$this->getAuthIdentifierName()];
+    }
+
+    /**
+     * Get the password for the user.
+     *
+     * @return string
+     */
+    public function getAuthPassword()
+    {
+        return $this->data[self::USERS_FIELD_PASSWORD];
+    }
+
+    /**
+     * Get the token value for the "remember me" session.
+     *
+     * @return string
+     */
+    public function getRememberToken()
+    {
+        return '';
+    }
+
+    /**
+     * Set the token value for the "remember me" session.
+     *
+     * @param string $value
+     *
+     * @return void
+     */
+    public function setRememberToken($value)
+    {
+        return;
+    }
+
+    /**
+     * Get the column name for the "remember me" token.
+     *
+     * @return string
+     */
+    public function getRememberTokenName()
+    {
+        return '';
     }
 }
