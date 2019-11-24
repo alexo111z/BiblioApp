@@ -24,7 +24,7 @@ class UsersSeeder extends Seeder
 
     public function run()
     {
-        for ($i=1; $i<=5; $i++) {
+        for ($i=1; $i<=self::GENERATION_LIMIT; $i++) {
             /** @var int $userId */
            $userId = (int) DB::table(User::TABLE_USERS)
                 ->insertGetId([
@@ -41,7 +41,9 @@ class UsersSeeder extends Seeder
 
             print_r($userToCreate->getData());
 
-            $this->createUser($userToCreate);
+            try {
+                $this->createUser($userToCreate);
+            } catch (\Exception $ex) {}
         }
     }
 
