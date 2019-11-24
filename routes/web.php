@@ -12,8 +12,14 @@
 */
 //Ruta default
 Route::get('/', function () {
-    return view('login.index');
+    return redirect('login');
 });
+
+Route::get('/login', 'Auth\\LoginController@index')->name('login');
+
+Route::get('/home', 'DashboardController@index')->name('home');
+
+Route::post('/login', 'Auth\\LoginController@logIn');
 
 //Autores
 Route::get('/autores', function () {

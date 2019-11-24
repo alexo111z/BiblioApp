@@ -24,11 +24,13 @@ class UsersSeeder extends Seeder
 
     public function run()
     {
+        $password = 'password';
+
         for ($i=1; $i<=self::GENERATION_LIMIT; $i++) {
             /** @var int $userId */
            $userId = (int) DB::table(User::TABLE_USERS)
                 ->insertGetId([
-                    'Password' => bin2hex(bcrypt('password')),
+                    'Password' => $password,
                 ]);
 
             $randomUserType = random_int(1, 5);
@@ -39,11 +41,15 @@ class UsersSeeder extends Seeder
                 $this->buildParamsFromType($randomUserType, $userId)
             );
 
+            echo 'Data from params' . PHP_EOL;
             print_r($userToCreate->getData());
 
             try {
                 $this->createUser($userToCreate);
-            } catch (\Exception $ex) {}
+            } catch (\Exception $ex) {
+            }
+
+            $userToCreate = null;
         }
     }
 
