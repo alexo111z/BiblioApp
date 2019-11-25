@@ -103,3 +103,12 @@ mix.scripts(
     ],
     'public/js/login/app.js'
 );
+
+// Logout
+
+mix.scripts(
+    [
+        'resources/js/login/logout.js',
+    ],
+    'public/js/login/logout.js'
+);
