@@ -54,7 +54,7 @@
 
 <body style="background-color: #ddd;">
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container-fluid" id="app">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('images/LogoTec.png') }}"/>
@@ -89,6 +89,7 @@
                     </ul>
                 </li>
                 <li><a href="{{asset('reportes')}}">Reportes</a></li>
+                <li><a @click="onLogOut()" style="cursor:pointer;">Cerrar sesión</a></li>
             </ul>
         </div>
     </nav>
@@ -98,6 +99,8 @@
     <footer class="footer align-items-center container-fluid text-center" style="background-color: #363636; padding: 5rem 0;">
             <span style="color: white; font-weight: 400;">Copyright © Tec MM campus Vallarta 2020 Todos los derechos reservados</span>
         </footer>
+
+    <script src="{{asset('js/login/logout.js')}}"></script>
 </body>
 
 </html>
