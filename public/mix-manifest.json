@@ -8,5 +8,6 @@
     "/js/appAdeudos.js": "/js/appAdeudos.js",
     "/js/appMateriales.js": "/js/appMateriales.js",
     "/js/appLibros.js": "/js/appLibros.js",
-    "/js/login/app.js": "/js/login/app.js"
+    "/js/login/app.js": "/js/login/app.js",
+    "/js/login/logout.js": "/js/login/logout.js"
 }
