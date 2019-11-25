@@ -154,12 +154,12 @@ class User implements Authenticatable
             ->first();
 
         if ($user !== null) {
-            $this->data[User::USERS_FIELD_PASSWORD] = $credentials['Password'];
             $this->data[User::FIELD_USER_ID] = $user->IdUsuario;
             $this->data[User::FIELD_NAME] = $user->Nombre;
             $this->data[User::FIELD_LAST_NAME] = $user->Apellidos;
             $this->data[User::ADMINS_FIELD_NICK] = $user->Nick;
             $this->data[User::ADMINS_FIELD_TYPE] = $user->Tipo;
+            $this->userType = (int) $user->Tipo;
         }
 
         return ($user === null)
