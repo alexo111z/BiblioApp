@@ -9,9 +9,6 @@
 
         <title>Inicio de Sesión | Biblio App</title>
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-
         <!-- Fonts -->
         <link rel="dns-prefetch" href="//fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -104,7 +101,7 @@
                 }
             }
 
-            .login button[type=submit] {
+            .login button {
                 background-color: #6d356c;
                 border-color: #6d356c;
             }
@@ -128,20 +125,22 @@
                     <div class="panel-heading">Iniciar Sesión</div>
 
                     <div class="panel-body">
-                        <form method="POST" action="{{ route('login') }}">
+                        <form autocomplete="off">
                             @csrf
 
                             <div class="form-group row">
                                 <label for="Nick" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Usuario') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="Nick" name="Nick" type="text" class="form-control @error('Nick') is-invalid @enderror" value="{{ old('Nick') }}" required autocomplete="Nick" autofocus>
-
-                                    @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input
+                                        id="Nick"
+                                        name="Nick"
+                                        type="text"
+                                        class="form-control"
+                                        required
+                                        autocomplete="off"
+                                        v-model="userName"
+                                        autofocus>
                                 </div>
                             </div>
 
@@ -149,19 +148,20 @@
                                 <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('Password') is-invalid @enderror" name="Password" required autocomplete="current-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        class="form-control"
+                                        name="Password"
+                                        required
+                                        v-model="password"
+                                        autocomplete="off">
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="button" class="btn btn-primary" @click="onLogin">
                                         {{ __('Entrar') }}
                                     </button>
                                 </div>
@@ -175,5 +175,7 @@
                 <span>Copyright © Tec MM campus Vallarta 2020 Todos los derechos reservados</span>
             </footer>
         </div>
+
+        <script src="{{asset('js/login/app.js')}}"></script>
     </body>
 </html>

@@ -69,7 +69,7 @@ mix.scripts([
     'resources/js/toastr.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/materiales/materiales.js'], 
+    'resources/js/materiales/materiales.js'],
     'public/js/appMateriales.js') ;
 //Libros
 mix.scripts([
@@ -78,8 +78,16 @@ mix.scripts([
     'resources/js/toastr.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/libros/Libros.js'], 
+    'resources/js/libros/Libros.js'],
     'public/js/appLibros.js') ;
- 
- 
-    
+
+// Login
+
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/app.js'], 'public/js/login/app.js');
+
