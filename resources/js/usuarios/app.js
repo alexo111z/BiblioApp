@@ -26,6 +26,8 @@ new Vue({
             NoControl: '',
             Puesto: '',
             NoNomina: '',
+            Password: '',
+            Tipo: 1,
         },
         userType: 1,
         modalUser: 1,
@@ -147,6 +149,7 @@ new Vue({
             this.modal.title = 'Agregar Usuario';
 
             this.modalUser = this.userType;
+            this.user.Tipo = parseInt(this.userType);
         },
         onEdit: function(user) {
             this.clearModal();
@@ -155,6 +158,31 @@ new Vue({
             this.modal.title = 'Editar Usuario';
 
             this.modalUser = this.userType;
+
+            this.user.IdUsuario = user.IdUsuario;
+            this.user.Nombre = user.Nombre;
+            this.user.Apellidos = user.Apellidos;
+            this.user.Password = user.Password;
+            this.user.Tipo = parseInt(this.userType);
+
+            if (this.userType == 1
+                || this.userType == 2) {
+                this.user.Nick = user.Nick;
+            } else if (this.userType == 3) {
+                this.user.Telefono = user.Telefono;
+                this.user.Correo = user.Correo;
+                this.user.NoNomina = user.NoNomina;
+            } else if (this.userType == 4) {
+                this.user.Telefono = user.Telefono;
+                this.user.Correo = user.Correo;
+                this.user.NoControl = user.NoControl;
+                this.user.IdCarrera = user.IdCarrera;
+            } else if (this.userType == 5) {
+                this.user.Telefono = user.Telefono;
+                this.user.Correo = user.Correo;
+                this.user.NoNomina = user.NoNomina;
+                this.user.Puesto = user.Puesto;
+            }
         },
         clearModal: function() {
             this.user.IdUsuario = '';
@@ -167,9 +195,77 @@ new Vue({
             this.user.NoControl = '';
             this.user.Puesto = '';
             this.user.NoNomina = '';
+            this.user.Password = '';
+            this.user.Tipo = parseInt(this.userType);
+        },
+        buildUser: function(user) {
+
+            if (this.userType == 1 || this.userType == 2) {
+                return {
+                    IdUsuario: user.IdUsuario,
+                    Nick: user.Nick,
+                    Nombre: user.Nombre,
+                    Apellidos: user.Apellidos,
+                };
+            } else if (this.userType == 3) {
+                return {
+                    IdUsuario: user.IdUsuario,
+                    NoNomina: user.NoNomina,
+                    Nombre: user.Nombre,
+                    Apellidos: user.Apellidos,
+                    Telefono: user.Telefono,
+                    Correo: user.Correo,
+                };
+            } else if (this.userType === 4) {
+                return {
+                    IdUsuario: user.IdUsuario,
+                    NoControl: user.NoControl,
+                    Nombre: user.Nombre,
+                    Apellidos: user.Apellidos,
+                    Telefono: user.Telefono,
+                    Correo: user.Correo,
+                    IdCarrera: user.IdCarrera,
+                };
+            } else if (this.userType === 5) {
+                return {
+                    IdUsuario: user.IdUsuario,
+                    NoNomina: user.NoNomina,
+                    Nombre: user.Nombre,
+                    Apellidos: user.Apellidos,
+                    Telefono: user.Telefono,
+                    Correo: user.Correo,
+                    Puesto: user.Puesto,
+                };
+            }
         },
         add: function() {
-            console.log('Creating user');
+            const endpointUrl = 'usuarios';
+            let userToSend = Object.assign({}, this.user);
+
+            userToSend = _.pickBy(userToSend, _.identity);
+
+            userToSend.userType = this.userType;
+            userToSend.Existe = 1;
+            
+            axios.post(
+                endpointUrl,
+                userToSend
+            ).then((response) => {
+                let userCreated = response.data.user;
+
+                toastr.success('El usuario fue creado exitosamente', 'Todo bien');
+
+                userCreated.Tipo = '';
+                userCreated.Existe = '';
+                userCreated = _.pickBy(userCreated, _.identity);
+
+                this.users.unshift(
+                    this.buildUser(userCreated)
+                );
+                this.users.pop();
+            }).catch(() => {
+                toastr.error('El usuario pudo ser creado, intenta de nuevo', '¡Error!');
+            });
         },
         edit: function() {
             console.log('Editing user');
@@ -177,5 +273,5 @@ new Vue({
         remove: function() {
             console.log('Removing user');
         },
-    }
+    },
 });

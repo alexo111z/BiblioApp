@@ -119,6 +119,7 @@ mix.scripts(
         'resources/js/toastr.js',
         'resources/js/vue.js',
         'resources/js/axios.js',
+        'resources/js/lodash.js',
         'resources/js/login/middleware.js',
         'resources/js/usuarios/app.js'
     ],

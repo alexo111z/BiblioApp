@@ -205,7 +205,7 @@
                                 style="background-color: #2da19a; border-color: #2da19a;"
                                 data-toggle="modal"
                                 data-target="#usersModal"
-                                @click="onEdit()"
+                                @click="onEdit(user)"
                                 title="Tooltip on top"><i class="fa fa-edit"></i></a>
                         </td>
                         <td width="10px">

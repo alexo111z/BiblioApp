@@ -131,11 +131,13 @@ class User implements Authenticatable
         /** @var LengthAwarePaginator $users */
         $users = DB::table(self::TABLE_ADMIN)
             ->select([
+                self::FIELD_USER_ID,
                 self::ADMINS_FIELD_NICK,
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
             ])
             ->where(self::ADMINS_FIELD_TYPE, $adminType)
+            ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
         return $users;
@@ -146,6 +148,7 @@ class User implements Authenticatable
         /** @var LengthAwarePaginator $teachers */
         $teachers = DB::table(self::TABLE_TEACHER)
             ->select([
+                self::FIELD_USER_ID,
                 self::TEACHERS_FIELD_PAYROLL,
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
@@ -154,6 +157,7 @@ class User implements Authenticatable
                 self::FIELD_USER_ID
             ])
             ->where('Existe', 1)
+            ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
         return $teachers;
@@ -164,6 +168,7 @@ class User implements Authenticatable
         /** @var LengthAwarePaginator $students */
         $students = DB::table(self::TABLE_STUDENT)
             ->select([
+                self::FIELD_USER_ID,
                 self::STUDENTS_CONTROL_NUMBER,
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
@@ -172,6 +177,7 @@ class User implements Authenticatable
                 self::STUDENTS_FIELD_CAREER,
             ])
             ->where('Existe', 1)
+            ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
         return $students;
@@ -182,6 +188,7 @@ class User implements Authenticatable
         /** @var LengthAwarePaginator $administratives */
         $administratives = DB::table(self::TABLE_ADMINISTRATIVE)
             ->select([
+                self::FIELD_USER_ID,
                 self::ADMINISTRATIVES_FIELD_PAYROLL,
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
@@ -190,6 +197,7 @@ class User implements Authenticatable
                 self::ADMINISTRATIVES_FIELD_JOB,
             ])
             ->where(self::FIELD_EXISTS, 1)
+            ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
         return $administratives;
@@ -208,43 +216,125 @@ class User implements Authenticatable
         }
 
         $this->data[self::FIELD_USER_ID] = $userId;
+        unset($this->data[self::USERS_FIELD_PASSWORD]);
+
+        $wasCreated = false;        
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
-            $userId = DB::table(User::TABLE_ADMIN)
-                ->insertGetId($this->data);
+            unset($this->data[self::FIELD_EXISTS]);
+
+            $wasCreated = DB::table(User::TABLE_ADMIN)
+                ->insert($this->data);
         } else if ($this->userType === User::TYPE_TEACHER) {
-            $userId = DB::table(User::TABLE_TEACHER)
-                ->insertGetId($this->data);
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasCreated = DB::table(User::TABLE_TEACHER)
+                ->insert($this->data);
         } else if ($this->userType === User::TYPE_STUDENT) {
-            $userId = DB::table(User::TABLE_STUDENT)
-                ->insertGetId($this->data);
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasCreated = DB::table(User::TABLE_STUDENT)
+                ->insert($this->data);
         } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
-            $userId = DB::table(User::TABLE_ADMINISTRATIVE)
-                ->insertGetId($this->data);
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasCreated = DB::table(User::TABLE_ADMINISTRATIVE)
+                ->insert($this->data);
         }
 
-        $this->data[self::USERS_FIELD_ID] = $userId;
-
-        return ($userId > 0);
+        return $wasCreated;
     }
 
-    public function update(int $userType)
+    public function update(): bool
     {
-        return;
+        $wasUpdated = false;        
+
+        if ($this->userType === User::TYPE_ADMIN
+            || $this->userType === User::TYPE_COLLABORATOR) {
+            $wasUpdated = DB::table(User::TABLE_ADMIN)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->update($this->data);
+        } else if ($this->userType === User::TYPE_TEACHER) {
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasUpdated = DB::table(User::TABLE_TEACHER)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->update($this->data);
+        } else if ($this->userType === User::TYPE_STUDENT) {
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasUpdated = DB::table(User::TABLE_STUDENT)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->update($this->data);
+        } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
+            unset($this->data[self::ADMINS_FIELD_TYPE]);
+
+            $wasUpdated = DB::table(User::TABLE_ADMINISTRATIVE)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->update($this->data);
+        }
+
+        return $wasUpdated;
     }
 
-    public function delete(int $userType): bool
+    public function delete(): bool
     {
-        return false;
+        $wasDeleted = false;        
+
+        if ($this->userType === User::TYPE_ADMIN
+            || $this->userType === User::TYPE_COLLABORATOR) {
+            $wasDeleted = DB::table(User::TABLE_ADMIN)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->delete();
+        } else if ($this->userType === User::TYPE_TEACHER) {
+            $wasDeleted = DB::table(User::TABLE_TEACHER)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->delete();
+        } else if ($this->userType === User::TYPE_STUDENT) {
+            $wasDeleted = DB::table(User::TABLE_STUDENT)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->delete();
+        } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
+            $wasDeleted = DB::table(User::TABLE_ADMINISTRATIVE)
+                ->where(
+                    self::FIELD_USER_ID, 
+                    (int) $this->data[self::FIELD_USER_ID]
+                )
+                ->delete();
+        }
+
+        return $wasDeleted;
     }
 
     public function fromRequest(Request $request): void
     {
         $data = [
-            'IdUsuario' => $request->get('IdUsuario', null),
             'Nombre' => $request->get('Nombre'),
             'Apellidos' => $request->get('Apellidos'),
+            'Password' => $request->get('Password', null),
+            'IdUsuario' => $request->get('IdUsuario', null),
             'IdCarrera' => $request->get('IdCarrera', null),
             'Telefono' => $request->get('Telefono', null),
             'Correo' => $request->get('Correo', null),
