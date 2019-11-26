@@ -9,5 +9,6 @@
     "/js/appMateriales.js": "/js/appMateriales.js",
     "/js/appLibros.js": "/js/appLibros.js",
     "/js/login/app.js": "/js/login/app.js",
-    "/js/login/logout.js": "/js/login/logout.js"
+    "/js/login/logout.js": "/js/login/logout.js",
+    "/js/usuarios/app.js": "/js/usuarios/app.js"
 }

@@ -90,7 +90,6 @@ mix.scripts([
     'public/js/appLibros.js') ;
 
 // Login
-
 mix.scripts(
     [
         'resources/js/jquery.js',
@@ -105,10 +104,23 @@ mix.scripts(
 );
 
 // Logout
-
 mix.scripts(
     [
         'resources/js/login/logout.js',
     ],
     'public/js/login/logout.js'
+);
+
+//Usuarios
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/login/middleware.js',
+        'resources/js/usuarios/app.js'
+    ],
+    'public/js/usuarios/app.js'
 );

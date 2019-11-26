@@ -6,15 +6,19 @@ namespace App;
 
 use \DomainException;
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class User implements Authenticatable
 {
+    const PAGINATION_OFFSET = 5;
+
     const TYPE_ADMIN = 1;
     const TYPE_COLLABORATOR = 2;
     const TYPE_TEACHER = 3;
     const TYPE_STUDENT = 4;
     const TYPE_ADMINISTRATIVE = 5;
+
     const TYPES_ALLOWED = [
         self::TYPE_ADMIN,
         self::TYPE_COLLABORATOR,
@@ -119,6 +123,90 @@ class User implements Authenticatable
         ];
 
         $this->data = array_filter($paramsToFilter);
+    }
+
+    public static function getAdministrators(int $adminType = 1): LengthAwarePaginator
+    {
+        /** @var LengthAwarePaginator $users */
+        $users = DB::table(self::TABLE_ADMIN)
+            ->select([
+                self::ADMINS_FIELD_NICK,
+                self::FIELD_NAME,
+                self::FIELD_LAST_NAME,
+            ])
+            ->where(self::ADMINS_FIELD_TYPE, $adminType)
+            ->paginate(self::PAGINATION_OFFSET);
+
+        return $users;
+    }
+
+    public static function getTeachers(): LengthAwarePaginator
+    {
+        /** @var LengthAwarePaginator $teachers */
+        $teachers = DB::table(self::TABLE_TEACHER)
+            ->select([
+                self::TEACHERS_FIELD_PAYROLL,
+                self::FIELD_NAME,
+                self::FIELD_LAST_NAME,
+                self::FIELD_PHONE,
+                self::FIELD_EMAIL,
+                self::FIELD_USER_ID
+            ])
+            ->where('Existe', 1)
+            ->paginate(self::PAGINATION_OFFSET);
+
+        return $teachers;
+    }
+
+    public static function getStudents(): LengthAwarePaginator
+    {
+        /** @var LengthAwarePaginator $students */
+        $students = DB::table(self::TABLE_STUDENT)
+            ->select([
+                self::STUDENTS_CONTROL_NUMBER,
+                self::FIELD_NAME,
+                self::FIELD_LAST_NAME,
+                self::FIELD_PHONE,
+                self::FIELD_EMAIL,
+                self::STUDENTS_FIELD_CAREER,
+            ])
+            ->where('Existe', 1)
+            ->paginate(self::PAGINATION_OFFSET);
+
+        return $students;
+    }
+
+    public static function getAdministratives(): LengthAwarePaginator
+    {
+        /** @var LengthAwarePaginator $administratives */
+        $administratives = DB::table(self::TABLE_ADMINISTRATIVE)
+            ->select([
+                self::ADMINISTRATIVES_FIELD_PAYROLL,
+                self::FIELD_NAME,
+                self::FIELD_LAST_NAME,
+                self::FIELD_PHONE,
+                self::FIELD_EMAIL,
+                self::ADMINISTRATIVES_FIELD_JOB,
+            ])
+            ->where(self::FIELD_EXISTS, 1)
+            ->paginate(self::PAGINATION_OFFSET);
+
+        return $administratives;
+    }
+
+    public static function buildResponseFromPaginator(LengthAwarePaginator $paginator): array
+    {
+        return [
+            'pagination' => [
+                'total' => $paginator->total(),
+                'current_page' => $paginator->currentPage(),
+                'per_page' => $paginator->perPage(),
+                'last_page' => $paginator->lastItem(),
+                'from' => $paginator->firstItem(),
+                'to' => $paginator->lastItem(),
+            ],
+            'users' => $paginator,
+        ];
     }
 
     public function fetchUserByCredentials(array $credentials): ?Authenticatable

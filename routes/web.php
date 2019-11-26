@@ -82,3 +82,8 @@ Route::get('/libros', function (){
 });
 
 Route::get('libros', 'LibrosController@selects')->name('varios');
+
+//Usuarios
+Route::get('/usuarios', 'UsersController@index')->name('usuarios');
+
+Route::post('/usuarios/all', 'UsersController@getAll');
