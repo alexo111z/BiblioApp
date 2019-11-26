@@ -83,3 +83,5 @@ Route::get('/usuarios', 'UsersController@index')->name('usuarios');
 Route::post('/usuarios/all', 'UsersController@getAll');
 
 Route::post('/usuarios', 'UsersController@create');
+
+Route::post('/usuarios/remove', 'UsersController@delete');
