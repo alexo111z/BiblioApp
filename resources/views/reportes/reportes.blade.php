@@ -39,27 +39,6 @@
                             @include('reportes.prestamos')
                         </div>
                     </div>
-
-                    <div class="panel-heading " style="border:1px solid #eee; background-color: #f7f7f7;">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#masmultas">Reporte de alumnos con más multas</a>
-                        </h4>
-                    </div>
-                    <div id="masmultas" class="panel-collapse collapse" style="background-color: #fbfbfb;">
-                        <div class="panel-body">
-                            @include('reportes.Masmultas')
-                        </div>
-                    </div>
-                    <div class="panel-heading" style="border:1px solid #eee; background-color: #f7f7f7;">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#libros">Reporte de libros</a>
-                        </h4>
-                    </div>
-                    <div id="libros" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @include('reportes.libros')
-                        </div>
-                    </div>
                     <div class="panel-heading" style="border:1px solid #eee; background-color: #f7f7f7;">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" href="#titulos">Reporte de títulos registrados por año</a>
