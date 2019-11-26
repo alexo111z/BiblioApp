@@ -76,3 +76,8 @@ Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit'
 Route::get('/libros', function (){
     return view('Libros.principal');
 });
+
+//Usuarios
+Route::get('/usuarios', 'UsersController@index')->name('usuarios');
+
+Route::post('/usuarios/all', 'UsersController@getAll');
