@@ -27498,8 +27498,28 @@ new Vue({
         edit: function() {
             console.log('Editing user');
         },
-        remove: function() {
-            console.log('Removing user');
+        remove: function(user) {
+            const endpointUrl = 'usuarios/remove';
+
+            axios.post(
+                endpointUrl,
+                {
+                    userType: this.userType,
+                    IdUsuario: user.IdUsuario,
+                }
+            ).then(() => {
+                toastr.success('El usuario ha sido eliminado exitosamente', 'Todo bien');
+
+                this.users = _.remove(this.users, (_user) => {
+                    return _user.IdUsuario !== user.IdUsuario;
+                });
+
+                if (this.users.length === 0) {
+                    this.getUsers();
+                }
+            }).catch(() => {
+                toastr.error('El usuario no pudo ser eliminado, intenta de nuevo', '¡Error!');
+            });
         },
     },
 });

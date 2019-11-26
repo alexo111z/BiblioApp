@@ -209,7 +209,7 @@
                                 title="Tooltip on top"><i class="fa fa-edit"></i></a>
                         </td>
                         <td width="10px">
-                            <a class="btn btn-danger btn-sm" @click="remove()"><i class="fa fa-user-times"></i></a>
+                            <a class="btn btn-danger btn-sm" @click="remove(user)"><i class="fa fa-user-times"></i></a>
                         </td>
                     </tr>
                 </tbody>
