@@ -27118,6 +27118,7 @@ new Vue({
             NoNomina: '',
         },
         userType: 1,
+        modalUser: 1,
         pagination: {
             total: 0,
             current_page: 0,
@@ -27126,7 +27127,7 @@ new Vue({
             'from': 0,
             to: 0,
         },
-        offset: 3,
+        offset: 5,
         errors: [],
         search: '',
         tableColumns: [
@@ -27174,6 +27175,10 @@ new Vue({
                 'Acciones',
             ],
         ],
+        modal: {
+            title: 'Agregar Usuario',
+            operation: 'add',
+        },
     },
     computed: {
         isActived: function() {
@@ -27224,6 +27229,43 @@ new Vue({
             }).catch((error) =>{
                 toastr.error('Hubo un error al obtener los usuarios', "¡Error!");
             });
+        },
+        onAdd: function() {
+            this.clearModal();
+
+            this.modal.operation = 'add';
+            this.modal.title = 'Agregar Usuario';
+
+            this.modalUser = this.userType;
+        },
+        onEdit: function(user) {
+            this.clearModal();
+
+            this.modal.operation = 'edit';
+            this.modal.title = 'Editar Usuario';
+
+            this.modalUser = this.userType;
+        },
+        clearModal: function() {
+            this.user.IdUsuario = '';
+            this.user.Nombre = '';
+            this.user.Apellidos = '';
+            this.user.IdCarrera ='';
+            this.user.Telefono = '';
+            this.user.Correo = '';
+            this.user.Nick = '';
+            this.user.NoControl = '';
+            this.user.Puesto = '';
+            this.user.NoNomina = '';
+        },
+        add: function() {
+            console.log('Creating user');
+        },
+        edit: function() {
+            console.log('Editing user');
+        },
+        remove: function() {
+            console.log('Removing user');
         },
     }
 });
