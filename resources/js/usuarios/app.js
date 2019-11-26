@@ -36,7 +36,7 @@ new Vue({
             'from': 0,
             to: 0,
         },
-        offset: 3,
+        offset: 5,
         errors: [],
         search: '',
         tableColumns: [
@@ -120,8 +120,8 @@ new Vue({
             this.pagination.current_page = page;
             this.getUsers(page);
         },
-        getUsers: function(page) {
-            const usersEndpoint = 'usuarios/all';
+        getUsers: function(page = 1) {
+            const usersEndpoint = 'usuarios/all?page=' + page;
 
             axios.post(
                 usersEndpoint,
