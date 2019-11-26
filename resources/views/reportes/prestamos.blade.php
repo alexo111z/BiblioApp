@@ -13,7 +13,7 @@
                                 @{{item.Nombre}}</option>
                             <option :value="item.Id" v-else>@{{item.Id}} - @{{item.Nombre}}</option>
                         </select>
-                        <select name="topic" id="topic" class="form-control" style="margin-top:1rem;" v-model="ConsultaPrestamos.clasificacion">
+                        <select name="topic" id="topic" class="form-control" style="margin-top:1rem;">
                             <!--enlazar select a la tabla clasificacion-->
                             <option v-for="item in topic" :value="item.Id" v-if="item.Id < 10">00@{{item.Id}} -
                                 @{{item.Nombre}}</option>
@@ -22,7 +22,7 @@
                             <option :value="item.Id" v-else>@{{item.Id}} - @{{item.Nombre}}</option>
                         </select>
                         <label>Seleccionar la carrera</label>
-                        <select name="carrera" id="carreras" class="form-control" v-model="ConsultaPrestamos.carrera">
+                        <select name="carrera" id="carreras" class="form-control">
                             <!-- enlazar select a tabla carreras -->
                             <option  v-for="carrera in carreras" :value="carrera.Clave">@{{carrera.Nombre}}</option>
                         </select>
@@ -44,16 +44,16 @@
                 <tbody>
                     <tr>
                         <td>Préstamos por carrera</td>
-                        <td>11111</td><!-- numero de Préstamos por Carrera -->
+                        <td>@{{resultados.pcarrera}}</td><!-- numero de Préstamos por Carrera -->
                     </tr>
                     <tr>
                         <td>Préstamos por clasificación</td>
-                        <td>11111</td>
+                        <td>@{{resultados.pclasificacion}}</td>
                         <!--numero de Préstamos por Clasificación -->
                     </tr>
                     <tr>
                         <td>Préstamos totales</td>
-                        <td>111111</td>
+                        <td>@{{resultados.ptotales}}</td>
                         <!--numero de Préstamos Totales -->
                     </tr>
                 </tbody>
@@ -78,7 +78,12 @@
                         <th style="padding:3px;">Carrera</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody v-if="resultados.plista.length==0">
+                    <tr>
+                        <td colspan="5" class="text-center">Sin resultados...</td>
+                    </tr>
+                </tbody>
+                <tbody v-else>
                     <tr>
                         <td style="padding:3px;">1</td>
                         <!--#-->

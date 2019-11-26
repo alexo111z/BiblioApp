@@ -7,12 +7,15 @@ new Vue({
     },
     data:{
         url:'reporte',
+        inicio: '',
+        fin: '',
         concentrado:[],
         topic:[],
-        carreras:[],
-        ConsultaPrestamos:{
-            clasificacion: '',
-            carrera: ''
+        resultados:{
+            pcarrera:0,
+            pclasificacion:0,
+            ptotales:0,
+            plista:[]
         }
     },
     methods:{
@@ -43,7 +46,19 @@ new Vue({
             });
         },
         obtenerConcentrado: function () {
-            console.log(this.ConsultaPrestamos);
+            var carrera  = $("#carreras").val();
+            var clasificacion = $("#topic").val();
+
+            axios.post(this.url+"/consultaprestamos",{
+                'carrera':carrera,
+                'clasificacion':clasificacion,
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
+            .then(response =>{
+                this.resultados = response.data;
+
+            });
         }
     }
 

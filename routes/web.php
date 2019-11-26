@@ -37,6 +37,7 @@ Route::get('/reportes',function (){
 });
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
 Route::get('reporte/carreras', 'ReportesController@getCarreras')->name('getCarreras');
+Route::post('reporte/consultaprestamos','ReportesController@getReportes')->name('getReportes');
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos

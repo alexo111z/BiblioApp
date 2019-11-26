@@ -20,9 +20,9 @@
                 <label class="h4">Periodo </label>
                 <div class="input-group">
                     <span class="input-group-addon">Del</span>
-                    <input type="date" class="input-sm form-control" name="start" />
+                    <input type="date" class="input-sm form-control" name="start" id="start" v-model="inicio"/>
                     <span class="input-group-addon">al</span>
-                    <input type="date" class="input-sm form-control" name="end" />
+                    <input type="date" class="input-sm form-control" name="end" id="end" v-model="fin"/>
                 </div>
             </div>
         </div>
