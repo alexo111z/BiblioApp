@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
@@ -13,7 +14,20 @@ class UsersController extends Controller
 {
     public function index()
     {
-        return view('usuarios.index');
+        $careers = DB::table('tblcarreras')
+            ->select([
+                'Clave',
+                'Nombre',
+            ])
+            ->where('Existe', 1)
+            ->get();
+
+        return view(
+            'usuarios.index',
+            [
+                'careers' => $careers,
+            ]
+        );
     }
 
     public function getAll(Request $request)
@@ -38,5 +52,24 @@ class UsersController extends Controller
         }
 
         return new JsonResponse(null, 400);
+    }
+
+    public function create(Request $request)
+    {
+        $userType = (int) $request->get('userType', User::TYPE_ADMIN);
+        $user = new User($userType);
+
+        $user->fromRequest($request);
+
+        if ($user->create()) {
+            return new JsonResponse([
+                'message' => 'El usuario fue creado exitosamente',
+                'user' => $user->getData(),
+            ], 201);
+        }
+
+        return new JsonResponse([
+            'message' => 'El usuario no pudo ser creado',
+        ], 403);
     }
 }
