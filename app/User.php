@@ -252,6 +252,8 @@ class User implements Authenticatable
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
+            unset($this->data[self::FIELD_EXISTS]);
+            
             $wasUpdated = DB::table(User::TABLE_ADMIN)
                 ->where(
                     self::FIELD_USER_ID, 
@@ -292,40 +294,46 @@ class User implements Authenticatable
 
     public function delete(): bool
     {
-        $wasDeleted = false;        
+        $rowsDeleted = false;        
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
-            $wasDeleted = DB::table(User::TABLE_ADMIN)
+            $rowsDeleted = DB::table(User::TABLE_ADMIN)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->delete();
         } else if ($this->userType === User::TYPE_TEACHER) {
-            $wasDeleted = DB::table(User::TABLE_TEACHER)
+            $rowsDeleted = DB::table(User::TABLE_TEACHER)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
                 )
-                ->delete();
+                ->update([
+                    'Existe' => 0,
+                ]);
         } else if ($this->userType === User::TYPE_STUDENT) {
-            $wasDeleted = DB::table(User::TABLE_STUDENT)
+            $rowsDeleted = DB::table(User::TABLE_STUDENT)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
                 )
-                ->delete();
+                ->update([
+                    'Existe' => 0,
+                ]);
         } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
-            $wasDeleted = DB::table(User::TABLE_ADMINISTRATIVE)
+            $rowsDeleted = DB::table(User::TABLE_ADMINISTRATIVE)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
                 )
-                ->delete();
+                ->update([
+                    'Existe' => 0,
+                ]);
         }
 
-        return $wasDeleted;
+        return $rowsDeleted > 0;
     }
 
     public function fromRequest(Request $request): void
