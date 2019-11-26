@@ -27496,7 +27496,34 @@ new Vue({
             });
         },
         edit: function() {
-            console.log('Editing user');
+            const endpointUrl = 'usuarios/update';
+
+            let userToSend = Object.assign({}, this.user);
+
+            userToSend = _.pickBy(userToSend, _.identity);
+
+            userToSend.userType = this.userType;
+
+            axios.post(
+                endpointUrl,
+                userToSend
+            ).then(() => {
+                const userIndex = _.findIndex(this.users, (user) => {
+                    return userToSend.IdUsuario = user.IdUsuario;
+                });
+
+                this.users = _.remove(this.users, (_user, index) => {
+                    return index !== userIndex;
+                });
+
+                this.users.unshift(
+                    this.buildUser(userToSend)
+                );
+
+                toastr.success('El usuario fue editado exitosamente', 'Todo bien');
+            }).catch(() => {
+                toastr.error('El usuario pudo ser editado, intenta de nuevo', '¡Error!');
+            });
         },
         remove: function(user) {
             const endpointUrl = 'usuarios/remove';
@@ -27508,15 +27535,15 @@ new Vue({
                     IdUsuario: user.IdUsuario,
                 }
             ).then(() => {
-                toastr.success('El usuario ha sido eliminado exitosamente', 'Todo bien');
-
-                this.users = _.remove(this.users, (_user) => {
+                this.users = _.remove(this.users, (_user, index) => {
                     return _user.IdUsuario !== user.IdUsuario;
                 });
 
                 if (this.users.length === 0) {
                     this.getUsers();
                 }
+
+                toastr.success('El usuario ha sido eliminado exitosamente', 'Todo bien');
             }).catch(() => {
                 toastr.error('El usuario no pudo ser eliminado, intenta de nuevo', '¡Error!');
             });

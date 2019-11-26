@@ -248,13 +248,13 @@ class User implements Authenticatable
 
     public function update(): bool
     {
-        $wasUpdated = false;        
+        $rowsUpdated = false;        
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
             unset($this->data[self::FIELD_EXISTS]);
             
-            $wasUpdated = DB::table(User::TABLE_ADMIN)
+            $rowsUpdated = DB::table(User::TABLE_ADMIN)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
@@ -263,7 +263,7 @@ class User implements Authenticatable
         } else if ($this->userType === User::TYPE_TEACHER) {
             unset($this->data[self::ADMINS_FIELD_TYPE]);
 
-            $wasUpdated = DB::table(User::TABLE_TEACHER)
+            $rowsUpdated = DB::table(User::TABLE_TEACHER)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
@@ -272,7 +272,7 @@ class User implements Authenticatable
         } else if ($this->userType === User::TYPE_STUDENT) {
             unset($this->data[self::ADMINS_FIELD_TYPE]);
 
-            $wasUpdated = DB::table(User::TABLE_STUDENT)
+            $rowsUpdated = DB::table(User::TABLE_STUDENT)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
@@ -281,7 +281,7 @@ class User implements Authenticatable
         } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
             unset($this->data[self::ADMINS_FIELD_TYPE]);
 
-            $wasUpdated = DB::table(User::TABLE_ADMINISTRATIVE)
+            $rowsUpdated = DB::table(User::TABLE_ADMINISTRATIVE)
                 ->where(
                     self::FIELD_USER_ID, 
                     (int) $this->data[self::FIELD_USER_ID]
@@ -289,7 +289,7 @@ class User implements Authenticatable
                 ->update($this->data);
         }
 
-        return $wasUpdated;
+        return $rowsUpdated > 0;
     }
 
     public function delete(): bool

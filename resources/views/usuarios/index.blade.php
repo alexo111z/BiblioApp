@@ -31,9 +31,12 @@
                             <form autocomplete="off">
                                 <input type="hidden" name="id" v-model="user.IdUsuario">
                                 <div class="form-group">
+                                    <label for="modalUserType">Selecciona el tipo de usuario</label>
                                     <select
+                                        id="modalUserType"
                                         class="form-control"
-                                        v-model="modalUser">
+                                        v-model="modalUser"
+                                        v-bind:disabled="modal.operation === 'edit'">
                                         <option :value="1" selected>Administrador</option>
                                         <option :value="2">Colaborador</option>
                                         <option :value="3">Docente</option>
@@ -118,7 +121,9 @@
                                 </div>
 
                                 <div class="form-group" v-if="modalUser == 4">
+                                    <label for="careers">Selecciona una carrera</label>
                                     <select
+                                        id="careers"
                                         class="form-control"
                                         v-model="user.IdCarrera">
                                         @foreach ($careers as $career)
@@ -157,6 +162,7 @@
                             <button
                                 type="button"
                                 class="btn btn-primary"
+                                @click="edit()"
                                 v-if="modal.operation === 'edit'">Editar</button>
                             <button
                                 type="button"

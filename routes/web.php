@@ -90,4 +90,6 @@ Route::post('/usuarios/all', 'UsersController@getAll');
 
 Route::post('/usuarios', 'UsersController@create');
 
+Route::post('/usuarios/update', 'UsersController@update');
+
 Route::post('/usuarios/remove', 'UsersController@delete');
