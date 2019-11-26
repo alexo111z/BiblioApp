@@ -8,6 +8,7 @@ use \DomainException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Request;
 
 class User implements Authenticatable
 {
@@ -194,6 +195,70 @@ class User implements Authenticatable
         return $administratives;
     }
 
+    public function create(): bool
+    {
+        /** @var int $userId */
+        $userId = (int) DB::table(User::TABLE_USERS)
+            ->insertGetId([
+                'Password' => $this->data[User::USERS_FIELD_PASSWORD],
+            ]);
+
+        if ($userId <= 0) {
+            return false;
+        }
+
+        $this->data[self::FIELD_USER_ID] = $userId;
+
+        if ($this->userType === User::TYPE_ADMIN
+            || $this->userType === User::TYPE_COLLABORATOR) {
+            $userId = DB::table(User::TABLE_ADMIN)
+                ->insertGetId($this->data);
+        } else if ($this->userType === User::TYPE_TEACHER) {
+            $userId = DB::table(User::TABLE_TEACHER)
+                ->insertGetId($this->data);
+        } else if ($this->userType === User::TYPE_STUDENT) {
+            $userId = DB::table(User::TABLE_STUDENT)
+                ->insertGetId($this->data);
+        } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
+            $userId = DB::table(User::TABLE_ADMINISTRATIVE)
+                ->insertGetId($this->data);
+        }
+
+        $this->data[self::USERS_FIELD_ID] = $userId;
+
+        return ($userId > 0);
+    }
+
+    public function update(int $userType)
+    {
+        return;
+    }
+
+    public function delete(int $userType): bool
+    {
+        return false;
+    }
+
+    public function fromRequest(Request $request): void
+    {
+        $data = [
+            'IdUsuario' => $request->get('IdUsuario', null),
+            'Nombre' => $request->get('Nombre'),
+            'Apellidos' => $request->get('Apellidos'),
+            'IdCarrera' => $request->get('IdCarrera', null),
+            'Telefono' => $request->get('Telefono', null),
+            'Correo' => $request->get('Correo', null),
+            'Existe' => $request->get('Existe', null),
+            'Nick' => $request->get('Nick', null),
+            'Tipo' => $request->get('Tipo', null),
+            'NoControl' => $request->get('NoControl', null),
+            'Puesto' => $request->get('Puesto', null),
+            'NoNomina' => $request->get('NoNomina', null),
+        ];
+
+        $this->data = array_filter($data);
+    }
+
     public static function buildResponseFromPaginator(LengthAwarePaginator $paginator): array
     {
         return [
@@ -201,7 +266,7 @@ class User implements Authenticatable
                 'total' => $paginator->total(),
                 'current_page' => $paginator->currentPage(),
                 'per_page' => $paginator->perPage(),
-                'last_page' => $paginator->lastItem(),
+                'last_page' => $paginator->lastPage(),
                 'from' => $paginator->firstItem(),
                 'to' => $paginator->lastItem(),
             ],
