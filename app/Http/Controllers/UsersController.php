@@ -63,13 +63,39 @@ class UsersController extends Controller
 
         if ($user->create()) {
             return new JsonResponse([
-                'message' => 'El usuario fue creado exitosamente',
                 'user' => $user->getData(),
             ], 201);
         }
 
-        return new JsonResponse([
-            'message' => 'El usuario no pudo ser creado',
-        ], 403);
+        return new JsonResponse(null, 403);
+    }
+
+    public function update(Request $request)
+    {
+        $userType = (int) $request->get('userType', User::TYPE_ADMIN);
+        $user = new User($userType);
+
+        $user->fromRequest($request);
+
+        if ($user->update()) {
+            return new JsonResponse([
+                'user' => $user->getData(),
+            ], 200);
+        }
+
+        return new JsonResponse(null, 403);
+    }
+
+    public function delete(Request $request)
+    {
+        $userType = (int) $request->get('userType', User::TYPE_ADMIN);
+        $user = new User($userType);
+
+        $user->fromRequest($request);    
+
+        return new JsonResponse(
+            null, 
+            ($user->delete()) ? 200 : 403
+        );
     }
 }
