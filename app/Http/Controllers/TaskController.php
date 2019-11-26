@@ -60,7 +60,7 @@ class TaskController extends Controller
                 ->union($dataa)
                 ->union($datab)
                 ->orderby('fecha_final', 'DESC')
-                ->get();
+                ->paginate(4);
         } else {
             $dataa = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
                 ->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
@@ -107,7 +107,7 @@ class TaskController extends Controller
                 ->union($dataa)
                 ->union($datab)
                 ->orderby('fecha_final', 'DESC')
-                ->get();
+                ->paginate(4);
         }
 
 
@@ -131,7 +131,17 @@ class TaskController extends Controller
 
 
 
-        return $datas;
+        return [
+            'pagination' => [
+                'total'         => $datas->total(),
+                'current_page'  => $datas->currentPage(),
+                'per_page'      => $datas->perPage(),
+                'last_page'     => $datas->lastPage(),
+                'from'          => $datas->firstItem(),
+                'to'            => $datas->lastItem(),
+            ],
+            'prestamos' =>$datas
+        ];
     }
 
 
