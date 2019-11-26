@@ -21,7 +21,15 @@
 {{--                    <a href="#" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createCarrera">--}}
 {{--                        <i class="fa fa-pencil"></i> Registrar carrera--}}
 {{--                    </a>--}}
-
+                <div class="form-inline">
+                    <label class="h4">Periodo </label>
+                    <div class="input-group">
+                        <span class="input-group-addon">Del</span>
+                        <input type="date" class="input-sm form-control" name="start"  value="22-06-2019"/>
+                        <span class="input-group-addon">al</span>
+                        <input type="date" class="input-sm form-control" name="end" />
+                    </div>
+                </div>
                 </div>
                 {{--            Buscador--}}
                 <div class="col-sm-6" style="text-align: right;">
@@ -38,9 +46,8 @@
                     <th>Fecha prestamo</th>
                     <th>Fecha a entregar</th>
                     <th>Fecha entregado</th>
-                    <th>Renovaciones</th>
                     <th>Adeudo</th>
-                    <th>No Libros</th>
+                    <th>Estado</th>
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
                 </thead>
@@ -61,16 +68,17 @@
                     <td>
                         @{{ adeudo.Fecha_entrega }}
                     </td>
-                    <td>
-                        @{{ adeudo.Renovaciones }}
+                    <td v-if="totalAdeudo[index]>100">
+                        Donación
                     </td>
-                    <td>
-                        @{{  totalAdeudo[index] }}
-                    </td>
+                    <td v-else>@{{  totalAdeudo[index] }}</td>
 {{--                Cantidad libros prestados--}}
-                    <td>
-                        @{{  contarLibros[index] }}
+                    <td v-if="adeudo.Existe==1">
+                        <strong class="text-danger">Adeudo</strong>
                     </td>
+                    <td v-else>
+                        <p class="text-success">Pagado</p>
+                    </td>                    
 
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-list"></i></a>
@@ -110,13 +118,13 @@
                 </div>
             </div><!--Fin Paginacion-->
 
-{{--                    Pruebas--}}
-{{--                        <div class="col-sm-12">--}}
-{{--                            <pre>--}}
-{{--                                @{{ $data }}--}}
-{{--                            </pre>--}}
-{{--                        </div>--}}
-
+{{--                    Pruebas--}}<!--
+                        <div class="col-sm-12">
+                            <pre>
+                                @{{ $data }}
+                            </pre>
+                        </div>
+                    -->
 {{--            @include('Adeudos.show')--}}
         </div> <!--Fin Contenido-->
     </div>

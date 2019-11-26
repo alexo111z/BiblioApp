@@ -56,7 +56,7 @@ class CarreraController extends Controller
     public function destroy($id)
     {
         $carrera = Carrera::findOrFail($id);
-        $carrera->Existe = 0;
-        $carrera->save();
+        $carrera->delete();
+        return;
     }
 }
