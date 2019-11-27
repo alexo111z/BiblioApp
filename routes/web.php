@@ -47,6 +47,9 @@ Route::get('/carrera', function(){
 });
 //Materiales
 Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
+
 Route::get('/materiales', function (){
     return view('Materiales.principal');
 });
+
+Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
