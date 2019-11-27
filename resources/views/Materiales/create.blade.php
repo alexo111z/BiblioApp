@@ -27,7 +27,7 @@
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                      <select name="clave" id="clave" class="form-control" required="" v-model="newMaterial.Clave">
                                      @foreach($claves as $clave)
-                                     <option> {{ $clave->Clave }}</option> 
+                                     <option value ="{{ $clave->Clave }}"> {{ $clave->Nombre}}</option> 
                                      @endforeach
                                      </select>
                                 </div>
