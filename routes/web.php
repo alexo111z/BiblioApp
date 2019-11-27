@@ -47,11 +47,8 @@ Route::get('/carrera', function(){
 });
 //Materiales
 Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
+
 Route::get('/materiales', function (){
     return view('Materiales.principal');
 });
-//Libros
-Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
-Route::get('/libros', function (){
-    return view('Libros.principal');
-});
+Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
