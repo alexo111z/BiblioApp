@@ -45,9 +45,9 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{asset('dewey')}}">
-                        <i class="fa fa-tags"></i>
-                        <p class="section-title">Clasificación</p>
+                    <a href="{{route('prestatarios')}}">
+                        <i class="fa fa-exchange"></i>
+                        <p class="section-title">prestatarios</p>
                     </a>
                 </div>
                 <div class="col-md-4">
@@ -99,6 +99,12 @@
             </div>
 
             <div class="row section">
+                <div class="col-md-4">
+                    <a href="{{asset('dewey')}}">
+                        <i class="fa fa-tags"></i>
+                        <p class="section-title">Clasificación</p>
+                    </a>
+                </div>
                 <div class="col-md-4">
                     <a href="{{asset('carrera')}}">
                         <i class="fa fa-graduation-cap"></i>
