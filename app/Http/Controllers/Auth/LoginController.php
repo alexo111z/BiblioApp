@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -42,6 +43,10 @@ class LoginController extends Controller
             ],
             403
         );
+
+        if ($user !== null) {
+            Session::put('userData', $user->getData());
+        }
 
         return ($user !== null)
             ? $successResponse
