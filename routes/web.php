@@ -86,6 +86,8 @@ Route::get('libros', 'LibrosController@selects')->name('varios');
 //Usuarios
 Route::get('/usuarios', 'UsersController@index')->name('usuarios');
 
+Route::get('/prestatarios', 'UsersController@indexPrestatarios')->name('prestatarios');
+
 Route::post('/usuarios/all', 'UsersController@getAll');
 
 Route::post('/usuarios', 'UsersController@create');

@@ -28,6 +28,8 @@ class User implements Authenticatable
         self::TYPE_ADMINISTRATIVE,
     ];
 
+    const TABLE_CAREERS = 'tblcarreras';
+
     const FIELD_NAME = 'Nombre';
     const FIELD_LAST_NAME = 'Apellidos';
     const FIELD_USER_ID = 'IdUsuario';
@@ -136,8 +138,7 @@ class User implements Authenticatable
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
             ])
-            ->where(self::ADMINS_FIELD_TYPE, $adminType)
-            ->orderBy(self::FIELD_USER_ID, 'desc')
+            ->orderBy(self::FIELD_USER_ID, 'DESC')
             ->paginate(self::PAGINATION_OFFSET);
 
         return $users;
@@ -156,7 +157,7 @@ class User implements Authenticatable
                 self::FIELD_EMAIL,
                 self::FIELD_USER_ID
             ])
-            ->where('Existe', 1)
+            ->where(self::FIELD_EXISTS, 1)
             ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
@@ -170,13 +171,26 @@ class User implements Authenticatable
             ->select([
                 self::FIELD_USER_ID,
                 self::STUDENTS_CONTROL_NUMBER,
-                self::FIELD_NAME,
+                static::getDbField(self::TABLE_STUDENT, self::FIELD_NAME),
                 self::FIELD_LAST_NAME,
                 self::FIELD_PHONE,
                 self::FIELD_EMAIL,
                 self::STUDENTS_FIELD_CAREER,
+                sprintf(
+                    '%s AS NombreCarrera',
+                    static::getDbField(self::TABLE_CAREERS, self::FIELD_NAME)
+                )
             ])
-            ->where('Existe', 1)
+            ->join(
+                self::TABLE_CAREERS,
+                self::STUDENTS_FIELD_CAREER,
+                '=',
+                'Clave'
+            )
+            ->where(
+                self::getDbField(self::TABLE_STUDENT, self::FIELD_EXISTS),
+                1
+            )
             ->orderBy(self::FIELD_USER_ID, 'desc')
             ->paginate(self::PAGINATION_OFFSET);
 
@@ -218,7 +232,7 @@ class User implements Authenticatable
         $this->data[self::FIELD_USER_ID] = $userId;
         unset($this->data[self::USERS_FIELD_PASSWORD]);
 
-        $wasCreated = false;        
+        $wasCreated = false;
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
@@ -248,15 +262,15 @@ class User implements Authenticatable
 
     public function update(): bool
     {
-        $rowsUpdated = false;        
+        $rowsUpdated = false;
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
             unset($this->data[self::FIELD_EXISTS]);
-            
+
             $rowsUpdated = DB::table(User::TABLE_ADMIN)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update($this->data);
@@ -265,7 +279,7 @@ class User implements Authenticatable
 
             $rowsUpdated = DB::table(User::TABLE_TEACHER)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update($this->data);
@@ -274,7 +288,7 @@ class User implements Authenticatable
 
             $rowsUpdated = DB::table(User::TABLE_STUDENT)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update($this->data);
@@ -283,7 +297,7 @@ class User implements Authenticatable
 
             $rowsUpdated = DB::table(User::TABLE_ADMINISTRATIVE)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update($this->data);
@@ -294,20 +308,20 @@ class User implements Authenticatable
 
     public function delete(): bool
     {
-        $rowsDeleted = false;        
+        $rowsDeleted = false;
 
         if ($this->userType === User::TYPE_ADMIN
             || $this->userType === User::TYPE_COLLABORATOR) {
             $rowsDeleted = DB::table(User::TABLE_ADMIN)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->delete();
         } else if ($this->userType === User::TYPE_TEACHER) {
             $rowsDeleted = DB::table(User::TABLE_TEACHER)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update([
@@ -316,7 +330,7 @@ class User implements Authenticatable
         } else if ($this->userType === User::TYPE_STUDENT) {
             $rowsDeleted = DB::table(User::TABLE_STUDENT)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update([
@@ -325,7 +339,7 @@ class User implements Authenticatable
         } else if ($this->userType === User::TYPE_ADMINISTRATIVE) {
             $rowsDeleted = DB::table(User::TABLE_ADMINISTRATIVE)
                 ->where(
-                    self::FIELD_USER_ID, 
+                    self::FIELD_USER_ID,
                     (int) $this->data[self::FIELD_USER_ID]
                 )
                 ->update([
