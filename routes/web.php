@@ -61,4 +61,4 @@ Route::get('/libros', function (){
     return view('Libros.principal');
 });
 
-//Route::get('libros', 'LibrosController@cla')->name('autor');
+Route::get('libros', 'LibrosController@selects')->name('varios');
