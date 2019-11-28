@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Materiales;
+
 
 class MaterialesController extends Controller
 {
@@ -14,7 +16,7 @@ class MaterialesController extends Controller
      */
    
     public function index(Request $request)
-    {
+    {   
         $search = $request->get('search');
         $materiales = Materiales::where('Existe','=',1)->search($search)->orderBy('id','DESC')->paginate(30);
         return [
@@ -28,6 +30,14 @@ class MaterialesController extends Controller
             ],
             'material' =>$materiales
         ];
+
+    }
+
+    public function cla()
+    {   
+        //return DB::table('tblcarreras')->select('Nombre')->get();
+        $claves= DB::table('tblcarreras')->get();
+        return view('Materiales.principal', compact('claves'));
     }
 
         /**
@@ -37,7 +47,7 @@ class MaterialesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
       $this->validate($request, [
         'Titulo' => 'required',
         'Clave' => 'required',

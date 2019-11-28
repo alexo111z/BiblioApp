@@ -16,5 +16,6 @@ class Materiales extends Model
         if($search && $search != "")
             return $query -> where('Titulo', 'LIKE', "%$search%");
     }
+
 }
 
