@@ -124,11 +124,11 @@
             </div><!--Fin Paginacion-->
 
 {{--                    Pruebas--}}
-                        <div class="col-sm-12">
+                        {{--<div class="col-sm-12">
                             <pre>
                                 @{{ $data }}
                             </pre>
-                        </div>
+                        </div>--}}
                     
             @include('Adeudos.detalles')
         </div> <!--Fin Contenido-->

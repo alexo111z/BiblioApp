@@ -118,5 +118,6 @@ class AdeudoController extends Controller
         $deudor = Prestamo::findOrFail($id);
         $deudor ->Existe = 0;
         $deudor->save();
+        
     }
 }
