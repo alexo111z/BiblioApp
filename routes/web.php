@@ -39,7 +39,8 @@ Route::resource('libros','LibrosController');
 //Adeudos
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit']);
 
-Route::get('adeudo/count/{adeudo}', 'AdeudoController@count');
+Route::get('adeudo/det/{folio}', 'AdeudoController@show');
+
 Route::get('adeudo/usu/{adeudo}', 'AdeudoController@usuario');
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');

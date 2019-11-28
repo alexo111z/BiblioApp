@@ -27090,8 +27090,21 @@ new Vue({
     data: {
         adeudos: [],
         cantidad: [],
+        detailsdata: [],
         usuario: [],
-        fillAdeudos: '',
+        fillAdeudos: {
+            'folio': '',
+            'control': '',
+            'nombre': '',
+            'apellidos': '',
+            'fecha_inicio': '',
+            'fecha_final': '',
+            'fecha_entrega': '',
+            'renovaciones': '',
+            'existe': '',
+            'monto': '',
+        },
+
         urlAdeudos: 'adeudo',
         pagination: {
             'total': 0,
@@ -27151,20 +27164,6 @@ new Vue({
             });
             return totales;
         },
-        contarLibros: function () {
-            // var count = [];
-            // this.adeudos.forEach(adeudo => {
-            //
-            //     const url = this.urlAdeudos + '/count/' + adeudo.Folio;
-            //     axios.get(url).then(response => {
-            //        count.push(response.data);
-            //        this.cantidad = count;
-            //     });
-            //
-            // });
-            count = this.cantidad;
-            return count;
-        },
         codUsuario: function () {
             usu = this.usuario;
             return usu;
@@ -27185,20 +27184,55 @@ new Vue({
         getAdeudos: function (page) { //param: page
             var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search;
             axios.get(url).then(response => {
-                aux = this.adeudos = response.data.adeudos.data;//.carreras.data;
+                this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
-                this.getCount();
-                this.getUsu();
             });
         },
-        getCount: function() {
-            var count = [];
-            this.adeudos.forEach(adeudo => {
-                const url = this.urlAdeudos + '/count/' + adeudo.Folio;
-                axios.get(url).then(response => {
-                    count.push(response.data);
-                    this.cantidad = count;
+        deleteAdeudo: function (adeudo) {
+            if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.folio + '?')) {
+                var url = this.urlAdeudos + '/' + adeudo.folio;
+                axios.delete(url).then(response => {
+                    this.getAdeudos();
+                    swal.close();
+                    toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
+                }).catch(ex => {
+                    toastr.error(ex.response.data.message, "Error!");
                 });
+            }
+        },
+        showAdeudo: function (adeudo, monto) {
+            var url = this.urlAdeudos+'/det/'+adeudo.folio;
+            axios.get(url).then(response => {
+                this.detailsdata = response.data
+            });
+            this.fillAdeudos.folio  = adeudo.folio;
+            this.fillAdeudos.control = adeudo.control;
+            this.fillAdeudos.nombre = adeudo.nombre;
+            this.fillAdeudos.apellidos = adeudo.apellidos;
+            this.fillAdeudos.fecha_inicio = adeudo.fecha_inicio;
+            this.fillAdeudos.fecha_final = adeudo.fecha_final;
+            this.fillAdeudos.fecha_entrega = adeudo.fecha_entrega;
+            this.fillAdeudos.renovaciones = adeudo.renovaciones;
+            this.fillAdeudos.existe = adeudo.existe;
+            this.fillAdeudos.monto = adeudo.monto;
+            $('#detalles').modal('show');
+        },
+        /*getAlums: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/alum';
+            axios.get(url).then(response => {
+                this.alumnos = response.data;//.carreras.data;
+            });
+        },
+        getProfs: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/prof';
+            axios.get(url).then(response => {
+                this.docentes = response.data;//.carreras.data;  
+            });
+        },
+        getAdms: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/adm';
+            axios.get(url).then(response => {
+                this.administrativos = response.data;//.carreras.data;
             });
         },
         getUsu: function() {
@@ -27210,20 +27244,7 @@ new Vue({
                     this.usuario = count;
                 });
             });
-        },
-        deleteAdeudo: function (adeudo) {
-            if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.Folio + '?')) {
-                var url = this.urlAdeudos + '/' + adeudo.Folio;
-                axios.delete(url).then(response => {
-                    this.getAdeudos();
-                    swal.close();
-                    toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
-                });
-            }
-        },
-
+        },*/
         // editCarrera: function (carrera) {
         //     this.fillCarrera.Clave  = carrera.Clave;
         //     this.fillCarrera.Nombre = carrera.Nombre;
