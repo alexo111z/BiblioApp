@@ -15,7 +15,7 @@ class LibrosController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $libros = Libros::where('Existe','=',1)->search($search)->orderBy('ISBN','DESC')->paginate(30);
+        $libros = Libros::where('Existe','=',1)->search($search)->orderBy('ISBN','DESC')->paginate(10);
         return [
             'pagination' => [
                 'total'         => $libros->total(),
