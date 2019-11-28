@@ -29,8 +29,8 @@ new Vue({
             Password: '',
             Tipo: 1,
         },
-        userType: 1,
-        modalUser: 1,
+        userType: 3,
+        modalUser: 3,
         pagination: {
             total: 0,
             current_page: 0,
@@ -139,14 +139,14 @@ new Vue({
                 this.users = response.data.users.data;
                 this.pagination = response.data.pagination;
             }).catch((error) =>{
-                toastr.error('Hubo un error al obtener los colaboradores', "¡Error!");
+                toastr.error('Hubo un error al obtener los prestatarios', "¡Error!");
             });
         },
         onAdd: function() {
             this.clearModal();
 
             this.modal.operation = 'add';
-            this.modal.title = 'Agregar Colaborador';
+            this.modal.title = 'Agregar Prestatario';
 
             this.modalUser = this.userType;
             this.user.Tipo = parseInt(this.userType);
@@ -155,7 +155,7 @@ new Vue({
             this.clearModal();
 
             this.modal.operation = 'edit';
-            this.modal.title = 'Editar Colaborador';
+            this.modal.title = 'Editar Prestatario';
 
             this.modalUser = this.userType;
 
@@ -254,7 +254,7 @@ new Vue({
             ).then((response) => {
                 let userCreated = response.data.user;
 
-                toastr.success('El colaborador fue creado exitosamente', 'Todo bien');
+                toastr.success('El prestatario fue creado exitosamente', 'Todo bien');
 
                 if (this.userType === 4) {
                     setTimeout(() => {
@@ -271,7 +271,7 @@ new Vue({
                 );
                 this.users.pop();
             }).catch(() => {
-                toastr.error('El usuario pudo ser creado, intenta de nuevo', '¡Error!');
+                toastr.error('El prestatario pudo ser creado, intenta de nuevo', '¡Error!');
             });
         },
         edit: function() {
@@ -306,9 +306,9 @@ new Vue({
                     this.buildUser(userToSend)
                 );
 
-                toastr.success('El colaborador fue editado exitosamente', 'Todo bien');
+                toastr.success('El prestatario fue editado exitosamente', 'Todo bien');
             }).catch(() => {
-                toastr.error('El colaborador pudo ser editado, intenta de nuevo', '¡Error!');
+                toastr.error('El prestatario pudo ser editado, intenta de nuevo', '¡Error!');
             });
         },
         remove: function(user) {
@@ -329,9 +329,9 @@ new Vue({
                     this.getUsers();
                 }
 
-                toastr.success('El colaborador ha sido eliminado exitosamente', 'Todo bien');
+                toastr.success('El prestatario ha sido eliminado exitosamente', 'Todo bien');
             }).catch(() => {
-                toastr.error('El colaborador no pudo ser eliminado, intenta de nuevo', '¡Error!');
+                toastr.error('El prestatario no pudo ser eliminado, intenta de nuevo', '¡Error!');
             });
         },
     },

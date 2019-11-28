@@ -30,6 +30,24 @@ class UsersController extends Controller
         );
     }
 
+    public function indexPrestatarios()
+    {
+        $careers = DB::table('tblcarreras')
+            ->select([
+                'Clave',
+                'Nombre',
+            ])
+            ->where('Existe', 1)
+            ->get();
+
+        return view(
+            'usuarios.prestatarios',
+            [
+                'careers' => $careers,
+            ]
+        );
+    }
+
     public function getAll(Request $request)
     {
         $userType = (int) $request->get('userType', User::TYPE_ADMIN);
@@ -91,10 +109,10 @@ class UsersController extends Controller
         $userType = (int) $request->get('userType', User::TYPE_ADMIN);
         $user = new User($userType);
 
-        $user->fromRequest($request);    
+        $user->fromRequest($request);
 
         return new JsonResponse(
-            null, 
+            null,
             ($user->delete()) ? 200 : 403
         );
     }

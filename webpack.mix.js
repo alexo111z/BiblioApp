@@ -125,3 +125,18 @@ mix.scripts(
     ],
     'public/js/usuarios/app.js'
 );
+
+//Prestatarios
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/lodash.js',
+        'resources/js/login/middleware.js',
+        'resources/js/prestatarios/app.js'
+    ],
+    'public/js/prestatarios/app.js'
+);
