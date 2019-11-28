@@ -25,9 +25,9 @@
                     <label class="h4">Periodo </label>
                     <div class="input-group">
                         <span class="input-group-addon">Del</span>
-                        <input type="date" class="input-sm form-control" name="start"  value="22-06-2019"/>
+                        <input v-model="fechaInicio" @change="filtrarFecha()" type="date" class="input-sm form-control" name="start"/>
                         <span class="input-group-addon">al</span>
-                        <input type="date" class="input-sm form-control" name="end" />
+                        <input v-model="fechaFinal" @change="filtrarFecha()" type="date" class="input-sm form-control" name="end"/>
                     </div>
                 </div>
                 </div>

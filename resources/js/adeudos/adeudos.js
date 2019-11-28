@@ -36,6 +36,8 @@ new Vue({
         offset: 3,
         errors: [],
         search: '',
+        fechaInicio: '',
+        fechaFinal: ''
     },
     computed: {
         isActived: function () {
@@ -112,10 +114,21 @@ new Vue({
             this.search = search;
             this.getAdeudos();
         },
+        filtrarFecha: function () {
+            if (this.fechaInicio && this.fechaFinal) {
+                this.getAdeudos();
+            }
+        },
 
         //Modulo Carreras
         getAdeudos: function (page) { //param: page
-            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search;
+            let inicio = '';
+            let final = '';
+            if (this.fechaInicio && this.fechaFinal) {
+                inicio = new Date(this.fechaInicio).toUTCString();
+                final = new Date(this.fechaFinal).toUTCString();
+            }
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
             axios.get(url).then(response => {
                 aux = this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;

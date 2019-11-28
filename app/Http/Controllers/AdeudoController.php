@@ -12,7 +12,17 @@ class AdeudoController extends Controller
 
     public function index(Request $request){
         $search = $request->get('search');
-        $adeudos = Prestamo::whereRaw('(Fecha_final <= Fecha_entrega and Existe = 1) OR (Fecha_final < now() and Fecha_entrega is null and Existe = 1)')
+        $fechaFinal = strtotime($request->get('fechaFinal'));
+        $fechaInicio = strtotime($request->get('fechaInicio'));
+        $condicionFecha = '';
+
+        if ($fechaFinal && $fechaInicio) {
+            $fechaFinal = date('Y-m-d', $fechaFinal);
+            $fechaInicio = date('Y-m-d', $fechaInicio);
+            $condicionFecha =  'AND (Fecha_inicio >= \''.$fechaInicio.'\' AND Fecha_inicio <= \''.$fechaFinal.'\')';
+        }
+
+        $adeudos = Prestamo::whereRaw('((Fecha_final <= Fecha_entrega and Existe = 1) OR (Fecha_final < now() and Fecha_entrega is null and Existe = 1))'.$condicionFecha)
             ->search($search)->paginate(10);
         return [
             'pagination' => [
@@ -50,6 +60,8 @@ class AdeudoController extends Controller
         $detalle = DetPrestamo::where('Folio','=',$id)->get();
         return $detalle;
     }
+
+   
 
     //form para editar, id -> datos elemento editar
 //    public function edit($id)
