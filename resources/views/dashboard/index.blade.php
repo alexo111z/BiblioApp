@@ -65,7 +65,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{asset('editoriales')}}>
+                    <a href="{{asset('editoriales')}}">
                         <i class="fa fa-university"></i>
                         <p class="section-title">Editoriales</p>
                     </a>
@@ -85,7 +85,7 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{asset('adeudos')}}>
+                    <a href="{{asset('adeudos')}}">
                         <i class="fa fa-money"></i>
                         <p class="section-title">adeudos</p>
                     </a>
