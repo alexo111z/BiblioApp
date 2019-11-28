@@ -42,10 +42,10 @@
                     <i class="fa fa-money"></i>
                     <p class="section-title"><a href="#">adeudos</a></p>
                 </div>
-                    <div class="col-md-4">
-                        <i class="fa fa-line-chart"></i>
-                        <p class="section-title"><a href="#">reportes</a></p>
-                    </div>
+                <div class="col-md-4">
+                    <i class="fa fa-line-chart"></i>
+                    <p class="section-title"><a href="#">reportes</a></p>
+                </div>
             </div>
 
             <div class="row section">
