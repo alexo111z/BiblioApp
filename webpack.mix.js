@@ -140,3 +140,14 @@ mix.scripts(
     ],
     'public/js/prestatarios/app.js'
 );
+
+//
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+    ],
+    'public/js/dashboard/app.js'
+);

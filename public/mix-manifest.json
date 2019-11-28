@@ -11,5 +11,6 @@
     "/js/login/app.js": "/js/login/app.js",
     "/js/login/logout.js": "/js/login/logout.js",
     "/js/usuarios/app.js": "/js/usuarios/app.js",
-    "/js/prestatarios/app.js": "/js/prestatarios/app.js"
+    "/js/prestatarios/app.js": "/js/prestatarios/app.js",
+    "/js/dashboard/app.js": "/js/dashboard/app.js"
 }
