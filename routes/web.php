@@ -80,6 +80,8 @@ Route::get('/libros', function (){
 //Usuarios
 Route::get('/usuarios', 'UsersController@index')->name('usuarios');
 
+Route::get('/prestatarios', 'UsersController@indexPrestatarios')->name('prestatarios');
+
 Route::post('/usuarios/all', 'UsersController@getAll');
 
 Route::post('/usuarios', 'UsersController@create');
