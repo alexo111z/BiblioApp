@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Libros;
-
+use DB;
 use Illuminate\Http\Request;
 
 class LibrosController extends Controller
@@ -28,6 +28,17 @@ class LibrosController extends Controller
             'libro' =>$libros
         ];
     }
+
+    public function selects()
+    {   
+        $autores= DB::table('tblautores')->get();
+        $editoriales= DB::table('tbleditoriales')->get();
+        $carreras= DB::table('tblcarreras')->get();
+        $deweys= DB::table('tbldewey')->get();
+
+        return view('Libros.principal', compact('autores', 'editoriales','carreras','deweys'));
+    }
+
 
         /**
      * Store a newly created resource in storage.
