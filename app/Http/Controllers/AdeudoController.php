@@ -23,13 +23,25 @@ class AdeudoController extends Controller
         ->select('tblprestamos.folio','tbldocentes.NoNomina as control','tbldocentes.nombre','tbldocentes.apellidos','tblprestamos.fecha_inicio'
         ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
         ->whereRaw('(tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null)');
-        $adeudos =DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+
+        if (trim($search) == null or trim($search) == '') {
+            $adeudos =DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
         ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio'
         ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
         ->whereRaw('(tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null)')
         ->union($a)->union($b)
         ->orderby('folio')->paginate(10);
+        }else{
+            $adeudos =DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
+        ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
+        ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio'
+        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
+        ->where('tblprestamos.folio', $search)//->where('control', 'LIKE', "%$search%")
+        ->whereRaw('(tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null)')
+        ->union($a)->union($b)
+        ->orderby('folio')->paginate(10);
+        }
 
         //$adeudos = Prestamo::whereRaw('(Fecha_final <= Fecha_entrega and Existe = 1) OR (Fecha_final < now() and Fecha_entrega is null and Existe = 1)')
         //    ->search($search)->paginate(10);

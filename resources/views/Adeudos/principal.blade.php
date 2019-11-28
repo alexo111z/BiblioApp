@@ -25,10 +25,15 @@
                     <label class="h4">Periodo </label>
                     <div class="input-group">
                         <span class="input-group-addon">Del</span>
-                        <input type="date" class="input-sm form-control" name="start"  value="{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d') }}"/>
+                        <input type="date" class="input-sm form-control" name="start" id="date-start"  value="{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d') }}"/>
                         <span class="input-group-addon">al</span>
-                        <input type="date" class="input-sm form-control" name="end" value="{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s','9999-12-31 23:59:59')->format('Y-m-d') }}"/>
+                        <input type="date" class="input-sm form-control" name="end" id="date-end" value="{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s','9999-12-31 23:59:59')->format('Y-m-d') }}"/>
                     </div>
+                    <button class="btn btn-primary" style="background-color: rgb(109, 53, 108); border-color: rgb(109, 53, 108);"
+                        onclick="fechahoy()" id="caldendarbutton">
+                        <i class="fa fa-calendar"></i>
+                        Volver
+                    </button>
                 </div>
                 </div>
                 {{--            Buscador--}}
@@ -129,4 +134,12 @@
         </div> <!--Fin Contenido-->
     </div>
     <script src="{{asset('js/appAdeudos.js')}}"></script>
+    <script>
+            // seleccionamos el enlace 
+            var boton = document.getElementById("caldendarbutton");
+            function fechahoy(){
+                document.getElementById("date-start").value = "{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d') }}";
+                document.getElementById("date-end").value = "{{  \Carbon\Carbon::createFromFormat('Y-m-d H:i:s','9999-12-31 23:59:59')->format('Y-m-d') }}";
+            }
+            </script>
 @endsection
