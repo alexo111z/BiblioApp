@@ -130,9 +130,8 @@ new Vue({
             }
             var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
             axios.get(url).then(response => {
-                aux = this.adeudos = response.data.adeudos.data;//.carreras.data;
+                this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
-                this.getCount();
                 this.getUsu();
             });
         },

@@ -15,15 +15,21 @@ class AdeudoController extends Controller
         $fechaFinal = strtotime($request->get('fechaFinal'));
         $fechaInicio = strtotime($request->get('fechaInicio'));
         $condicionFecha = '';
+        $condB = '';
 
         if ($fechaFinal && $fechaInicio) {
             $fechaFinal = date('Y-m-d', $fechaFinal);
             $fechaInicio = date('Y-m-d', $fechaInicio);
             $condicionFecha =  'AND (Fecha_inicio >= \''.$fechaInicio.'\' AND Fecha_inicio <= \''.$fechaFinal.'\')';
         }
+        if ($search && $search != ""){
+            $condB = 'AND (folio = '.$search.')';//\dd($condB);
+        }else{
+            $condB = '';//\dd($condB);
+        }
 
-        $adeudos = Prestamo::whereRaw('((Fecha_final <= Fecha_entrega and Existe = 1) OR (Fecha_final < now() and Fecha_entrega is null and Existe = 1))'.$condicionFecha)
-            ->search($search)->paginate(10);
+        $adeudos = Prestamo::whereRaw('((Fecha_final <= Fecha_entrega) OR (Fecha_final < now() and Fecha_entrega is null))'.$condicionFecha.$condB)
+            ->paginate(10);
         return [
             'pagination' => [
                 'total'         => $adeudos->total(),
