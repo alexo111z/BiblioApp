@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DetPrestamo;
 use App\Prestamo;
+use App\Multa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -142,11 +143,18 @@ class AdeudoController extends Controller{
 //    }
 
    //Remove the specified resource from storage.
-    public function destroy($id)
+    public function delete($id, $monto)
     {
+        $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d');
         $deudor = Prestamo::findOrFail($id);
         $deudor ->Existe = 0;
         $deudor->save();
+        Multa::create([
+            'Folio' => $id,
+            'Multa' => $monto,
+            'Fecha' => $date,
+            'Notas' => 'Persona acargo: XXXXXXX yei',
+        ]);
         
     }
 }

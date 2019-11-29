@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span v-for="error in errors" class="text-danger">@{{error}}</span>
+                        {{--<span v-for="error in errors" class="text-danger">@{{error}}</span>--}}
 
                     </div><!--Fin Body -->
 

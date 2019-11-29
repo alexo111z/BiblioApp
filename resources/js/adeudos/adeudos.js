@@ -80,10 +80,10 @@ new Vue({
             const totales = [];
             this.adeudos.forEach(adeudo => {
                 const fechaActual = new Date().getTime();
-                const fechaFinal = new Date(adeudo.Fecha_final).getTime();
-                const fechaEntrega = new Date(adeudo.Fecha_entrega).getTime();
+                const fechaFinal = new Date(adeudo.fecha_final).getTime();
+                const fechaEntrega = new Date(adeudo.fecha_entrega).getTime();
 
-                const diferencia = adeudo.Fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
+                const diferencia = adeudo.fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
                 const dias = Math.floor(diferencia/(1000*60*60*24));
 
                 let cantidad = 0;
@@ -140,15 +140,16 @@ new Vue({
                 this.pagination = response.data.pagination;
             });
         },
-        deleteAdeudo: function (adeudo) {
+        deleteAdeudo: function (adeudo, monto) {
             if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.folio + '?')) {
-                var url = this.urlAdeudos + '/' + adeudo.folio;
-                axios.delete(url).then(response => {
+                var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto;
+                console.log(monto);
+                axios.post(url).then(response => {
                     this.getAdeudos();
-                    swal.close();
+                    //swal.close();
                     toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    toastr.error(ex.response.data, "Error!");
                 });
             }
         },

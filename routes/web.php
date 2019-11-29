@@ -37,8 +37,8 @@ Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'e
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos
-Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit']);
-
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
+Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
 Route::get('adeudo/det/{folio}', 'AdeudoController@show');
 
 Route::get('adeudo/usu/{adeudo}', 'AdeudoController@usuario'); //no se usa
