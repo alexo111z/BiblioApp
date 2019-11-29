@@ -20,11 +20,11 @@ class Prestamo extends Model
     ];
 
     function detalles(){
-        return $this->hasMany(DetPrestamo::class, 'Folio');
+        return $this->hasMany(DetPrestamo::class,'Id' , 'Folio');
     }
     public function scopeSearch($query, $search)
     {
         if($search && $search != "")
-            return $query -> where('Folio', 'LIKE', "%$search%");//->orWhere('IdPrestatario', 'LIKE', "%$search%");
+            return $query->where('folio', 'LIKE', "%$search%")->where('control','LIKE',"%$search%");//->orWhere('IdPrestatario', 'LIKE', "%$search%");
     }
 }

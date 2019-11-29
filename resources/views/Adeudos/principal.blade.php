@@ -25,10 +25,15 @@
                     <label class="h4">Periodo </label>
                     <div class="input-group">
                         <span class="input-group-addon">Del</span>
-                        <input v-model="fechaInicio" @change="filtrarFecha()" type="date" class="input-sm form-control" name="start"/>
+                        <input v-model="fechaInicio" @change="filtrarFecha()" type="date" class="input-sm form-control" id="date-start" name="start"/>
                         <span class="input-group-addon">al</span>
-                        <input v-model="fechaFinal" @change="filtrarFecha()" type="date" class="input-sm form-control" name="end"/>
+                        <input v-model="fechaFinal" @change="filtrarFecha()" type="date" class="input-sm form-control" id="date-end" name="end"/>
                     </div>
+                    <button class="btn btn-primary" style="background-color: rgb(109, 53, 108); border-color: rgb(109, 53, 108);"
+                        v-on:click="clearDataInput()">
+                        <i class="fa fa-calendar"></i>
+                        Limpiar
+                    </button>
                 </div>
                 </div>
                 {{--            Buscador--}}
@@ -54,26 +59,26 @@
                 <tbody  v-for="(adeudo, index) in adeudos" id="tabla">
                 <tr>
                     <th>
-                        @{{ adeudo.Folio }}
+                        @{{ adeudo.folio }}
                     </th>
+                    <td >
+                        @{{ adeudo.control }}
+                    </td>-
                     <td>
-                        @{{ codUsuario[index] }}
+                        @{{ adeudo.fecha_inicio }}
                     </td>
                     <td>
-                        @{{ adeudo.Fecha_inicio }}
+                        @{{ adeudo.fecha_final }}
                     </td>
                     <td>
-                        @{{ adeudo.Fecha_final }}
-                    </td>
-                    <td>
-                        @{{ adeudo.Fecha_entrega }}
+                        @{{ adeudo.fecha_entrega }}
                     </td>
                     <td v-if="totalAdeudo[index]>100">
                         Donación
                     </td>
                     <td v-else>@{{  totalAdeudo[index] }}</td>
 {{--                Cantidad libros prestados--}}
-                    <td v-if="adeudo.Existe==1">
+                    <td v-if="adeudo.existe==1">
                         <strong class="text-danger">Adeudo</strong>
                     </td>
                     <td v-else>
@@ -81,7 +86,7 @@
                     </td>                    
 
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="editCarrera(carrera)"><i class="fa fa-list"></i></a>
+                        <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="showAdeudo(adeudo, totalAdeudo[index])"><i class="fa fa-list"></i></a>
                     </td>
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo)" ><i class="fa fa-user-times"></i></a>
@@ -118,14 +123,14 @@
                 </div>
             </div><!--Fin Paginacion-->
 
-{{--                    Pruebas--}}<!--
-                        <div class="col-sm-12">
+{{--                    Pruebas--}}
+                        {{--<div class="col-sm-12">
                             <pre>
                                 @{{ $data }}
                             </pre>
-                        </div>
-                    -->
-{{--            @include('Adeudos.show')--}}
+                        </div>--}}
+                    
+            @include('Adeudos.detalles')
         </div> <!--Fin Contenido-->
     </div>
     <script src="{{asset('js/appAdeudos.js')}}"></script>
