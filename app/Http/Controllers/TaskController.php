@@ -317,8 +317,6 @@ class TaskController extends Controller
 
 
 
-
-
             if (count($pedimento) == 3) {
                 $book1 = DB::table('tbllibros')
                     ->join('tblejemplares', 'tblejemplares.isbn', '=', 'tbllibros.isbn')
