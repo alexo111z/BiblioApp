@@ -27066,7 +27066,6 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
-<<<<<<< HEAD
 const authMiddleware = () => {
     const sessionData = localStorage.getItem('userData');
     const redirectTo = '/login';
@@ -27090,8 +27089,6 @@ if (window.addEventListener) {
 }
 
 
-=======
->>>>>>> AlanSanchezTics_branch
 new Vue({
     el: '#reportes',
     created: function(){
