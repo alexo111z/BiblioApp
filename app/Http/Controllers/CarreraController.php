@@ -9,7 +9,8 @@ class CarreraController extends Controller
 {
     //Display a listing of the resource.    Request $request
     public function index(Request $request){
-        $carreras = Carrera::orderBy('Clave')->where('Existe', 1)->paginate(15);
+        $search = $request->get('search');
+        $carreras = Carrera::orderBy('Clave')->where('Existe', 1)->search($search)->paginate(10);
         return [
             'pagination' => [
                 'total'         => $carreras->total(),
@@ -21,10 +22,7 @@ class CarreraController extends Controller
             ],
             'carreras' => $carreras,
         ];
-//        $search = $request ->get("search");
-//        $carreras = Carrera::orderBy('Nombre','DESC')
-//            ->search($search)
-//            ->paginate(10);
+
     }
 
     //Store a newly created resource in storage.
@@ -58,7 +56,7 @@ class CarreraController extends Controller
     public function destroy($id)
     {
         $carrera = Carrera::findOrFail($id);
-        $carrera->Existe = 0;
-        $carrera->save();
+        $carrera->delete();
+        return;
     }
 }

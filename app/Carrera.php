@@ -16,8 +16,10 @@ class Carrera extends Model
         'Existe',
     ];
 
-    function existe(){
-        return $this->where('Existe', '=',1);
+    public function scopeSearch($query, $search)
+    {
+        if($search && $search != "")
+            return $query -> where('Clave', 'LIKE', "%$search%")->orWhere('Nombre', 'LIKE', "%$search%");
     }
 
 }
