@@ -20,9 +20,9 @@
                 <label class="h4">Periodo </label>
                 <div class="input-group">
                     <span class="input-group-addon">Del</span>
-                    <input type="date" class="input-sm form-control" name="start" />
+                    <input type="date" class="input-sm form-control" name="start" id="start" v-model="inicio"/>
                     <span class="input-group-addon">al</span>
-                    <input type="date" class="input-sm form-control" name="end" />
+                    <input type="date" class="input-sm form-control" name="end" id="end" v-model="fin"/>
                 </div>
             </div>
         </div>
@@ -37,27 +37,6 @@
                     <div id="prestamos" class="panel-collapse collapse" style="background-color: #fbfbfb;">
                         <div class="panel-body">
                             @include('reportes.prestamos')
-                        </div>
-                    </div>
-
-                    <div class="panel-heading " style="border:1px solid #eee; background-color: #f7f7f7;">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#masmultas">Reporte de alumnos con más multas</a>
-                        </h4>
-                    </div>
-                    <div id="masmultas" class="panel-collapse collapse" style="background-color: #fbfbfb;">
-                        <div class="panel-body">
-                            @include('reportes.Masmultas')
-                        </div>
-                    </div>
-                    <div class="panel-heading" style="border:1px solid #eee; background-color: #f7f7f7;">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#libros">Reporte de libros</a>
-                        </h4>
-                    </div>
-                    <div id="libros" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            @include('reportes.libros')
                         </div>
                     </div>
                     <div class="panel-heading" style="border:1px solid #eee; background-color: #f7f7f7;">
