@@ -79,7 +79,7 @@
         de todas las carreras y clasificaciones, pero tambien se puede especificar clasificación y/o carrera -->
 
     <div class="row col-xs-12" style="margin-bottom:10px;max-height:350px; overflow:auto;">
-        <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+        <table class="table table-hover table-striped" style="margin-top: 1.5rem; max-height:300px; overflow:scroll;">
             <thead>
                 <tr>
                     <th style="padding:3px;">#</th>

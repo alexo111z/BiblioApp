@@ -70,5 +70,16 @@ class ReportesController extends Controller
         $lista = $libros;
         return view('pdf.reporteregistros',compact('lista'));
     }
+    public function getCatalogo(Request $request)
+    {
+        $libros = DB::select("SELECT tbllibros.Titulo, tblautores.Nombre AS Autor, tbleditoriales.Nombre AS Editorial, tblcarreras.Nombre AS Carrera, tbldewey.Nombre AS Dewey, tbllibros.Edicion, tbllibros.Ejemplares, tbllibros.FechaRegistro AS Registro FROM tbllibros, tblautores, tbleditoriales, tbldewey, tblcarreras WHERE tbllibros.IdAutor = tblautores.IdAutor AND tbllibros.IdEditorial = tbleditoriales.Id AND tbllibros.dewey = tbldewey.Id AND tbllibros.IdCarrera = tblcarreras.Clave");
+        return $libros;
+    }
+    public function imprimirCatalogo(Request $request)
+    {
+        $libros = DB::select("SELECT tbllibros.Titulo, tblautores.Nombre AS Autor, tbleditoriales.Nombre AS Editorial, tblcarreras.Nombre AS Carrera, tbldewey.Nombre AS Dewey, tbllibros.Edicion, tbllibros.Ejemplares, tbllibros.FechaRegistro AS Registro FROM tbllibros, tblautores, tbleditoriales, tbldewey, tblcarreras WHERE tbllibros.IdAutor = tblautores.IdAutor AND tbllibros.IdEditorial = tbleditoriales.Id AND tbllibros.dewey = tbldewey.Id AND tbllibros.IdCarrera = tblcarreras.Clave");
+        $lista = $libros;
+        return view('pdf.reportecatalogo',compact('lista'));
+    }
 
 }

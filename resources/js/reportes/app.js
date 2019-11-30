@@ -21,7 +21,8 @@ new Vue({
             ttitulos:0,
             tejemplares:0,
             plista:[]
-        }
+        },
+        catalogo:[]
     },
     methods:{
         getClasificacion: function(){
@@ -83,6 +84,12 @@ new Vue({
             })
             .then(response =>{
                 this.resultadosRegistros = response.data;
+            });
+        },
+        obtenercatalogo: function () {
+            axios.get(this.url+'/consultaCatalogo')
+            .then(response => {
+                this.catalogo = response.data;
             });
         }
     }
