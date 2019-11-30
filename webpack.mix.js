@@ -88,7 +88,6 @@ mix.scripts([
     'resources/js/login/middleware.js',
     'resources/js/libros/Libros.js'],
     'public/js/appLibros.js') ;
-
 // Login
 mix.scripts(
     [
@@ -99,9 +98,7 @@ mix.scripts(
         'resources/js/axios.js',
         'resources/js/login/middleware.js',
         'resources/js/login/app.js',
-    ],
-    'public/js/login/app.js'
-);
+    ],'public/js/login/app.js');
 
 // Logout
 mix.scripts(
@@ -110,7 +107,6 @@ mix.scripts(
     ],
     'public/js/login/logout.js'
 );
-
 //Usuarios
 mix.scripts(
     [
@@ -125,7 +121,6 @@ mix.scripts(
     ],
     'public/js/usuarios/app.js'
 );
-
 //Prestatarios
 mix.scripts(
     [
@@ -140,7 +135,6 @@ mix.scripts(
     ],
     'public/js/prestatarios/app.js'
 );
-
 //
 mix.scripts(
     [
