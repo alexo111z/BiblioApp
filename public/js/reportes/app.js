@@ -27066,7 +27066,6 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
-
 new Vue({
     el: '#reportes',
     created: function(){
@@ -27116,11 +27115,29 @@ new Vue({
         obtenerConcentrado: function () {
             var carrera  = $("#carreras").val();
             var clasificacion = $("#topic").val();
-            console.log(this.inicio+" "+this.fin);
-            axios.post(this.url+"/consultaprestamos",{'carrera':carrera,'clsificacion':clasificacion})
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
+
+            axios.post(this.url+"/consultaprestamos",{
+                'carrera':carrera,
+                'clasificacion':clasificacion,
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
             .then(response =>{
                 this.resultados = response.data;
-                console.log(response.data.request);
+                console.log(this.resultados);
+            });
+        },
+        imprimirReporte: function () {
+            console.log(this.resultados.plista);
+            var url = "reporte/printprestamos";
+            axios.get(url,{
+                'plista': this.resultados.plista
+            }).then(response =>{
+
             });
         }
     }

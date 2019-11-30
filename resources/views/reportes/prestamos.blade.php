@@ -44,16 +44,19 @@
                 <tbody>
                     <tr>
                         <td>Préstamos por carrera</td>
-                        <td>@{{resultados.pcarrera}}</td><!-- numero de Préstamos por Carrera -->
+                        <td v-if="resultados.pcarrera==0">0</td>
+                        <td v-else v-for="total in resultados.pcarrera">@{{total.Prestamos}}</td><!-- numero de Préstamos por Carrera -->
                     </tr>
                     <tr>
                         <td>Préstamos por clasificación</td>
-                        <td>@{{resultados.pclasificacion}}</td>
+                        <td v-if="resultados.pclasificacion==0">0</td>
+                        <td v-else v-for="total in resultados.pclasificacion">@{{total.Prestamos}}</td><!-- numero de Préstamos por Carrera -->
                         <!--numero de Préstamos por Clasificación -->
                     </tr>
                     <tr>
                         <td>Préstamos totales</td>
-                        <td>@{{resultados.ptotales}}</td>
+                        <td v-if="resultados.ptotales==0">0</td>
+                        <td v-else v-for="total in resultados.ptotales">@{{total.Prestamos}}</td>
                         <!--numero de Préstamos Totales -->
                     </tr>
                 </tbody>
@@ -71,7 +74,6 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th style="padding:3px;">#</th>
                         <th style="padding:3px;">Préstamos</th>
                         <th style="padding:3px;">No. Control</th>
                         <th style="padding:3px;">Nombre</th>
@@ -83,65 +85,16 @@
                         <td colspan="5" class="text-center">Sin resultados...</td>
                     </tr>
                 </tbody>
-                <tbody v-else>
+                <tbody v-else v-for="registro in resultados.plista">
+
                     <tr>
-                        <td style="padding:3px;">1</td>
-                        <!--#-->
-                        <td style="padding:3px;">23</td>
+                        <td style="padding:3px;">@{{registro.Prestamos}}</td>
                         <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td>
+                        <td style="padding:3px;">@{{registro.NoControl}}</td>
                         <!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td>
+                        <td style="padding:3px;">@{{registro.Nombre}} @{{registro.Apellidos}}</td>
                         <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
-                        <!--Carrera-->
-                    </tr>
-                    <tr>
-                        <td style="padding:3px;">2</td>
-                        <!--#-->
-                        <td style="padding:3px;">23</td>
-                        <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td>
-                        <!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td>
-                        <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
-                        <!--Carrera-->
-                    </tr>
-                    <tr>
-                        <td style="padding:3px;">3</td>
-                        <!--#-->
-                        <td style="padding:3px;">23</td>
-                        <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td>
-                        <!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td>
-                        <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
-                        <!--Carrera-->
-                    </tr>
-                    <tr>
-                        <td style="padding:3px;">4</td>
-                        <!--#-->
-                        <td style="padding:3px;">23</td>
-                        <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td>
-                        <!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td>
-                        <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
-                        <!--Carrera-->
-                    </tr>
-                    <tr>
-                        <td style="padding:3px;">5</td>
-                        <!--#-->
-                        <td style="padding:3px;">23</td>
-                        <!--Número de prestamos en el periodo-->
-                        <td style="padding:3px;">15021049</td>
-                        <!--No. de control-->
-                        <td style="padding:3px;">María Guadalupe González Hernández</td>
-                        <!--Nombre-->
-                        <td style="padding:3px;">Ingenieria en Sistemas Computacionales</td>
+                        <td style="padding:3px;">@{{registro.Carrera}}</td>
                         <!--Carrera-->
                     </tr>
                 </tbody>

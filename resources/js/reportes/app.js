@@ -1,4 +1,3 @@
-
 new Vue({
     el: '#reportes',
     created: function(){
@@ -48,6 +47,10 @@ new Vue({
         obtenerConcentrado: function () {
             var carrera  = $("#carreras").val();
             var clasificacion = $("#topic").val();
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
 
             axios.post(this.url+"/consultaprestamos",{
                 'carrera':carrera,
@@ -57,9 +60,8 @@ new Vue({
             })
             .then(response =>{
                 this.resultados = response.data;
-
             });
-        }
+        },
     }
 
 });
