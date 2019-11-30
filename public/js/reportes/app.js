@@ -27076,12 +27076,18 @@ new Vue({
         url:'reporte',
         inicio: '',
         fin: '',
+        carrera: '',
         concentrado:[],
         topic:[],
         resultados:{
             pcarrera:0,
             pclasificacion:0,
             ptotales:0,
+            plista:[]
+        },
+        resultadosRegistros:{
+            ttitulos:0,
+            tejemplares:0,
             plista:[]
         }
     },
@@ -27114,6 +27120,7 @@ new Vue({
         },
         obtenerConcentrado: function () {
             var carrera  = $("#carreras").val();
+            this.carrera = carrera;
             var clasificacion = $("#topic").val();
             if (this.inicio=='' || this.fin == '') {
                 toastr.error("Seleccione un rango de fecha correcto", "Error!");
@@ -27128,16 +27135,22 @@ new Vue({
             })
             .then(response =>{
                 this.resultados = response.data;
-                console.log(this.resultados);
             });
         },
-        imprimirReporte: function () {
-            console.log(this.resultados.plista);
-            var url = "reporte/printprestamos";
-            axios.get(url,{
-                'plista': this.resultados.plista
-            }).then(response =>{
-
+        obtenerConcentradoRegistros: function () {
+            var carrera  = $("#carrerast").val();
+            this.carrera = carrera;
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
+            axios.post(this.url+"/consultaRegistrados",{
+                'carrera':carrera,
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
+            .then(response =>{
+                this.resultadosRegistros = response.data;
             });
         }
     }

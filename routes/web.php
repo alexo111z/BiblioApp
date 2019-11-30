@@ -38,6 +38,9 @@ Route::get('/reportes',function (){
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
 Route::get('reporte/carreras', 'ReportesController@getCarreras')->name('getCarreras');
 Route::post('reporte/consultaprestamos','ReportesController@getReportes')->name('getReportes');
+Route::post('reporte/consultaRegistrados', 'ReportesController@getRegistros')->name('getRegistros');
+Route::get('reportes/imprimirreporte','ReportesController@imprimirReporte')->name('printreporte');
+Route::get('reportes/imprimirreporteRegistros','ReportesController@imprimirReporteRegistros')->name('printreporteRegistros');
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos

@@ -47,6 +47,9 @@ mix.scripts([
     'resources/js/vue.js',
     'resources/js/axios.js',
     'resources/js/reportes/app.js'], 'public/js/reportes/app.js');
+    mix.scripts([
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js'], 'public/js/app.js');
 //Carreras
 mix.scripts([
     'resources/js/jquery.js',

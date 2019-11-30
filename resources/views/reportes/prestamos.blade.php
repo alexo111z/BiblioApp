@@ -62,7 +62,12 @@
                 </tbody>
             </table>
             <!-- boton para imprimir la tabla de alumnos con mas prestamos -->
-            <a href="#" class="btn btn-danger pull-right">Imprimir reporte <i class="fa fa-file-pdf-o"></i></a>
+            <form action="{{route('printreporte')}}" method="GET" target="_blank">
+                <input type="hidden" name="carrera" :value="carrera">
+                <input type="hidden" name="inicio" :value="inicio">
+                <input type="hidden" name="fin" :value="fin">
+                <button  type="submit"  class="btn btn-danger pull-right">Imprimir reporte <i class="fa fa-file-pdf-o"></i></a>
+            </form>
         </div>
     </div>
     <div class="row">
