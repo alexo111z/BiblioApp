@@ -4,6 +4,30 @@
     <div class="row col-xs-12" style="margin-bottom:10px;">
         <!--FILTRADO-->
         <div class="row col-sm-12">
+        <!--TABLA DE LIBRoS TOTALES EN SISTEMA, no se imprime, es general por lo que 
+        no se filtra el periodo de registro ni por clasificación ni carrea-->
+        <div class="col-sm-4">
+            <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+                <thead>
+                    <tr>
+                        <th colspan="2"><h4>Libros totales en el sistema</h4></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Títulos registrados</td>
+                        <td>11111</td><!-- Número de Títulos registrados -->
+                    </tr>
+                    <tr>
+                        <td>Ejemplares regístrados</td>
+                        <td>11111</td><!-- Número de Ejemplares registrados-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--FIN TABLA DE LIBRoS TOTALES EN SISTEMA-->
+        <div class="col-sm-8" style="border-left: 1px solid rgb(221, 221, 221);">
+            <div class="col-sm-12"><h3>Consultar títulos registrados:</h3></div>
             <div class="row col-sm-2" style="min-width: max-content;">
                 <label>Año:</label><br> <!--Poner años con los cuales se puede buscar-->
                 <div class="col-sm-3" style="padding-top: .5rem; ">
@@ -35,6 +59,7 @@
             </div>
             <!-- Boton para consultar  los titulos registrados-->
             <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:145px;" data-toggle="" data-target="#">consultar</a>
+        </div>
         </div> 
         <div class="col-sm-12">
         <div class="col-sm-8 text-center"><h3>Títulos registrados:</h3></div>

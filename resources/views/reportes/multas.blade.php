@@ -2,8 +2,8 @@
 <div class="col-xs-12" style="background-color: #FFF; padding: 1rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
     <div class="row col-xs-12" style="margin-bottom:10px;">
         <!--TABLA DE Adeudos/multas EN SISTEMA en el perioso, no se imprime-->
-        <div class="col-sm-7">
-            <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+        <div class="col-sm-7"style="border-right: 1px solid rgb(221, 221, 221);">
+            <table class="table table-hover table-striped" style="margin-top: 1.5rem;" >
                 <thead>
                     <tr>
                         <th colspan="2"><h4>Resumen de multas por periodo</h4></th>
@@ -34,21 +34,27 @@
             </table>
         </div>
         <!--FIN TABLA DE multas en el periodo-->
+        <div class="col-sm-5" >
+            <div class="col-sm-12"><h3>Consultar multas del periodo</h3></div>
+            <div class="row col-sm-4"  style="min-width: max-content;">
+                <label>Ver:</label><br>
+                <div class="col-sm-3" style="padding-top: .5rem; ">
+                    <select style="padding: .5rem;" >
+                        <option>Todas</option>
+                        <option>Activas</option>
+                        <option>Inactivas</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Boton para consultar  los titulos registrados-->
+            <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:90px;" data-toggle="" data-target="#">consultar</a>
+        </div>
     </div>   
     <div class="col-sm-12">
     <hr > 
         <div class="col-sm-12"><h3>Multas del periodo</h3></div>
-        <div class="col-sm-7">
-            <label>Ver:</label>
-                <select style="padding: .5rem;" >
-                    <option>Todas</option>
-                    <option>Activas</option>
-                    <option>Inactivas</option>
-                </select>
-                <!-- boton para consultar la tabla de multas del periodo-->
-                <a href="#" class="btn btn-primary" style="background-color: #6d356c; " data-toggle="" data-target="#">consultar</a>
-        </div>
-        <div class="col-sm-4 text-right" >
+
+        <div class="col-sm-12 text-right" >
             <!-- boton para imprimir la tabla de multas del periodo-->
             <a href="#" class="btn btn-danger"  data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
         </div>
