@@ -106,17 +106,17 @@
                     </a>
                 </div>
                 <div class="col-md-4">
-                    <a href="{{asset('carrera')}}">
+                    <a href="{{asset('carreras')}}">
                         <i class="fa fa-graduation-cap"></i>
                         <p class="section-title">Carreras</p>
                     </a>
                 </div>
-                <div class="col-md-4">
+                <!--<div class="col-md-4">
                     <a href="#">
                         <i class="fa fa-qrcode"></i>
                         <p class="section-title">Código de libro</p>
                     </a>
-                </div>
+                </div>-->
             </div>
         </div>
     </div>

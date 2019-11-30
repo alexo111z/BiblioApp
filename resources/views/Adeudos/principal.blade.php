@@ -2,7 +2,7 @@
 @section('titulo', "Adeudos | BiblioApp")
 @section('content')
     <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
-        <li><a href="javascript:void();">Inicio</a></li>
+        <li><a href="{{route('home')}}">Inicio</a></li>
         <li class="active">Adeudos</li>
     </ol>
 
@@ -83,7 +83,7 @@
                     </td>
                     <td v-else>
                         <p class="text-success">Pagado</p>
-                    </td>                    
+                    </td>
 
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="showAdeudo(adeudo, totalAdeudo[index])"><i class="fa fa-list"></i></a>
@@ -129,7 +129,7 @@
                                 @{{ $data }}
                             </pre>
                         </div>--}}
-                    
+
             @include('Adeudos.detalles')
         </div> <!--Fin Contenido-->
     </div>
