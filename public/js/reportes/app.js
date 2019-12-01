@@ -27088,7 +27088,6 @@ if (window.addEventListener) {
     window.attachEvent('onload', authMiddleware);
 }
 
-
 new Vue({
     el: '#reportes',
     created: function(){
@@ -27113,7 +27112,9 @@ new Vue({
             tejemplares:0,
             plista:[]
         },
-        catalogo:[]
+        catalogo:[],
+        tipoPrestatario:'',
+        prestamosAdministrativos:[]
     },
     methods:{
         getClasificacion: function(){
@@ -27181,6 +27182,22 @@ new Vue({
             axios.get(this.url+'/consultaCatalogo')
             .then(response => {
                 this.catalogo = response.data;
+            });
+        },
+        consultarPrestatarios: function () {
+            var tipo = $("#tipoPrestatario").val();
+            this.tipoPrestatario = tipo;
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
+            axios.post(this.url+"/consultaPrestatarios",{
+                'prestatario':tipo,
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
+            .then(response =>{
+                this.prestamosAdministrativos = response.data;
             });
         }
     }

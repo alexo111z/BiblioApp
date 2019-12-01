@@ -66,7 +66,7 @@
                 <input type="hidden" name="carrera" :value="carrera">
                 <input type="hidden" name="inicio" :value="inicio">
                 <input type="hidden" name="fin" :value="fin">
-                <button  type="submit"  class="btn btn-danger pull-right">Imprimir reporte <i class="fa fa-file-pdf-o"></i></a>
+                <button  type="submit"  class="btn btn-danger pull-right">Imprimir reporte <i class="fa fa-file-pdf-o"></i></button>
             </form>
         </div>
     </div>
@@ -100,6 +100,63 @@
                         <td style="padding:3px;">@{{registro.Nombre}} @{{registro.Apellidos}}</td>
                         <!--Nombre-->
                         <td style="padding:3px;">@{{registro.Carrera}}</td>
+                        <!--Carrera-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <hr>
+            <h4>Reporte de prestamos de docentes y administrativos</h4>
+        </div>
+        <div class="col-sm-4">
+            <label for="tipo">Prestamos de:</label>
+            <select class="form-control" name="tipo" id="tipoPrestatario">
+                <option value="Docente">Docentes</option>
+                <option value="Administrativo">Administrativos</option>
+            </select>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="#" @click.prevent="consultarPrestatarios" class="btn btn-primary btn-block" style="background-color: #6d356c; margin-top:20px;">Consultar <i class="fa fa-search"></i></a>
+                </div>
+                <div class="col-sm-6">
+                    <form method="GET" action="{{route('printPrestatarios')}}" target="_blank">
+                        <input type="hidden" name="tipop" :value="tipoPrestatario">
+                        <input type="hidden" name="iniciop" :value="inicio">
+                        <input type="hidden" name="finp" :value="fin">
+                        <button  type="submit"  class="btn btn-danger btn-block" style="margin-top:20px;">Imprimir reporte <i class="fa fa-file-pdf-o"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <table class="table table-hover table-striped" style="max-height: 300px; overflow: scroll;">
+                <thead>
+                    <tr>
+                        <th style="padding:3px;">#</th>
+                        <th style="padding:3px;">Préstamos</th>
+                        <th style="padding:3px;">No. de Nomina</th>
+                        <th style="padding:3px;">Nombre</th>
+                        <th style="padding:3px;">Puesto</th>
+                    </tr>
+                </thead>
+                <tbody v-if="prestamosAdministrativos.length==0">
+                    <tr>
+                        <td colspan="5" class="text-center">Sin resultados...</td>
+                    </tr>
+                </tbody>
+                <tbody v-else v-for="registro in prestamosAdministrativos">
+                    <tr>
+                        <td style="padding:3px;">*</td>
+                        <td style="padding:3px;">@{{registro.Prestamos}}</td>
+                        <!--Número de prestamos en el periodo-->
+                        <td style="padding:3px;">@{{registro.Nomina}}</td>
+                        <!--No. de control-->
+                        <td style="padding:3px;">@{{registro.Nombre}} @{{registro.Apellidos}}</td>
+                        <!--Nombre-->
+                        <td style="padding:3px;">@{{tipoPrestatario}}</td>
                         <!--Carrera-->
                     </tr>
                 </tbody>
