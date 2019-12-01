@@ -50,7 +50,7 @@ Route::resource('libros','LibrosController');
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
 Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
 Route::get('adeudo/det/{folio}', 'AdeudoController@show');
-Route::get('adeudo/usu/{adeudo}', 'AdeudoController@usuario'); //no se usa
+
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
@@ -59,6 +59,7 @@ Route::resource('carrera', 'CarreraController', ['except' => 'create', 'edit', '
 Route::get('/carreras', function(){
     return view('Carreras.carreras');
 });
+
 Route::get('/login', 'Auth\\LoginController@index')->name('login');
 Route::get('/home', 'DashboardController@index')->name('home');
 Route::post('/login', 'Auth\\LoginController@logIn');
@@ -69,3 +70,5 @@ Route::post('/usuarios/all', 'UsersController@getAll');
 Route::post('/usuarios', 'UsersController@create');
 Route::post('/usuarios/update', 'UsersController@update');
 Route::post('/usuarios/remove', 'UsersController@delete');
+
+

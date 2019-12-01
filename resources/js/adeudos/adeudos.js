@@ -90,9 +90,9 @@ new Vue({
                 if (dias > 0) {
                     cantidad = dias * 25;
                 }
-                if (cantidad > 100) {
+                /*if (cantidad > 100) {
                     cantidad = 100;
-                }
+                }*/
 
                 totales.push(cantidad);
             });
@@ -140,17 +140,21 @@ new Vue({
                 this.pagination = response.data.pagination;
             });
         },
-        deleteAdeudo: function (adeudo, monto) {
-            if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.folio + '?')) {
+        deleteAdeudo: function (adeudo, monto, estado) {
+            if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
                 var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto;
                 console.log(monto);
-                axios.post(url).then(response => {
-                    this.getAdeudos();
-                    //swal.close();
-                    toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data, "Error!");
-                });
+                if (estado == 1) {  
+                    axios.post(url).then(response => {
+                        this.getAdeudos();
+                        //swal.close();
+                        toastr.success("El estado del adeudo se a cambiado con exito.", "Tarea completada!");
+                    }).catch(ex => {
+                        toastr.error(ex.response.data, "Error!");
+                    });
+                }else{
+                    toastr.error('El adeudo ya ha sido pagado.','Aviso!');
+                }
             }
         },
         showAdeudo: function (adeudo, monto) {
