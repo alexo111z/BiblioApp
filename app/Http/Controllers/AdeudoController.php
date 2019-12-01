@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Session;
 use App\DetPrestamo;
 use App\Prestamo;
 use App\Multa;
@@ -34,20 +35,20 @@ class AdeudoController extends Controller{
         ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tblalumnos.NoControl as control','tblalumnos.nombre','tblalumnos.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
         
         $b = DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
         ->join('tbldocentes','tbldocentes.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tbldocentes.NoNomina as control','tbldocentes.nombre','tbldocentes.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
         
-
+        //$c utilizado para pruebas
         $c = DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
         ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
 
 
         //if (trim($search) == null or trim($search) == '') {
@@ -55,7 +56,7 @@ class AdeudoController extends Controller{
         ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB)
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB)
         ->union($a)->union($b)
         ->orderby('folio')->paginate(10);
         
@@ -86,24 +87,14 @@ class AdeudoController extends Controller{
         ];
     }
 
-    //Contar la cantidad de libros de un prestamo --no se usa --eliminado de web.php->routes
+    //Contar la cantidad de libros de un prestamo
     public function count($id){
 //        $count = DetPrestamo::where('Folio','=',$id)->count();
 //        return $count;
         $count = Prestamo::findOrFail($id);
         return $count->detalles->count();
     }
-    //Buscar usuarios  --no se usa
-    public function usuario($id){
-        $usuario = DB::table('tblalumnos')->where('IdUsuario','=',$id)->value('NoControl');
-        if ($usuario == ''){
-            $usuario = DB::table('tbldocentes')->where('IdUsuario','=',$id)->value('NoNomina');
-        }
-        if ($usuario == ''){
-            $usuario = DB::table('tbladministrativos')->where('IdUsuario','=',$id)->value('NoNomina');
-        }
-        return $usuario;
-    }
+
     //Mostrar un elemento (mediante el id)
     public function show($id){
         //DetPrestamo::where('Folio','=',$id)->get();
@@ -131,7 +122,13 @@ class AdeudoController extends Controller{
             ->get();
         return $detalles;
     }
-
+    function dd(){
+        $a = Session::get('userData');
+        if ($a == null OR $a == 0 OR $a == '') {
+            $a = 'no identificado';
+        }
+        \dd($a);
+    }
    
 
     //form para editar, id -> datos elemento editar

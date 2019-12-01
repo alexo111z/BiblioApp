@@ -40,8 +40,6 @@ Route::resource('libros','LibrosController');
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
 Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
 Route::get('adeudo/det/{folio}', 'AdeudoController@show');
-
-Route::get('adeudo/usu/{adeudo}', 'AdeudoController@usuario'); //no se usa
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
@@ -50,3 +48,7 @@ Route::resource('carrera', 'CarreraController', ['except' => 'create', 'edit', '
 Route::get('/carreras', function(){
     return view('Carreras.carreras');
 });
+
+
+Route::get('/dd', 'AdeudoController@dd');  //prueba --borrar cuando corrija insersion en tblmultas
+Route::get('adeudo/usu/{adeudo}', 'AdeudoController@usuario'); //no se usa (usado para obtener NoControles y Nomina)
