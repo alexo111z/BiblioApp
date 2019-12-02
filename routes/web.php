@@ -12,9 +12,8 @@
 */
 //Ruta default
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
-
 //Autores
 Route::get('/autores', function () {
     return view('autores.index');
@@ -43,16 +42,21 @@ Route::get('reportes/imprimirreporte','ReportesController@imprimirReporte')->nam
 Route::get('reportes/imprimirreporteRegistros','ReportesController@imprimirReporteRegistros')->name('printreporteRegistros');
 Route::get('reporte/consultaCatalogo', 'ReportesController@getCatalogo')->name('getCatalogo');
 Route::get('reportes/imprimirreporteCatalogo','ReportesController@imprimirCatalogo')->name('printCatalogo');
+Route::post('reporte/consultaPrestatarios', 'ReportesController@getAdministrativos')->name('getAdministrativos');
+Route::get('reportes/imprimirreportePrestatarios', 'reportesController@imprimirPrestatarios')->name('printPrestatarios');
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos
-Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit', 'show']);
+Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
+Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
+Route::get('adeudo/det/{folio}', 'AdeudoController@show');
+
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
 //Carreras
-Route::resource('carreras', 'CarreraController', ['except' => 'create', 'edit', 'show']);
-Route::get('/carrera', function(){
+Route::resource('carrera', 'CarreraController', ['except' => 'create', 'edit', 'show']);
+Route::get('/carreras', function(){
     return view('Carreras.carreras');
 });
 
@@ -77,4 +81,15 @@ Route::get('prestamos/getselectedbook/{codigolibro}', 'PrestamosController@getse
 Route::get('prestamos/getselectedbook/', 'PrestamosController@getselectedbook1')->name('getselectedbook1');
 Route::get('prestamos/endprestamo/{folio}', 'PrestamosController@endprestamo')->name('endprestamo');
 //Route::get('/prestamos/detalles/{id}', 'PrestamosController@detalles')->name('detalles');
+Route::get('/login', 'Auth\\LoginController@index')->name('login');
+Route::get('/home', 'DashboardController@index')->name('home');
+Route::post('/login', 'Auth\\LoginController@logIn');
+//Usuarios
+Route::get('/usuarios', 'UsersController@index')->name('usuarios');
+Route::get('/prestatarios', 'UsersController@indexPrestatarios')->name('prestatarios');
+Route::post('/usuarios/all', 'UsersController@getAll');
+Route::post('/usuarios', 'UsersController@create');
+Route::post('/usuarios/update', 'UsersController@update');
+Route::post('/usuarios/remove', 'UsersController@delete');
+
 

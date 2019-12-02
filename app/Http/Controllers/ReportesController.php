@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Carrera;
 use Barryvdh\DomPDF\Facade as PDF;
+use Swift;
 
 class ReportesController extends Controller
 {
@@ -80,6 +81,40 @@ class ReportesController extends Controller
         $libros = DB::select("SELECT tbllibros.Titulo, tblautores.Nombre AS Autor, tbleditoriales.Nombre AS Editorial, tblcarreras.Nombre AS Carrera, tbldewey.Nombre AS Dewey, tbllibros.Edicion, tbllibros.Ejemplares, tbllibros.FechaRegistro AS Registro FROM tbllibros, tblautores, tbleditoriales, tbldewey, tblcarreras WHERE tbllibros.IdAutor = tblautores.IdAutor AND tbllibros.IdEditorial = tbleditoriales.Id AND tbllibros.dewey = tbldewey.Id AND tbllibros.IdCarrera = tblcarreras.Clave");
         $lista = $libros;
         return view('pdf.reportecatalogo',compact('lista'));
+    }
+    public function getAdministrativos(Request $request)
+    {
+        $prestatario = $request -> post('prestatario');
+        $inicio = $request -> post('inicio');
+        $fin = $request -> post("fin");
+        switch ($prestatario) {
+            case 'Administrativo':
+                $data = DB::select("SELECT COUNT(Nomina) AS Prestamos, Nomina, Nombre, Apellidos FROM `prestamosadministrativos` WHERE Inicio >='{$inicio}' AND Inicio<='{$fin}' GROUP By Nomina");
+                return $data;
+                break;
+            case 'Docente':
+                $data = DB::select("SELECT COUNT(Nomina) AS Prestamos, Nomina, Nombre, Apellidos FROM `prestamosdocentes` WHERE Inicio >='{$inicio}' AND Inicio<='{$fin}' GROUP By Nomina");
+                return $data;
+                break;
+        }
+    }
+    public function imprimirPrestatarios(Request $request)
+    {
+        $prestatario = $request -> get('tipop');
+        $inicio = $request -> get('iniciop');
+        $fin = $request -> get("finp");
+        switch ($prestatario) {
+            case 'Administrativo':
+                $data = DB::select("SELECT COUNT(Nomina) AS Prestamos, Nomina, Nombre, Apellidos FROM `prestamosadministrativos` WHERE Inicio >='{$inicio}' AND Inicio<='{$fin}' GROUP By Nomina");
+                $lista = $data;
+                return view('pdf.reportePrestatarios',compact('lista'));
+                break;
+            case 'Docente':
+                $data = DB::select("SELECT COUNT(Nomina) AS Prestamos, Nomina, Nombre, Apellidos FROM `prestamosdocentes` WHERE Inicio >='{$inicio}' AND Inicio<='{$fin}' GROUP By Nomina");
+                $lista = $data;
+                return view('pdf.reporteDocentes',compact('lista'));
+                break;
+        }
     }
 
 }

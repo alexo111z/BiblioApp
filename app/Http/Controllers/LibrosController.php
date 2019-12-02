@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Libros;
 
-use App\libros;
 use Illuminate\Http\Request;
 
 class LibrosController extends Controller
@@ -12,23 +12,24 @@ class LibrosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $datos['libro']=Libros::paginate(5);
-        return view('libros.index', $datos);
+        $search = $request->get('search');
+        $libros = Libros::where('Existe','=',1)->search($search)->orderBy('ISBN','DESC')->paginate(30);
+        return [
+            'pagination' => [
+                'total'         => $libros->total(),
+                'current_page'  => $libros->currentPage(),
+                'per_page'      => $libros->perPage(),
+                'last_page'     => $libros->lastPage(),
+                'from'          => $libros->firstItem(),
+                'to'            => $libros->lastItem(),
+            ],
+            'libro' =>$libros
+        ];
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('libros.create');
-    }
-
-    /**
+        /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -36,59 +37,62 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
-        $datosLibros=request()->except('_token');
+      $this->validate($request, [
+        'ISBN' => 'required',
+        'Titulo' => 'required',
+        'IdAutor' => 'required',
+        'IdEditorial' => 'required',
+        'IdCarrera' => 'required',
+        'dewey' => 'required',
+        'Edicion' => 'required',
+        'Year' => 'required',
+        'Volumen' => 'required',
+        'Ejemplares' => 'required',
+        'EjemDisp' => 'required',
+        'Imagen' => 'required',
+        'FechaRegistro' => 'required'
+      ]);
 
-        if($request->hasFile('Imagen')){
-            $datosLibros['Imagen']=$request->file('Imagen')->store('uploaps','public');
-        }
+      Libros::create($request->all());
 
-        Libros::insert($datosLibros);
-        return response()->json($datosLibros);
+      return;
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\libros  $libros
-     * @return \Illuminate\Http\Response
-     */
-    public function show(libros $libros)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\libros  $libros
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(libros $libros)
-    {
-        return view('libros.edit');
-    }
-
-    /**
+        /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\libros  $libros
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, libros $libros)
+    public function update(Request $request, $ISBN)
     {
-        //
+        $this->validate($request, [
+            'ISBN' => 'required',
+            'Titulo' => 'required',
+            'IdAutor' => 'required',
+            'IdEditorial' => 'required',
+            'IdCarrera' => 'required',
+            'dewey' => 'required',
+            'Edicion' => 'required',
+            'Year' => 'required',
+            'Volumen' => 'required',
+            'Ejemplares' => 'required',
+            'EjemDisp' => 'required',
+            'Imagen' => 'required',
+            'FechaRegistro' => 'required'
+        ]);
+
+        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\libros  $libros
-     * @return \Illuminate\Http\Response
-     */
+    
+    //Remove the specified resource from storage.
     public function destroy($ISBN)
     {
-        Libros::destroy($ISBN);
-        return redirect('libros');
+        $libro = Libros::findOrFail($ISBN);
+        $libro->Existe = 0;
+        $libro->save();
     }
 }

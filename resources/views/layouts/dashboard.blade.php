@@ -54,7 +54,7 @@
 
 <body style="background-color: #ddd;">
     <nav class="navbar navbar-default">
-        <div class="container-fluid">
+        <div class="container-fluid" id="app">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     <img src="{{ asset('images/LogoTec.png') }}"/>
@@ -73,8 +73,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Material Bibliografico   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{asset('libros')}}">Libros</a></li>
-                        <li><a href="#">Materiales</a></li>
-                        <li><a href="{{asset('dewey')}}">Clasificación DEWEY</a></li>
+                        <li><a href="{{asset('materiales')}}">Materiales</a></li>
+                        <li><a href="{{asset('dewey')}}">Clasificación</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="{{asset('autores')}}">Autores</a></li>
                         <li><a href="{{asset('editoriales')}}">Editoriales</a></li>
@@ -83,13 +83,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Control de usuarios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Colaboradores</a></li>
-                        <li><a href="#">Prestatarios</a></li>
+                        <li><a href="{{route('usuarios')}}">Colaboradores</a></li>
+                        <li><a href="{{route('prestatarios')}}">Prestatarios</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{asset('carrera')}}">Carreras</a></li>
+                        <li><a href="{{asset('carreras')}}">Carreras</a></li>
                     </ul>
                 </li>
                 <li><a href="{{asset('reportes')}}">Reportes</a></li>
+                <li><a @click="onLogOut()" style="cursor:pointer;">Cerrar sesión</a></li>
             </ul>
         </div>
     </nav>
@@ -99,6 +100,8 @@
     <footer class="footer align-items-center container-fluid text-center" style="background-color: #363636; padding: 5rem 0;">
             <span style="color: white; font-weight: 400;">Copyright © Tec MM campus Vallarta 2020 Todos los derechos reservados</span>
         </footer>
+
+    <script src="{{asset('js/login/logout.js')}}"></script>
 </body>
 
 </html>

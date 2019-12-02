@@ -27066,6 +27066,28 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el: '#reportes',
     created: function(){
@@ -27090,7 +27112,9 @@ new Vue({
             tejemplares:0,
             plista:[]
         },
-        catalogo:[]
+        catalogo:[],
+        tipoPrestatario:'',
+        prestamosAdministrativos:[]
     },
     methods:{
         getClasificacion: function(){
@@ -27158,6 +27182,22 @@ new Vue({
             axios.get(this.url+'/consultaCatalogo')
             .then(response => {
                 this.catalogo = response.data;
+            });
+        },
+        consultarPrestatarios: function () {
+            var tipo = $("#tipoPrestatario").val();
+            this.tipoPrestatario = tipo;
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
+            axios.post(this.url+"/consultaPrestatarios",{
+                'prestatario':tipo,
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
+            .then(response =>{
+                this.prestamosAdministrativos = response.data;
             });
         }
     }

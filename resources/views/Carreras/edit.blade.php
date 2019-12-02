@@ -17,7 +17,7 @@
                             <div class="col-sm-6">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
-                                    <input type="text" name="ClaveCarrera" id="ClaveCarrera" class="form-control" placeholder="Clave carrera..."  v-model="fillCarrera.Clave">
+                                    <input type="text" name="ClaveCarrera" id="ClaveCarrera" class="form-control" placeholder="Clave carrera..."  v-model="fillCarrera.Clave" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-6">
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span v-for="error in errors" class="text-danger">@{{error}}</span>
+                        {{--<span v-for="error in errors" class="text-danger">@{{error}}</span>--}}
 
                     </div><!--Fin Body -->
 

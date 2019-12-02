@@ -5,7 +5,7 @@
 <div id="prestamosindex">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #FFFF; padding: 15px 10px;">
-        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+        <li class="breadcrumb-item"><a href="{{route('home')}}">Inicio</a></li>
         <li class="breadcrumb-item active" aria-current="page">Prestamos</li>
     </ol>
 </nav>

@@ -15,4 +15,6 @@ class Autores extends Model
         if($search && $search != "")
             return $query -> where('Nombre', 'LIKE', "%$search%")->orWhere('Apellidos', 'LIKE', "%$search%");
     }
+    
 }
+

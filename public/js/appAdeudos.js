@@ -27066,6 +27066,28 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el: '#adeudosCRUD',
     created: function () {
@@ -27089,8 +27111,22 @@ new Vue({
 
     data: {
         adeudos: [],
-        monto: [],
-        fillAdeudos: '',
+        cantidad: [],
+        detailsdata: [],
+        usuario: [],
+        fillAdeudos: {
+            'folio': '',
+            'control': '',
+            'nombre': '',
+            'apellidos': '',
+            'fecha_inicio': '',
+            'fecha_final': '',
+            'fecha_entrega': '',
+            'renovaciones': '',
+            'existe': '',
+            'monto': '',
+        },
+
         urlAdeudos: 'adeudo',
         pagination: {
             'total': 0,
@@ -27103,6 +27139,8 @@ new Vue({
         offset: 3,
         errors: [],
         search: '',
+        fechaInicio: '',
+        fechaFinal: ''
     },
     computed: {
         isActived: function () {
@@ -27112,11 +27150,11 @@ new Vue({
             if (!this.pagination.to) {
                 return [];
             }
-            var from = this.pagination.current_page - this.offset; //TODO offset
+            var from = this.pagination.current_page - this.offset;
             if (from < 1) {
                 from = 1;
             }
-            var to = from + (this.offset * 2); //TODO offset
+            var to = from + (this.offset * 2);
             if (to >= this.pagination.last_page) {
                 to = this.pagination.last_page;
             }
@@ -27132,23 +27170,27 @@ new Vue({
             const totales = [];
             this.adeudos.forEach(adeudo => {
                 const fechaActual = new Date().getTime();
-                const fechaFinal = new Date(adeudo.Fecha_final).getTime();
-                const fechaEntrega = new Date(adeudo.Fecha_entrega).getTime();
-                
-                const diferencia = adeudo.Fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
+                const fechaFinal = new Date(adeudo.fecha_final).getTime();
+                const fechaEntrega = new Date(adeudo.fecha_entrega).getTime();
+
+                const diferencia = adeudo.fecha_entrega ? fechaEntrega - fechaFinal : fechaActual - fechaFinal;
                 const dias = Math.floor(diferencia/(1000*60*60*24));
 
                 let cantidad = 0;
                 if (dias > 0) {
                     cantidad = dias * 25;
                 }
-                if (cantidad > 100) {
+                /*if (cantidad > 100) {
                     cantidad = 100;
-                }
+                }*/
 
                 totales.push(cantidad);
             });
             return totales;
+        },
+        codUsuario: function () {
+            usu = this.usuario;
+            return usu;
         }
     },
     methods: {
@@ -27156,35 +27198,100 @@ new Vue({
             this.pagination.current_page = page;
             this.getAdeudos(page);
         },
-        searchAutor: function () {
+        searchAdeudo: function () {
             var search = $("#search").val();
             this.search = search;
+            console.log('Folios');
             this.getAdeudos();
         },
-
-        //Modulo Carreras
-        getAdeudos: function () { //param: page
-            var url = this.urlAdeudos;//?page=' + page;
-            axios.get(url).then(response => {
-                aux = this.adeudos = response.data;//.carreras.data;
-                this.monto.push({
-                   ad: "asd",
-                });
-                //this.pagination = response.data.pagination;
-            });
-        },
-        deleteAdeudo: function (adeudo) {
-            if (confirm('¿Desea eliminar el adeudo del Folio: ' + adeudo.Folio + '?')) {
-                var url = this.urlAdeudos + '/' + adeudo.Folio;
-                axios.delete(url).then(response => {
-                    this.getAdeudos();
-                    swal.close();
-                    toastr.success("El adeudo ha sido eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
-                });
+        filtrarFecha: function () {
+            if (this.fechaInicio && this.fechaFinal) {
+                console.log('Fechas');
+                this.getAdeudos();
             }
         },
+        clearDataInput: function() {
+            this.fechaInicio = '';
+            this.fechaFinal = '';
+            this.getAdeudos();
+        },
+        //Modulo Carreras
+        getAdeudos: function (page) { //param: page
+            console.log('Index');
+            let inicio = '';
+            let final = '';
+            if (this.fechaInicio && this.fechaFinal) {
+                inicio = new Date(this.fechaInicio).toUTCString();
+                final = new Date(this.fechaFinal).toUTCString();
+            }
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
+            axios.get(url).then(response => {
+                this.adeudos = response.data.adeudos.data;//.carreras.data;
+                this.pagination = response.data.pagination;
+            });
+        },
+        deleteAdeudo: function (adeudo, monto, estado) {
+            if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
+                var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto;
+                console.log(monto);
+                if (estado == 1) {  
+                    axios.post(url).then(response => {
+                        this.getAdeudos();
+                        //swal.close();
+                        toastr.success("El estado del adeudo se a cambiado con exito.", "Tarea completada!");
+                    }).catch(ex => {
+                        toastr.error(ex.response.data, "Error!");
+                    });
+                }else{
+                    toastr.error('El adeudo ya ha sido pagado.','Aviso!');
+                }
+            }
+        },
+        showAdeudo: function (adeudo, monto) {
+            var url = this.urlAdeudos+'/det/'+adeudo.folio;
+            axios.get(url).then(response => {
+                this.detailsdata = response.data
+            });
+            this.fillAdeudos.folio  = adeudo.folio;
+            this.fillAdeudos.control = adeudo.control;
+            this.fillAdeudos.nombre = adeudo.nombre;
+            this.fillAdeudos.apellidos = adeudo.apellidos;
+            this.fillAdeudos.fecha_inicio = adeudo.fecha_inicio;
+            this.fillAdeudos.fecha_final = adeudo.fecha_final;
+            this.fillAdeudos.fecha_entrega = adeudo.fecha_entrega;
+            this.fillAdeudos.renovaciones = adeudo.renovaciones;
+            this.fillAdeudos.existe = adeudo.existe;
+            this.fillAdeudos.monto = adeudo.monto;
+            $('#detalles').modal('show');
+        },
+        /*getAlums: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/alum';
+            axios.get(url).then(response => {
+                this.alumnos = response.data;//.carreras.data;
+            });
+        },
+        getProfs: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/prof';
+            axios.get(url).then(response => {
+                this.docentes = response.data;//.carreras.data;  
+            });
+        },
+        getAdms: function (page) { //param: page
+            var url = this.urlAdeudos+'/get/adm';
+            axios.get(url).then(response => {
+                this.administrativos = response.data;//.carreras.data;
+            });
+        },
+        getUsu: function() {
+            var count = [];
+            this.adeudos.forEach(adeudo => {
+                const url = this.urlAdeudos + '/usu/' + adeudo.IdPrestatario;
+                axios.get(url).then(response => {
+                    count.push(response.data);
+                    this.usuario = count;
+                });
+            });
+        },*/
         // editCarrera: function (carrera) {
         //     this.fillCarrera.Clave  = carrera.Clave;
         //     this.fillCarrera.Nombre = carrera.Nombre;

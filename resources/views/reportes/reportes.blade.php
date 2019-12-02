@@ -4,7 +4,7 @@
 
 
 <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
-    <li><a href="javascript:void();">Inicio</a></li>
+    <li><a href="{{route('home')}}">Inicio</a></li>
     <li class="active">Reportes</li>
 </ol>
 <div class="row" id="reportes"
