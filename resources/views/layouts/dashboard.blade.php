@@ -65,7 +65,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{asset('prestamos')}}">Prestamos</a></li>
+                        <li><a href="#">Prestamos</a></li>
                         <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
                     </ul>
                 </li>
