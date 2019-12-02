@@ -2,6 +2,7 @@ new Vue({
     el: "#materialesCRUD",
     created: function () {
         this.getMateriales();
+        this.getCarreras();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -41,7 +42,8 @@ new Vue({
             'Year':'',
             'Ejemplares':'',
             'Tipo':''
-        }
+        },
+        carreras:[]
     },
     computed:{
         isActived:function () {
@@ -85,7 +87,13 @@ new Vue({
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
             });
-        },
+        },getCarreras: function () {  /*ejemplo cmb */
+            axios.get("material/carreras")
+            .then(response =>{
+                this.carreras=response.data;
+            });
+        }
+        ,
         createMaterial: function () {
             var url = 'material';
             axios.post(url, this.newMaterial)
@@ -110,10 +118,12 @@ new Vue({
         editMaterial: function (material) {
             this.fillMaterial.Id = material.Id;
             this.fillMaterial.Titulo = material.Titulo;
-            this.fillMaterial.Clave = material.Clave;
+            this.fillMaterial.Clave = material.IDCarrera;
             this.fillMaterial.Year = material.Year;
             this.fillMaterial.Ejemplares = material.Ejemplares;
             this.fillMaterial.Tipo = material.Tipo;
+            console.log(this.fillMaterial);
+            
             $('#edit').modal('show');
         },
         updateMaterial: function (id) {

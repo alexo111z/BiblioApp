@@ -22,8 +22,10 @@ class MaterialesController extends Controller
 
         $materiales = Materiales::join('tblcarreras', 'tblcarreras.clave', '=', 'tblmateriales.clave')
                 ->select(
+                    'tblmateriales.Id',
                     'tblmateriales.Titulo',
                     'tblcarreras.Nombre as Clave',
+                    'tblmateriales.Clave as IDCarrera',
                     'tblmateriales.year as Year',
                     'tblmateriales.Ejemplares',
                     'tblmateriales.Tipo'
@@ -51,6 +53,11 @@ class MaterialesController extends Controller
         //return DB::table('tblcarreras')->select('Nombre')->get();
         $claves= DB::table('tblcarreras')->get();
         return view('Materiales.principal', compact('claves'));
+    }
+    public function getCarreras()
+    {
+        $claves= DB::table('tblcarreras')->get();
+        return $claves;
     }
 
         /**

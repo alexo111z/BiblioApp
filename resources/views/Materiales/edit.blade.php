@@ -26,9 +26,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                     <select name="clave" id="clave" class="form-control" required="" v-model="fillMaterial.Clave">
-                                    @foreach($claves as $clave)
-                                    <option value ="{{ $clave->Clave }}"> {{ $clave->Nombre}}</option> 
-                                     @endforeach
+                                        <option v-for="carrera in carreras" :value ="carrera.Clave"> @{{carrera.Nombre}}</option> 
                                     </select>
                                 </div>
                             </div>

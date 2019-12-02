@@ -37,6 +37,7 @@
                     <th>Autor</th>
                     <th>Editorial</th>
                     <th>Carrera</th>
+                    <th>Dewey</th>
                     <th colspan="3">Acciones</th>
                 </tr>
             </thead>
@@ -49,9 +50,10 @@
                 <tr>
                     <th> @{{libro.ISBN}}</th>
                     <td> @{{libro.Titulo}} </td>
-                    <td> @{{libro.IdAutor}} </td>
-                    <td> @{{libro.IdEditorial}} </td>
-                    <td> @{{libro.IdCarrera}} </td>
+                    <td> @{{libro.Nombre}} @{{libro.Ape}}</td>
+                    <td> @{{libro.Editorial}} </td>
+                    <td> @{{libro.Carrera}} </td>
+                    <td> @{{libro.Dewey}} </td>
                     <td width="20px">
                         <a href="javascript:void()" class="btn btn-info btn-sm" v-on:click.prevent="checkLibro(libro)"><i class="fa fa-info"></i></a>
                     </td>

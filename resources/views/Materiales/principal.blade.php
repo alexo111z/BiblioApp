@@ -33,9 +33,9 @@
         <table class="table table-striped table-hover" style="margin-top: 1.5rem;">
             <thead>
                 <tr>
-                    <th width="10px">#</th>
+                  
                     <th>Titulo</th>
-                    <th>Clave</th>
+                    <th>Carrera</th>
                     <th>Año</th>
                     <th>Ejemplares</th>
                     <th>Tipo</th>
@@ -49,7 +49,7 @@
             </tbody>
             <tbody v-else v-for="material in materiales">
                 <tr>
-                    <th> @{{material.Id}}</th>
+              
                     <td> @{{material.Titulo}} </td>
                     <td> @{{material.Clave}} </td>
                     <td> @{{material.Year}} </td>

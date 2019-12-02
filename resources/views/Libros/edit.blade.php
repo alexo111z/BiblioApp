@@ -36,7 +36,7 @@
                                      <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                      <select name="idAutor" id="idAutor" class="form-control" required v-model="fillLibro.IdAutor">
                                      @foreach($autores as $autor)
-                                     <option value ="{{ $autor->IdAutor }}"> {{ $autor->Nombre}}</option> 
+                                     <option value ="{{ $autor->IdAutor }}"> {{ $autor->Nombre}} {{ $autor->Apellidos}}</option> 
                                      @endforeach
                                      </select>
                                 </div>
@@ -133,21 +133,13 @@
                                 </div>
                              </div>
                         </div>
-                        <div class="col-sm-6">
-                             <div class="form-group">
-                             <label for="imagen">Imagen</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-file-image-o"></i></div>
-                                    <input type="text" name="imagen" id="imagen" class="form-control" required v-model="fillLibro.Imagen">
-                                </div>
-                             </div>
-                        </div>
+                     
                         <div class="col-sm-6">
                              <div class="form-group">
                              <label for="fechaRegistro">Fecha de Registro</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" required v-model="fillLibro.FechaRegistro">
+                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" disabled v-model="fillLibro.FechaRegistro">
                                 </div>
                              </div>
                         </div>
