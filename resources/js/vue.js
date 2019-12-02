@@ -8,16 +8,25 @@
     typeof define === 'function' && define.amd ? define(factory) :
     (global = global || self, global.Vue = factory());
   }(this, function () { 'use strict';
+<<<<<<< HEAD
 
     /*  */
 
     var emptyObject = Object.freeze({});
 
+=======
+  
+    /*  */
+  
+    var emptyObject = Object.freeze({});
+  
+>>>>>>> Palomino
     // These helpers produce better VM code in JS engines due to their
     // explicitness and function inlining.
     function isUndef (v) {
       return v === undefined || v === null
     }
+<<<<<<< HEAD
 
     function isDef (v) {
       return v !== undefined && v !== null
@@ -31,6 +40,21 @@
       return v === false
     }
 
+=======
+  
+    function isDef (v) {
+      return v !== undefined && v !== null
+    }
+  
+    function isTrue (v) {
+      return v === true
+    }
+  
+    function isFalse (v) {
+      return v === false
+    }
+  
+>>>>>>> Palomino
     /**
      * Check if value is primitive.
      */
@@ -43,7 +67,11 @@
         typeof value === 'boolean'
       )
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Quick object check - this is primarily used to tell
      * Objects from primitive values when we know the value
@@ -52,16 +80,28 @@
     function isObject (obj) {
       return obj !== null && typeof obj === 'object'
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Get the raw type string of a value, e.g., [object Object].
      */
     var _toString = Object.prototype.toString;
+<<<<<<< HEAD
 
     function toRawType (value) {
       return _toString.call(value).slice(8, -1)
     }
 
+=======
+  
+    function toRawType (value) {
+      return _toString.call(value).slice(8, -1)
+    }
+  
+>>>>>>> Palomino
     /**
      * Strict object type check. Only returns true
      * for plain JavaScript objects.
@@ -69,11 +109,19 @@
     function isPlainObject (obj) {
       return _toString.call(obj) === '[object Object]'
     }
+<<<<<<< HEAD
 
     function isRegExp (v) {
       return _toString.call(v) === '[object RegExp]'
     }
 
+=======
+  
+    function isRegExp (v) {
+      return _toString.call(v) === '[object RegExp]'
+    }
+  
+>>>>>>> Palomino
     /**
      * Check if val is a valid array index.
      */
@@ -81,7 +129,11 @@
       var n = parseFloat(String(val));
       return n >= 0 && Math.floor(n) === n && isFinite(val)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isPromise (val) {
       return (
         isDef(val) &&
@@ -89,7 +141,11 @@
         typeof val.catch === 'function'
       )
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Convert a value to a string that is actually rendered.
      */
@@ -100,7 +156,11 @@
           ? JSON.stringify(val, null, 2)
           : String(val)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Convert an input value to a number for persistence.
      * If the conversion fails, return original string.
@@ -109,7 +169,11 @@
       var n = parseFloat(val);
       return isNaN(n) ? val : n
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Make a map and return a function for checking if a key
      * is in that map.
@@ -127,17 +191,29 @@
         ? function (val) { return map[val.toLowerCase()]; }
         : function (val) { return map[val]; }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Check if a tag is a built-in tag.
      */
     var isBuiltInTag = makeMap('slot,component', true);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Check if an attribute is a reserved attribute.
      */
     var isReservedAttribute = makeMap('key,ref,slot,slot-scope,is');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Remove an item from an array.
      */
@@ -149,7 +225,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Check whether an object has the property.
      */
@@ -157,7 +237,11 @@
     function hasOwn (obj, key) {
       return hasOwnProperty.call(obj, key)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Create a cached version of a pure function.
      */
@@ -168,7 +252,11 @@
         return hit || (cache[str] = fn(str))
       })
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Camelize a hyphen-delimited string.
      */
@@ -176,14 +264,22 @@
     var camelize = cached(function (str) {
       return str.replace(camelizeRE, function (_, c) { return c ? c.toUpperCase() : ''; })
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Capitalize a string.
      */
     var capitalize = cached(function (str) {
       return str.charAt(0).toUpperCase() + str.slice(1)
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Hyphenate a camelCase string.
      */
@@ -191,7 +287,11 @@
     var hyphenate = cached(function (str) {
       return str.replace(hyphenateRE, '-$1').toLowerCase()
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Simple bind polyfill for environments that do not support it,
      * e.g., PhantomJS 1.x. Technically, we don't need this anymore
@@ -199,7 +299,11 @@
      * But removing it would mean breaking code that was able to run in
      * PhantomJS 1.x, so this must be kept for backward compatibility.
      */
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /* istanbul ignore next */
     function polyfillBind (fn, ctx) {
       function boundFn (a) {
@@ -210,6 +314,7 @@
             : fn.call(ctx, a)
           : fn.call(ctx)
       }
+<<<<<<< HEAD
 
       boundFn._length = fn.length;
       return boundFn
@@ -223,6 +328,21 @@
       ? nativeBind
       : polyfillBind;
 
+=======
+  
+      boundFn._length = fn.length;
+      return boundFn
+    }
+  
+    function nativeBind (fn, ctx) {
+      return fn.bind(ctx)
+    }
+  
+    var bind = Function.prototype.bind
+      ? nativeBind
+      : polyfillBind;
+  
+>>>>>>> Palomino
     /**
      * Convert an Array-like object to a real Array.
      */
@@ -235,7 +355,11 @@
       }
       return ret
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Mix properties into target object.
      */
@@ -245,7 +369,11 @@
       }
       return to
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Merge an Array of Objects into a single Object.
      */
@@ -258,28 +386,48 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /* eslint-disable no-unused-vars */
 
+=======
+  
+    /* eslint-disable no-unused-vars */
+  
+>>>>>>> Palomino
     /**
      * Perform no operation.
      * Stubbing args to make Flow happy without leaving useless transpiled code
      * with ...rest (https://flow.org/blog/2017/05/07/Strict-Function-Call-Arity/).
      */
     function noop (a, b, c) {}
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Always return false.
      */
     var no = function (a, b, c) { return false; };
+<<<<<<< HEAD
 
     /* eslint-enable no-unused-vars */
 
+=======
+  
+    /* eslint-enable no-unused-vars */
+  
+>>>>>>> Palomino
     /**
      * Return the same value.
      */
     var identity = function (_) { return _; };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Generate a string containing static keys from compiler modules.
      */
@@ -288,7 +436,11 @@
         return keys.concat(m.staticKeys || [])
       }, []).join(',')
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Check if two values are loosely equal - that is,
      * if they are plain objects, do they have the same shape?
@@ -327,7 +479,11 @@
         return false
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Return the first index at which a loosely equal value can be
      * found in the array (if value is a plain object, the array must
@@ -339,7 +495,11 @@
       }
       return -1
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Ensure a function is called only once.
      */
@@ -352,15 +512,25 @@
         }
       }
     }
+<<<<<<< HEAD
 
     var SSR_ATTR = 'data-server-rendered';
 
+=======
+  
+    var SSR_ATTR = 'data-server-rendered';
+  
+>>>>>>> Palomino
     var ASSET_TYPES = [
       'component',
       'directive',
       'filter'
     ];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var LIFECYCLE_HOOKS = [
       'beforeCreate',
       'created',
@@ -375,114 +545,196 @@
       'errorCaptured',
       'serverPrefetch'
     ];
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     var config = ({
       /**
        * Option merge strategies (used in core/util/options)
        */
       // $flow-disable-line
       optionMergeStrategies: Object.create(null),
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Whether to suppress warnings.
        */
       silent: false,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Show production mode tip message on boot?
        */
       productionTip: "development" !== 'production',
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Whether to enable devtools
        */
       devtools: "development" !== 'production',
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Whether to record perf
        */
       performance: false,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Error handler for watcher errors
        */
       errorHandler: null,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Warn handler for watcher warns
        */
       warnHandler: null,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Ignore certain custom elements
        */
       ignoredElements: [],
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Custom user key aliases for v-on
        */
       // $flow-disable-line
       keyCodes: Object.create(null),
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Check if a tag is reserved so that it cannot be registered as a
        * component. This is platform-dependent and may be overwritten.
        */
       isReservedTag: no,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Check if an attribute is reserved so that it cannot be used as a component
        * prop. This is platform-dependent and may be overwritten.
        */
       isReservedAttr: no,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Check if a tag is an unknown element.
        * Platform-dependent.
        */
       isUnknownElement: no,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Get the namespace of an element
        */
       getTagNamespace: noop,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Parse the real tag name for the specific platform.
        */
       parsePlatformTagName: identity,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Check if an attribute must be bound using property, e.g. value
        * Platform-dependent.
        */
       mustUseProp: no,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Perform updates asynchronously. Intended to be used by Vue Test Utils
        * This will significantly reduce performance if set to false.
        */
       async: true,
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Exposed for legacy reasons
        */
       _lifecycleHooks: LIFECYCLE_HOOKS
     });
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * unicode letters used for parsing html tags, component names and property paths.
      * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
      * skipping \u10000-\uEFFFF due to it freezing up PhantomJS
      */
     var unicodeRegExp = /a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD/;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Check if a string starts with $ or _
      */
@@ -490,7 +742,11 @@
       var c = (str + '').charCodeAt(0);
       return c === 0x24 || c === 0x5F
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Define a property.
      */
@@ -502,7 +758,11 @@
         configurable: true
       });
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Parse simple path.
      */
@@ -520,12 +780,21 @@
         return obj
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     // can we use __proto__?
     var hasProto = '__proto__' in {};
 
+=======
+  
+    /*  */
+  
+    // can we use __proto__?
+    var hasProto = '__proto__' in {};
+  
+>>>>>>> Palomino
     // Browser environment sniffing
     var inBrowser = typeof window !== 'undefined';
     var inWeex = typeof WXEnvironment !== 'undefined' && !!WXEnvironment.platform;
@@ -539,10 +808,17 @@
     var isChrome = UA && /chrome\/\d+/.test(UA) && !isEdge;
     var isPhantomJS = UA && /phantomjs/.test(UA);
     var isFF = UA && UA.match(/firefox\/(\d+)/);
+<<<<<<< HEAD
 
     // Firefox has a "watch" function on Object.prototype...
     var nativeWatch = ({}).watch;
 
+=======
+  
+    // Firefox has a "watch" function on Object.prototype...
+    var nativeWatch = ({}).watch;
+  
+>>>>>>> Palomino
     var supportsPassive = false;
     if (inBrowser) {
       try {
@@ -556,7 +832,11 @@
         window.addEventListener('test-passive', null, opts);
       } catch (e) {}
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // this needs to be lazy-evaled because vue may be required before
     // vue-server-renderer can set VUE_ENV
     var _isServer;
@@ -573,19 +853,34 @@
       }
       return _isServer
     };
+<<<<<<< HEAD
 
     // detect devtools
     var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
 
+=======
+  
+    // detect devtools
+    var devtools = inBrowser && window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
+  
+>>>>>>> Palomino
     /* istanbul ignore next */
     function isNative (Ctor) {
       return typeof Ctor === 'function' && /native code/.test(Ctor.toString())
     }
+<<<<<<< HEAD
 
     var hasSymbol =
       typeof Symbol !== 'undefined' && isNative(Symbol) &&
       typeof Reflect !== 'undefined' && isNative(Reflect.ownKeys);
 
+=======
+  
+    var hasSymbol =
+      typeof Symbol !== 'undefined' && isNative(Symbol) &&
+      typeof Reflect !== 'undefined' && isNative(Reflect.ownKeys);
+  
+>>>>>>> Palomino
     var _Set;
     /* istanbul ignore if */ // $flow-disable-line
     if (typeof Set !== 'undefined' && isNative(Set)) {
@@ -606,6 +901,7 @@
         Set.prototype.clear = function clear () {
           this.set = Object.create(null);
         };
+<<<<<<< HEAD
 
         return Set;
       }());
@@ -613,28 +909,52 @@
 
     /*  */
 
+=======
+  
+        return Set;
+      }());
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     var warn = noop;
     var tip = noop;
     var generateComponentTrace = (noop); // work around flow check
     var formatComponentName = (noop);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     {
       var hasConsole = typeof console !== 'undefined';
       var classifyRE = /(?:^|[-_])(\w)/g;
       var classify = function (str) { return str
         .replace(classifyRE, function (c) { return c.toUpperCase(); })
         .replace(/[-_]/g, ''); };
+<<<<<<< HEAD
 
       warn = function (msg, vm) {
         var trace = vm ? generateComponentTrace(vm) : '';
 
+=======
+  
+      warn = function (msg, vm) {
+        var trace = vm ? generateComponentTrace(vm) : '';
+  
+>>>>>>> Palomino
         if (config.warnHandler) {
           config.warnHandler.call(null, msg, vm, trace);
         } else if (hasConsole && (!config.silent)) {
           console.error(("[Vue warn]: " + msg + trace));
         }
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       tip = function (msg, vm) {
         if (hasConsole && (!config.silent)) {
           console.warn("[Vue tip]: " + msg + (
@@ -642,7 +962,11 @@
           ));
         }
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       formatComponentName = function (vm, includeFile) {
         if (vm.$root === vm) {
           return '<Root>'
@@ -658,13 +982,21 @@
           var match = file.match(/([^/\\]+)\.vue$/);
           name = match && match[1];
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         return (
           (name ? ("<" + (classify(name)) + ">") : "<Anonymous>") +
           (file && includeFile !== false ? (" at " + file) : '')
         )
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var repeat = function (str, n) {
         var res = '';
         while (n) {
@@ -674,7 +1006,11 @@
         }
         return res
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       generateComponentTrace = function (vm) {
         if (vm._isVue && vm.$parent) {
           var tree = [];
@@ -704,11 +1040,19 @@
         }
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
     var uid = 0;
 
+=======
+  
+    /*  */
+  
+    var uid = 0;
+  
+>>>>>>> Palomino
     /**
      * A dep is an observable that can have multiple
      * directives subscribing to it.
@@ -717,6 +1061,7 @@
       this.id = uid++;
       this.subs = [];
     };
+<<<<<<< HEAD
 
     Dep.prototype.addSub = function addSub (sub) {
       this.subs.push(sub);
@@ -726,12 +1071,27 @@
       remove(this.subs, sub);
     };
 
+=======
+  
+    Dep.prototype.addSub = function addSub (sub) {
+      this.subs.push(sub);
+    };
+  
+    Dep.prototype.removeSub = function removeSub (sub) {
+      remove(this.subs, sub);
+    };
+  
+>>>>>>> Palomino
     Dep.prototype.depend = function depend () {
       if (Dep.target) {
         Dep.target.addDep(this);
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     Dep.prototype.notify = function notify () {
       // stabilize the subscriber list first
       var subs = this.subs.slice();
@@ -745,25 +1105,43 @@
         subs[i].update();
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // The current target watcher being evaluated.
     // This is globally unique because only one watcher
     // can be evaluated at a time.
     Dep.target = null;
     var targetStack = [];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function pushTarget (target) {
       targetStack.push(target);
       Dep.target = target;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function popTarget () {
       targetStack.pop();
       Dep.target = targetStack[targetStack.length - 1];
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var VNode = function VNode (
       tag,
       data,
@@ -798,30 +1176,53 @@
       this.asyncMeta = undefined;
       this.isAsyncPlaceholder = false;
     };
+<<<<<<< HEAD
 
     var prototypeAccessors = { child: { configurable: true } };
 
+=======
+  
+    var prototypeAccessors = { child: { configurable: true } };
+  
+>>>>>>> Palomino
     // DEPRECATED: alias for componentInstance for backwards compat.
     /* istanbul ignore next */
     prototypeAccessors.child.get = function () {
       return this.componentInstance
     };
+<<<<<<< HEAD
 
     Object.defineProperties( VNode.prototype, prototypeAccessors );
 
     var createEmptyVNode = function (text) {
       if ( text === void 0 ) text = '';
 
+=======
+  
+    Object.defineProperties( VNode.prototype, prototypeAccessors );
+  
+    var createEmptyVNode = function (text) {
+      if ( text === void 0 ) text = '';
+  
+>>>>>>> Palomino
       var node = new VNode();
       node.text = text;
       node.isComment = true;
       return node
     };
+<<<<<<< HEAD
 
     function createTextVNode (val) {
       return new VNode(undefined, undefined, undefined, String(val))
     }
 
+=======
+  
+    function createTextVNode (val) {
+      return new VNode(undefined, undefined, undefined, String(val))
+    }
+  
+>>>>>>> Palomino
     // optimized shallow clone
     // used for static nodes and slot nodes because they may be reused across
     // multiple renders, cloning them avoids errors when DOM manipulations rely
@@ -851,15 +1252,26 @@
       cloned.isCloned = true;
       return cloned
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /*
      * not type checking this file because flow doesn't play well with
      * dynamically accessing methods on Array prototype
      */
+<<<<<<< HEAD
 
     var arrayProto = Array.prototype;
     var arrayMethods = Object.create(arrayProto);
 
+=======
+  
+    var arrayProto = Array.prototype;
+    var arrayMethods = Object.create(arrayProto);
+  
+>>>>>>> Palomino
     var methodsToPatch = [
       'push',
       'pop',
@@ -869,7 +1281,11 @@
       'sort',
       'reverse'
     ];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Intercept mutating methods and emit events
      */
@@ -879,7 +1295,11 @@
       def(arrayMethods, method, function mutator () {
         var args = [], len = arguments.length;
         while ( len-- ) args[ len ] = arguments[ len ];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var result = original.apply(this, args);
         var ob = this.__ob__;
         var inserted;
@@ -898,21 +1318,37 @@
         return result
       });
     });
+<<<<<<< HEAD
 
     /*  */
 
     var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
 
+=======
+  
+    /*  */
+  
+    var arrayKeys = Object.getOwnPropertyNames(arrayMethods);
+  
+>>>>>>> Palomino
     /**
      * In some cases we may want to disable observation inside a component's
      * update computation.
      */
     var shouldObserve = true;
+<<<<<<< HEAD
 
     function toggleObserving (value) {
       shouldObserve = value;
     }
 
+=======
+  
+    function toggleObserving (value) {
+      shouldObserve = value;
+    }
+  
+>>>>>>> Palomino
     /**
      * Observer class that is attached to each observed
      * object. Once attached, the observer converts the target
@@ -935,7 +1371,11 @@
         this.walk(value);
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Walk through all properties and convert them into
      * getter/setters. This method should only be called when
@@ -947,7 +1387,11 @@
         defineReactive$$1(obj, keys[i]);
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Observe a list of Array items.
      */
@@ -956,9 +1400,15 @@
         observe(items[i]);
       }
     };
+<<<<<<< HEAD
 
     // helpers
 
+=======
+  
+    // helpers
+  
+>>>>>>> Palomino
     /**
      * Augment a target Object or Array by intercepting
      * the prototype chain using __proto__
@@ -968,7 +1418,11 @@
       target.__proto__ = src;
       /* eslint-enable no-proto */
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Augment a target Object or Array by defining
      * hidden properties.
@@ -980,7 +1434,11 @@
         def(target, key, src[key]);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Attempt to create an observer instance for a value,
      * returns the new observer if successfully observed,
@@ -1007,7 +1465,11 @@
       }
       return ob
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Define a reactive property on an Object.
      */
@@ -1019,19 +1481,31 @@
       shallow
     ) {
       var dep = new Dep();
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var property = Object.getOwnPropertyDescriptor(obj, key);
       if (property && property.configurable === false) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // cater for pre-defined getter/setters
       var getter = property && property.get;
       var setter = property && property.set;
       if ((!getter || setter) && arguments.length === 2) {
         val = obj[key];
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var childOb = !shallow && observe(val);
       Object.defineProperty(obj, key, {
         enumerable: true,
@@ -1071,7 +1545,11 @@
         }
       });
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Set a property on an object. Adds the new property and
      * triggers change notification if the property doesn't
@@ -1107,7 +1585,11 @@
       ob.dep.notify();
       return val
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Delete a property and trigger change if necessary.
      */
@@ -1137,7 +1619,11 @@
       }
       ob.dep.notify();
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Collect dependencies on array elements when the array is touched, since
      * we cannot intercept array element access like property getters.
@@ -1151,16 +1637,26 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Option overwriting strategies are functions that handle
      * how to merge a parent option value and a child option
      * value into the final value.
      */
     var strats = config.optionMergeStrategies;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Options with restrictions
      */
@@ -1175,18 +1671,30 @@
         return defaultStrat(parent, child)
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Helper that recursively merges two data objects together.
      */
     function mergeData (to, from) {
       if (!from) { return to }
       var key, toVal, fromVal;
+<<<<<<< HEAD
 
       var keys = hasSymbol
         ? Reflect.ownKeys(from)
         : Object.keys(from);
 
+=======
+  
+      var keys = hasSymbol
+        ? Reflect.ownKeys(from)
+        : Object.keys(from);
+  
+>>>>>>> Palomino
       for (var i = 0; i < keys.length; i++) {
         key = keys[i];
         // in case the object is already observed...
@@ -1205,7 +1713,11 @@
       }
       return to
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Data
      */
@@ -1250,7 +1762,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     strats.data = function (
       parentVal,
       childVal,
@@ -1264,15 +1780,26 @@
             'definitions.',
             vm
           );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           return parentVal
         }
         return mergeDataOrFn(parentVal, childVal)
       }
+<<<<<<< HEAD
 
       return mergeDataOrFn(parentVal, childVal, vm)
     };
 
+=======
+  
+      return mergeDataOrFn(parentVal, childVal, vm)
+    };
+  
+>>>>>>> Palomino
     /**
      * Hooks and props are merged as arrays.
      */
@@ -1291,7 +1818,11 @@
         ? dedupeHooks(res)
         : res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function dedupeHooks (hooks) {
       var res = [];
       for (var i = 0; i < hooks.length; i++) {
@@ -1301,11 +1832,19 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     LIFECYCLE_HOOKS.forEach(function (hook) {
       strats[hook] = mergeHook;
     });
 
+=======
+  
+    LIFECYCLE_HOOKS.forEach(function (hook) {
+      strats[hook] = mergeHook;
+    });
+  
+>>>>>>> Palomino
     /**
      * Assets
      *
@@ -1327,11 +1866,19 @@
         return res
       }
     }
+<<<<<<< HEAD
 
     ASSET_TYPES.forEach(function (type) {
       strats[type + 's'] = mergeAssets;
     });
 
+=======
+  
+    ASSET_TYPES.forEach(function (type) {
+      strats[type + 's'] = mergeAssets;
+    });
+  
+>>>>>>> Palomino
     /**
      * Watchers.
      *
@@ -1367,7 +1914,11 @@
       }
       return ret
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Other object hashes.
      */
@@ -1390,7 +1941,11 @@
       return ret
     };
     strats.provide = mergeDataOrFn;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Default strategy.
      */
@@ -1399,7 +1954,11 @@
         ? parentVal
         : childVal
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Validate component names
      */
@@ -1408,7 +1967,11 @@
         validateComponentName(key);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function validateComponentName (name) {
       if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + (unicodeRegExp.source) + "]*$")).test(name)) {
         warn(
@@ -1423,7 +1986,11 @@
         );
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Ensure all props option syntax are normalized into the
      * Object-based format.
@@ -1461,7 +2028,11 @@
       }
       options.props = res;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Normalize all injections into Object-based format
      */
@@ -1488,7 +2059,11 @@
         );
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Normalize raw function directives into object format.
      */
@@ -1503,7 +2078,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function assertObjectType (name, value, vm) {
       if (!isPlainObject(value)) {
         warn(
@@ -1513,7 +2092,11 @@
         );
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Merge two option objects into a new one.
      * Core utility used in both instantiation and inheritance.
@@ -1526,6 +2109,7 @@
       {
         checkComponents(child);
       }
+<<<<<<< HEAD
 
       if (typeof child === 'function') {
         child = child.options;
@@ -1535,6 +2119,17 @@
       normalizeInject(child, vm);
       normalizeDirectives(child);
 
+=======
+  
+      if (typeof child === 'function') {
+        child = child.options;
+      }
+  
+      normalizeProps(child, vm);
+      normalizeInject(child, vm);
+      normalizeDirectives(child);
+  
+>>>>>>> Palomino
       // Apply extends and mixins on the child options,
       // but only if it is a raw options object that isn't
       // the result of another mergeOptions call.
@@ -1549,7 +2144,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var options = {};
       var key;
       for (key in parent) {
@@ -1566,7 +2165,11 @@
       }
       return options
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Resolve an asset.
      * This function is used because child instances need access
@@ -1599,11 +2202,19 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     function validateProp (
       key,
       propOptions,
@@ -1642,7 +2253,11 @@
       }
       return value
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Get the default value of a prop.
      */
@@ -1675,7 +2290,11 @@
         ? def.call(vm)
         : def
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Assert whether a prop is valid.
      */
@@ -1709,7 +2328,11 @@
           valid = assertedType.valid;
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (!valid) {
         warn(
           getInvalidTypeMessage(name, value, expectedTypes),
@@ -1727,9 +2350,15 @@
         }
       }
     }
+<<<<<<< HEAD
 
     var simpleCheckRE = /^(String|Number|Boolean|Function|Symbol)$/;
 
+=======
+  
+    var simpleCheckRE = /^(String|Number|Boolean|Function|Symbol)$/;
+  
+>>>>>>> Palomino
     function assertType (value, type) {
       var valid;
       var expectedType = getType(type);
@@ -1752,7 +2381,11 @@
         expectedType: expectedType
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Use function string name to check built-in types,
      * because a simple equality check will fail when running
@@ -1762,11 +2395,19 @@
       var match = fn && fn.toString().match(/^\s*function (\w+)/);
       return match ? match[1] : ''
     }
+<<<<<<< HEAD
 
     function isSameType (a, b) {
       return getType(a) === getType(b)
     }
 
+=======
+  
+    function isSameType (a, b) {
+      return getType(a) === getType(b)
+    }
+  
+>>>>>>> Palomino
     function getTypeIndex (type, expectedTypes) {
       if (!Array.isArray(expectedTypes)) {
         return isSameType(expectedTypes, type) ? 0 : -1
@@ -1778,7 +2419,11 @@
       }
       return -1
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getInvalidTypeMessage (name, value, expectedTypes) {
       var message = "Invalid prop: type check failed for prop \"" + name + "\"." +
         " Expected " + (expectedTypes.map(capitalize).join(', '));
@@ -1799,7 +2444,11 @@
       }
       return message
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function styleValue (value, type) {
       if (type === 'String') {
         return ("\"" + value + "\"")
@@ -1809,11 +2458,16 @@
         return ("" + value)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isExplicable (value) {
       var explicitTypes = ['string', 'number', 'boolean'];
       return explicitTypes.some(function (elem) { return value.toLowerCase() === elem; })
     }
+<<<<<<< HEAD
 
     function isBoolean () {
       var args = [], len = arguments.length;
@@ -1824,6 +2478,18 @@
 
     /*  */
 
+=======
+  
+    function isBoolean () {
+      var args = [], len = arguments.length;
+      while ( len-- ) args[ len ] = arguments[ len ];
+  
+      return args.some(function (elem) { return elem.toLowerCase() === 'boolean'; })
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     function handleError (err, vm, info) {
       // Deactivate deps tracking while processing error handler to avoid possible infinite rendering.
       // See: https://github.com/vuejs/vuex/issues/1505
@@ -1850,7 +2516,11 @@
         popTarget();
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function invokeWithErrorHandling (
       handler,
       context,
@@ -1872,7 +2542,11 @@
       }
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function globalHandleError (err, vm, info) {
       if (config.errorHandler) {
         try {
@@ -1887,7 +2561,11 @@
       }
       logError(err, vm, info);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function logError (err, vm, info) {
       {
         warn(("Error in " + info + ": \"" + (err.toString()) + "\""), vm);
@@ -1899,6 +2577,7 @@
         throw err
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -1907,6 +2586,16 @@
     var callbacks = [];
     var pending = false;
 
+=======
+  
+    /*  */
+  
+    var isUsingMicroTask = false;
+  
+    var callbacks = [];
+    var pending = false;
+  
+>>>>>>> Palomino
     function flushCallbacks () {
       pending = false;
       var copies = callbacks.slice(0);
@@ -1915,7 +2604,11 @@
         copies[i]();
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // Here we have async deferring wrappers using microtasks.
     // In 2.5 we used (macro) tasks (in combination with microtasks).
     // However, it has subtle problems when state is changed right before repaint
@@ -1928,7 +2621,11 @@
     // sequential events (e.g. #4521, #6690, which have workarounds)
     // or even between bubbling of the same event (#6566).
     var timerFunc;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // The nextTick behavior leverages the microtask queue, which can be accessed
     // via either native Promise.then or MutationObserver.
     // MutationObserver has wider support, however it is seriously bugged in
@@ -1980,7 +2677,11 @@
         setTimeout(flushCallbacks, 0);
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function nextTick (cb, ctx) {
       var _resolve;
       callbacks.push(function () {
@@ -2005,12 +2706,21 @@
         })
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     var mark;
     var measure;
 
+=======
+  
+    /*  */
+  
+    var mark;
+    var measure;
+  
+>>>>>>> Palomino
     {
       var perf = inBrowser && window.performance;
       /* istanbul ignore if */
@@ -2030,11 +2740,19 @@
         };
       }
     }
+<<<<<<< HEAD
 
     /* not type checking this file because flow doesn't play well with Proxy */
 
     var initProxy;
 
+=======
+  
+    /* not type checking this file because flow doesn't play well with Proxy */
+  
+    var initProxy;
+  
+>>>>>>> Palomino
     {
       var allowedGlobals = makeMap(
         'Infinity,undefined,NaN,isFinite,isNaN,' +
@@ -2042,7 +2760,11 @@
         'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,' +
         'require' // for Webpack/Browserify
       );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var warnNonPresent = function (target, key) {
         warn(
           "Property or method \"" + key + "\" is not defined on the instance but " +
@@ -2053,7 +2775,11 @@
           target
         );
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var warnReservedPrefix = function (target, key) {
         warn(
           "Property \"" + key + "\" must be accessed with \"$data." + key + "\" because " +
@@ -2063,10 +2789,17 @@
           target
         );
       };
+<<<<<<< HEAD
 
       var hasProxy =
         typeof Proxy !== 'undefined' && isNative(Proxy);
 
+=======
+  
+      var hasProxy =
+        typeof Proxy !== 'undefined' && isNative(Proxy);
+  
+>>>>>>> Palomino
       if (hasProxy) {
         var isBuiltInModifier = makeMap('stop,prevent,self,ctrl,shift,alt,meta,exact');
         config.keyCodes = new Proxy(config.keyCodes, {
@@ -2081,7 +2814,11 @@
           }
         });
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var hasHandler = {
         has: function has (target, key) {
           var has = key in target;
@@ -2094,7 +2831,11 @@
           return has || !isAllowed
         }
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var getHandler = {
         get: function get (target, key) {
           if (typeof key === 'string' && !(key in target)) {
@@ -2104,7 +2845,11 @@
           return target[key]
         }
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       initProxy = function initProxy (vm) {
         if (hasProxy) {
           // determine which proxy handler to use
@@ -2118,11 +2863,19 @@
         }
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
     var seenObjects = new _Set();
 
+=======
+  
+    /*  */
+  
+    var seenObjects = new _Set();
+  
+>>>>>>> Palomino
     /**
      * Recursively traverse an object to evoke all converted
      * getters, so that every nested property inside the object
@@ -2132,7 +2885,11 @@
       _traverse(val, seenObjects);
       seenObjects.clear();
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function _traverse (val, seen) {
       var i, keys;
       var isA = Array.isArray(val);
@@ -2155,9 +2912,15 @@
         while (i--) { _traverse(val[keys[i]], seen); }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var normalizeEvent = cached(function (name) {
       var passive = name.charAt(0) === '&';
       name = passive ? name.slice(1) : name;
@@ -2172,11 +2935,19 @@
         passive: passive
       }
     });
+<<<<<<< HEAD
 
     function createFnInvoker (fns, vm) {
       function invoker () {
         var arguments$1 = arguments;
 
+=======
+  
+    function createFnInvoker (fns, vm) {
+      function invoker () {
+        var arguments$1 = arguments;
+  
+>>>>>>> Palomino
         var fns = invoker.fns;
         if (Array.isArray(fns)) {
           var cloned = fns.slice();
@@ -2191,7 +2962,11 @@
       invoker.fns = fns;
       return invoker
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function updateListeners (
       on,
       oldOn,
@@ -2230,23 +3005,37 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function mergeVNodeHook (def, hookKey, hook) {
       if (def instanceof VNode) {
         def = def.data.hook || (def.data.hook = {});
       }
       var invoker;
       var oldHook = def[hookKey];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function wrappedHook () {
         hook.apply(this, arguments);
         // important: remove merged hook to ensure it's called only once
         // and prevent memory leak
         remove(invoker.fns, wrappedHook);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (isUndef(oldHook)) {
         // no existing hook
         invoker = createFnInvoker([wrappedHook]);
@@ -2261,6 +3050,7 @@
           invoker = createFnInvoker([oldHook, wrappedHook]);
         }
       }
+<<<<<<< HEAD
 
       invoker.merged = true;
       def[hookKey] = invoker;
@@ -2268,6 +3058,15 @@
 
     /*  */
 
+=======
+  
+      invoker.merged = true;
+      def[hookKey] = invoker;
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     function extractPropsFromVNodeData (
       data,
       Ctor,
@@ -2308,7 +3107,11 @@
       }
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkProp (
       res,
       hash,
@@ -2333,16 +3136,26 @@
       }
       return false
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     // The template compiler attempts to minimize the need for normalization by
     // statically analyzing the template at compile time.
     //
     // For plain HTML markup, normalization can be completely skipped because the
     // generated render function is guaranteed to return Array<VNode>. There are
     // two cases where extra normalization is needed:
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // 1. When the children contains components - because a functional component
     // may return an Array instead of a single root. In this case, just a simple
     // normalization is needed - if any child is an Array, we flatten the whole
@@ -2356,7 +3169,11 @@
       }
       return children
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // 2. When the children contains constructs that always generated nested Arrays,
     // e.g. <template>, <slot>, v-for, or when the children is provided by user
     // with hand-written render functions / JSX. In such cases a full normalization
@@ -2368,11 +3185,19 @@
           ? normalizeArrayChildren(children)
           : undefined
     }
+<<<<<<< HEAD
 
     function isTextNode (node) {
       return isDef(node) && isDef(node.text) && isFalse(node.isComment)
     }
 
+=======
+  
+    function isTextNode (node) {
+      return isDef(node) && isDef(node.text) && isFalse(node.isComment)
+    }
+  
+>>>>>>> Palomino
     function normalizeArrayChildren (children, nestedIndex) {
       var res = [];
       var i, c, lastIndex, last;
@@ -2420,9 +3245,15 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initProvide (vm) {
       var provide = vm.$options.provide;
       if (provide) {
@@ -2431,7 +3262,11 @@
           : provide;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initInjections (vm) {
       var result = resolveInject(vm.$options.inject, vm);
       if (result) {
@@ -2452,7 +3287,11 @@
         toggleObserving(true);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function resolveInject (inject, vm) {
       if (inject) {
         // inject is :any because flow is not smart enough to figure out cached
@@ -2460,7 +3299,11 @@
         var keys = hasSymbol
           ? Reflect.ownKeys(inject)
           : Object.keys(inject);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         for (var i = 0; i < keys.length; i++) {
           var key = keys[i];
           // #6574 in case the inject object is observed...
@@ -2488,11 +3331,19 @@
         return result
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for resolving raw children VNodes into a slot object.
      */
@@ -2535,6 +3386,7 @@
       }
       return slots
     }
+<<<<<<< HEAD
 
     function isWhitespace (node) {
       return (node.isComment && !node.asyncFactory) || node.text === ' '
@@ -2542,6 +3394,15 @@
 
     /*  */
 
+=======
+  
+    function isWhitespace (node) {
+      return (node.isComment && !node.asyncFactory) || node.text === ' '
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     function normalizeScopedSlots (
       slots,
       normalSlots,
@@ -2591,7 +3452,11 @@
       def(res, '$hasNormal', hasNormalSlots);
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function normalizeScopedSlot(normalSlots, key, fn) {
       var normalized = function () {
         var res = arguments.length ? fn.apply(null, arguments) : fn({});
@@ -2616,6 +3481,7 @@
       }
       return normalized
     }
+<<<<<<< HEAD
 
     function proxyNormalSlot(slots, key) {
       return function () { return slots[key]; }
@@ -2623,6 +3489,15 @@
 
     /*  */
 
+=======
+  
+    function proxyNormalSlot(slots, key) {
+      return function () { return slots[key]; }
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for rendering v-for lists.
      */
@@ -2665,9 +3540,15 @@
       (ret)._isVList = true;
       return ret
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for rendering <slot>
      */
@@ -2694,7 +3575,11 @@
       } else {
         nodes = this.$slots[name] || fallback;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var target = props && props.slot;
       if (target) {
         return this.$createElement('template', { slot: target }, nodes)
@@ -2702,18 +3587,30 @@
         return nodes
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for resolving filters
      */
     function resolveFilter (id) {
       return resolveAsset(this.$options, 'filters', id, true) || identity
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function isKeyNotMatch (expect, actual) {
       if (Array.isArray(expect)) {
         return expect.indexOf(actual) === -1
@@ -2721,7 +3618,11 @@
         return expect !== actual
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for checking keyCodes from config.
      * exposed as Vue.prototype._k
@@ -2743,9 +3644,15 @@
         return hyphenate(eventKeyName) !== key
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for merging v-bind="object" into a VNode's data.
      */
@@ -2784,7 +3691,11 @@
             var hyphenatedKey = hyphenate(key);
             if (!(camelizedKey in hash) && !(hyphenatedKey in hash)) {
               hash[key] = value[key];
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
               if (isSync) {
                 var on = data.on || (data.on = {});
                 on[("update:" + key)] = function ($event) {
@@ -2793,15 +3704,25 @@
               }
             }
           };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           for (var key in value) loop( key );
         }
       }
       return data
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for rendering static trees.
      */
@@ -2825,7 +3746,11 @@
       markStatic(tree, ("__static__" + index), false);
       return tree
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Runtime helper for v-once.
      * Effectively it means marking the node as static with a unique key.
@@ -2838,7 +3763,11 @@
       markStatic(tree, ("__once__" + index + (key ? ("_" + key) : "")), true);
       return tree
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function markStatic (
       tree,
       key,
@@ -2854,15 +3783,25 @@
         markStaticNode(tree, key, isOnce);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function markStaticNode (node, key, isOnce) {
       node.isStatic = true;
       node.key = key;
       node.isOnce = isOnce;
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function bindObjectListeners (data, value) {
       if (value) {
         if (!isPlainObject(value)) {
@@ -2881,9 +3820,15 @@
       }
       return data
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function resolveScopedSlots (
       fns, // see flow/vnode
       res,
@@ -2909,9 +3854,15 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function bindDynamicKeys (baseObj, values) {
       for (var i = 0; i < values.length; i += 2) {
         var key = values[i];
@@ -2927,16 +3878,26 @@
       }
       return baseObj
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // helper to dynamically append modifier runtime markers to event names.
     // ensure only append when value is already string, otherwise it will be cast
     // to string and cause the type check to miss.
     function prependModifier (value, symbol) {
       return typeof value === 'string' ? symbol + value : value
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function installRenderHelpers (target) {
       target._o = markOnce;
       target._n = toNumber;
@@ -2956,9 +3917,15 @@
       target._d = bindDynamicKeys;
       target._p = prependModifier;
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function FunctionalRenderContext (
       data,
       props,
@@ -2967,7 +3934,11 @@
       Ctor
     ) {
       var this$1 = this;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var options = Ctor.options;
       // ensure the createElement function in functional components
       // gets a unique context - this is necessary for correct named slot check
@@ -2986,7 +3957,11 @@
       }
       var isCompiled = isTrue(options._compiled);
       var needNormalization = !isCompiled;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       this.data = data;
       this.props = props;
       this.children = children;
@@ -3002,14 +3977,22 @@
         }
         return this$1.$slots
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Object.defineProperty(this, 'scopedSlots', ({
         enumerable: true,
         get: function get () {
           return normalizeScopedSlots(data.scopedSlots, this.slots())
         }
       }));
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // support for compiled functional template
       if (isCompiled) {
         // exposing $options for renderStatic()
@@ -3018,7 +4001,11 @@
         this.$slots = this.slots();
         this.$scopedSlots = normalizeScopedSlots(data.scopedSlots, this.$slots);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (options._scopeId) {
         this._c = function (a, b, c, d) {
           var vnode = createElement(contextVm, a, b, c, d, needNormalization);
@@ -3032,9 +4019,15 @@
         this._c = function (a, b, c, d) { return createElement(contextVm, a, b, c, d, needNormalization); };
       }
     }
+<<<<<<< HEAD
 
     installRenderHelpers(FunctionalRenderContext.prototype);
 
+=======
+  
+    installRenderHelpers(FunctionalRenderContext.prototype);
+  
+>>>>>>> Palomino
     function createFunctionalComponent (
       Ctor,
       propsData,
@@ -3053,7 +4046,11 @@
         if (isDef(data.attrs)) { mergeProps(props, data.attrs); }
         if (isDef(data.props)) { mergeProps(props, data.props); }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var renderContext = new FunctionalRenderContext(
         data,
         props,
@@ -3061,9 +4058,15 @@
         contextVm,
         Ctor
       );
+<<<<<<< HEAD
 
       var vnode = options.render.call(null, renderContext._c, renderContext);
 
+=======
+  
+      var vnode = options.render.call(null, renderContext._c, renderContext);
+  
+>>>>>>> Palomino
       if (vnode instanceof VNode) {
         return cloneAndMarkFunctionalResult(vnode, data, renderContext.parent, options, renderContext)
       } else if (Array.isArray(vnode)) {
@@ -3075,7 +4078,11 @@
         return res
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function cloneAndMarkFunctionalResult (vnode, data, contextVm, options, renderContext) {
       // #7817 clone node before setting fnContext, otherwise if the node is reused
       // (e.g. it was from a cached normal slot) the fnContext causes named slots
@@ -3091,12 +4098,17 @@
       }
       return clone
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function mergeProps (to, from) {
       for (var key in from) {
         to[camelize(key)] = from[key];
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -3106,6 +4118,17 @@
 
     /*  */
 
+=======
+  
+    /*  */
+  
+    /*  */
+  
+    /*  */
+  
+    /*  */
+  
+>>>>>>> Palomino
     // inline hooks to be invoked on component VNodes during patch
     var componentVNodeHooks = {
       init: function init (vnode, hydrating) {
@@ -3125,7 +4148,11 @@
           child.$mount(hydrating ? vnode.elm : undefined, hydrating);
         }
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       prepatch: function prepatch (oldVnode, vnode) {
         var options = vnode.componentOptions;
         var child = vnode.componentInstance = oldVnode.componentInstance;
@@ -3137,7 +4164,11 @@
           options.children // new children
         );
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       insert: function insert (vnode) {
         var context = vnode.context;
         var componentInstance = vnode.componentInstance;
@@ -3158,7 +4189,11 @@
           }
         }
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       destroy: function destroy (vnode) {
         var componentInstance = vnode.componentInstance;
         if (!componentInstance._isDestroyed) {
@@ -3170,9 +4205,15 @@
         }
       }
     };
+<<<<<<< HEAD
 
     var hooksToMerge = Object.keys(componentVNodeHooks);
 
+=======
+  
+    var hooksToMerge = Object.keys(componentVNodeHooks);
+  
+>>>>>>> Palomino
     function createComponent (
       Ctor,
       data,
@@ -3183,14 +4224,24 @@
       if (isUndef(Ctor)) {
         return
       }
+<<<<<<< HEAD
 
       var baseCtor = context.$options._base;
 
+=======
+  
+      var baseCtor = context.$options._base;
+  
+>>>>>>> Palomino
       // plain options object: turn it into a constructor
       if (isObject(Ctor)) {
         Ctor = baseCtor.extend(Ctor);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // if at this stage it's not a constructor or an async component factory,
       // reject.
       if (typeof Ctor !== 'function') {
@@ -3199,7 +4250,11 @@
         }
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // async component
       var asyncFactory;
       if (isUndef(Ctor.cid)) {
@@ -3218,6 +4273,7 @@
           )
         }
       }
+<<<<<<< HEAD
 
       data = data || {};
 
@@ -3225,30 +4281,58 @@
       // component constructor creation
       resolveConstructorOptions(Ctor);
 
+=======
+  
+      data = data || {};
+  
+      // resolve constructor options in case global mixins are applied after
+      // component constructor creation
+      resolveConstructorOptions(Ctor);
+  
+>>>>>>> Palomino
       // transform component v-model data into props & events
       if (isDef(data.model)) {
         transformModel(Ctor.options, data);
       }
+<<<<<<< HEAD
 
       // extract props
       var propsData = extractPropsFromVNodeData(data, Ctor, tag);
 
+=======
+  
+      // extract props
+      var propsData = extractPropsFromVNodeData(data, Ctor, tag);
+  
+>>>>>>> Palomino
       // functional component
       if (isTrue(Ctor.options.functional)) {
         return createFunctionalComponent(Ctor, propsData, data, context, children)
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // extract listeners, since these needs to be treated as
       // child component listeners instead of DOM listeners
       var listeners = data.on;
       // replace with listeners with .native modifier
       // so it gets processed during parent component patch.
       data.on = data.nativeOn;
+<<<<<<< HEAD
 
       if (isTrue(Ctor.options.abstract)) {
         // abstract components do not keep anything
         // other than props & listeners & slot
 
+=======
+  
+      if (isTrue(Ctor.options.abstract)) {
+        // abstract components do not keep anything
+        // other than props & listeners & slot
+  
+>>>>>>> Palomino
         // work around flow
         var slot = data.slot;
         data = {};
@@ -3256,10 +4340,17 @@
           data.slot = slot;
         }
       }
+<<<<<<< HEAD
 
       // install component management hooks onto the placeholder node
       installComponentHooks(data);
 
+=======
+  
+      // install component management hooks onto the placeholder node
+      installComponentHooks(data);
+  
+>>>>>>> Palomino
       // return a placeholder vnode
       var name = Ctor.options.name || tag;
       var vnode = new VNode(
@@ -3268,10 +4359,17 @@
         { Ctor: Ctor, propsData: propsData, listeners: listeners, tag: tag, children: children },
         asyncFactory
       );
+<<<<<<< HEAD
 
       return vnode
     }
 
+=======
+  
+      return vnode
+    }
+  
+>>>>>>> Palomino
     function createComponentInstanceForVnode (
       vnode, // we know it's MountedComponentVNode but flow doesn't
       parent // activeInstance in lifecycle state
@@ -3289,7 +4387,11 @@
       }
       return new vnode.componentOptions.Ctor(options)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function installComponentHooks (data) {
       var hooks = data.hook || (data.hook = {});
       for (var i = 0; i < hooksToMerge.length; i++) {
@@ -3301,7 +4403,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function mergeHook$1 (f1, f2) {
       var merged = function (a, b) {
         // flow complains about extra args which is why we use any
@@ -3311,7 +4417,11 @@
       merged._merged = true;
       return merged
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // transform component v-model info (value and callback) into
     // prop and event handler respectively.
     function transformModel (options, data) {
@@ -3333,12 +4443,21 @@
         on[event] = callback;
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     var SIMPLE_NORMALIZE = 1;
     var ALWAYS_NORMALIZE = 2;
 
+=======
+  
+    /*  */
+  
+    var SIMPLE_NORMALIZE = 1;
+    var ALWAYS_NORMALIZE = 2;
+  
+>>>>>>> Palomino
     // wrapper function for providing a more flexible interface
     // without getting yelled at by flow
     function createElement (
@@ -3359,7 +4478,11 @@
       }
       return _createElement(context, tag, data, children, normalizationType)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function _createElement (
       context,
       tag,
@@ -3443,7 +4566,11 @@
         return createEmptyVNode()
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function applyNS (vnode, ns, force) {
       vnode.ns = ns;
       if (vnode.tag === 'foreignObject') {
@@ -3461,7 +4588,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // ref #5318
     // necessary to ensure parent re-render when deep bindings like :style and
     // :class are used on slot nodes
@@ -3473,9 +4604,15 @@
         traverse(data.class);
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initRender (vm) {
       vm._vnode = null; // the root of the child tree
       vm._staticTrees = null; // v-once cached trees
@@ -3492,11 +4629,19 @@
       // normalization is always applied for the public version, used in
       // user-written render functions.
       vm.$createElement = function (a, b, c, d) { return createElement(vm, a, b, c, d, true); };
+<<<<<<< HEAD
 
       // $attrs & $listeners are exposed for easier HOC creation.
       // they need to be reactive so that HOCs using them are always updated
       var parentData = parentVnode && parentVnode.data;
 
+=======
+  
+      // $attrs & $listeners are exposed for easier HOC creation.
+      // they need to be reactive so that HOCs using them are always updated
+      var parentData = parentVnode && parentVnode.data;
+  
+>>>>>>> Palomino
       /* istanbul ignore else */
       {
         defineReactive$$1(vm, '$attrs', parentData && parentData.attrs || emptyObject, function () {
@@ -3507,6 +4652,7 @@
         }, true);
       }
     }
+<<<<<<< HEAD
 
     var currentRenderingInstance = null;
 
@@ -3518,12 +4664,29 @@
         return nextTick(fn, this)
       };
 
+=======
+  
+    var currentRenderingInstance = null;
+  
+    function renderMixin (Vue) {
+      // install runtime convenience helpers
+      installRenderHelpers(Vue.prototype);
+  
+      Vue.prototype.$nextTick = function (fn) {
+        return nextTick(fn, this)
+      };
+  
+>>>>>>> Palomino
       Vue.prototype._render = function () {
         var vm = this;
         var ref = vm.$options;
         var render = ref.render;
         var _parentVnode = ref._parentVnode;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (_parentVnode) {
           vm.$scopedSlots = normalizeScopedSlots(
             _parentVnode.data.scopedSlots,
@@ -3531,7 +4694,11 @@
             vm.$scopedSlots
           );
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // set parent vnode. this allows render functions to have access
         // to the data on the placeholder node.
         vm.$vnode = _parentVnode;
@@ -3581,9 +4748,15 @@
         return vnode
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function ensureCtor (comp, base) {
       if (
         comp.__esModule ||
@@ -3595,7 +4768,11 @@
         ? base.extend(comp)
         : comp
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createAsyncPlaceholder (
       factory,
       data,
@@ -3608,7 +4785,11 @@
       node.asyncMeta = { data: data, context: context, children: children, tag: tag };
       return node
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function resolveAsyncComponent (
       factory,
       baseCtor
@@ -3616,34 +4797,60 @@
       if (isTrue(factory.error) && isDef(factory.errorComp)) {
         return factory.errorComp
       }
+<<<<<<< HEAD
 
       if (isDef(factory.resolved)) {
         return factory.resolved
       }
 
+=======
+  
+      if (isDef(factory.resolved)) {
+        return factory.resolved
+      }
+  
+>>>>>>> Palomino
       var owner = currentRenderingInstance;
       if (owner && isDef(factory.owners) && factory.owners.indexOf(owner) === -1) {
         // already pending
         factory.owners.push(owner);
       }
+<<<<<<< HEAD
 
       if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
         return factory.loadingComp
       }
 
+=======
+  
+      if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
+        return factory.loadingComp
+      }
+  
+>>>>>>> Palomino
       if (owner && !isDef(factory.owners)) {
         var owners = factory.owners = [owner];
         var sync = true;
         var timerLoading = null;
         var timerTimeout = null
+<<<<<<< HEAD
 
         ;(owner).$on('hook:destroyed', function () { return remove(owners, owner); });
 
+=======
+  
+        ;(owner).$on('hook:destroyed', function () { return remove(owners, owner); });
+  
+>>>>>>> Palomino
         var forceRender = function (renderCompleted) {
           for (var i = 0, l = owners.length; i < l; i++) {
             (owners[i]).$forceUpdate();
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (renderCompleted) {
             owners.length = 0;
             if (timerLoading !== null) {
@@ -3656,7 +4863,11 @@
             }
           }
         };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var resolve = once(function (res) {
           // cache resolved
           factory.resolved = ensureCtor(res, baseCtor);
@@ -3668,7 +4879,11 @@
             owners.length = 0;
           }
         });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var reject = once(function (reason) {
           warn(
             "Failed to resolve async component: " + (String(factory)) +
@@ -3679,9 +4894,15 @@
             forceRender(true);
           }
         });
+<<<<<<< HEAD
 
         var res = factory(resolve, reject);
 
+=======
+  
+        var res = factory(resolve, reject);
+  
+>>>>>>> Palomino
         if (isObject(res)) {
           if (isPromise(res)) {
             // () => Promise
@@ -3690,11 +4911,19 @@
             }
           } else if (isPromise(res.component)) {
             res.component.then(resolve, reject);
+<<<<<<< HEAD
 
             if (isDef(res.error)) {
               factory.errorComp = ensureCtor(res.error, baseCtor);
             }
 
+=======
+  
+            if (isDef(res.error)) {
+              factory.errorComp = ensureCtor(res.error, baseCtor);
+            }
+  
+>>>>>>> Palomino
             if (isDef(res.loading)) {
               factory.loadingComp = ensureCtor(res.loading, baseCtor);
               if (res.delay === 0) {
@@ -3709,7 +4938,11 @@
                 }, res.delay || 200);
               }
             }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             if (isDef(res.timeout)) {
               timerTimeout = setTimeout(function () {
                 timerTimeout = null;
@@ -3722,7 +4955,11 @@
             }
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         sync = false;
         // return in case resolved synchronously
         return factory.loading
@@ -3730,6 +4967,7 @@
           : factory.resolved
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -3739,6 +4977,17 @@
 
     /*  */
 
+=======
+  
+    /*  */
+  
+    function isAsyncPlaceholder (node) {
+      return node.isComment && node.asyncFactory
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     function getFirstComponentChild (children) {
       if (Array.isArray(children)) {
         for (var i = 0; i < children.length; i++) {
@@ -3749,11 +4998,19 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     /*  */
 
+=======
+  
+    /*  */
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initEvents (vm) {
       vm._events = Object.create(null);
       vm._hasHookEvent = false;
@@ -3763,6 +5020,7 @@
         updateComponentListeners(vm, listeners);
       }
     }
+<<<<<<< HEAD
 
     var target;
 
@@ -3774,6 +5032,19 @@
       target.$off(event, fn);
     }
 
+=======
+  
+    var target;
+  
+    function add (event, fn) {
+      target.$on(event, fn);
+    }
+  
+    function remove$1 (event, fn) {
+      target.$off(event, fn);
+    }
+  
+>>>>>>> Palomino
     function createOnceHandler (event, fn) {
       var _target = target;
       return function onceHandler () {
@@ -3783,7 +5054,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function updateComponentListeners (
       vm,
       listeners,
@@ -3793,7 +5068,11 @@
       updateListeners(listeners, oldListeners || {}, add, remove$1, createOnceHandler, vm);
       target = undefined;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function eventsMixin (Vue) {
       var hookRE = /^hook:/;
       Vue.prototype.$on = function (event, fn) {
@@ -3812,7 +5091,11 @@
         }
         return vm
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.prototype.$once = function (event, fn) {
         var vm = this;
         function on () {
@@ -3823,7 +5106,11 @@
         vm.$on(event, on);
         return vm
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.prototype.$off = function (event, fn) {
         var vm = this;
         // all
@@ -3859,7 +5146,11 @@
         }
         return vm
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.prototype.$emit = function (event) {
         var vm = this;
         {
@@ -3886,12 +5177,21 @@
         return vm
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
     var activeInstance = null;
     var isUpdatingChildComponent = false;
 
+=======
+  
+    /*  */
+  
+    var activeInstance = null;
+    var isUpdatingChildComponent = false;
+  
+>>>>>>> Palomino
     function setActiveInstance(vm) {
       var prevActiveInstance = activeInstance;
       activeInstance = vm;
@@ -3899,10 +5199,17 @@
         activeInstance = prevActiveInstance;
       }
     }
+<<<<<<< HEAD
 
     function initLifecycle (vm) {
       var options = vm.$options;
 
+=======
+  
+    function initLifecycle (vm) {
+      var options = vm.$options;
+  
+>>>>>>> Palomino
       // locate first non-abstract parent
       var parent = options.parent;
       if (parent && !options.abstract) {
@@ -3911,6 +5218,7 @@
         }
         parent.$children.push(vm);
       }
+<<<<<<< HEAD
 
       vm.$parent = parent;
       vm.$root = parent ? parent.$root : vm;
@@ -3918,6 +5226,15 @@
       vm.$children = [];
       vm.$refs = {};
 
+=======
+  
+      vm.$parent = parent;
+      vm.$root = parent ? parent.$root : vm;
+  
+      vm.$children = [];
+      vm.$refs = {};
+  
+>>>>>>> Palomino
       vm._watcher = null;
       vm._inactive = null;
       vm._directInactive = false;
@@ -3925,7 +5242,11 @@
       vm._isDestroyed = false;
       vm._isBeingDestroyed = false;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function lifecycleMixin (Vue) {
       Vue.prototype._update = function (vnode, hydrating) {
         var vm = this;
@@ -3957,14 +5278,22 @@
         // updated hook is called by the scheduler to ensure that children are
         // updated in a parent's updated hook.
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.prototype.$forceUpdate = function () {
         var vm = this;
         if (vm._watcher) {
           vm._watcher.update();
         }
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.prototype.$destroy = function () {
         var vm = this;
         if (vm._isBeingDestroyed) {
@@ -4008,7 +5337,11 @@
         }
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function mountComponent (
       vm,
       el,
@@ -4036,7 +5369,11 @@
         }
       }
       callHook(vm, 'beforeMount');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var updateComponent;
       /* istanbul ignore if */
       if (config.performance && mark) {
@@ -4045,12 +5382,20 @@
           var id = vm._uid;
           var startTag = "vue-perf-start:" + id;
           var endTag = "vue-perf-end:" + id;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           mark(startTag);
           var vnode = vm._render();
           mark(endTag);
           measure(("vue " + name + " render"), startTag, endTag);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           mark(startTag);
           vm._update(vnode, hydrating);
           mark(endTag);
@@ -4061,7 +5406,11 @@
           vm._update(vm._render(), hydrating);
         };
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // we set this to vm._watcher inside the watcher's constructor
       // since the watcher's initial patch may call $forceUpdate (e.g. inside child
       // component's mounted hook), which relies on vm._watcher being already defined
@@ -4073,7 +5422,11 @@
         }
       }, true /* isRenderWatcher */);
       hydrating = false;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // manually mounted instance, call mounted on self
       // mounted is called for render-created child components in its inserted hook
       if (vm.$vnode == null) {
@@ -4082,7 +5435,11 @@
       }
       return vm
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function updateChildComponent (
       vm,
       propsData,
@@ -4093,10 +5450,17 @@
       {
         isUpdatingChildComponent = true;
       }
+<<<<<<< HEAD
 
       // determine whether component has slot children
       // we need to do this before overwriting $options._renderChildren.
 
+=======
+  
+      // determine whether component has slot children
+      // we need to do this before overwriting $options._renderChildren.
+  
+>>>>>>> Palomino
       // check if there are dynamic scopedSlots (hand-written or compiled but with
       // dynamic slot names). Static scoped slots compiled from template has the
       // "$stable" marker.
@@ -4107,7 +5471,11 @@
         (oldScopedSlots !== emptyObject && !oldScopedSlots.$stable) ||
         (newScopedSlots && vm.$scopedSlots.$key !== newScopedSlots.$key)
       );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // Any static slot children from the parent may have changed during parent's
       // update. Dynamic scoped slots may also have changed. In such cases, a forced
       // update is necessary to ensure correctness.
@@ -4116,21 +5484,36 @@
         vm.$options._renderChildren ||  // has old static slots
         hasDynamicScopedSlot
       );
+<<<<<<< HEAD
 
       vm.$options._parentVnode = parentVnode;
       vm.$vnode = parentVnode; // update vm's placeholder node without re-render
 
+=======
+  
+      vm.$options._parentVnode = parentVnode;
+      vm.$vnode = parentVnode; // update vm's placeholder node without re-render
+  
+>>>>>>> Palomino
       if (vm._vnode) { // update child tree's parent
         vm._vnode.parent = parentVnode;
       }
       vm.$options._renderChildren = renderChildren;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // update $attrs and $listeners hash
       // these are also reactive so they may trigger child update if the child
       // used them during render
       vm.$attrs = parentVnode.data.attrs || emptyObject;
       vm.$listeners = listeners || emptyObject;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // update props
       if (propsData && vm.$options.props) {
         toggleObserving(false);
@@ -4145,31 +5528,51 @@
         // keep a copy of raw propsData
         vm.$options.propsData = propsData;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // update listeners
       listeners = listeners || emptyObject;
       var oldListeners = vm.$options._parentListeners;
       vm.$options._parentListeners = listeners;
       updateComponentListeners(vm, listeners, oldListeners);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // resolve slots + force update if has children
       if (needsForceUpdate) {
         vm.$slots = resolveSlots(renderChildren, parentVnode.context);
         vm.$forceUpdate();
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       {
         isUpdatingChildComponent = false;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isInInactiveTree (vm) {
       while (vm && (vm = vm.$parent)) {
         if (vm._inactive) { return true }
       }
       return false
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function activateChildComponent (vm, direct) {
       if (direct) {
         vm._directInactive = false;
@@ -4187,7 +5590,11 @@
         callHook(vm, 'activated');
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function deactivateChildComponent (vm, direct) {
       if (direct) {
         vm._directInactive = true;
@@ -4203,7 +5610,11 @@
         callHook(vm, 'deactivated');
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function callHook (vm, hook) {
       // #7573 disable dep collection when invoking lifecycle hooks
       pushTarget();
@@ -4219,11 +5630,19 @@
       }
       popTarget();
     }
+<<<<<<< HEAD
 
     /*  */
 
     var MAX_UPDATE_COUNT = 100;
 
+=======
+  
+    /*  */
+  
+    var MAX_UPDATE_COUNT = 100;
+  
+>>>>>>> Palomino
     var queue = [];
     var activatedChildren = [];
     var has = {};
@@ -4231,7 +5650,11 @@
     var waiting = false;
     var flushing = false;
     var index = 0;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Reset the scheduler's state.
      */
@@ -4243,17 +5666,28 @@
       }
       waiting = flushing = false;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // Async edge case #6566 requires saving the timestamp when event listeners are
     // attached. However, calling performance.now() has a perf overhead especially
     // if the page has thousands of event listeners. Instead, we take a timestamp
     // every time the scheduler flushes and use that for all event listeners
     // attached during that flush.
     var currentFlushTimestamp = 0;
+<<<<<<< HEAD
 
     // Async edge case fix requires storing an event listener's attach timestamp.
     var getNow = Date.now;
 
+=======
+  
+    // Async edge case fix requires storing an event listener's attach timestamp.
+    var getNow = Date.now;
+  
+>>>>>>> Palomino
     // Determine what event timestamp the browser is using. Annoyingly, the
     // timestamp can either be hi-res (relative to page load) or low-res
     // (relative to UNIX epoch), so in order to compare time we have to use the
@@ -4274,7 +5708,11 @@
         getNow = function () { return performance.now(); };
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Flush both queues and run the watchers.
      */
@@ -4282,7 +5720,11 @@
       currentFlushTimestamp = getNow();
       flushing = true;
       var watcher, id;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // Sort queue before flush.
       // This ensures that:
       // 1. Components are updated from parent to child. (because parent is always
@@ -4292,7 +5734,11 @@
       // 3. If a component is destroyed during a parent component's watcher run,
       //    its watchers can be skipped.
       queue.sort(function (a, b) { return a.id - b.id; });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // do not cache length because more watchers might be pushed
       // as we run existing watchers
       for (index = 0; index < queue.length; index++) {
@@ -4319,6 +5765,7 @@
           }
         }
       }
+<<<<<<< HEAD
 
       // keep copies of post queues before resetting state
       var activatedQueue = activatedChildren.slice();
@@ -4330,13 +5777,30 @@
       callActivatedHooks(activatedQueue);
       callUpdatedHooks(updatedQueue);
 
+=======
+  
+      // keep copies of post queues before resetting state
+      var activatedQueue = activatedChildren.slice();
+      var updatedQueue = queue.slice();
+  
+      resetSchedulerState();
+  
+      // call component updated and activated hooks
+      callActivatedHooks(activatedQueue);
+      callUpdatedHooks(updatedQueue);
+  
+>>>>>>> Palomino
       // devtool hook
       /* istanbul ignore if */
       if (devtools && config.devtools) {
         devtools.emit('flush');
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function callUpdatedHooks (queue) {
       var i = queue.length;
       while (i--) {
@@ -4347,7 +5811,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Queue a kept-alive component that was activated during patch.
      * The queue will be processed after the entire tree has been patched.
@@ -4358,14 +5826,22 @@
       vm._inactive = false;
       activatedChildren.push(vm);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function callActivatedHooks (queue) {
       for (var i = 0; i < queue.length; i++) {
         queue[i]._inactive = true;
         activateChildComponent(queue[i], true /* true */);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Push a watcher into the watcher queue.
      * Jobs with duplicate IDs will be skipped unless it's
@@ -4389,7 +5865,11 @@
         // queue the flush
         if (!waiting) {
           waiting = true;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (!config.async) {
             flushSchedulerQueue();
             return
@@ -4398,6 +5878,7 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -4405,6 +5886,15 @@
 
     var uid$2 = 0;
 
+=======
+  
+    /*  */
+  
+  
+  
+    var uid$2 = 0;
+  
+>>>>>>> Palomino
     /**
      * A watcher parses an expression, collects dependencies,
      * and fires callback when the expression value changes.
@@ -4460,7 +5950,11 @@
         ? undefined
         : this.get();
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Evaluate the getter, and re-collect dependencies.
      */
@@ -4487,7 +5981,11 @@
       }
       return value
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Add a dependency to this directive.
      */
@@ -4501,7 +5999,11 @@
         }
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Clean up for dependency collection.
      */
@@ -4522,7 +6024,11 @@
       this.newDeps = tmp;
       this.newDeps.length = 0;
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Subscriber interface.
      * Will be called when a dependency changes.
@@ -4537,7 +6043,11 @@
         queueWatcher(this);
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Scheduler job interface.
      * Will be called by the scheduler.
@@ -4568,7 +6078,11 @@
         }
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Evaluate the value of the watcher.
      * This only gets called for lazy watchers.
@@ -4577,7 +6091,11 @@
       this.value = this.get();
       this.dirty = false;
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Depend on all deps collected by this watcher.
      */
@@ -4587,7 +6105,11 @@
         this.deps[i].depend();
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Remove self from all dependencies' subscriber list.
      */
@@ -4606,16 +6128,26 @@
         this.active = false;
       }
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var sharedPropertyDefinition = {
       enumerable: true,
       configurable: true,
       get: noop,
       set: noop
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function proxy (target, sourceKey, key) {
       sharedPropertyDefinition.get = function proxyGetter () {
         return this[sourceKey][key]
@@ -4625,7 +6157,11 @@
       };
       Object.defineProperty(target, key, sharedPropertyDefinition);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initState (vm) {
       vm._watchers = [];
       var opts = vm.$options;
@@ -4641,7 +6177,11 @@
         initWatch(vm, opts.watch);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initProps (vm, propsOptions) {
       var propsData = vm.$options.propsData || {};
       var props = vm._props = {};
@@ -4685,11 +6225,19 @@
           proxy(vm, "_props", key);
         }
       };
+<<<<<<< HEAD
 
       for (var key in propsOptions) loop( key );
       toggleObserving(true);
     }
 
+=======
+  
+      for (var key in propsOptions) loop( key );
+      toggleObserving(true);
+    }
+  
+>>>>>>> Palomino
     function initData (vm) {
       var data = vm.$options.data;
       data = vm._data = typeof data === 'function'
@@ -4731,7 +6279,11 @@
       // observe data
       observe(data, true /* asRootData */);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getData (data, vm) {
       // #7573 disable dep collection when invoking data getters
       pushTarget();
@@ -4744,15 +6296,25 @@
         popTarget();
       }
     }
+<<<<<<< HEAD
 
     var computedWatcherOptions = { lazy: true };
 
+=======
+  
+    var computedWatcherOptions = { lazy: true };
+  
+>>>>>>> Palomino
     function initComputed (vm, computed) {
       // $flow-disable-line
       var watchers = vm._computedWatchers = Object.create(null);
       // computed properties are just getters during SSR
       var isSSR = isServerRendering();
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       for (var key in computed) {
         var userDef = computed[key];
         var getter = typeof userDef === 'function' ? userDef : userDef.get;
@@ -4762,7 +6324,11 @@
             vm
           );
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (!isSSR) {
           // create internal watcher for the computed property.
           watchers[key] = new Watcher(
@@ -4772,7 +6338,11 @@
             computedWatcherOptions
           );
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // component-defined computed properties are already defined on the
         // component prototype. We only need to define computed properties defined
         // at instantiation here.
@@ -4787,7 +6357,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function defineComputed (
       target,
       key,
@@ -4817,7 +6391,11 @@
       }
       Object.defineProperty(target, key, sharedPropertyDefinition);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createComputedGetter (key) {
       return function computedGetter () {
         var watcher = this._computedWatchers && this._computedWatchers[key];
@@ -4832,13 +6410,21 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createGetterInvoker(fn) {
       return function computedGetter () {
         return fn.call(this, this)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initMethods (vm, methods) {
       var props = vm.$options.props;
       for (var key in methods) {
@@ -4866,7 +6452,11 @@
         vm[key] = typeof methods[key] !== 'function' ? noop : bind(methods[key], vm);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initWatch (vm, watch) {
       for (var key in watch) {
         var handler = watch[key];
@@ -4879,7 +6469,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createWatcher (
       vm,
       expOrFn,
@@ -4895,7 +6489,11 @@
       }
       return vm.$watch(expOrFn, handler, options)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function stateMixin (Vue) {
       // flow somehow has problems with directly declared definition object
       // when using Object.defineProperty, so we have to procedurally build up
@@ -4918,10 +6516,17 @@
       }
       Object.defineProperty(Vue.prototype, '$data', dataDef);
       Object.defineProperty(Vue.prototype, '$props', propsDef);
+<<<<<<< HEAD
 
       Vue.prototype.$set = set;
       Vue.prototype.$delete = del;
 
+=======
+  
+      Vue.prototype.$set = set;
+      Vue.prototype.$delete = del;
+  
+>>>>>>> Palomino
       Vue.prototype.$watch = function (
         expOrFn,
         cb,
@@ -4946,17 +6551,29 @@
         }
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
     var uid$3 = 0;
 
+=======
+  
+    /*  */
+  
+    var uid$3 = 0;
+  
+>>>>>>> Palomino
     function initMixin (Vue) {
       Vue.prototype._init = function (options) {
         var vm = this;
         // a uid
         vm._uid = uid$3++;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var startTag, endTag;
         /* istanbul ignore if */
         if (config.performance && mark) {
@@ -4964,7 +6581,11 @@
           endTag = "vue-perf-end:" + (vm._uid);
           mark(startTag);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // a flag to avoid this being observed
         vm._isVue = true;
         // merge options
@@ -4994,39 +6615,63 @@
         initState(vm);
         initProvide(vm); // resolve provide after data/props
         callHook(vm, 'created');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         /* istanbul ignore if */
         if (config.performance && mark) {
           vm._name = formatComponentName(vm, false);
           mark(endTag);
           measure(("vue " + (vm._name) + " init"), startTag, endTag);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (vm.$options.el) {
           vm.$mount(vm.$options.el);
         }
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initInternalComponent (vm, options) {
       var opts = vm.$options = Object.create(vm.constructor.options);
       // doing this because it's faster than dynamic enumeration.
       var parentVnode = options._parentVnode;
       opts.parent = options.parent;
       opts._parentVnode = parentVnode;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var vnodeComponentOptions = parentVnode.componentOptions;
       opts.propsData = vnodeComponentOptions.propsData;
       opts._parentListeners = vnodeComponentOptions.listeners;
       opts._renderChildren = vnodeComponentOptions.children;
       opts._componentTag = vnodeComponentOptions.tag;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (options.render) {
         opts.render = options.render;
         opts.staticRenderFns = options.staticRenderFns;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function resolveConstructorOptions (Ctor) {
       var options = Ctor.options;
       if (Ctor.super) {
@@ -5050,7 +6695,11 @@
       }
       return options
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function resolveModifiedOptions (Ctor) {
       var modified;
       var latest = Ctor.options;
@@ -5063,7 +6712,11 @@
       }
       return modified
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function Vue (options) {
       if (!(this instanceof Vue)
       ) {
@@ -5071,22 +6724,36 @@
       }
       this._init(options);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     initMixin(Vue);
     stateMixin(Vue);
     eventsMixin(Vue);
     lifecycleMixin(Vue);
     renderMixin(Vue);
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initUse (Vue) {
       Vue.use = function (plugin) {
         var installedPlugins = (this._installedPlugins || (this._installedPlugins = []));
         if (installedPlugins.indexOf(plugin) > -1) {
           return this
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // additional parameters
         var args = toArray(arguments, 1);
         args.unshift(this);
@@ -5099,18 +6766,30 @@
         return this
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initMixin$1 (Vue) {
       Vue.mixin = function (mixin) {
         this.options = mergeOptions(this.options, mixin);
         return this
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initExtend (Vue) {
       /**
        * Each instance constructor, including Vue, has a unique
@@ -5119,7 +6798,11 @@
        */
       Vue.cid = 0;
       var cid = 1;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /**
        * Class inheritance
        */
@@ -5131,12 +6814,20 @@
         if (cachedCtors[SuperId]) {
           return cachedCtors[SuperId]
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var name = extendOptions.name || Super.options.name;
         if (name) {
           validateComponentName(name);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var Sub = function VueComponent (options) {
           this._init(options);
         };
@@ -5148,7 +6839,11 @@
           extendOptions
         );
         Sub['super'] = Super;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // For props and computed properties, we define the proxy getters on
         // the Vue instances at extension time, on the extended prototype. This
         // avoids Object.defineProperty calls for each instance created.
@@ -5158,12 +6853,20 @@
         if (Sub.options.computed) {
           initComputed$1(Sub);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // allow further extension/mixin/plugin usage
         Sub.extend = Super.extend;
         Sub.mixin = Super.mixin;
         Sub.use = Super.use;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // create asset registers, so extended classes
         // can have their private assets too.
         ASSET_TYPES.forEach(function (type) {
@@ -5173,36 +6876,58 @@
         if (name) {
           Sub.options.components[name] = Sub;
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // keep a reference to the super options at extension time.
         // later at instantiation we can check if Super's options have
         // been updated.
         Sub.superOptions = Super.options;
         Sub.extendOptions = extendOptions;
         Sub.sealedOptions = extend({}, Sub.options);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // cache constructor
         cachedCtors[SuperId] = Sub;
         return Sub
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initProps$1 (Comp) {
       var props = Comp.options.props;
       for (var key in props) {
         proxy(Comp.prototype, "_props", key);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function initComputed$1 (Comp) {
       var computed = Comp.options.computed;
       for (var key in computed) {
         defineComputed(Comp.prototype, key, computed[key]);
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initAssetRegisters (Vue) {
       /**
        * Create asset registration methods.
@@ -5232,6 +6957,7 @@
         };
       });
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -5241,6 +6967,17 @@
       return opts && (opts.Ctor.options.name || opts.tag)
     }
 
+=======
+  
+    /*  */
+  
+  
+  
+    function getComponentName (opts) {
+      return opts && (opts.Ctor.options.name || opts.tag)
+    }
+  
+>>>>>>> Palomino
     function matches (pattern, name) {
       if (Array.isArray(pattern)) {
         return pattern.indexOf(name) > -1
@@ -5252,7 +6989,11 @@
       /* istanbul ignore next */
       return false
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function pruneCache (keepAliveInstance, filter) {
       var cache = keepAliveInstance.cache;
       var keys = keepAliveInstance.keys;
@@ -5267,7 +7008,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function pruneCacheEntry (
       cache,
       key,
@@ -5281,6 +7026,7 @@
       cache[key] = null;
       remove(keys, key);
     }
+<<<<<<< HEAD
 
     var patternTypes = [String, RegExp, Array];
 
@@ -5288,26 +7034,50 @@
       name: 'keep-alive',
       abstract: true,
 
+=======
+  
+    var patternTypes = [String, RegExp, Array];
+  
+    var KeepAlive = {
+      name: 'keep-alive',
+      abstract: true,
+  
+>>>>>>> Palomino
       props: {
         include: patternTypes,
         exclude: patternTypes,
         max: [String, Number]
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       created: function created () {
         this.cache = Object.create(null);
         this.keys = [];
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       destroyed: function destroyed () {
         for (var key in this.cache) {
           pruneCacheEntry(this.cache, key, this.keys);
         }
       },
+<<<<<<< HEAD
 
       mounted: function mounted () {
         var this$1 = this;
 
+=======
+  
+      mounted: function mounted () {
+        var this$1 = this;
+  
+>>>>>>> Palomino
         this.$watch('include', function (val) {
           pruneCache(this$1, function (name) { return matches(val, name); });
         });
@@ -5315,7 +7085,11 @@
           pruneCache(this$1, function (name) { return !matches(val, name); });
         });
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       render: function render () {
         var slot = this.$slots.default;
         var vnode = getFirstComponentChild(slot);
@@ -5334,7 +7108,11 @@
           ) {
             return vnode
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           var ref$1 = this;
           var cache = ref$1.cache;
           var keys = ref$1.keys;
@@ -5356,12 +7134,17 @@
               pruneCacheEntry(cache, keys[0], keys, this._vnode);
             }
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           vnode.data.keepAlive = true;
         }
         return vnode || (slot && slot[0])
       }
     };
+<<<<<<< HEAD
 
     var builtInComponents = {
       KeepAlive: KeepAlive
@@ -5369,6 +7152,15 @@
 
     /*  */
 
+=======
+  
+    var builtInComponents = {
+      KeepAlive: KeepAlive
+    };
+  
+    /*  */
+  
+>>>>>>> Palomino
     function initGlobalAPI (Vue) {
       // config
       var configDef = {};
@@ -5381,7 +7173,11 @@
         };
       }
       Object.defineProperty(Vue, 'config', configDef);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // exposed util methods.
       // NOTE: these are not considered part of the public API - avoid relying on
       // them unless you are aware of the risk.
@@ -5391,21 +7187,34 @@
         mergeOptions: mergeOptions,
         defineReactive: defineReactive$$1
       };
+<<<<<<< HEAD
 
       Vue.set = set;
       Vue.delete = del;
       Vue.nextTick = nextTick;
 
+=======
+  
+      Vue.set = set;
+      Vue.delete = del;
+      Vue.nextTick = nextTick;
+  
+>>>>>>> Palomino
       // 2.6 explicit observable API
       Vue.observable = function (obj) {
         observe(obj);
         return obj
       };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       Vue.options = Object.create(null);
       ASSET_TYPES.forEach(function (type) {
         Vue.options[type + 's'] = Object.create(null);
       });
+<<<<<<< HEAD
 
       // this is used to identify the "base" constructor to extend all plain-object
       // components with in Weex's multi-instance scenarios.
@@ -5413,11 +7222,21 @@
 
       extend(Vue.options.components, builtInComponents);
 
+=======
+  
+      // this is used to identify the "base" constructor to extend all plain-object
+      // components with in Weex's multi-instance scenarios.
+      Vue.options._base = Vue;
+  
+      extend(Vue.options.components, builtInComponents);
+  
+>>>>>>> Palomino
       initUse(Vue);
       initMixin$1(Vue);
       initExtend(Vue);
       initAssetRegisters(Vue);
     }
+<<<<<<< HEAD
 
     initGlobalAPI(Vue);
 
@@ -5425,17 +7244,31 @@
       get: isServerRendering
     });
 
+=======
+  
+    initGlobalAPI(Vue);
+  
+    Object.defineProperty(Vue.prototype, '$isServer', {
+      get: isServerRendering
+    });
+  
+>>>>>>> Palomino
     Object.defineProperty(Vue.prototype, '$ssrContext', {
       get: function get () {
         /* istanbul ignore next */
         return this.$vnode && this.$vnode.ssrContext
       }
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // expose FunctionalRenderContext for ssr runtime helper installation
     Object.defineProperty(Vue, 'FunctionalRenderContext', {
       value: FunctionalRenderContext
     });
+<<<<<<< HEAD
 
     Vue.version = '2.6.10';
 
@@ -5445,6 +7278,17 @@
     // during template compilation
     var isReservedAttr = makeMap('style,class');
 
+=======
+  
+    Vue.version = '2.6.10';
+  
+    /*  */
+  
+    // these are reserved for web because they are directly compiled away
+    // during template compilation
+    var isReservedAttr = makeMap('style,class');
+  
+>>>>>>> Palomino
     // attributes that should be using props for binding
     var acceptValue = makeMap('input,textarea,option,select,progress');
     var mustUseProp = function (tag, type, attr) {
@@ -5455,11 +7299,19 @@
         (attr === 'muted' && tag === 'video')
       )
     };
+<<<<<<< HEAD
 
     var isEnumeratedAttr = makeMap('contenteditable,draggable,spellcheck');
 
     var isValidContentEditableValue = makeMap('events,caret,typing,plaintext-only');
 
+=======
+  
+    var isEnumeratedAttr = makeMap('contenteditable,draggable,spellcheck');
+  
+    var isValidContentEditableValue = makeMap('events,caret,typing,plaintext-only');
+  
+>>>>>>> Palomino
     var convertEnumeratedValue = function (key, value) {
       return isFalsyAttrValue(value) || value === 'false'
         ? 'false'
@@ -5468,7 +7320,11 @@
           ? value
           : 'true'
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var isBooleanAttr = makeMap(
       'allowfullscreen,async,autofocus,autoplay,checked,compact,controls,declare,' +
       'default,defaultchecked,defaultmuted,defaultselected,defer,disabled,' +
@@ -5477,6 +7333,7 @@
       'required,reversed,scoped,seamless,selected,sortable,translate,' +
       'truespeed,typemustmatch,visible'
     );
+<<<<<<< HEAD
 
     var xlinkNS = 'http://www.w3.org/1999/xlink';
 
@@ -5494,6 +7351,25 @@
 
     /*  */
 
+=======
+  
+    var xlinkNS = 'http://www.w3.org/1999/xlink';
+  
+    var isXlink = function (name) {
+      return name.charAt(5) === ':' && name.slice(0, 5) === 'xlink'
+    };
+  
+    var getXlinkProp = function (name) {
+      return isXlink(name) ? name.slice(6, name.length) : ''
+    };
+  
+    var isFalsyAttrValue = function (val) {
+      return val == null || val === false
+    };
+  
+    /*  */
+  
+>>>>>>> Palomino
     function genClassForVnode (vnode) {
       var data = vnode.data;
       var parentNode = vnode;
@@ -5511,7 +7387,11 @@
       }
       return renderClass(data.staticClass, data.class)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function mergeClassData (child, parent) {
       return {
         staticClass: concat(child.staticClass, parent.staticClass),
@@ -5520,7 +7400,11 @@
           : parent.class
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function renderClass (
       staticClass,
       dynamicClass
@@ -5531,11 +7415,19 @@
       /* istanbul ignore next */
       return ''
     }
+<<<<<<< HEAD
 
     function concat (a, b) {
       return a ? b ? (a + ' ' + b) : a : (b || '')
     }
 
+=======
+  
+    function concat (a, b) {
+      return a ? b ? (a + ' ' + b) : a : (b || '')
+    }
+  
+>>>>>>> Palomino
     function stringifyClass (value) {
       if (Array.isArray(value)) {
         return stringifyArray(value)
@@ -5549,7 +7441,11 @@
       /* istanbul ignore next */
       return ''
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function stringifyArray (value) {
       var res = '';
       var stringified;
@@ -5561,7 +7457,11 @@
       }
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function stringifyObject (value) {
       var res = '';
       for (var key in value) {
@@ -5572,14 +7472,24 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var namespaceMap = {
       svg: 'http://www.w3.org/2000/svg',
       math: 'http://www.w3.org/1998/Math/MathML'
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var isHTMLTag = makeMap(
       'html,body,base,head,link,meta,style,title,' +
       'address,article,aside,footer,header,h1,h2,h3,h4,h5,h6,hgroup,nav,section,' +
@@ -5593,7 +7503,11 @@
       'details,dialog,menu,menuitem,summary,' +
       'content,element,shadow,template,blockquote,iframe,tfoot'
     );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // this map is intentionally selective, only covering SVG elements that may
     // contain child elements.
     var isSVG = makeMap(
@@ -5602,6 +7516,7 @@
       'polygon,polyline,rect,switch,symbol,text,textpath,tspan,use,view',
       true
     );
+<<<<<<< HEAD
 
     var isPreTag = function (tag) { return tag === 'pre'; };
 
@@ -5609,6 +7524,15 @@
       return isHTMLTag(tag) || isSVG(tag)
     };
 
+=======
+  
+    var isPreTag = function (tag) { return tag === 'pre'; };
+  
+    var isReservedTag = function (tag) {
+      return isHTMLTag(tag) || isSVG(tag)
+    };
+  
+>>>>>>> Palomino
     function getTagNamespace (tag) {
       if (isSVG(tag)) {
         return 'svg'
@@ -5619,7 +7543,11 @@
         return 'math'
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var unknownElementCache = Object.create(null);
     function isUnknownElement (tag) {
       /* istanbul ignore if */
@@ -5645,11 +7573,19 @@
         return (unknownElementCache[tag] = /HTMLUnknownElement/.test(el.toString()))
       }
     }
+<<<<<<< HEAD
 
     var isTextInputType = makeMap('text,number,password,search,email,tel,url');
 
     /*  */
 
+=======
+  
+    var isTextInputType = makeMap('text,number,password,search,email,tel,url');
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Query an element selector if it's not an element already.
      */
@@ -5667,9 +7603,15 @@
         return el
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function createElement$1 (tagName, vnode) {
       var elm = document.createElement(tagName);
       if (tagName !== 'select') {
@@ -5681,6 +7623,7 @@
       }
       return elm
     }
+<<<<<<< HEAD
 
     function createElementNS (namespace, tagName) {
       return document.createElementNS(namespaceMap[namespace], tagName)
@@ -5726,6 +7669,53 @@
       node.setAttribute(scopeId, '');
     }
 
+=======
+  
+    function createElementNS (namespace, tagName) {
+      return document.createElementNS(namespaceMap[namespace], tagName)
+    }
+  
+    function createTextNode (text) {
+      return document.createTextNode(text)
+    }
+  
+    function createComment (text) {
+      return document.createComment(text)
+    }
+  
+    function insertBefore (parentNode, newNode, referenceNode) {
+      parentNode.insertBefore(newNode, referenceNode);
+    }
+  
+    function removeChild (node, child) {
+      node.removeChild(child);
+    }
+  
+    function appendChild (node, child) {
+      node.appendChild(child);
+    }
+  
+    function parentNode (node) {
+      return node.parentNode
+    }
+  
+    function nextSibling (node) {
+      return node.nextSibling
+    }
+  
+    function tagName (node) {
+      return node.tagName
+    }
+  
+    function setTextContent (node, text) {
+      node.textContent = text;
+    }
+  
+    function setStyleScope (node, scopeId) {
+      node.setAttribute(scopeId, '');
+    }
+  
+>>>>>>> Palomino
     var nodeOps = /*#__PURE__*/Object.freeze({
       createElement: createElement$1,
       createElementNS: createElementNS,
@@ -5740,9 +7730,15 @@
       setTextContent: setTextContent,
       setStyleScope: setStyleScope
     });
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var ref = {
       create: function create (_, vnode) {
         registerRef(vnode);
@@ -5757,11 +7753,19 @@
         registerRef(vnode, true);
       }
     };
+<<<<<<< HEAD
 
     function registerRef (vnode, isRemoval) {
       var key = vnode.data.ref;
       if (!isDef(key)) { return }
 
+=======
+  
+    function registerRef (vnode, isRemoval) {
+      var key = vnode.data.ref;
+      if (!isDef(key)) { return }
+  
+>>>>>>> Palomino
       var vm = vnode.context;
       var ref = vnode.componentInstance || vnode.elm;
       var refs = vm.$refs;
@@ -5784,7 +7788,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Virtual DOM patching algorithm based on Snabbdom by
      * Simon Friis Vindum (@paldepind)
@@ -5796,11 +7804,19 @@
      * Not type-checking this because this file is perf-critical and the cost
      * of making flow understand it is not worth it.
      */
+<<<<<<< HEAD
 
     var emptyNode = new VNode('', {}, []);
 
     var hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
 
+=======
+  
+    var emptyNode = new VNode('', {}, []);
+  
+    var hooks = ['create', 'activate', 'update', 'remove', 'destroy'];
+  
+>>>>>>> Palomino
     function sameVnode (a, b) {
       return (
         a.key === b.key && (
@@ -5817,7 +7833,11 @@
         )
       )
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function sameInputType (a, b) {
       if (a.tag !== 'input') { return true }
       var i;
@@ -5825,7 +7845,11 @@
       var typeB = isDef(i = b.data) && isDef(i = i.attrs) && i.type;
       return typeA === typeB || isTextInputType(typeA) && isTextInputType(typeB)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createKeyToOldIdx (children, beginIdx, endIdx) {
       var i, key;
       var map = {};
@@ -5835,6 +7859,7 @@
       }
       return map
     }
+<<<<<<< HEAD
 
     function createPatchFunction (backend) {
       var i, j;
@@ -5843,6 +7868,16 @@
       var modules = backend.modules;
       var nodeOps = backend.nodeOps;
 
+=======
+  
+    function createPatchFunction (backend) {
+      var i, j;
+      var cbs = {};
+  
+      var modules = backend.modules;
+      var nodeOps = backend.nodeOps;
+  
+>>>>>>> Palomino
       for (i = 0; i < hooks.length; ++i) {
         cbs[hooks[i]] = [];
         for (j = 0; j < modules.length; ++j) {
@@ -5851,11 +7886,19 @@
           }
         }
       }
+<<<<<<< HEAD
 
       function emptyNodeAt (elm) {
         return new VNode(nodeOps.tagName(elm).toLowerCase(), {}, [], undefined, elm)
       }
 
+=======
+  
+      function emptyNodeAt (elm) {
+        return new VNode(nodeOps.tagName(elm).toLowerCase(), {}, [], undefined, elm)
+      }
+  
+>>>>>>> Palomino
       function createRmCb (childElm, listeners) {
         function remove$$1 () {
           if (--remove$$1.listeners === 0) {
@@ -5865,7 +7908,11 @@
         remove$$1.listeners = listeners;
         return remove$$1
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function removeNode (el) {
         var parent = nodeOps.parentNode(el);
         // element may have already been removed due to v-html / v-text
@@ -5873,7 +7920,11 @@
           nodeOps.removeChild(parent, el);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function isUnknownElement$$1 (vnode, inVPre) {
         return (
           !inVPre &&
@@ -5889,9 +7940,15 @@
           config.isUnknownElement(vnode.tag)
         )
       }
+<<<<<<< HEAD
 
       var creatingElmInVPre = 0;
 
+=======
+  
+      var creatingElmInVPre = 0;
+  
+>>>>>>> Palomino
       function createElm (
         vnode,
         insertedVnodeQueue,
@@ -5909,12 +7966,20 @@
           // associated DOM element for it.
           vnode = ownerArray[index] = cloneVNode(vnode);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         vnode.isRootInsert = !nested; // for transition enter check
         if (createComponent(vnode, insertedVnodeQueue, parentElm, refElm)) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var data = vnode.data;
         var children = vnode.children;
         var tag = vnode.tag;
@@ -5932,12 +7997,20 @@
               );
             }
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           vnode.elm = vnode.ns
             ? nodeOps.createElementNS(vnode.ns, tag)
             : nodeOps.createElement(tag, vnode);
           setScope(vnode);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           /* istanbul ignore if */
           {
             createChildren(vnode, children, insertedVnodeQueue);
@@ -5946,7 +8019,11 @@
             }
             insert(parentElm, vnode.elm, refElm);
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (data && data.pre) {
             creatingElmInVPre--;
           }
@@ -5958,7 +8035,11 @@
           insert(parentElm, vnode.elm, refElm);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function createComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
         var i = vnode.data;
         if (isDef(i)) {
@@ -5980,7 +8061,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function initComponent (vnode, insertedVnodeQueue) {
         if (isDef(vnode.data.pendingInsert)) {
           insertedVnodeQueue.push.apply(insertedVnodeQueue, vnode.data.pendingInsert);
@@ -5998,7 +8083,11 @@
           insertedVnodeQueue.push(vnode);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function reactivateComponent (vnode, insertedVnodeQueue, parentElm, refElm) {
         var i;
         // hack for #4339: a reactivated component with inner transition
@@ -6020,7 +8109,11 @@
         // a reactivated keep-alive component doesn't insert itself
         insert(parentElm, vnode.elm, refElm);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function insert (parent, elm, ref$$1) {
         if (isDef(parent)) {
           if (isDef(ref$$1)) {
@@ -6032,7 +8125,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function createChildren (vnode, children, insertedVnodeQueue) {
         if (Array.isArray(children)) {
           {
@@ -6045,14 +8142,22 @@
           nodeOps.appendChild(vnode.elm, nodeOps.createTextNode(String(vnode.text)));
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function isPatchable (vnode) {
         while (vnode.componentInstance) {
           vnode = vnode.componentInstance._vnode;
         }
         return isDef(vnode.tag)
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function invokeCreateHooks (vnode, insertedVnodeQueue) {
         for (var i$1 = 0; i$1 < cbs.create.length; ++i$1) {
           cbs.create[i$1](emptyNode, vnode);
@@ -6063,7 +8168,11 @@
           if (isDef(i.insert)) { insertedVnodeQueue.push(vnode); }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // set scope id attribute for scoped CSS.
       // this is implemented as a special case to avoid the overhead
       // of going through the normal attribute patching process.
@@ -6089,13 +8198,21 @@
           nodeOps.setStyleScope(vnode.elm, i);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function addVnodes (parentElm, refElm, vnodes, startIdx, endIdx, insertedVnodeQueue) {
         for (; startIdx <= endIdx; ++startIdx) {
           createElm(vnodes[startIdx], insertedVnodeQueue, parentElm, refElm, false, vnodes, startIdx);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function invokeDestroyHook (vnode) {
         var i, j;
         var data = vnode.data;
@@ -6109,7 +8226,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function removeVnodes (parentElm, vnodes, startIdx, endIdx) {
         for (; startIdx <= endIdx; ++startIdx) {
           var ch = vnodes[startIdx];
@@ -6123,7 +8244,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function removeAndInvokeRemoveHook (vnode, rm) {
         if (isDef(rm) || isDef(vnode.data)) {
           var i;
@@ -6152,7 +8277,11 @@
           removeNode(vnode.elm);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function updateChildren (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) {
         var oldStartIdx = 0;
         var newStartIdx = 0;
@@ -6163,16 +8292,28 @@
         var newStartVnode = newCh[0];
         var newEndVnode = newCh[newEndIdx];
         var oldKeyToIdx, idxInOld, vnodeToMove, refElm;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // removeOnly is a special flag used only by <transition-group>
         // to ensure removed elements stay in correct relative positions
         // during leaving transitions
         var canMove = !removeOnly;
+<<<<<<< HEAD
 
         {
           checkDuplicateKeys(newCh);
         }
 
+=======
+  
+        {
+          checkDuplicateKeys(newCh);
+        }
+  
+>>>>>>> Palomino
         while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
           if (isUndef(oldStartVnode)) {
             oldStartVnode = oldCh[++oldStartIdx]; // Vnode has been moved left
@@ -6224,7 +8365,11 @@
           removeVnodes(parentElm, oldCh, oldStartIdx, oldEndIdx);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function checkDuplicateKeys (children) {
         var seenKeys = {};
         for (var i = 0; i < children.length; i++) {
@@ -6242,14 +8387,22 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function findIdxInOld (node, oldCh, start, end) {
         for (var i = start; i < end; i++) {
           var c = oldCh[i];
           if (isDef(c) && sameVnode(node, c)) { return i }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function patchVnode (
         oldVnode,
         vnode,
@@ -6261,14 +8414,24 @@
         if (oldVnode === vnode) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (isDef(vnode.elm) && isDef(ownerArray)) {
           // clone reused vnode
           vnode = ownerArray[index] = cloneVNode(vnode);
         }
+<<<<<<< HEAD
 
         var elm = vnode.elm = oldVnode.elm;
 
+=======
+  
+        var elm = vnode.elm = oldVnode.elm;
+  
+>>>>>>> Palomino
         if (isTrue(oldVnode.isAsyncPlaceholder)) {
           if (isDef(vnode.asyncFactory.resolved)) {
             hydrate(oldVnode.elm, vnode, insertedVnodeQueue);
@@ -6277,7 +8440,11 @@
           }
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // reuse element for static trees.
         // note we only do this if the vnode is cloned -
         // if the new node is not cloned it means the render functions have been
@@ -6290,13 +8457,21 @@
           vnode.componentInstance = oldVnode.componentInstance;
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var i;
         var data = vnode.data;
         if (isDef(data) && isDef(i = data.hook) && isDef(i = i.prepatch)) {
           i(oldVnode, vnode);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var oldCh = oldVnode.children;
         var ch = vnode.children;
         if (isDef(data) && isPatchable(vnode)) {
@@ -6324,7 +8499,11 @@
           if (isDef(i = data.hook) && isDef(i = i.postpatch)) { i(oldVnode, vnode); }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function invokeInsertHook (vnode, queue, initial) {
         // delay insert hooks for component root nodes, invoke them after the
         // element is really inserted
@@ -6336,14 +8515,22 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var hydrationBailed = false;
       // list of modules that can skip create hook during hydration because they
       // are already rendered on the client or has no need for initialization
       // Note: style is excluded because it relies on initial clone for future
       // deep updates (#7063).
       var isRenderedModule = makeMap('attrs,class,staticClass,staticStyle,key');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // Note: this is a browser-only function so we can assume elms are DOM nodes.
       function hydrate (elm, vnode, insertedVnodeQueue, inVPre) {
         var i;
@@ -6352,7 +8539,11 @@
         var children = vnode.children;
         inVPre = inVPre || (data && data.pre);
         vnode.elm = elm;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (isTrue(vnode.isComment) && isDef(vnode.asyncFactory)) {
           vnode.isAsyncPlaceholder = true;
           return true
@@ -6437,7 +8628,11 @@
         }
         return true
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function assertNodeMatch (node, vnode, inVPre) {
         if (isDef(vnode.tag)) {
           return vnode.tag.indexOf('vue-component') === 0 || (
@@ -6448,16 +8643,27 @@
           return node.nodeType === (vnode.isComment ? 8 : 3)
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       return function patch (oldVnode, vnode, hydrating, removeOnly) {
         if (isUndef(vnode)) {
           if (isDef(oldVnode)) { invokeDestroyHook(oldVnode); }
           return
         }
+<<<<<<< HEAD
 
         var isInitialPatch = false;
         var insertedVnodeQueue = [];
 
+=======
+  
+        var isInitialPatch = false;
+        var insertedVnodeQueue = [];
+  
+>>>>>>> Palomino
         if (isUndef(oldVnode)) {
           // empty mount (likely as component), create new root element
           isInitialPatch = true;
@@ -6494,11 +8700,19 @@
               // create an empty node and replace it
               oldVnode = emptyNodeAt(oldVnode);
             }
+<<<<<<< HEAD
 
             // replacing existing element
             var oldElm = oldVnode.elm;
             var parentElm = nodeOps.parentNode(oldElm);
 
+=======
+  
+            // replacing existing element
+            var oldElm = oldVnode.elm;
+            var parentElm = nodeOps.parentNode(oldElm);
+  
+>>>>>>> Palomino
             // create new node
             createElm(
               vnode,
@@ -6509,7 +8723,11 @@
               oldElm._leaveCb ? null : parentElm,
               nodeOps.nextSibling(oldElm)
             );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             // update parent placeholder node element, recursively
             if (isDef(vnode.parent)) {
               var ancestor = vnode.parent;
@@ -6539,7 +8757,11 @@
                 ancestor = ancestor.parent;
               }
             }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             // destroy old node
             if (isDef(parentElm)) {
               removeVnodes(parentElm, [oldVnode], 0, 0);
@@ -6548,14 +8770,24 @@
             }
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         invokeInsertHook(vnode, insertedVnodeQueue, isInitialPatch);
         return vnode.elm
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var directives = {
       create: updateDirectives,
       update: updateDirectives,
@@ -6563,22 +8795,37 @@
         updateDirectives(vnode, emptyNode);
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function updateDirectives (oldVnode, vnode) {
       if (oldVnode.data.directives || vnode.data.directives) {
         _update(oldVnode, vnode);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function _update (oldVnode, vnode) {
       var isCreate = oldVnode === emptyNode;
       var isDestroy = vnode === emptyNode;
       var oldDirs = normalizeDirectives$1(oldVnode.data.directives, oldVnode.context);
       var newDirs = normalizeDirectives$1(vnode.data.directives, vnode.context);
+<<<<<<< HEAD
 
       var dirsWithInsert = [];
       var dirsWithPostpatch = [];
 
+=======
+  
+      var dirsWithInsert = [];
+      var dirsWithPostpatch = [];
+  
+>>>>>>> Palomino
       var key, oldDir, dir;
       for (key in newDirs) {
         oldDir = oldDirs[key];
@@ -6599,7 +8846,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (dirsWithInsert.length) {
         var callInsert = function () {
           for (var i = 0; i < dirsWithInsert.length; i++) {
@@ -6612,7 +8863,11 @@
           callInsert();
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (dirsWithPostpatch.length) {
         mergeVNodeHook(vnode, 'postpatch', function () {
           for (var i = 0; i < dirsWithPostpatch.length; i++) {
@@ -6620,7 +8875,11 @@
           }
         });
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (!isCreate) {
         for (key in oldDirs) {
           if (!newDirs[key]) {
@@ -6630,9 +8889,15 @@
         }
       }
     }
+<<<<<<< HEAD
 
     var emptyModifiers = Object.create(null);
 
+=======
+  
+    var emptyModifiers = Object.create(null);
+  
+>>>>>>> Palomino
     function normalizeDirectives$1 (
       dirs,
       vm
@@ -6655,11 +8920,19 @@
       // $flow-disable-line
       return res
     }
+<<<<<<< HEAD
 
     function getRawDirName (dir) {
       return dir.rawName || ((dir.name) + "." + (Object.keys(dir.modifiers || {}).join('.')))
     }
 
+=======
+  
+    function getRawDirName (dir) {
+      return dir.rawName || ((dir.name) + "." + (Object.keys(dir.modifiers || {}).join('.')))
+    }
+  
+>>>>>>> Palomino
     function callHook$1 (dir, hook, vnode, oldVnode, isDestroy) {
       var fn = dir.def && dir.def[hook];
       if (fn) {
@@ -6670,14 +8943,24 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var baseModules = [
       ref,
       directives
     ];
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function updateAttrs (oldVnode, vnode) {
       var opts = vnode.componentOptions;
       if (isDef(opts) && opts.Ctor.options.inheritAttrs === false) {
@@ -6694,7 +8977,11 @@
       if (isDef(attrs.__ob__)) {
         attrs = vnode.data.attrs = extend({}, attrs);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       for (key in attrs) {
         cur = attrs[key];
         old = oldAttrs[key];
@@ -6718,7 +9005,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function setAttr (el, key, value) {
       if (el.tagName.indexOf('-') > -1) {
         baseSetAttr(el, key, value);
@@ -6747,7 +9038,11 @@
         baseSetAttr(el, key, value);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function baseSetAttr (el, key, value) {
       if (isFalsyAttrValue(value)) {
         el.removeAttribute(key);
@@ -6772,14 +9067,24 @@
         el.setAttribute(key, value);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var attrs = {
       create: updateAttrs,
       update: updateAttrs
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function updateClass (oldVnode, vnode) {
       var el = vnode.elm;
       var data = vnode.data;
@@ -6795,31 +9100,53 @@
       ) {
         return
       }
+<<<<<<< HEAD
 
       var cls = genClassForVnode(vnode);
 
+=======
+  
+      var cls = genClassForVnode(vnode);
+  
+>>>>>>> Palomino
       // handle transition classes
       var transitionClass = el._transitionClasses;
       if (isDef(transitionClass)) {
         cls = concat(cls, stringifyClass(transitionClass));
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // set the class
       if (cls !== el._prevClass) {
         el.setAttribute('class', cls);
         el._prevClass = cls;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var klass = {
       create: updateClass,
       update: updateClass
     };
+<<<<<<< HEAD
 
     /*  */
 
     var validDivisionCharRE = /[\w).+\-_$\]]/;
 
+=======
+  
+    /*  */
+  
+    var validDivisionCharRE = /[\w).+\-_$\]]/;
+  
+>>>>>>> Palomino
     function parseFilters (exp) {
       var inSingle = false;
       var inDouble = false;
@@ -6830,7 +9157,11 @@
       var paren = 0;
       var lastFilterIndex = 0;
       var c, prev, i, expression, filters;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       for (i = 0; i < exp.length; i++) {
         prev = c;
         c = exp.charCodeAt(i);
@@ -6881,27 +9212,46 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (expression === undefined) {
         expression = exp.slice(0, i).trim();
       } else if (lastFilterIndex !== 0) {
         pushFilter();
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function pushFilter () {
         (filters || (filters = [])).push(exp.slice(lastFilterIndex, i).trim());
         lastFilterIndex = i + 1;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (filters) {
         for (i = 0; i < filters.length; i++) {
           expression = wrapFilter(expression, filters[i]);
         }
       }
+<<<<<<< HEAD
 
       return expression
     }
 
+=======
+  
+      return expression
+    }
+  
+>>>>>>> Palomino
     function wrapFilter (exp, filter) {
       var i = filter.indexOf('(');
       if (i < 0) {
@@ -6913,17 +9263,29 @@
         return ("_f(\"" + name + "\")(" + exp + (args !== ')' ? ',' + args : args))
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     /* eslint-disable no-unused-vars */
     function baseWarn (msg, range) {
       console.error(("[Vue compiler]: " + msg));
     }
     /* eslint-enable no-unused-vars */
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function pluckModuleFunction (
       modules,
       key
@@ -6932,12 +9294,20 @@
         ? modules.map(function (m) { return m[key]; }).filter(function (_) { return _; })
         : []
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addProp (el, name, value, range, dynamic) {
       (el.props || (el.props = [])).push(rangeSetItem({ name: name, value: value, dynamic: dynamic }, range));
       el.plain = false;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addAttr (el, name, value, range, dynamic) {
       var attrs = dynamic
         ? (el.dynamicAttrs || (el.dynamicAttrs = []))
@@ -6945,13 +9315,21 @@
       attrs.push(rangeSetItem({ name: name, value: value, dynamic: dynamic }, range));
       el.plain = false;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // add a raw attr (use this in preTransforms)
     function addRawAttr (el, name, value, range) {
       el.attrsMap[name] = value;
       el.attrsList.push(rangeSetItem({ name: name, value: value }, range));
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addDirective (
       el,
       name,
@@ -6972,13 +9350,21 @@
       }, range));
       el.plain = false;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function prependModifierMarker (symbol, name, dynamic) {
       return dynamic
         ? ("_p(" + name + ",\"" + symbol + "\")")
         : symbol + name // mark the event as captured
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addHandler (
       el,
       name,
@@ -7002,7 +9388,11 @@
           range
         );
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // normalize click.right and click.middle since they don't actually fire
       // this is technically browser-specific, but at least for now browsers are
       // the only target envs that have right/middle clicks.
@@ -7020,7 +9410,11 @@
           name = 'mouseup';
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // check capture modifier
       if (modifiers.capture) {
         delete modifiers.capture;
@@ -7035,7 +9429,11 @@
         delete modifiers.passive;
         name = prependModifierMarker('&', name, dynamic);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var events;
       if (modifiers.native) {
         delete modifiers.native;
@@ -7043,12 +9441,20 @@
       } else {
         events = el.events || (el.events = {});
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var newHandler = rangeSetItem({ value: value.trim(), dynamic: dynamic }, range);
       if (modifiers !== emptyObject) {
         newHandler.modifiers = modifiers;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var handlers = events[name];
       /* istanbul ignore if */
       if (Array.isArray(handlers)) {
@@ -7058,10 +9464,17 @@
       } else {
         events[name] = newHandler;
       }
+<<<<<<< HEAD
 
       el.plain = false;
     }
 
+=======
+  
+      el.plain = false;
+    }
+  
+>>>>>>> Palomino
     function getRawBindingAttr (
       el,
       name
@@ -7070,7 +9483,11 @@
         el.rawAttrsMap['v-bind:' + name] ||
         el.rawAttrsMap[name]
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getBindingAttr (
       el,
       name,
@@ -7088,7 +9505,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // note: this only removes the attr from the Array (attrsList) so that it
     // doesn't get processed by processAttrs.
     // By default it does NOT remove it from the map (attrsMap) because the map is
@@ -7113,7 +9534,11 @@
       }
       return val
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getAndRemoveAttrByRegex (
       el,
       name
@@ -7127,7 +9552,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function rangeSetItem (
       item,
       range
@@ -7142,9 +9571,15 @@
       }
       return item
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     /**
      * Cross-platform code generation for component v-model
      */
@@ -7156,7 +9591,11 @@
       var ref = modifiers || {};
       var number = ref.number;
       var trim = ref.trim;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var baseValueExpression = '$$v';
       var valueExpression = baseValueExpression;
       if (trim) {
@@ -7169,14 +9608,22 @@
         valueExpression = "_n(" + valueExpression + ")";
       }
       var assignment = genAssignmentCode(value, valueExpression);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       el.model = {
         value: ("(" + value + ")"),
         expression: JSON.stringify(value),
         callback: ("function (" + baseValueExpression + ") {" + assignment + "}")
       };
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Cross-platform codegen helper for generating v-model value assignment code.
      */
@@ -7191,7 +9638,11 @@
         return ("$set(" + (res.exp) + ", " + (res.key) + ", " + assignment + ")")
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Parse a v-model expression into a base path and a final key segment.
      * Handles both dot-path and possible square brackets.
@@ -7206,17 +9657,29 @@
      * - test.xxx.a["asa"][test1[key]]
      *
      */
+<<<<<<< HEAD
 
     var len, str, chr, index$1, expressionPos, expressionEndPos;
 
 
 
+=======
+  
+    var len, str, chr, index$1, expressionPos, expressionEndPos;
+  
+  
+  
+>>>>>>> Palomino
     function parseModel (val) {
       // Fix https://github.com/vuejs/vue/pull/7730
       // allow v-model="obj.val " (trailing whitespace)
       val = val.trim();
       len = val.length;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (val.indexOf('[') < 0 || val.lastIndexOf(']') < len - 1) {
         index$1 = val.lastIndexOf('.');
         if (index$1 > -1) {
@@ -7231,10 +9694,17 @@
           }
         }
       }
+<<<<<<< HEAD
 
       str = val;
       index$1 = expressionPos = expressionEndPos = 0;
 
+=======
+  
+      str = val;
+      index$1 = expressionPos = expressionEndPos = 0;
+  
+>>>>>>> Palomino
       while (!eof()) {
         chr = next();
         /* istanbul ignore if */
@@ -7244,12 +9714,17 @@
           parseBracket(chr);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       return {
         exp: val.slice(0, expressionPos),
         key: val.slice(expressionPos + 1, expressionEndPos)
       }
     }
+<<<<<<< HEAD
 
     function next () {
       return str.charCodeAt(++index$1)
@@ -7263,6 +9738,21 @@
       return chr === 0x22 || chr === 0x27
     }
 
+=======
+  
+    function next () {
+      return str.charCodeAt(++index$1)
+    }
+  
+    function eof () {
+      return index$1 >= len
+    }
+  
+    function isStringStart (chr) {
+      return chr === 0x22 || chr === 0x27
+    }
+  
+>>>>>>> Palomino
     function parseBracket (chr) {
       var inBracket = 1;
       expressionPos = index$1;
@@ -7280,7 +9770,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function parseString (chr) {
       var stringQuote = chr;
       while (!eof()) {
@@ -7290,16 +9784,28 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     var warn$1;
 
+=======
+  
+    /*  */
+  
+    var warn$1;
+  
+>>>>>>> Palomino
     // in some cases, the event used has to be determined at runtime
     // so we used some reserved tokens during compile.
     var RANGE_TOKEN = '__r';
     var CHECKBOX_RADIO_TOKEN = '__c';
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function model (
       el,
       dir,
@@ -7310,7 +9816,11 @@
       var modifiers = dir.modifiers;
       var tag = el.tag;
       var type = el.attrsMap.type;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       {
         // inputs with type="file" are read only and setting the input's
         // value will throw an error.
@@ -7322,7 +9832,11 @@
           );
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (el.component) {
         genComponentModel(el, value, modifiers);
         // component v-model doesn't need extra runtime
@@ -7348,11 +9862,19 @@
           el.rawAttrsMap['v-model']
         );
       }
+<<<<<<< HEAD
 
       // ensure runtime directive metadata
       return true
     }
 
+=======
+  
+      // ensure runtime directive metadata
+      return true
+    }
+  
+>>>>>>> Palomino
     function genCheckboxModel (
       el,
       value,
@@ -7383,7 +9905,11 @@
         null, true
       );
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genRadioModel (
       el,
       value,
@@ -7395,7 +9921,11 @@
       addProp(el, 'checked', ("_q(" + value + "," + valueBinding + ")"));
       addHandler(el, 'change', genAssignmentCode(value, valueBinding), null, true);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genSelect (
       el,
       value,
@@ -7406,20 +9936,32 @@
         ".call($event.target.options,function(o){return o.selected})" +
         ".map(function(o){var val = \"_value\" in o ? o._value : o.value;" +
         "return " + (number ? '_n(val)' : 'val') + "})";
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var assignment = '$event.target.multiple ? $$selectedVal : $$selectedVal[0]';
       var code = "var $$selectedVal = " + selectedVal + ";";
       code = code + " " + (genAssignmentCode(value, assignment));
       addHandler(el, 'change', code, null, true);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genDefaultModel (
       el,
       value,
       modifiers
     ) {
       var type = el.attrsMap.type;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // warn if v-bind:value conflicts with v-model
       // except for inputs with v-bind:type
       {
@@ -7434,7 +9976,11 @@
           );
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var ref = modifiers || {};
       var lazy = ref.lazy;
       var number = ref.number;
@@ -7445,7 +9991,11 @@
         : type === 'range'
           ? RANGE_TOKEN
           : 'input';
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var valueExpression = '$event.target.value';
       if (trim) {
         valueExpression = "$event.target.value.trim()";
@@ -7453,21 +10003,35 @@
       if (number) {
         valueExpression = "_n(" + valueExpression + ")";
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var code = genAssignmentCode(value, valueExpression);
       if (needCompositionGuard) {
         code = "if($event.target.composing)return;" + code;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       addProp(el, 'value', ("(" + value + ")"));
       addHandler(el, event, code, null, true);
       if (trim || number) {
         addHandler(el, 'blur', '$forceUpdate()');
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     // normalize v-model event tokens that can only be determined at runtime.
     // it's important to place the event as the first in the array because
     // the whole point is ensuring the v-model callback gets called before
@@ -7488,9 +10052,15 @@
         delete on[CHECKBOX_RADIO_TOKEN];
       }
     }
+<<<<<<< HEAD
 
     var target$1;
 
+=======
+  
+    var target$1;
+  
+>>>>>>> Palomino
     function createOnceHandler$1 (event, handler, capture) {
       var _target = target$1; // save current target element in closure
       return function onceHandler () {
@@ -7500,12 +10070,20 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // #9446: Firefox <= 53 (in particular, ESR 52) has incorrect Event.timeStamp
     // implementation and does not fire microtasks in between event propagation, so
     // safe to exclude.
     var useMicrotaskFix = isUsingMicroTask && !(isFF && Number(isFF[1]) <= 53);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function add$1 (
       name,
       handler,
@@ -7550,7 +10128,11 @@
           : capture
       );
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function remove$2 (
       name,
       handler,
@@ -7563,7 +10145,11 @@
         capture
       );
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function updateDOMListeners (oldVnode, vnode) {
       if (isUndef(oldVnode.data.on) && isUndef(vnode.data.on)) {
         return
@@ -7575,16 +10161,28 @@
       updateListeners(on, oldOn, add$1, remove$2, createOnceHandler$1, vnode.context);
       target$1 = undefined;
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var events = {
       create: updateDOMListeners,
       update: updateDOMListeners
     };
+<<<<<<< HEAD
 
     /*  */
 
     var svgContainer;
 
+=======
+  
+    /*  */
+  
+    var svgContainer;
+  
+>>>>>>> Palomino
     function updateDOMProps (oldVnode, vnode) {
       if (isUndef(oldVnode.data.domProps) && isUndef(vnode.data.domProps)) {
         return
@@ -7597,13 +10195,21 @@
       if (isDef(props.__ob__)) {
         props = vnode.data.domProps = extend({}, props);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       for (key in oldProps) {
         if (!(key in props)) {
           elm[key] = '';
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       for (key in props) {
         cur = props[key];
         // ignore children if the node has textContent or innerHTML,
@@ -7618,7 +10224,11 @@
             elm.removeChild(elm.childNodes[0]);
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (key === 'value' && elm.tagName !== 'PROGRESS') {
           // store value as _value as well since
           // non-string values will be stringified
@@ -7654,10 +10264,17 @@
         }
       }
     }
+<<<<<<< HEAD
 
     // check platforms/web/util/attrs.js acceptValue
 
 
+=======
+  
+    // check platforms/web/util/attrs.js acceptValue
+  
+  
+>>>>>>> Palomino
     function shouldUpdateValue (elm, checkVal) {
       return (!elm.composing && (
         elm.tagName === 'OPTION' ||
@@ -7665,7 +10282,11 @@
         isDirtyWithModifiers(elm, checkVal)
       ))
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isNotInFocusAndDirty (elm, checkVal) {
       // return true when textbox (.number and .trim) loses focus and its value is
       // not equal to the updated value
@@ -7675,7 +10296,11 @@
       try { notInFocus = document.activeElement !== elm; } catch (e) {}
       return notInFocus && elm.value !== checkVal
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isDirtyWithModifiers (elm, newVal) {
       var value = elm.value;
       var modifiers = elm._vModifiers; // injected by v-model runtime
@@ -7689,14 +10314,24 @@
       }
       return value !== newVal
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var domProps = {
       create: updateDOMProps,
       update: updateDOMProps
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var parseStyleText = cached(function (cssText) {
       var res = {};
       var listDelimiter = /;(?![^(]*\))/g;
@@ -7709,7 +10344,11 @@
       });
       return res
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // merge static and dynamic style data on the same vnode
     function normalizeStyleData (data) {
       var style = normalizeStyleBinding(data.style);
@@ -7719,7 +10358,11 @@
         ? extend(data.staticStyle, style)
         : style
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // normalize possible array / string values into Object
     function normalizeStyleBinding (bindingStyle) {
       if (Array.isArray(bindingStyle)) {
@@ -7730,7 +10373,11 @@
       }
       return bindingStyle
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * parent component style should be after child's
      * so that parent component's style could override it
@@ -7738,7 +10385,11 @@
     function getStyle (vnode, checkChild) {
       var res = {};
       var styleData;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (checkChild) {
         var childNode = vnode;
         while (childNode.componentInstance) {
@@ -7751,11 +10402,19 @@
           }
         }
       }
+<<<<<<< HEAD
 
       if ((styleData = normalizeStyleData(vnode.data))) {
         extend(res, styleData);
       }
 
+=======
+  
+      if ((styleData = normalizeStyleData(vnode.data))) {
+        extend(res, styleData);
+      }
+  
+>>>>>>> Palomino
       var parentNode = vnode;
       while ((parentNode = parentNode.parent)) {
         if (parentNode.data && (styleData = normalizeStyleData(parentNode.data))) {
@@ -7764,9 +10423,15 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var cssVarRE = /^--/;
     var importantRE = /\s*!important$/;
     var setProp = function (el, name, val) {
@@ -7789,9 +10454,15 @@
         }
       }
     };
+<<<<<<< HEAD
 
     var vendorNames = ['Webkit', 'Moz', 'ms'];
 
+=======
+  
+    var vendorNames = ['Webkit', 'Moz', 'ms'];
+  
+>>>>>>> Palomino
     var emptyStyle;
     var normalize = cached(function (prop) {
       emptyStyle = emptyStyle || document.createElement('div').style;
@@ -7807,36 +10478,63 @@
         }
       }
     });
+<<<<<<< HEAD
 
     function updateStyle (oldVnode, vnode) {
       var data = vnode.data;
       var oldData = oldVnode.data;
 
+=======
+  
+    function updateStyle (oldVnode, vnode) {
+      var data = vnode.data;
+      var oldData = oldVnode.data;
+  
+>>>>>>> Palomino
       if (isUndef(data.staticStyle) && isUndef(data.style) &&
         isUndef(oldData.staticStyle) && isUndef(oldData.style)
       ) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var cur, name;
       var el = vnode.elm;
       var oldStaticStyle = oldData.staticStyle;
       var oldStyleBinding = oldData.normalizedStyle || oldData.style || {};
+<<<<<<< HEAD
 
       // if static style exists, stylebinding already merged into it when doing normalizeStyleData
       var oldStyle = oldStaticStyle || oldStyleBinding;
 
       var style = normalizeStyleBinding(vnode.data.style) || {};
 
+=======
+  
+      // if static style exists, stylebinding already merged into it when doing normalizeStyleData
+      var oldStyle = oldStaticStyle || oldStyleBinding;
+  
+      var style = normalizeStyleBinding(vnode.data.style) || {};
+  
+>>>>>>> Palomino
       // store normalized style under a different key for next diff
       // make sure to clone it if it's reactive, since the user likely wants
       // to mutate it.
       vnode.data.normalizedStyle = isDef(style.__ob__)
         ? extend({}, style)
         : style;
+<<<<<<< HEAD
 
       var newStyle = getStyle(vnode, true);
 
+=======
+  
+      var newStyle = getStyle(vnode, true);
+  
+>>>>>>> Palomino
       for (name in oldStyle) {
         if (isUndef(newStyle[name])) {
           setProp(el, name, '');
@@ -7850,16 +10548,28 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var style = {
       create: updateStyle,
       update: updateStyle
     };
+<<<<<<< HEAD
 
     /*  */
 
     var whitespaceRE = /\s+/;
 
+=======
+  
+    /*  */
+  
+    var whitespaceRE = /\s+/;
+  
+>>>>>>> Palomino
     /**
      * Add class with compatibility for SVG since classList is not supported on
      * SVG elements in IE
@@ -7869,7 +10579,11 @@
       if (!cls || !(cls = cls.trim())) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /* istanbul ignore else */
       if (el.classList) {
         if (cls.indexOf(' ') > -1) {
@@ -7884,7 +10598,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Remove class with compatibility for SVG since classList is not supported on
      * SVG elements in IE
@@ -7894,7 +10612,11 @@
       if (!cls || !(cls = cls.trim())) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /* istanbul ignore else */
       if (el.classList) {
         if (cls.indexOf(' ') > -1) {
@@ -7919,9 +10641,15 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function resolveTransition (def$$1) {
       if (!def$$1) {
         return
@@ -7938,7 +10666,11 @@
         return autoCssTransition(def$$1)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var autoCssTransition = cached(function (name) {
       return {
         enterClass: (name + "-enter"),
@@ -7949,11 +10681,19 @@
         leaveActiveClass: (name + "-leave-active")
       }
     });
+<<<<<<< HEAD
 
     var hasTransition = inBrowser && !isIE9;
     var TRANSITION = 'transition';
     var ANIMATION = 'animation';
 
+=======
+  
+    var hasTransition = inBrowser && !isIE9;
+    var TRANSITION = 'transition';
+    var ANIMATION = 'animation';
+  
+>>>>>>> Palomino
     // Transition property/event sniffing
     var transitionProp = 'transition';
     var transitionEndEvent = 'transitionend';
@@ -7974,20 +10714,32 @@
         animationEndEvent = 'webkitAnimationEnd';
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // binding to window is necessary to make hot reload work in IE in strict mode
     var raf = inBrowser
       ? window.requestAnimationFrame
         ? window.requestAnimationFrame.bind(window)
         : setTimeout
       : /* istanbul ignore next */ function (fn) { return fn(); };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function nextFrame (fn) {
       raf(function () {
         raf(fn);
       });
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addTransitionClass (el, cls) {
       var transitionClasses = el._transitionClasses || (el._transitionClasses = []);
       if (transitionClasses.indexOf(cls) < 0) {
@@ -7995,14 +10747,22 @@
         addClass(el, cls);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function removeTransitionClass (el, cls) {
       if (el._transitionClasses) {
         remove(el._transitionClasses, cls);
       }
       removeClass(el, cls);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function whenTransitionEnds (
       el,
       expectedType,
@@ -8033,9 +10793,15 @@
       }, timeout + 1);
       el.addEventListener(event, onEnd);
     }
+<<<<<<< HEAD
 
     var transformRE = /\b(transform|all)(,|$)/;
 
+=======
+  
+    var transformRE = /\b(transform|all)(,|$)/;
+  
+>>>>>>> Palomino
     function getTransitionInfo (el, expectedType) {
       var styles = window.getComputedStyle(el);
       // JSDOM may return undefined for transition properties
@@ -8045,7 +10811,11 @@
       var animationDelays = (styles[animationProp + 'Delay'] || '').split(', ');
       var animationDurations = (styles[animationProp + 'Duration'] || '').split(', ');
       var animationTimeout = getTimeout(animationDelays, animationDurations);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var type;
       var timeout = 0;
       var propCount = 0;
@@ -8085,18 +10855,30 @@
         hasTransform: hasTransform
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getTimeout (delays, durations) {
       /* istanbul ignore next */
       while (delays.length < durations.length) {
         delays = delays.concat(delays);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       return Math.max.apply(null, durations.map(function (d, i) {
         return toMs(d) + toMs(delays[i])
       }))
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // Old versions of Chromium (below 61.0.3163.100) formats floating pointer numbers
     // in a locale-dependent way, using a comma instead of a dot.
     // If comma is not replaced with a dot, the input will be rounded down (i.e. acting
@@ -8104,28 +10886,49 @@
     function toMs (s) {
       return Number(s.slice(0, -1).replace(',', '.')) * 1000
     }
+<<<<<<< HEAD
 
     /*  */
 
     function enter (vnode, toggleDisplay) {
       var el = vnode.elm;
 
+=======
+  
+    /*  */
+  
+    function enter (vnode, toggleDisplay) {
+      var el = vnode.elm;
+  
+>>>>>>> Palomino
       // call leave callback now
       if (isDef(el._leaveCb)) {
         el._leaveCb.cancelled = true;
         el._leaveCb();
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var data = resolveTransition(vnode.data.transition);
       if (isUndef(data)) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /* istanbul ignore if */
       if (isDef(el._enterCb) || el.nodeType !== 1) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var css = data.css;
       var type = data.type;
       var enterClass = data.enterClass;
@@ -8143,7 +10946,11 @@
       var afterAppear = data.afterAppear;
       var appearCancelled = data.appearCancelled;
       var duration = data.duration;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // activeInstance will always be the <transition> component managing this
       // transition. One edge case to check is when the <transition> is placed
       // as the root node of a child component. In that case we need to check
@@ -8154,6 +10961,7 @@
         context = transitionNode.context;
         transitionNode = transitionNode.parent;
       }
+<<<<<<< HEAD
 
       var isAppear = !context._isMounted || !vnode.isRootInsert;
 
@@ -8161,6 +10969,15 @@
         return
       }
 
+=======
+  
+      var isAppear = !context._isMounted || !vnode.isRootInsert;
+  
+      if (isAppear && !appear && appear !== '') {
+        return
+      }
+  
+>>>>>>> Palomino
       var startClass = isAppear && appearClass
         ? appearClass
         : enterClass;
@@ -8170,7 +10987,11 @@
       var toClass = isAppear && appearToClass
         ? appearToClass
         : enterToClass;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var beforeEnterHook = isAppear
         ? (beforeAppear || beforeEnter)
         : beforeEnter;
@@ -8183,12 +11004,17 @@
       var enterCancelledHook = isAppear
         ? (appearCancelled || enterCancelled)
         : enterCancelled;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var explicitEnterDuration = toNumber(
         isObject(duration)
           ? duration.enter
           : duration
       );
+<<<<<<< HEAD
 
       if (explicitEnterDuration != null) {
         checkDuration(explicitEnterDuration, 'enter', vnode);
@@ -8197,6 +11023,16 @@
       var expectsCSS = css !== false && !isIE9;
       var userWantsControl = getHookArgumentsLength(enterHook);
 
+=======
+  
+      if (explicitEnterDuration != null) {
+        checkDuration(explicitEnterDuration, 'enter', vnode);
+      }
+  
+      var expectsCSS = css !== false && !isIE9;
+      var userWantsControl = getHookArgumentsLength(enterHook);
+  
+>>>>>>> Palomino
       var cb = el._enterCb = once(function () {
         if (expectsCSS) {
           removeTransitionClass(el, toClass);
@@ -8212,7 +11048,11 @@
         }
         el._enterCb = null;
       });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (!vnode.data.show) {
         // remove pending leave element on enter by injecting an insert hook
         mergeVNodeHook(vnode, 'insert', function () {
@@ -8227,7 +11067,11 @@
           enterHook && enterHook(el, cb);
         });
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // start enter transition
       beforeEnterHook && beforeEnterHook(el);
       if (expectsCSS) {
@@ -8247,36 +11091,63 @@
           }
         });
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (vnode.data.show) {
         toggleDisplay && toggleDisplay();
         enterHook && enterHook(el, cb);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (!expectsCSS && !userWantsControl) {
         cb();
       }
     }
+<<<<<<< HEAD
 
     function leave (vnode, rm) {
       var el = vnode.elm;
 
+=======
+  
+    function leave (vnode, rm) {
+      var el = vnode.elm;
+  
+>>>>>>> Palomino
       // call enter callback now
       if (isDef(el._enterCb)) {
         el._enterCb.cancelled = true;
         el._enterCb();
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var data = resolveTransition(vnode.data.transition);
       if (isUndef(data) || el.nodeType !== 1) {
         return rm()
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /* istanbul ignore if */
       if (isDef(el._leaveCb)) {
         return
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var css = data.css;
       var type = data.type;
       var leaveClass = data.leaveClass;
@@ -8288,20 +11159,35 @@
       var leaveCancelled = data.leaveCancelled;
       var delayLeave = data.delayLeave;
       var duration = data.duration;
+<<<<<<< HEAD
 
       var expectsCSS = css !== false && !isIE9;
       var userWantsControl = getHookArgumentsLength(leave);
 
+=======
+  
+      var expectsCSS = css !== false && !isIE9;
+      var userWantsControl = getHookArgumentsLength(leave);
+  
+>>>>>>> Palomino
       var explicitLeaveDuration = toNumber(
         isObject(duration)
           ? duration.leave
           : duration
       );
+<<<<<<< HEAD
 
       if (isDef(explicitLeaveDuration)) {
         checkDuration(explicitLeaveDuration, 'leave', vnode);
       }
 
+=======
+  
+      if (isDef(explicitLeaveDuration)) {
+        checkDuration(explicitLeaveDuration, 'leave', vnode);
+      }
+  
+>>>>>>> Palomino
       var cb = el._leaveCb = once(function () {
         if (el.parentNode && el.parentNode._pending) {
           el.parentNode._pending[vnode.key] = null;
@@ -8321,13 +11207,21 @@
         }
         el._leaveCb = null;
       });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (delayLeave) {
         delayLeave(performLeave);
       } else {
         performLeave();
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function performLeave () {
         // the delayed leave may have already been cancelled
         if (cb.cancelled) {
@@ -8361,7 +11255,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // only used in dev mode
     function checkDuration (val, name, vnode) {
       if (typeof val !== 'number') {
@@ -8378,11 +11276,19 @@
         );
       }
     }
+<<<<<<< HEAD
 
     function isValidDuration (val) {
       return typeof val === 'number' && !isNaN(val)
     }
 
+=======
+  
+    function isValidDuration (val) {
+      return typeof val === 'number' && !isNaN(val)
+    }
+  
+>>>>>>> Palomino
     /**
      * Normalize a transition hook's argument length. The hook may be:
      * - a merged hook (invoker) with the original in .fns
@@ -8405,13 +11311,21 @@
         return (fn._length || fn.length) > 1
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function _enter (_, vnode) {
       if (vnode.data.show !== true) {
         enter(vnode);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var transition = inBrowser ? {
       create: _enter,
       activate: _enter,
@@ -8424,7 +11338,11 @@
         }
       }
     } : {};
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var platformModules = [
       attrs,
       klass,
@@ -8433,6 +11351,7 @@
       style,
       transition
     ];
+<<<<<<< HEAD
 
     /*  */
 
@@ -8442,11 +11361,26 @@
 
     var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
 
+=======
+  
+    /*  */
+  
+    // the directive module should be applied last, after all
+    // built-in modules have been applied.
+    var modules = platformModules.concat(baseModules);
+  
+    var patch = createPatchFunction({ nodeOps: nodeOps, modules: modules });
+  
+>>>>>>> Palomino
     /**
      * Not type checking this file because flow doesn't like attaching
      * properties to Elements.
      */
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /* istanbul ignore if */
     if (isIE9) {
       // http://www.matts411.com/post/internet-explorer-9-oninput/
@@ -8457,7 +11391,11 @@
         }
       });
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var directive = {
       inserted: function inserted (el, binding, vnode, oldVnode) {
         if (vnode.tag === 'select') {
@@ -8487,7 +11425,11 @@
           }
         }
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       componentUpdated: function componentUpdated (el, binding, vnode) {
         if (vnode.tag === 'select') {
           setSelected(el, binding, vnode.context);
@@ -8510,7 +11452,11 @@
         }
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function setSelected (el, binding, vm) {
       actuallySetSelected(el, binding, vm);
       /* istanbul ignore if */
@@ -8520,7 +11466,11 @@
         }, 0);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function actuallySetSelected (el, binding, vm) {
       var value = binding.value;
       var isMultiple = el.multiple;
@@ -8553,47 +11503,81 @@
         el.selectedIndex = -1;
       }
     }
+<<<<<<< HEAD
 
     function hasNoMatchingOption (value, options) {
       return options.every(function (o) { return !looseEqual(o, value); })
     }
 
+=======
+  
+    function hasNoMatchingOption (value, options) {
+      return options.every(function (o) { return !looseEqual(o, value); })
+    }
+  
+>>>>>>> Palomino
     function getValue (option) {
       return '_value' in option
         ? option._value
         : option.value
     }
+<<<<<<< HEAD
 
     function onCompositionStart (e) {
       e.target.composing = true;
     }
 
+=======
+  
+    function onCompositionStart (e) {
+      e.target.composing = true;
+    }
+  
+>>>>>>> Palomino
     function onCompositionEnd (e) {
       // prevent triggering an input event for no reason
       if (!e.target.composing) { return }
       e.target.composing = false;
       trigger(e.target, 'input');
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function trigger (el, type) {
       var e = document.createEvent('HTMLEvents');
       e.initEvent(type, true, true);
       el.dispatchEvent(e);
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     // recursively search for possible transition defined inside the component root
     function locateNode (vnode) {
       return vnode.componentInstance && (!vnode.data || !vnode.data.transition)
         ? locateNode(vnode.componentInstance._vnode)
         : vnode
     }
+<<<<<<< HEAD
 
     var show = {
       bind: function bind (el, ref, vnode) {
         var value = ref.value;
 
+=======
+  
+    var show = {
+      bind: function bind (el, ref, vnode) {
+        var value = ref.value;
+  
+>>>>>>> Palomino
         vnode = locateNode(vnode);
         var transition$$1 = vnode.data && vnode.data.transition;
         var originalDisplay = el.__vOriginalDisplay =
@@ -8607,11 +11591,19 @@
           el.style.display = value ? originalDisplay : 'none';
         }
       },
+<<<<<<< HEAD
 
       update: function update (el, ref, vnode) {
         var value = ref.value;
         var oldValue = ref.oldValue;
 
+=======
+  
+      update: function update (el, ref, vnode) {
+        var value = ref.value;
+        var oldValue = ref.oldValue;
+  
+>>>>>>> Palomino
         /* istanbul ignore if */
         if (!value === !oldValue) { return }
         vnode = locateNode(vnode);
@@ -8631,7 +11623,11 @@
           el.style.display = value ? el.__vOriginalDisplay : 'none';
         }
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       unbind: function unbind (
         el,
         binding,
@@ -8644,14 +11640,24 @@
         }
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var platformDirectives = {
       model: directive,
       show: show
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var transitionProps = {
       name: String,
       appear: Boolean,
@@ -8669,7 +11675,11 @@
       appearToClass: String,
       duration: [Number, String, Object]
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // in case the child is also an abstract component, e.g. <keep-alive>
     // we want to recursively retrieve the real component to be rendered
     function getRealChild (vnode) {
@@ -8680,7 +11690,11 @@
         return vnode
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function extractTransitionData (comp) {
       var data = {};
       var options = comp.$options;
@@ -8696,7 +11710,11 @@
       }
       return data
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function placeholder (h, rawChild) {
       if (/\d-keep-alive$/.test(rawChild.tag)) {
         return h('keep-alive', {
@@ -8704,7 +11722,11 @@
         })
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function hasParentTransition (vnode) {
       while ((vnode = vnode.parent)) {
         if (vnode.data.transition) {
@@ -8712,6 +11734,7 @@
         }
       }
     }
+<<<<<<< HEAD
 
     function isSameChild (child, oldChild) {
       return oldChild.key === child.key && oldChild.tag === child.tag
@@ -8721,26 +11744,52 @@
 
     var isVShowDirective = function (d) { return d.name === 'show'; };
 
+=======
+  
+    function isSameChild (child, oldChild) {
+      return oldChild.key === child.key && oldChild.tag === child.tag
+    }
+  
+    var isNotTextNode = function (c) { return c.tag || isAsyncPlaceholder(c); };
+  
+    var isVShowDirective = function (d) { return d.name === 'show'; };
+  
+>>>>>>> Palomino
     var Transition = {
       name: 'transition',
       props: transitionProps,
       abstract: true,
+<<<<<<< HEAD
 
       render: function render (h) {
         var this$1 = this;
 
+=======
+  
+      render: function render (h) {
+        var this$1 = this;
+  
+>>>>>>> Palomino
         var children = this.$slots.default;
         if (!children) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // filter out text nodes (possible whitespaces)
         children = children.filter(isNotTextNode);
         /* istanbul ignore if */
         if (!children.length) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // warn multiple elements
         if (children.length > 1) {
           warn(
@@ -8749,9 +11798,15 @@
             this.$parent
           );
         }
+<<<<<<< HEAD
 
         var mode = this.mode;
 
+=======
+  
+        var mode = this.mode;
+  
+>>>>>>> Palomino
         // warn invalid mode
         if (mode && mode !== 'in-out' && mode !== 'out-in'
         ) {
@@ -8760,15 +11815,25 @@
             this.$parent
           );
         }
+<<<<<<< HEAD
 
         var rawChild = children[0];
 
+=======
+  
+        var rawChild = children[0];
+  
+>>>>>>> Palomino
         // if this is a component root node and the component's
         // parent container node also has transition, skip.
         if (hasParentTransition(this.$vnode)) {
           return rawChild
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // apply transition data to child
         // use getRealChild() to ignore abstract components e.g. keep-alive
         var child = getRealChild(rawChild);
@@ -8776,11 +11841,19 @@
         if (!child) {
           return rawChild
         }
+<<<<<<< HEAD
 
         if (this._leaving) {
           return placeholder(h, rawChild)
         }
 
+=======
+  
+        if (this._leaving) {
+          return placeholder(h, rawChild)
+        }
+  
+>>>>>>> Palomino
         // ensure a key that is unique to the vnode type and to this transition
         // component instance. This key will be used to remove pending leaving nodes
         // during entering.
@@ -8792,17 +11865,29 @@
           : isPrimitive(child.key)
             ? (String(child.key).indexOf(id) === 0 ? child.key : id + child.key)
             : child.key;
+<<<<<<< HEAD
 
         var data = (child.data || (child.data = {})).transition = extractTransitionData(this);
         var oldRawChild = this._vnode;
         var oldChild = getRealChild(oldRawChild);
 
+=======
+  
+        var data = (child.data || (child.data = {})).transition = extractTransitionData(this);
+        var oldRawChild = this._vnode;
+        var oldChild = getRealChild(oldRawChild);
+  
+>>>>>>> Palomino
         // mark v-show
         // so that the transition module can hand over the control to the directive
         if (child.data.directives && child.data.directives.some(isVShowDirective)) {
           child.data.show = true;
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (
           oldChild &&
           oldChild.data &&
@@ -8834,6 +11919,7 @@
             mergeVNodeHook(oldData, 'delayLeave', function (leave) { delayedLeave = leave; });
           }
         }
+<<<<<<< HEAD
 
         return rawChild
       }
@@ -8841,10 +11927,20 @@
 
     /*  */
 
+=======
+  
+        return rawChild
+      }
+    };
+  
+    /*  */
+  
+>>>>>>> Palomino
     var props = extend({
       tag: String,
       moveClass: String
     }, transitionProps);
+<<<<<<< HEAD
 
     delete props.mode;
 
@@ -8854,6 +11950,17 @@
       beforeMount: function beforeMount () {
         var this$1 = this;
 
+=======
+  
+    delete props.mode;
+  
+    var TransitionGroup = {
+      props: props,
+  
+      beforeMount: function beforeMount () {
+        var this$1 = this;
+  
+>>>>>>> Palomino
         var update = this._update;
         this._update = function (vnode, hydrating) {
           var restoreActiveInstance = setActiveInstance(this$1);
@@ -8869,7 +11976,11 @@
           update.call(this$1, vnode, hydrating);
         };
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       render: function render (h) {
         var tag = this.tag || this.$vnode.data.tag || 'span';
         var map = Object.create(null);
@@ -8877,7 +11988,11 @@
         var rawChildren = this.$slots.default || [];
         var children = this.children = [];
         var transitionData = extractTransitionData(this);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         for (var i = 0; i < rawChildren.length; i++) {
           var c = rawChildren[i];
           if (c.tag) {
@@ -8892,7 +12007,11 @@
             }
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (prevChildren) {
           var kept = [];
           var removed = [];
@@ -8909,28 +12028,47 @@
           this.kept = h(tag, null, kept);
           this.removed = removed;
         }
+<<<<<<< HEAD
 
         return h(tag, null, children)
       },
 
+=======
+  
+        return h(tag, null, children)
+      },
+  
+>>>>>>> Palomino
       updated: function updated () {
         var children = this.prevChildren;
         var moveClass = this.moveClass || ((this.name || 'v') + '-move');
         if (!children.length || !this.hasMove(children[0].elm, moveClass)) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // we divide the work into three loops to avoid mixing DOM reads and writes
         // in each iteration - which helps prevent layout thrashing.
         children.forEach(callPendingCbs);
         children.forEach(recordPosition);
         children.forEach(applyTranslation);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // force reflow to put everything in position
         // assign to this to avoid being removed in tree-shaking
         // $flow-disable-line
         this._reflow = document.body.offsetHeight;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         children.forEach(function (c) {
           if (c.data.moved) {
             var el = c.elm;
@@ -8950,7 +12088,11 @@
           }
         });
       },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       methods: {
         hasMove: function hasMove (el, moveClass) {
           /* istanbul ignore if */
@@ -8979,7 +12121,11 @@
         }
       }
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function callPendingCbs (c) {
       /* istanbul ignore if */
       if (c.elm._moveCb) {
@@ -8990,11 +12136,19 @@
         c.elm._enterCb();
       }
     }
+<<<<<<< HEAD
 
     function recordPosition (c) {
       c.data.newPos = c.elm.getBoundingClientRect();
     }
 
+=======
+  
+    function recordPosition (c) {
+      c.data.newPos = c.elm.getBoundingClientRect();
+    }
+  
+>>>>>>> Palomino
     function applyTranslation (c) {
       var oldPos = c.data.pos;
       var newPos = c.data.newPos;
@@ -9007,20 +12161,31 @@
         s.transitionDuration = '0s';
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var platformComponents = {
       Transition: Transition,
       TransitionGroup: TransitionGroup
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     // install platform specific utils
     Vue.config.mustUseProp = mustUseProp;
     Vue.config.isReservedTag = isReservedTag;
     Vue.config.isReservedAttr = isReservedAttr;
     Vue.config.getTagNamespace = getTagNamespace;
     Vue.config.isUnknownElement = isUnknownElement;
+<<<<<<< HEAD
 
     // install platform runtime directives & components
     extend(Vue.options.directives, platformDirectives);
@@ -9029,6 +12194,16 @@
     // install platform patch function
     Vue.prototype.__patch__ = inBrowser ? patch : noop;
 
+=======
+  
+    // install platform runtime directives & components
+    extend(Vue.options.directives, platformDirectives);
+    extend(Vue.options.components, platformComponents);
+  
+    // install platform patch function
+    Vue.prototype.__patch__ = inBrowser ? patch : noop;
+  
+>>>>>>> Palomino
     // public mount method
     Vue.prototype.$mount = function (
       el,
@@ -9037,7 +12212,11 @@
       el = el && inBrowser ? query(el) : undefined;
       return mountComponent(this, el, hydrating)
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // devtools global hook
     /* istanbul ignore next */
     if (inBrowser) {
@@ -9063,20 +12242,35 @@
         }
       }, 0);
     }
+<<<<<<< HEAD
 
     /*  */
 
     var defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
     var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
 
+=======
+  
+    /*  */
+  
+    var defaultTagRE = /\{\{((?:.|\r?\n)+?)\}\}/g;
+    var regexEscapeRE = /[-.*+?^${}()|[\]\/\\]/g;
+  
+>>>>>>> Palomino
     var buildRegex = cached(function (delimiters) {
       var open = delimiters[0].replace(regexEscapeRE, '\\$&');
       var close = delimiters[1].replace(regexEscapeRE, '\\$&');
       return new RegExp(open + '((?:.|\\n)+?)' + close, 'g')
     });
+<<<<<<< HEAD
 
 
 
+=======
+  
+  
+  
+>>>>>>> Palomino
     function parseText (
       text,
       delimiters
@@ -9111,9 +12305,15 @@
         tokens: rawTokens
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function transformNode (el, options) {
       var warn = options.warn || baseWarn;
       var staticClass = getAndRemoveAttr(el, 'class');
@@ -9137,7 +12337,11 @@
         el.classBinding = classBinding;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genData (el) {
       var data = '';
       if (el.staticClass) {
@@ -9148,15 +12352,25 @@
       }
       return data
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var klass$1 = {
       staticKeys: ['staticClass'],
       transformNode: transformNode,
       genData: genData
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function transformNode$1 (el, options) {
       var warn = options.warn || baseWarn;
       var staticStyle = getAndRemoveAttr(el, 'style');
@@ -9176,13 +12390,21 @@
         }
         el.staticStyle = JSON.stringify(parseStyleText(staticStyle));
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var styleBinding = getBindingAttr(el, 'style', false /* getStatic */);
       if (styleBinding) {
         el.styleBinding = styleBinding;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genData$1 (el) {
       var data = '';
       if (el.staticStyle) {
@@ -9193,17 +12415,29 @@
       }
       return data
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var style$1 = {
       staticKeys: ['staticStyle'],
       transformNode: transformNode$1,
       genData: genData$1
     };
+<<<<<<< HEAD
 
     /*  */
 
     var decoder;
 
+=======
+  
+    /*  */
+  
+    var decoder;
+  
+>>>>>>> Palomino
     var he = {
       decode: function decode (html) {
         decoder = decoder || document.createElement('div');
@@ -9211,20 +12445,34 @@
         return decoder.textContent
       }
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var isUnaryTag = makeMap(
       'area,base,br,col,embed,frame,hr,img,input,isindex,keygen,' +
       'link,meta,param,source,track,wbr'
     );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // Elements that you can, intentionally, leave open
     // (and which close themselves)
     var canBeLeftOpenTag = makeMap(
       'colgroup,dd,dt,li,options,p,td,tfoot,th,thead,tr,source'
     );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // HTML5 tags https://html.spec.whatwg.org/multipage/indices.html#elements-3
     // Phrasing Content https://html.spec.whatwg.org/multipage/dom.html#phrasing-content
     var isNonPhrasingTag = makeMap(
@@ -9234,11 +12482,19 @@
       'optgroup,option,param,rp,rt,source,style,summary,tbody,td,tfoot,th,thead,' +
       'title,tr,track'
     );
+<<<<<<< HEAD
 
     /**
      * Not type-checking this file because it's mostly vendor code.
      */
 
+=======
+  
+    /**
+     * Not type-checking this file because it's mostly vendor code.
+     */
+  
+>>>>>>> Palomino
     // Regular Expressions for parsing tags and attributes
     var attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
     var dynamicArgAttribute = /^\s*((?:v-[\w-]+:|@|:|#)\[[^=]+\][^\s"'<>\/=]*)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
@@ -9251,11 +12507,19 @@
     // #7298: escape - to avoid being pased as HTML comment when inlined in page
     var comment = /^<!\--/;
     var conditionalComment = /^<!\[/;
+<<<<<<< HEAD
 
     // Special Elements (can contain anything)
     var isPlainTextElement = makeMap('script,style,textarea', true);
     var reCache = {};
 
+=======
+  
+    // Special Elements (can contain anything)
+    var isPlainTextElement = makeMap('script,style,textarea', true);
+    var reCache = {};
+  
+>>>>>>> Palomino
     var decodingMap = {
       '&lt;': '<',
       '&gt;': '>',
@@ -9267,16 +12531,28 @@
     };
     var encodedAttr = /&(?:lt|gt|quot|amp|#39);/g;
     var encodedAttrWithNewLines = /&(?:lt|gt|quot|amp|#39|#10|#9);/g;
+<<<<<<< HEAD
 
     // #5992
     var isIgnoreNewlineTag = makeMap('pre,textarea', true);
     var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\n'; };
 
+=======
+  
+    // #5992
+    var isIgnoreNewlineTag = makeMap('pre,textarea', true);
+    var shouldIgnoreFirstNewline = function (tag, html) { return tag && isIgnoreNewlineTag(tag) && html[0] === '\n'; };
+  
+>>>>>>> Palomino
     function decodeAttr (value, shouldDecodeNewlines) {
       var re = shouldDecodeNewlines ? encodedAttrWithNewLines : encodedAttr;
       return value.replace(re, function (match) { return decodingMap[match]; })
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function parseHTML (html, options) {
       var stack = [];
       var expectHTML = options.expectHTML;
@@ -9293,7 +12569,11 @@
             // Comment:
             if (comment.test(html)) {
               var commentEnd = html.indexOf('-->');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
               if (commentEnd >= 0) {
                 if (options.shouldKeepComment) {
                   options.comment(html.substring(4, commentEnd), index, index + commentEnd + 3);
@@ -9302,24 +12582,40 @@
                 continue
               }
             }
+<<<<<<< HEAD
 
             // http://en.wikipedia.org/wiki/Conditional_comment#Downlevel-revealed_conditional_comment
             if (conditionalComment.test(html)) {
               var conditionalEnd = html.indexOf(']>');
 
+=======
+  
+            // http://en.wikipedia.org/wiki/Conditional_comment#Downlevel-revealed_conditional_comment
+            if (conditionalComment.test(html)) {
+              var conditionalEnd = html.indexOf(']>');
+  
+>>>>>>> Palomino
               if (conditionalEnd >= 0) {
                 advance(conditionalEnd + 2);
                 continue
               }
             }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             // Doctype:
             var doctypeMatch = html.match(doctype);
             if (doctypeMatch) {
               advance(doctypeMatch[0].length);
               continue
             }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             // End tag:
             var endTagMatch = html.match(endTag);
             if (endTagMatch) {
@@ -9328,7 +12624,11 @@
               parseEndTag(endTagMatch[1], curIndex, index);
               continue
             }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
             // Start tag:
             var startTagMatch = parseStartTag();
             if (startTagMatch) {
@@ -9339,7 +12639,11 @@
               continue
             }
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           var text = (void 0), rest = (void 0), next = (void 0);
           if (textEnd >= 0) {
             rest = html.slice(textEnd);
@@ -9357,6 +12661,7 @@
             }
             text = html.substring(0, textEnd);
           }
+<<<<<<< HEAD
 
           if (textEnd < 0) {
             text = html;
@@ -9366,6 +12671,17 @@
             advance(text.length);
           }
 
+=======
+  
+          if (textEnd < 0) {
+            text = html;
+          }
+  
+          if (text) {
+            advance(text.length);
+          }
+  
+>>>>>>> Palomino
           if (options.chars && text) {
             options.chars(text, index - text.length, index);
           }
@@ -9392,7 +12708,11 @@
           html = rest$1;
           parseEndTag(stackedTag, index - endTagLength, index);
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (html === last) {
           options.chars && options.chars(html);
           if (!stack.length && options.warn) {
@@ -9401,15 +12721,26 @@
           break
         }
       }
+<<<<<<< HEAD
 
       // Clean up any remaining tags
       parseEndTag();
 
+=======
+  
+      // Clean up any remaining tags
+      parseEndTag();
+  
+>>>>>>> Palomino
       function advance (n) {
         index += n;
         html = html.substring(n);
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function parseStartTag () {
         var start = html.match(startTagOpen);
         if (start) {
@@ -9434,11 +12765,19 @@
           }
         }
       }
+<<<<<<< HEAD
 
       function handleStartTag (match) {
         var tagName = match.tagName;
         var unarySlash = match.unarySlash;
 
+=======
+  
+      function handleStartTag (match) {
+        var tagName = match.tagName;
+        var unarySlash = match.unarySlash;
+  
+>>>>>>> Palomino
         if (expectHTML) {
           if (lastTag === 'p' && isNonPhrasingTag(tagName)) {
             parseEndTag(lastTag);
@@ -9447,9 +12786,15 @@
             parseEndTag(tagName);
           }
         }
+<<<<<<< HEAD
 
         var unary = isUnaryTag$$1(tagName) || !!unarySlash;
 
+=======
+  
+        var unary = isUnaryTag$$1(tagName) || !!unarySlash;
+  
+>>>>>>> Palomino
         var l = match.attrs.length;
         var attrs = new Array(l);
         for (var i = 0; i < l; i++) {
@@ -9467,22 +12812,38 @@
             attrs[i].end = args.end;
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (!unary) {
           stack.push({ tag: tagName, lowerCasedTag: tagName.toLowerCase(), attrs: attrs, start: match.start, end: match.end });
           lastTag = tagName;
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (options.start) {
           options.start(tagName, attrs, unary, match.start, match.end);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function parseEndTag (tagName, start, end) {
         var pos, lowerCasedTagName;
         if (start == null) { start = index; }
         if (end == null) { end = index; }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // Find the closest opened tag of the same type
         if (tagName) {
           lowerCasedTagName = tagName.toLowerCase();
@@ -9495,7 +12856,11 @@
           // If no tag name is provided, clean shop
           pos = 0;
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (pos >= 0) {
           // Close all the open elements, up the stack
           for (var i = stack.length - 1; i >= pos; i--) {
@@ -9511,7 +12876,11 @@
               options.end(stack[i].tag, start, end);
             }
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           // Remove the open elements from the stack
           stack.length = pos;
           lastTag = pos && stack[pos - 1].tag;
@@ -9529,15 +12898,22 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var onRE = /^@|^v-on:/;
     var dirRE = /^v-|^@|^:/;
     var forAliasRE = /([\s\S]*?)\s+(?:in|of)\s+([\s\S]*)/;
     var forIteratorRE = /,([^,\}\]]*)(?:,([^,\}\]]*))?$/;
     var stripParensRE = /^\(|\)$/g;
     var dynamicArgRE = /^\[.*\]$/;
+<<<<<<< HEAD
 
     var argRE = /:(.*)$/;
     var bindRE = /^:|^\.|^v-bind:/;
@@ -9554,6 +12930,24 @@
 
     var emptySlotScopeToken = "_empty_";
 
+=======
+  
+    var argRE = /:(.*)$/;
+    var bindRE = /^:|^\.|^v-bind:/;
+    var modifierRE = /\.[^.\]]+(?=[^\]]*$)/g;
+  
+    var slotRE = /^v-slot(:|$)|^#/;
+  
+    var lineBreakRE = /[\r\n]/;
+    var whitespaceRE$1 = /\s+/g;
+  
+    var invalidAttributeRE = /[\s"'<>\/=]/;
+  
+    var decodeHTMLCached = cached(he.decode);
+  
+    var emptySlotScopeToken = "_empty_";
+  
+>>>>>>> Palomino
     // configurable state
     var warn$2;
     var delimiters;
@@ -9564,7 +12958,11 @@
     var platformMustUseProp;
     var platformGetTagNamespace;
     var maybeComponent;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function createASTElement (
       tag,
       attrs,
@@ -9580,7 +12978,11 @@
         children: []
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Convert HTML string to AST.
      */
@@ -9589,12 +12991,17 @@
       options
     ) {
       warn$2 = options.warn || baseWarn;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       platformIsPreTag = options.isPreTag || no;
       platformMustUseProp = options.mustUseProp || no;
       platformGetTagNamespace = options.getTagNamespace || no;
       var isReservedTag = options.isReservedTag || no;
       maybeComponent = function (el) { return !!el.component || !isReservedTag(el.tag); };
+<<<<<<< HEAD
 
       transforms = pluckModuleFunction(options.modules, 'transformNode');
       preTransforms = pluckModuleFunction(options.modules, 'preTransformNode');
@@ -9602,6 +13009,15 @@
 
       delimiters = options.delimiters;
 
+=======
+  
+      transforms = pluckModuleFunction(options.modules, 'transformNode');
+      preTransforms = pluckModuleFunction(options.modules, 'preTransformNode');
+      postTransforms = pluckModuleFunction(options.modules, 'postTransformNode');
+  
+      delimiters = options.delimiters;
+  
+>>>>>>> Palomino
       var stack = [];
       var preserveWhitespace = options.preserveWhitespace !== false;
       var whitespaceOption = options.whitespace;
@@ -9610,14 +13026,22 @@
       var inVPre = false;
       var inPre = false;
       var warned = false;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function warnOnce (msg, range) {
         if (!warned) {
           warned = true;
           warn$2(msg, range);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function closeElement (element) {
         trimEndingWhitespace(element);
         if (!inVPre && !element.processed) {
@@ -9658,13 +13082,21 @@
             element.parent = currentParent;
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // final children cleanup
         // filter out scoped slots
         element.children = element.children.filter(function (c) { return !(c).slotScope; });
         // remove trailing whitespace node again
         trimEndingWhitespace(element);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // check pre state
         if (element.pre) {
           inVPre = false;
@@ -9677,7 +13109,11 @@
           postTransforms[i](element, options);
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function trimEndingWhitespace (el) {
         // remove trailing whitespace node
         if (!inPre) {
@@ -9691,7 +13127,11 @@
           }
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       function checkRootConstraints (el) {
         if (el.tag === 'slot' || el.tag === 'template') {
           warnOnce(
@@ -9708,7 +13148,11 @@
           );
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       parseHTML(template, {
         warn: warn$2,
         expectHTML: options.expectHTML,
@@ -9722,18 +13166,30 @@
           // check namespace.
           // inherit parent ns if there is one
           var ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           // handle IE svg bug
           /* istanbul ignore if */
           if (isIE && ns === 'svg') {
             attrs = guardIESVGBug(attrs);
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           var element = createASTElement(tag, attrs, currentParent);
           if (ns) {
             element.ns = ns;
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           {
             if (options.outputSourceRange) {
               element.start = start$1;
@@ -9756,7 +13212,11 @@
               }
             });
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (isForbiddenTag(element) && !isServerRendering()) {
             element.forbidden = true;
             warn$2(
@@ -9766,12 +13226,20 @@
               { start: element.start }
             );
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           // apply pre-transforms
           for (var i = 0; i < preTransforms.length; i++) {
             element = preTransforms[i](element, options) || element;
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (!inVPre) {
             processPre(element);
             if (element.pre) {
@@ -9789,14 +13257,22 @@
             processIf(element);
             processOnce(element);
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (!root) {
             root = element;
             {
               checkRootConstraints(root);
             }
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (!unary) {
             currentParent = element;
             stack.push(element);
@@ -9804,7 +13280,11 @@
             closeElement(element);
           }
         },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         end: function end (tag, start, end$1) {
           var element = stack[stack.length - 1];
           // pop stack
@@ -9815,7 +13295,11 @@
           }
           closeElement(element);
         },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         chars: function chars (text, start, end) {
           if (!currentParent) {
             {
@@ -9906,13 +13390,21 @@
       });
       return root
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processPre (el) {
       if (getAndRemoveAttr(el, 'v-pre') != null) {
         el.pre = true;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processRawAttrs (el) {
       var list = el.attrsList;
       var len = list.length;
@@ -9933,13 +13425,21 @@
         el.plain = true;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processElement (
       element,
       options
     ) {
       processKey(element);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // determine whether this is a plain element after
       // removing structural attributes
       element.plain = (
@@ -9947,7 +13447,11 @@
         !element.scopedSlots &&
         !element.attrsList.length
       );
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       processRef(element);
       processSlotContent(element);
       processSlotOutlet(element);
@@ -9958,7 +13462,11 @@
       processAttrs(element);
       return element
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processKey (el) {
       var exp = getBindingAttr(el, 'key');
       if (exp) {
@@ -9985,7 +13493,11 @@
         el.key = exp;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processRef (el) {
       var ref = getBindingAttr(el, 'ref');
       if (ref) {
@@ -9993,7 +13505,11 @@
         el.refInFor = checkInFor(el);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processFor (el) {
       var exp;
       if ((exp = getAndRemoveAttr(el, 'v-for'))) {
@@ -10008,9 +13524,15 @@
         }
       }
     }
+<<<<<<< HEAD
 
 
 
+=======
+  
+  
+  
+>>>>>>> Palomino
     function parseFor (exp) {
       var inMatch = exp.match(forAliasRE);
       if (!inMatch) { return }
@@ -10029,7 +13551,11 @@
       }
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processIf (el) {
       var exp = getAndRemoveAttr(el, 'v-if');
       if (exp) {
@@ -10048,7 +13574,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processIfConditions (el, parent) {
       var prev = findPrevElement(parent.children);
       if (prev && prev.if) {
@@ -10064,7 +13594,11 @@
         );
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function findPrevElement (children) {
       var i = children.length;
       while (i--) {
@@ -10082,21 +13616,33 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function addIfCondition (el, condition) {
       if (!el.ifConditions) {
         el.ifConditions = [];
       }
       el.ifConditions.push(condition);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processOnce (el) {
       var once$$1 = getAndRemoveAttr(el, 'v-once');
       if (once$$1 != null) {
         el.once = true;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // handle content being passed to a component as slot,
     // e.g. <template slot="xxx">, <div slot-scope="xxx">
     function processSlotContent (el) {
@@ -10128,7 +13674,11 @@
         }
         el.slotScope = slotScope;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // slot="xxx"
       var slotTarget = getBindingAttr(el, 'slot');
       if (slotTarget) {
@@ -10140,7 +13690,11 @@
           addAttr(el, 'slot', slotTarget, getRawBindingAttr(el, 'slot'));
         }
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // 2.6 v-slot syntax
       {
         if (el.tag === 'template') {
@@ -10217,7 +13771,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function getSlotName (binding) {
       var name = binding.name.replace(slotRE, '');
       if (!name) {
@@ -10236,7 +13794,11 @@
         // static name
         : { name: ("\"" + name + "\""), dynamic: false }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // handle <slot/> outlets
     function processSlotOutlet (el) {
       if (el.tag === 'slot') {
@@ -10251,7 +13813,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processComponent (el) {
       var binding;
       if ((binding = getBindingAttr(el, 'is'))) {
@@ -10261,7 +13827,11 @@
         el.inlineTemplate = true;
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function processAttrs (el) {
       var list = el.attrsList;
       var i, l, name, rawName, value, modifiers, syncGen, isDynamic;
@@ -10394,7 +13964,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkInFor (el) {
       var parent = el;
       while (parent) {
@@ -10405,7 +13979,11 @@
       }
       return false
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function parseModifiers (name) {
       var match = name.match(modifierRE);
       if (match) {
@@ -10414,7 +13992,11 @@
         return ret
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function makeAttrsMap (attrs) {
       var map = {};
       for (var i = 0, l = attrs.length; i < l; i++) {
@@ -10427,12 +14009,20 @@
       }
       return map
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // for script (e.g. type="x/template") or style, do not decode content
     function isTextTag (el) {
       return el.tag === 'script' || el.tag === 'style'
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isForbiddenTag (el) {
       return (
         el.tag === 'style' ||
@@ -10442,10 +14032,17 @@
         ))
       )
     }
+<<<<<<< HEAD
 
     var ieNSBug = /^xmlns:NS\d+/;
     var ieNSPrefix = /^NS\d+:/;
 
+=======
+  
+    var ieNSBug = /^xmlns:NS\d+/;
+    var ieNSPrefix = /^NS\d+:/;
+  
+>>>>>>> Palomino
     /* istanbul ignore next */
     function guardIESVGBug (attrs) {
       var res = [];
@@ -10458,7 +14055,11 @@
       }
       return res
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkForAliasModel (el, value) {
       var _el = el;
       while (_el) {
@@ -10475,16 +14076,26 @@
         _el = _el.parent;
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function preTransformNode (el, options) {
       if (el.tag === 'input') {
         var map = el.attrsMap;
         if (!map['v-model']) {
           return
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         var typeBinding;
         if (map[':type'] || map['v-bind:type']) {
           typeBinding = getBindingAttr(el, 'type');
@@ -10492,7 +14103,11 @@
         if (!map.type && !typeBinding && map['v-bind']) {
           typeBinding = "(" + (map['v-bind']) + ").type";
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         if (typeBinding) {
           var ifCondition = getAndRemoveAttr(el, 'v-if', true);
           var ifConditionExtra = ifCondition ? ("&&(" + ifCondition + ")") : "";
@@ -10528,17 +14143,26 @@
             exp: ifCondition,
             block: branch2
           });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           if (hasElse) {
             branch0.else = true;
           } else if (elseIfCondition) {
             branch0.elseif = elseIfCondition;
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           return branch0
         }
       }
     }
+<<<<<<< HEAD
 
     function cloneASTElement (el) {
       return createASTElement(el.tag, el.attrsList.slice(), el.parent)
@@ -10548,36 +14172,69 @@
       preTransformNode: preTransformNode
     };
 
+=======
+  
+    function cloneASTElement (el) {
+      return createASTElement(el.tag, el.attrsList.slice(), el.parent)
+    }
+  
+    var model$1 = {
+      preTransformNode: preTransformNode
+    };
+  
+>>>>>>> Palomino
     var modules$1 = [
       klass$1,
       style$1,
       model$1
     ];
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function text (el, dir) {
       if (dir.value) {
         addProp(el, 'textContent', ("_s(" + (dir.value) + ")"), dir);
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function html (el, dir) {
       if (dir.value) {
         addProp(el, 'innerHTML', ("_s(" + (dir.value) + ")"), dir);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var directives$1 = {
       model: model,
       text: text,
       html: html
     };
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var baseOptions = {
       expectHTML: true,
       modules: modules$1,
@@ -10590,6 +14247,7 @@
       getTagNamespace: getTagNamespace,
       staticKeys: genStaticKeys(modules$1)
     };
+<<<<<<< HEAD
 
     /*  */
 
@@ -10598,6 +14256,16 @@
 
     var genStaticKeysCached = cached(genStaticKeys$1);
 
+=======
+  
+    /*  */
+  
+    var isStaticKey;
+    var isPlatformReservedTag;
+  
+    var genStaticKeysCached = cached(genStaticKeys$1);
+  
+>>>>>>> Palomino
     /**
      * Goal of the optimizer: walk the generated template AST tree
      * and detect sub-trees that are purely static, i.e. parts of
@@ -10618,14 +14286,22 @@
       // second pass: mark static roots.
       markStaticRoots(root, false);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genStaticKeys$1 (keys) {
       return makeMap(
         'type,tag,attrsList,attrsMap,plain,parent,children,attrs,start,end,rawAttrsMap' +
         (keys ? ',' + keys : '')
       )
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function markStatic$1 (node) {
       node.static = isStatic(node);
       if (node.type === 1) {
@@ -10657,7 +14333,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function markStaticRoots (node, isInFor) {
       if (node.type === 1) {
         if (node.static || node.once) {
@@ -10687,7 +14367,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isStatic (node) {
       if (node.type === 2) { // expression
         return false
@@ -10704,7 +14388,11 @@
         Object.keys(node).every(isStaticKey)
       ))
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function isDirectChildOfTemplateFor (node) {
       while (node.parent) {
         node = node.parent;
@@ -10717,6 +14405,7 @@
       }
       return false
     }
+<<<<<<< HEAD
 
     /*  */
 
@@ -10724,6 +14413,15 @@
     var fnInvokeRE = /\([^)]*?\);*$/;
     var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
 
+=======
+  
+    /*  */
+  
+    var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
+    var fnInvokeRE = /\([^)]*?\);*$/;
+    var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
+  
+>>>>>>> Palomino
     // KeyboardEvent.keyCode aliases
     var keyCodes = {
       esc: 27,
@@ -10736,7 +14434,11 @@
       down: 40,
       'delete': [8, 46]
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // KeyboardEvent.key aliases
     var keyNames = {
       // #7880: IE11 and Edge use `Esc` for Escape key name.
@@ -10753,12 +14455,20 @@
       // #9112: IE11 uses `Del` for Delete key name.
       'delete': ['Backspace', 'Delete', 'Del']
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // #4868: modifiers that prevent the execution of the listener
     // need to explicitly return null so that we can determine whether to remove
     // the listener for .once
     var genGuard = function (condition) { return ("if(" + condition + ")return null;"); };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var modifierCode = {
       stop: '$event.stopPropagation();',
       prevent: '$event.preventDefault();',
@@ -10771,7 +14481,11 @@
       middle: genGuard("'button' in $event && $event.button !== 1"),
       right: genGuard("'button' in $event && $event.button !== 2")
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genHandlers (
       events,
       isNative
@@ -10794,11 +14508,16 @@
         return prefix + staticHandlers
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genHandler (handler) {
       if (!handler) {
         return 'function(){}'
       }
+<<<<<<< HEAD
 
       if (Array.isArray(handler)) {
         return ("[" + (handler.map(function (handler) { return genHandler(handler); }).join(',')) + "]")
@@ -10808,6 +14527,17 @@
       var isFunctionExpression = fnExpRE.test(handler.value);
       var isFunctionInvocation = simplePathRE.test(handler.value.replace(fnInvokeRE, ''));
 
+=======
+  
+      if (Array.isArray(handler)) {
+        return ("[" + (handler.map(function (handler) { return genHandler(handler); }).join(',')) + "]")
+      }
+  
+      var isMethodPath = simplePathRE.test(handler.value);
+      var isFunctionExpression = fnExpRE.test(handler.value);
+      var isFunctionInvocation = simplePathRE.test(handler.value.replace(fnInvokeRE, ''));
+  
+>>>>>>> Palomino
       if (!handler.modifiers) {
         if (isMethodPath || isFunctionExpression) {
           return handler.value
@@ -10853,7 +14583,11 @@
         return ("function($event){" + code + handlerCode + "}")
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genKeyFilter (keys) {
       return (
         // make sure the key filters only apply to KeyboardEvents
@@ -10863,7 +14597,11 @@
         (keys.map(genFilterCode).join('&&')) + ")return null;"
       )
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genFilterCode (key) {
       var keyVal = parseInt(key, 10);
       if (keyVal) {
@@ -10880,31 +14618,50 @@
         ")"
       )
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function on (el, dir) {
       if (dir.modifiers) {
         warn("v-on without argument does not support modifiers.");
       }
       el.wrapListeners = function (code) { return ("_g(" + code + "," + (dir.value) + ")"); };
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     function bind$1 (el, dir) {
       el.wrapData = function (code) {
         return ("_b(" + code + ",'" + (el.tag) + "'," + (dir.value) + "," + (dir.modifiers && dir.modifiers.prop ? 'true' : 'false') + (dir.modifiers && dir.modifiers.sync ? ',true' : '') + ")")
       };
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var baseDirectives = {
       on: on,
       bind: bind$1,
       cloak: noop
     };
+<<<<<<< HEAD
 
     /*  */
 
@@ -10912,6 +14669,15 @@
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+  
+  
+>>>>>>> Palomino
     var CodegenState = function CodegenState (options) {
       this.options = options;
       this.warn = options.warn || baseWarn;
@@ -10924,9 +14690,15 @@
       this.staticRenderFns = [];
       this.pre = false;
     };
+<<<<<<< HEAD
 
 
 
+=======
+  
+  
+  
+>>>>>>> Palomino
     function generate (
       ast,
       options
@@ -10938,12 +14710,20 @@
         staticRenderFns: state.staticRenderFns
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genElement (el, state) {
       if (el.parent) {
         el.pre = el.pre || el.parent.pre;
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (el.staticRoot && !el.staticProcessed) {
         return genStatic(el, state)
       } else if (el.once && !el.onceProcessed) {
@@ -10966,7 +14746,11 @@
           if (!el.plain || (el.pre && state.maybeComponent(el))) {
             data = genData$2(el, state);
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           var children = el.inlineTemplate ? null : genChildren(el, state, true);
           code = "_c('" + (el.tag) + "'" + (data ? ("," + data) : '') + (children ? ("," + children) : '') + ")";
         }
@@ -10977,7 +14761,11 @@
         return code
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // hoist static sub-trees out
     function genStatic (el, state) {
       el.staticProcessed = true;
@@ -10992,7 +14780,11 @@
       state.pre = originalPreState;
       return ("_m(" + (state.staticRenderFns.length - 1) + (el.staticInFor ? ',true' : '') + ")")
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // v-once
     function genOnce (el, state) {
       el.onceProcessed = true;
@@ -11020,7 +14812,11 @@
         return genStatic(el, state)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genIf (
       el,
       state,
@@ -11030,7 +14826,11 @@
       el.ifProcessed = true; // avoid recursion
       return genIfConditions(el.ifConditions.slice(), state, altGen, altEmpty)
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genIfConditions (
       conditions,
       state,
@@ -11040,14 +14840,22 @@
       if (!conditions.length) {
         return altEmpty || '_e()'
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var condition = conditions.shift();
       if (condition.exp) {
         return ("(" + (condition.exp) + ")?" + (genTernaryExp(condition.block)) + ":" + (genIfConditions(conditions, state, altGen, altEmpty)))
       } else {
         return ("" + (genTernaryExp(condition.block)))
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // v-if with v-once should generate code like (a)?_m(0):_m(1)
       function genTernaryExp (el) {
         return altGen
@@ -11057,7 +14865,11 @@
             : genElement(el, state)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genFor (
       el,
       state,
@@ -11068,7 +14880,11 @@
       var alias = el.alias;
       var iterator1 = el.iterator1 ? ("," + (el.iterator1)) : '';
       var iterator2 = el.iterator2 ? ("," + (el.iterator2)) : '';
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       if (state.maybeComponent(el) &&
         el.tag !== 'slot' &&
         el.tag !== 'template' &&
@@ -11082,22 +14898,37 @@
           true /* tip */
         );
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       el.forProcessed = true; // avoid recursion
       return (altHelper || '_l') + "((" + exp + ")," +
         "function(" + alias + iterator1 + iterator2 + "){" +
           "return " + ((altGen || genElement)(el, state)) +
         '})'
     }
+<<<<<<< HEAD
 
     function genData$2 (el, state) {
       var data = '{';
 
+=======
+  
+    function genData$2 (el, state) {
+      var data = '{';
+  
+>>>>>>> Palomino
       // directives first.
       // directives may mutate the el's other properties before they are generated.
       var dirs = genDirectives(el, state);
       if (dirs) { data += dirs + ','; }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // key
       if (el.key) {
         data += "key:" + (el.key) + ",";
@@ -11173,7 +15004,11 @@
       }
       return data
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genDirectives (el, state) {
       var dirs = el.directives;
       if (!dirs) { return }
@@ -11198,7 +15033,11 @@
         return res.slice(0, -1) + ']'
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genInlineTemplate (el, state) {
       var ast = el.children[0];
       if (el.children.length !== 1 || ast.type !== 1) {
@@ -11212,7 +15051,11 @@
         return ("inlineTemplate:{render:function(){" + (inlineRenderFns.render) + "},staticRenderFns:[" + (inlineRenderFns.staticRenderFns.map(function (code) { return ("function(){" + code + "}"); }).join(',')) + "]}")
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genScopedSlots (
       el,
       slots,
@@ -11231,13 +15074,21 @@
           containsSlotChild(slot) // is passing down slot from parent which may be dynamic
         )
       });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // #9534: if a component with scoped slots is inside a conditional branch,
       // it's possible for the same component to be reused but with different
       // compiled slot content. To avoid that, we generate a unique key based on
       // the generated code of all the slot contents.
       var needsKey = !!el.if;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       // OR when it is inside another scoped slot or v-for (the reactivity may be
       // disconnected due to the intermediate scope variable)
       // #9438, #9506
@@ -11259,6 +15110,7 @@
           parent = parent.parent;
         }
       }
+<<<<<<< HEAD
 
       var generatedSlots = Object.keys(slots)
         .map(function (key) { return genScopedSlot(slots[key], state); })
@@ -11267,6 +15119,16 @@
       return ("scopedSlots:_u([" + generatedSlots + "]" + (needsForceUpdate ? ",null,true" : "") + (!needsForceUpdate && needsKey ? (",null,false," + (hash(generatedSlots))) : "") + ")")
     }
 
+=======
+  
+      var generatedSlots = Object.keys(slots)
+        .map(function (key) { return genScopedSlot(slots[key], state); })
+        .join(',');
+  
+      return ("scopedSlots:_u([" + generatedSlots + "]" + (needsForceUpdate ? ",null,true" : "") + (!needsForceUpdate && needsKey ? (",null,false," + (hash(generatedSlots))) : "") + ")")
+    }
+  
+>>>>>>> Palomino
     function hash(str) {
       var hash = 5381;
       var i = str.length;
@@ -11275,7 +15137,11 @@
       }
       return hash >>> 0
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function containsSlotChild (el) {
       if (el.type === 1) {
         if (el.tag === 'slot') {
@@ -11285,7 +15151,11 @@
       }
       return false
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genScopedSlot (
       el,
       state
@@ -11310,7 +15180,11 @@
       var reverseProxy = slotScope ? "" : ",proxy:true";
       return ("{key:" + (el.slotTarget || "\"default\"") + ",fn:" + fn + reverseProxy + "}")
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genChildren (
       el,
       state,
@@ -11339,7 +15213,11 @@
         return ("[" + (children.map(function (c) { return gen(c, state); }).join(',')) + "]" + (normalizationType$1 ? ("," + normalizationType$1) : ''))
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // determine the normalization needed for the children array.
     // 0: no normalization needed
     // 1: simple normalization needed (possible 1-level deep nested array)
@@ -11366,11 +15244,19 @@
       }
       return res
     }
+<<<<<<< HEAD
 
     function needsNormalization (el) {
       return el.for !== undefined || el.tag === 'template' || el.tag === 'slot'
     }
 
+=======
+  
+    function needsNormalization (el) {
+      return el.for !== undefined || el.tag === 'template' || el.tag === 'slot'
+    }
+  
+>>>>>>> Palomino
     function genNode (node, state) {
       if (node.type === 1) {
         return genElement(node, state)
@@ -11380,17 +15266,29 @@
         return genText(node)
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genText (text) {
       return ("_v(" + (text.type === 2
         ? text.expression // no need for () because already wrapped in _s()
         : transformSpecialNewlines(JSON.stringify(text.text))) + ")")
     }
+<<<<<<< HEAD
 
     function genComment (comment) {
       return ("_e(" + (JSON.stringify(comment.text)) + ")")
     }
 
+=======
+  
+    function genComment (comment) {
+      return ("_e(" + (JSON.stringify(comment.text)) + ")")
+    }
+  
+>>>>>>> Palomino
     function genSlot (el, state) {
       var slotName = el.slotName || '"default"';
       var children = genChildren(el, state);
@@ -11415,7 +15313,11 @@
       }
       return res + ')'
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // componentName is el.component, take it as argument to shun flow's pessimistic refinement
     function genComponent (
       componentName,
@@ -11425,7 +15327,11 @@
       var children = el.inlineTemplate ? null : genChildren(el, state, true);
       return ("_c(" + componentName + "," + (genData$2(el, state)) + (children ? ("," + children) : '') + ")")
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function genProps (props) {
       var staticProps = "";
       var dynamicProps = "";
@@ -11445,18 +15351,30 @@
         return staticProps
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // #3895, #4268
     function transformSpecialNewlines (text) {
       return text
         .replace(/\u2028/g, '\\u2028')
         .replace(/\u2029/g, '\\u2029')
     }
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     // these keywords should not appear inside expressions, but operators like
     // typeof, instanceof and in are allowed
     var prohibitedKeywordRE = new RegExp('\\b' + (
@@ -11464,22 +15382,37 @@
       'super,throw,while,yield,delete,export,import,return,switch,default,' +
       'extends,finally,continue,debugger,function,arguments'
     ).split(',').join('\\b|\\b') + '\\b');
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // these unary operators should not be used as property/method names
     var unaryOperatorsRE = new RegExp('\\b' + (
       'delete,typeof,void'
     ).split(',').join('\\s*\\([^\\)]*\\)|\\b') + '\\s*\\([^\\)]*\\)');
+<<<<<<< HEAD
 
     // strip strings in expressions
     var stripStringRE = /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`/g;
 
+=======
+  
+    // strip strings in expressions
+    var stripStringRE = /'(?:[^'\\]|\\.)*'|"(?:[^"\\]|\\.)*"|`(?:[^`\\]|\\.)*\$\{|\}(?:[^`\\]|\\.)*`|`(?:[^`\\]|\\.)*`/g;
+  
+>>>>>>> Palomino
     // detect problematic expressions in a template
     function detectErrors (ast, warn) {
       if (ast) {
         checkNode(ast, warn);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkNode (node, warn) {
       if (node.type === 1) {
         for (var name in node.attrsMap) {
@@ -11506,7 +15439,11 @@
         checkExpression(node.expression, node.text, warn, node);
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkEvent (exp, text, warn, range) {
       var stipped = exp.replace(stripStringRE, '');
       var keywordMatch = stipped.match(unaryOperatorsRE);
@@ -11519,14 +15456,22 @@
       }
       checkExpression(exp, text, warn, range);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkFor (node, text, warn, range) {
       checkExpression(node.for || '', text, warn, range);
       checkIdentifier(node.alias, 'v-for alias', text, warn, range);
       checkIdentifier(node.iterator1, 'v-for iterator', text, warn, range);
       checkIdentifier(node.iterator2, 'v-for iterator', text, warn, range);
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkIdentifier (
       ident,
       type,
@@ -11542,7 +15487,11 @@
         }
       }
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function checkExpression (exp, text, warn, range) {
       try {
         new Function(("return " + exp));
@@ -11564,11 +15513,19 @@
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
     var range = 2;
 
+=======
+  
+    /*  */
+  
+    var range = 2;
+  
+>>>>>>> Palomino
     function generateCodeFrame (
       source,
       start,
@@ -11576,7 +15533,11 @@
     ) {
       if ( start === void 0 ) start = 0;
       if ( end === void 0 ) end = source.length;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var lines = source.split(/\r?\n/);
       var count = 0;
       var res = [];
@@ -11605,7 +15566,11 @@
       }
       return res.join('\n')
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     function repeat$1 (str, n) {
       var result = '';
       if (n > 0) {
@@ -11618,11 +15583,19 @@
       }
       return result
     }
+<<<<<<< HEAD
 
     /*  */
 
 
 
+=======
+  
+    /*  */
+  
+  
+  
+>>>>>>> Palomino
     function createFunction (code, errors) {
       try {
         return new Function(code)
@@ -11631,10 +15604,17 @@
         return noop
       }
     }
+<<<<<<< HEAD
 
     function createCompileToFunctionFn (compile) {
       var cache = Object.create(null);
 
+=======
+  
+    function createCompileToFunctionFn (compile) {
+      var cache = Object.create(null);
+  
+>>>>>>> Palomino
       return function compileToFunctions (
         template,
         options,
@@ -11643,7 +15623,11 @@
         options = extend({}, options);
         var warn$$1 = options.warn || warn;
         delete options.warn;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         /* istanbul ignore if */
         {
           // detect possible CSP restriction
@@ -11661,7 +15645,11 @@
             }
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // check cache
         var key = options.delimiters
           ? String(options.delimiters) + template
@@ -11669,10 +15657,17 @@
         if (cache[key]) {
           return cache[key]
         }
+<<<<<<< HEAD
 
         // compile
         var compiled = compile(template, options);
 
+=======
+  
+        // compile
+        var compiled = compile(template, options);
+  
+>>>>>>> Palomino
         // check compilation errors/tips
         {
           if (compiled.errors && compiled.errors.length) {
@@ -11700,7 +15695,11 @@
             }
           }
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // turn code into functions
         var res = {};
         var fnGenErrors = [];
@@ -11708,7 +15707,11 @@
         res.staticRenderFns = compiled.staticRenderFns.map(function (code) {
           return createFunction(code, fnGenErrors)
         });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         // check function generation errors.
         // this should only happen if there is a bug in the compiler itself.
         // mostly for codegen development use
@@ -11720,13 +15723,18 @@
               fnGenErrors.map(function (ref) {
                 var err = ref.err;
                 var code = ref.code;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
                 return ((err.toString()) + " in\n\n" + code + "\n");
             }).join('\n'),
               vm
             );
           }
         }
+<<<<<<< HEAD
 
         return (cache[key] = res)
       }
@@ -11734,6 +15742,15 @@
 
     /*  */
 
+=======
+  
+        return (cache[key] = res)
+      }
+    }
+  
+    /*  */
+  
+>>>>>>> Palomino
     function createCompilerCreator (baseCompile) {
       return function createCompiler (baseOptions) {
         function compile (
@@ -11743,16 +15760,28 @@
           var finalOptions = Object.create(baseOptions);
           var errors = [];
           var tips = [];
+<<<<<<< HEAD
 
           var warn = function (msg, range, tip) {
             (tip ? tips : errors).push(msg);
           };
 
+=======
+  
+          var warn = function (msg, range, tip) {
+            (tip ? tips : errors).push(msg);
+          };
+  
+>>>>>>> Palomino
           if (options) {
             if (options.outputSourceRange) {
               // $flow-disable-line
               var leadingSpaceLength = template.match(/^\s*/)[0].length;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
               warn = function (msg, range, tip) {
                 var data = { msg: msg };
                 if (range) {
@@ -11785,9 +15814,15 @@
               }
             }
           }
+<<<<<<< HEAD
 
           finalOptions.warn = warn;
 
+=======
+  
+          finalOptions.warn = warn;
+  
+>>>>>>> Palomino
           var compiled = baseCompile(template.trim(), finalOptions);
           {
             detectErrors(compiled.ast, warn);
@@ -11796,16 +15831,26 @@
           compiled.tips = tips;
           return compiled
         }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
         return {
           compile: compile,
           compileToFunctions: createCompileToFunctionFn(compile)
         }
       }
     }
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     // `createCompilerCreator` allows creating compilers that use alternative
     // parser/optimizer/codegen, e.g the SSR optimizing compiler.
     // Here we just export a default compiler using the default parts.
@@ -11824,6 +15869,7 @@
         staticRenderFns: code.staticRenderFns
       }
     });
+<<<<<<< HEAD
 
     /*  */
 
@@ -11833,6 +15879,17 @@
 
     /*  */
 
+=======
+  
+    /*  */
+  
+    var ref$1 = createCompiler(baseOptions);
+    var compile = ref$1.compile;
+    var compileToFunctions = ref$1.compileToFunctions;
+  
+    /*  */
+  
+>>>>>>> Palomino
     // check whether current browser encodes a char inside attribute values
     var div;
     function getShouldDecode (href) {
@@ -11840,26 +15897,44 @@
       div.innerHTML = href ? "<a href=\"\n\"/>" : "<div a=\"\n\"/>";
       return div.innerHTML.indexOf('&#10;') > 0
     }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     // #3663: IE encodes newlines inside attribute values while other browsers don't
     var shouldDecodeNewlines = inBrowser ? getShouldDecode(false) : false;
     // #6828: chrome encodes content in a[href]
     var shouldDecodeNewlinesForHref = inBrowser ? getShouldDecode(true) : false;
+<<<<<<< HEAD
 
     /*  */
 
+=======
+  
+    /*  */
+  
+>>>>>>> Palomino
     var idToTemplate = cached(function (id) {
       var el = query(id);
       return el && el.innerHTML
     });
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     var mount = Vue.prototype.$mount;
     Vue.prototype.$mount = function (
       el,
       hydrating
     ) {
       el = el && query(el);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       /* istanbul ignore if */
       if (el === document.body || el === document.documentElement) {
         warn(
@@ -11867,7 +15942,11 @@
         );
         return this
       }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
       var options = this.$options;
       // resolve template/el and convert to render function
       if (!options.render) {
@@ -11900,7 +15979,11 @@
           if (config.performance && mark) {
             mark('compile');
           }
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           var ref = compileToFunctions(template, {
             outputSourceRange: "development" !== 'production',
             shouldDecodeNewlines: shouldDecodeNewlines,
@@ -11912,7 +15995,11 @@
           var staticRenderFns = ref.staticRenderFns;
           options.render = render;
           options.staticRenderFns = staticRenderFns;
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
           /* istanbul ignore if */
           if (config.performance && mark) {
             mark('compile end');
@@ -11922,7 +16009,11 @@
       }
       return mount.call(this, el, hydrating)
     };
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> Palomino
     /**
      * Get outerHTML of elements, taking care
      * of SVG elements in IE as well.
@@ -11936,9 +16027,18 @@
         return container.innerHTML
       }
     }
+<<<<<<< HEAD
 
     Vue.compile = compileToFunctions;
 
     return Vue;
 
   }));
+=======
+  
+    Vue.compile = compileToFunctions;
+  
+    return Vue;
+  
+  }));
+>>>>>>> Palomino

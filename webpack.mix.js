@@ -149,3 +149,11 @@ mix.scripts(
     ],
     'public/js/dashboard/app.js'
 );
+//Prestamos
+mix.scripts([
+    'resources/js/Jquery.js',
+    'resources/js/Bootstrap.js',
+    'resources/js/Toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/prestamos/app.js',], 'public/js/prestamos/app.js');
