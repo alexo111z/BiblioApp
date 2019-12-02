@@ -101,7 +101,8 @@ class LibrosController extends Controller
        $year = $request->post("Year");
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
-      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','', CURRENT_DATE, 1)");
+       $imagen = "http://127.0.0.1:8000/images/template.png";
+      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
         #########################
         if ($dewey < 10) {
             $dewey = "00".$dewey;
