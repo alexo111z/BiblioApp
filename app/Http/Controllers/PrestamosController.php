@@ -214,12 +214,13 @@ class PrestamosController extends Controller
     public function getlistcontrol($numcontrol)
     {
         if (is_null($numcontrol)) { } else {
-            $dataalumn = DB::table('tblusuarios')->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
+            $dataalumn = DB::table('tblusuarios')
+            ->join('tblalumnos', 'tblalumnos.idusuario', '=', 'tblusuarios.id')
                 ->select(
                     'tblusuarios.id',
                     'tblalumnos.nocontrol AS control1',
                     'tblalumnos.nombre',
-                    'tblalumnos.apellidos',
+                    'tblalumnos.apellidos'
                 )->where('tblalumnos.existe', '=', '1')->where('tblalumnos.NoControl', 'like', $numcontrol . '%');
 
 
@@ -228,7 +229,7 @@ class PrestamosController extends Controller
                     'tblusuarios.id',
                     'tbldocentes.nonomina AS control1',
                     'tbldocentes.nombre',
-                    'tbldocentes.apellidos',
+                    'tbldocentes.apellidos'
                 )->where('tbldocentes.existe', '=', '1')->where('tbldocentes.NoNomina', 'like', $numcontrol . '%');
 
             $listcontrol = DB::table('tblusuarios')->join('tbladministrativos', 'tbladministrativos.idusuario', '=', 'tblusuarios.id')
@@ -236,7 +237,7 @@ class PrestamosController extends Controller
                     'tblusuarios.id',
                     'tbladministrativos.nonomina AS control1',
                     'tbladministrativos.nombre',
-                    'tbladministrativos.apellidos',
+                    'tbladministrativos.apellidos'
                 )->where('tbladministrativos.existe', '=', '1')->where('tbladministrativos.NoNomina', 'like', $numcontrol . '%')
                 ->union($dataalumn)
                 ->union($datadoc)
@@ -416,11 +417,11 @@ class PrestamosController extends Controller
 
         $prestamos = DB::table('tblprestamos')->select('Folio')
             ->where('idprestatario', '=', $iduser)
-            ->where('existe', '=', '1')                       
+            ->where('existe', '=', '1')
             ->where('fecha_final', '>=', DB::raw('curdate()'))
-            ->whereNull('fecha_entrega') 
+            ->whereNull('fecha_entrega')
             ->get();
-            
+
         $lprestados = 0;
         foreach ($prestamos as $prestamo) {
             $lprestadoos1 = DB::table('tbldetprestamos')
@@ -429,7 +430,7 @@ class PrestamosController extends Controller
             $lprestados = $lprestados + $lprestadoos1;
         }
 
-        
+
 
         if ($lprestados < 3) {
             if ($lprestados + count($codigos) <= 3) {
@@ -533,7 +534,7 @@ class PrestamosController extends Controller
             DB::table('tblejemplares')
                 ->where('Codigo', '=', $librito->Codigo)
                 ->update(['Existe' => 1]);
-            
+
             $isbns = DB::table('tblejemplares')
                 ->select('ISBN')
                 ->where('Codigo', '=', $librito->Codigo)
@@ -542,7 +543,7 @@ class PrestamosController extends Controller
             DB::table('tbllibros')
                 ->where('ISBN', '=', $isbns[0]->ISBN)
                 ->increment('EjemDisp', 1);
-                
+
         }
 
 
