@@ -94,7 +94,7 @@
             </ul>
         </div>
     </nav>
-    <div class="container-fluid" style="padding:3rem;" id="prestamosindex">
+    <div class="container-fluid" style="padding:3rem;" id="prestamosindex12">
         @yield('content')
     </div>
     <footer class="footer align-items-center container-fluid text-center" style="background-color: #363636; padding: 5rem 0;">

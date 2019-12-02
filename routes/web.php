@@ -19,20 +19,19 @@ Route::get('/prestamos/filter', function () {
     return view('prestamos/filter');
 });
 
-
 //Route::Resource('prestamos','PrestamosController');
-Route::post('prestamos/nuevoprestamo/', 'TaskController@nuevoprestamo')->name('nuevoprestamo');
+Route::post('prestamos/nuevoprestamo/', 'PrestamosController@nuevoprestamo')->name('nuevoprestamo');
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
 Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');
 
-Route::Resource('tasks','TaskController');
-Route::get('prestamos/array/', 'TaskController@array')->name('array');
-Route::get('prestamos/getdetails/{folio}', 'TaskController@getdetails')->name('getdetails');
-Route::get('prestamos/getlistbooks/{codigolibro}', 'TaskController@getlistbooks')->name('getlistbooks');
-Route::get('prestamos/getlistcontrol/{codigolibro}', 'TaskController@getlistcontrol')->name('getlistcontrol');
-Route::get('prestamos/getselectedbook/{codigolibro}', 'TaskController@getselectedbook')->name('getselectedbook');
-Route::get('prestamos/getselectedbook/', 'TaskController@getselectedbook1')->name('getselectedbook1');
-Route::get('prestamos/endprestamo/{folio}', 'TaskController@endprestamo')->name('endprestamo');
+Route::Resource('tasks','PrestamosController');
+Route::get('prestamos/array/', 'PrestamosController@array')->name('array');
+Route::get('prestamos/getdetails/{folio}', 'PrestamosController@getdetails')->name('getdetails');
+Route::get('prestamos/getlistbooks/{codigolibro}', 'PrestamosController@getlistbooks')->name('getlistbooks');
+Route::get('prestamos/getlistcontrol/{codigolibro}', 'PrestamosController@getlistcontrol')->name('getlistcontrol');
+Route::get('prestamos/getselectedbook/{codigolibro}', 'PrestamosController@getselectedbook')->name('getselectedbook');
+Route::get('prestamos/getselectedbook/', 'PrestamosController@getselectedbook1')->name('getselectedbook1');
+Route::get('prestamos/endprestamo/{folio}', 'PrestamosController@endprestamo')->name('endprestamo');
 
 
 

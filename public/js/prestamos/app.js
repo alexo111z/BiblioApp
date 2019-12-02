@@ -29070,11 +29070,9 @@ new Vue({
             return pagesArray;
         },
 
-
     },
 
     methods: {
-
         changePage: function (page) {            
             this.pagination.current_page = page;            
             this.getkeeps(page);

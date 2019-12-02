@@ -1,6 +1,8 @@
 @extends('layouts.dashboard')
 @section('titulo', "Prestamos | BiblioApp")
 @section('content')
+
+<div id="prestamosindex">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb" style="background-color: #FFFF; padding: 15px 10px;">
         <li class="breadcrumb-item"><a href="#">Inicio</a></li>
@@ -91,4 +93,5 @@
     </div>
 </div>
 <script src="{{asset('js/prestamos/app.js')}}"></script>
+</div>
 @endsection
