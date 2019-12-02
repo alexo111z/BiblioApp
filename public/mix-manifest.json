@@ -7,5 +7,6 @@
     "/js/app.js": "/js/app.js",
     "/js/appCarrera.js": "/js/appCarrera.js",
     "/js/appAdeudos.js": "/js/appAdeudos.js",
-    "/js/libros/app.js": "/js/libros/app.js"
+    "/js/libros/app.js": "/js/libros/app.js",
+    "/js/prestamos/app.js": "/js/prestamos/app.js"
 }
