@@ -43,7 +43,9 @@ Route::get('reportes/imprimirreporteRegistros','ReportesController@imprimirRepor
 Route::get('reporte/consultaCatalogo', 'ReportesController@getCatalogo')->name('getCatalogo');
 Route::get('reportes/imprimirreporteCatalogo','ReportesController@imprimirCatalogo')->name('printCatalogo');
 Route::post('reporte/consultaPrestatarios', 'ReportesController@getAdministrativos')->name('getAdministrativos');
-Route::get('reportes/imprimirreportePrestatarios', 'reportesController@imprimirPrestatarios')->name('printPrestatarios');
+Route::get('reportes/imprimirreportePrestatarios', 'ReportesController@imprimirPrestatarios')->name('printPrestatarios');
+Route::post('reporte/consultaMultas', 'reportesController@getMultas')->name('getMultas');
+Route::get('reportes/imprimirMultas', 'ReportesController@imprimirMultas')->name('printMultas');
 //Libros
 Route::resource('libros','LibrosController');
 //Adeudos

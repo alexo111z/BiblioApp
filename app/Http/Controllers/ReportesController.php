@@ -116,5 +116,38 @@ class ReportesController extends Controller
                 break;
         }
     }
+    public function getMultas(Request $request)
+    {
+        $inicio = $request -> post('inicio');
+        $fin = $request -> post("fin");
+        $alumnos = DB::select("SELECT * FROM multasalumnos WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+        $administrativos = DB::select("SELECT * FROM multasadministrativos WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+        $docentes = DB::select("SELECT * FROM multasdocentes WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+
+        $multas = array_merge($alumnos,$administrativos,$docentes);
+        $total = 0;
+        foreach ($multas as $key) {
+            $total+=$key->Monto;
+        }
+        return [
+            'total' => $total,
+            'lista' =>$multas
+        ];
+    }
+    public function imprimirMultas(Request $request)
+    {
+        $inicio = $request -> get('inicio');
+        $fin = $request -> get("fin");
+        $alumnos = DB::select("SELECT * FROM multasalumnos WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+        $administrativos = DB::select("SELECT * FROM multasadministrativos WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+        $docentes = DB::select("SELECT * FROM multasdocentes WHERE FechaPago >='{$inicio}' AND FechaPago <= '{$fin}' LIMIT 5");
+
+        $multas = array_merge($alumnos,$administrativos,$docentes);
+        $total = 0;
+        foreach ($multas as $key) {
+            $total+=$key->Monto;
+        }
+        return view('pdf.reporteMultas', compact('multas'), compact('total'));
+    }
 
 }
