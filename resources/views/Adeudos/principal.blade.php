@@ -99,7 +99,7 @@
             <div class="row">
 {{--            Mensaje del paginado--}}
                 <div class="col-md-6 col-12">
-                    Mostrando carreras del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} carreras
+                    Mostrando adeudos del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} adeudos
                 </div>
 
                 <div class="col-md-6 col-12">
