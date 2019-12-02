@@ -140,10 +140,9 @@ class AdeudoController extends Controller{
         }else{
             if ($monto > 100) {
                 $notes = 'Recibió donación: '.$user['Nombre'].' '.$user['Apellidos'];
-                $cantidad = 0;
+                $monto = 0;
             }else{
                 $notes = 'Persona a cargo: '.$user['Nombre'].' '.$user['Apellidos'];
-                $cantidad = $monto;
             }
         }
 
@@ -153,7 +152,7 @@ class AdeudoController extends Controller{
         $deudor->save();
         Multa::create([
             'Folio' => $id,
-            'Multa' => $cantidad,
+            'Multa' => $monto,
             'Fecha' => $date,
             'Notas' => $notes,
         ]);
