@@ -9,7 +9,7 @@
 
 <div id="librosCRUD" class="row" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
     <div class="col-xs-12">
-       <h1 class="page-header" style="margin-top: 0;">Libros<small>Panel de control</small></h1>
+       <h1 class="page-header" style="margin-top: 0;">Libros<small> Panel de control</small></h1>
     </div>
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
