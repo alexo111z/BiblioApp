@@ -138,7 +138,13 @@ class AdeudoController extends Controller{
         if ($user == null OR $user == 0 OR $user == '') {
             $notes = 'Persona a cargo: No identificada';
         }else{
-            $notes = 'Persona a cargo: '.$user['Nombre'].' '.$user['Apellidos'];
+            if ($monto > 100) {
+                $notes = 'Recibió donación: '.$user['Nombre'].' '.$user['Apellidos'];
+                $cantidad = 0;
+            }else{
+                $notes = 'Persona a cargo: '.$user['Nombre'].' '.$user['Apellidos'];
+                $cantidad = $monto;
+            }
         }
 
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d');
@@ -147,7 +153,7 @@ class AdeudoController extends Controller{
         $deudor->save();
         Multa::create([
             'Folio' => $id,
-            'Multa' => $monto,
+            'Multa' => $cantidad,
             'Fecha' => $date,
             'Notas' => $notes,
         ]);
