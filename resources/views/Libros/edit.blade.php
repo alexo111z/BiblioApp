@@ -99,7 +99,7 @@
                                      $cont = date('Y');
                                      ?>
                                      <select name="year" id="year" class="form-control" required v-model="fillLibro.Year">
-                                     <?php while ($cont >= 1950) { ?>
+                                     <?php while ($cont >= 1900) { ?>
                                      <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                      <?php $cont = ($cont-1); } ?>
                                      </select>
