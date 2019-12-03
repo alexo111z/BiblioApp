@@ -47,13 +47,12 @@ Route::get('/carrera', function(){
 });
 //Materiales
 Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
-
 Route::get('/materiales', function (){
     return view('Materiales.principal');
 });
+Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
 
 Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
-
 //Libros
 Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
 

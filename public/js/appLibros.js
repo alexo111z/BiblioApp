@@ -27102,9 +27102,6 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':'',
-            'EjemDisp':'',
-            'Imagen':'',
-            'FechaRegistro':'',
             'Existe':1
         },
         offset: 3,
@@ -27120,10 +27117,7 @@ new Vue({
             'Edicion':'',
             'Year':'',
             'Volumen':'',
-            'Ejemplares':'',
-            'EjemDisp':'',
-            'Imagen':'',
-            'FechaRegistro':''
+            'Ejemplares':''
         }
     },
     computed:{
@@ -27185,14 +27179,13 @@ new Vue({
                     'Year':'',
                     'Volumen':'',
                     'Ejemplares':'',
-                    'EjemDisp':'',
-                    'Imagen':'',
-                    'FechaRegistro':'',
                     'Existe':1
                 };
                 this.errors = [];
                 $("#create").modal('hide');
-                toastr.success("Libro registrado con exito.", "Tarea completada!");
+                toastr.success("Libro registrado con éxito.", "Tarea completada!");
+                console.log(response.data);
+                
             }).catch(error => {
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error2!");
@@ -27210,8 +27203,10 @@ new Vue({
             this.fillLibro.Volumen = libro.Volumen;
             this.fillLibro.Ejemplares = libro.Ejemplares;
             this.fillLibro.EjemDisp = libro.EjemDisp;
-            this.fillLibro.Imagen = libro.Imagen;
+       
             this.fillLibro.FechaRegistro = libro.FechaRegistro;
+            console.log(this.fillLibro);
+            
             $('#edit').modal('show');
         },
         updateLibro: function (ISBN) {
@@ -27232,7 +27227,7 @@ new Vue({
                     'Volumen':'',
                     'Ejemplares':'',
                     'EjemDisp':'',
-                    'Imagen':'',
+                  
                     'FechaRegistro':''
                 };
                 this.errors = [];
