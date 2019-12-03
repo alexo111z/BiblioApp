@@ -9,7 +9,7 @@
 
 <div id="librosCRUD" class="row" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
     <div class="col-xs-12">
-       <h1 class="page-header" style="margin-top: 0;">Libros<small>Panel de control</small></h1>
+       <h1 class="page-header" style="margin-top: 0;">Libros<small> Panel de control</small></h1>
     </div>
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
@@ -37,6 +37,7 @@
                     <th>Autor</th>
                     <th>Editorial</th>
                     <th>Carrera</th>
+                    <th>Dewey</th>
                     <th colspan="3">Acciones</th>
                 </tr>
             </thead>
@@ -49,11 +50,12 @@
                 <tr>
                     <th> @{{libro.ISBN}}</th>
                     <td> @{{libro.Titulo}} </td>
-                    <td> @{{libro.IdAutor}} </td>
-                    <td> @{{libro.IdEditorial}} </td>
-                    <td> @{{libro.IdCarrera}} </td>
+                    <td> @{{libro.Nombre}} @{{libro.Ape}}</td>
+                    <td> @{{libro.Editorial}} </td>
+                    <td> @{{libro.Carrera}} </td>
+                    <td> @{{libro.Dewey}} </td>
                     <td width="20px">
-                        <a href="javascript:void()" class="btn btn-info btn-sm" v-on:click.prevent="checkLibro(libro)"><i class="fa fa-info"></i></a>
+                        <a href="javascript:void()" class="btn btn-info btn-sm" v-on:click.prevent="showLibro(libro)"><i class="fa fa-info"></i></a>
                     </td>
                     <td width="10px">
                     <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editLibro(libro)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
@@ -90,7 +92,7 @@
         </div>
         @include('libros.create')
         @include('libros.edit')      
-      
+        @include('libros.show')   
     </div>
 </div>
 

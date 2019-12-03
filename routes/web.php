@@ -95,3 +95,14 @@ Route::post('/usuarios/update', 'UsersController@update');
 Route::post('/usuarios/remove', 'UsersController@delete');
 
 
+Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
+
+Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
+//Libros
+Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
+
+Route::get('/libros', function (){
+    return view('Libros.principal');
+});
+
+Route::get('libros', 'LibrosController@selects')->name('varios');
