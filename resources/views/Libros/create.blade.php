@@ -93,7 +93,7 @@
                                 <label for="edicion">Edicion</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="edicion" id="edicion" class="form-control" required
+                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" required
                                         v-model="newLibro.Edicion">
                                 </div>
                             </div>
@@ -119,7 +119,7 @@
                                 <label for="volumen">Volumen</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="volumen" id="volumen" class="form-control" required
+                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" required
                                         v-model="newLibro.Volumen">
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                 <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" required
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" required
                                         v-model="newLibro.Ejemplares">
                                 </div>
                             </div>

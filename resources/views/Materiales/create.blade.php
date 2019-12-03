@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="titulo">Clave de carrera</label>
+                                <label for="claveCarrera">Clave de carrera</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                      <select name="clave" id="clave" class="form-control" required="" v-model="newMaterial.Clave">
@@ -51,15 +51,15 @@
                         </div>
                         <div class="col-sm-6">
                              <div class="form-group">
-                                <label for="titulo">Ejemplares</label>
+                                <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" required="" v-model="newMaterial.Ejemplares">
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" required="" v-model="newMaterial.Ejemplares">
                                 </div>
                              </div>
                         </div>
                         <div class="col-sm-6">
-                            <label for="titulo">Tipo</label>
+                            <label for="tipo">Tipo</label>
                             <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
                                     <select name="tipo" id="tipo" class="form-control" required="" v-model="newMaterial.Tipo">
