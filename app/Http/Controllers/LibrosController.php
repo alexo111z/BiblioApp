@@ -41,6 +41,7 @@ class LibrosController extends Controller
                    
                 )
                 ->where('tbllibros.Existe', '=', 1)
+                ->orderby('ISBN', 'ASC')
                 ->search($search)
                 ->paginate(10); 
         return [

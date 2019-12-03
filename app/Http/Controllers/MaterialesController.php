@@ -31,6 +31,7 @@ class MaterialesController extends Controller
                     'tblmateriales.Tipo'
                 )
                 ->where('tblmateriales.Existe', '=', 1)
+                ->orderby('id', 'DESC')
                 ->search($search)
                 ->paginate(10); 
         return [
