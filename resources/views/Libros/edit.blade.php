@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <input type="text" name="titulo" id="titulo" class="form-control" required v-model="fillLibro.Titulo">
+                                    <input type="text" name="titulo" id="titulo" class="form-control" maxlength="100" required v-model="fillLibro.Titulo">
                                     <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                                  </div>
                             </div>
