@@ -27195,10 +27195,10 @@ new Vue({
         showLibro: function (libro) {
             this.fillLibro.ISBN = libro.ISBN;
             this.fillLibro.Titulo = libro.Titulo;
-            this.fillLibro.IdAutor = libro.IdAutor;
-            this.fillLibro.IdEditorial = libro.IdEditorial;
-            this.fillLibro.IdCarrera = libro.IdCarrera;
-            this.fillLibro.dewey = libro.dewey;
+            this.fillLibro.IdAutor = libro.Nombre;
+            this.fillLibro.IdEditorial = libro.Editorial;
+            this.fillLibro.IdCarrera = libro.Carrera;
+            this.fillLibro.dewey = libro.Dewey;
             this.fillLibro.Edicion = libro.Edicion;
             this.fillLibro.Year = libro.Year;
             this.fillLibro.Volumen = libro.Volumen;

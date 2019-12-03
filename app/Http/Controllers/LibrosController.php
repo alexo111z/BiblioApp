@@ -56,42 +56,7 @@ class LibrosController extends Controller
         ];
     }
 
-    public function getShow($ISBN)
-    {
-        $libros = Libros::join('tblcarreras', 'tblcarreras.clave', '=', 'tbllibros.IdCarrera')
-                ->join('tbleditoriales' , 'tbleditoriales.Id','=','tbllibros.IdEditorial')  
-                ->join('tbldewey' , 'tbldewey.Id','=','tbllibros.dewey')  
-                ->join('tblautores','tblautores.IdAutor','=','tbllibros.IdAutor')
-                ->select(
-                    'tbllibros.ISBN',
-                    'tbllibros.Titulo',
-                    'tbllibros.IdAutor',
-                    'tbllibros.IdEditorial',
-                    'tbllibros.IdCarrera',
-                    'tbllibros.dewey',
-                    'tblAutores.Nombre as Nombre',
-                    'tblAutores.Apellidos as Ape',
-                    'tbleditoriales.Nombre as Editorial',
-                    'tblcarreras.Nombre as Carrera',
-                    'tbldewey.Nombre as Dewey',
-                    'tbllibros.Edicion',
-                    'tbllibros.Year',
-                    'tbllibros.Volumen',
-                    'tbllibros.Ejemplares',
-                    'tbllibros.EjemDisp',
-                    'tbllibros.Imagen',
-                    'tbllibros.FechaRegistro'
-            )
-            ->where('tbllibros.ISBN', '=', $ISBN)
-            ->where('tbllibros.existe', '=', '1')
-            ->get();
-
-            return ['libro' =>$libros
-            ];       
-    }
-
-
-
+    
     public function selects()
     {   
         $autores= DB::table('tblautores')->get();
