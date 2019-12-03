@@ -18,6 +18,7 @@
                                     <input type="number" name="isbn" id="isbn" class="form-control" required
                                         v-model="newLibro.ISBN">
                                 </div>
+                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -28,7 +29,6 @@
                                     <input type="text" name="titulo" id="titulo" class="form-control" required
                                         v-model="newLibro.Titulo">
                                 </div>
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
