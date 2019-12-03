@@ -55,7 +55,7 @@
                     <td> @{{libro.Carrera}} </td>
                     <td> @{{libro.Dewey}} </td>
                     <td width="20px">
-                        <a href="javascript:void()" class="btn btn-info btn-sm" v-on:click.prevent="checkLibro(libro)"><i class="fa fa-info"></i></a>
+                        <a href="javascript:void()" class="btn btn-info btn-sm" v-on:click.prevent="showLibro(libro)"><i class="fa fa-info"></i></a>
                     </td>
                     <td width="10px">
                     <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editLibro(libro)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
@@ -92,7 +92,7 @@
         </div>
         @include('libros.create')
         @include('libros.edit')      
-      
+        @include('libros.show')   
     </div>
 </div>
 

@@ -27191,6 +27191,34 @@ new Vue({
                 toastr.error(error.response.data.message, "Error2!");
             });
         },
+
+        showLibro: function (libro) {
+            this.fillLibro.ISBN = libro.ISBN;
+            this.fillLibro.Titulo = libro.Titulo;
+            this.fillLibro.IdAutor = libro.IdAutor;
+            this.fillLibro.IdEditorial = libro.IdEditorial;
+            this.fillLibro.IdCarrera = libro.IdCarrera;
+            this.fillLibro.dewey = libro.dewey;
+            this.fillLibro.Edicion = libro.Edicion;
+            this.fillLibro.Year = libro.Year;
+            this.fillLibro.Volumen = libro.Volumen;
+            this.fillLibro.Ejemplares = libro.Ejemplares;
+            this.fillLibro.EjemDisp = libro.EjemDisp;
+            this.fillLibro.FechaRegistro = libro.FechaRegistro;
+            console.log(this.fillLibro);
+            $('#show').modal('show');
+        },
+
+        getShow: function () {
+            var url = 'libros/getShow/' + this.fillLibro.ISBN;
+            axios.get(url).then(response => {
+                this.libros = response.data
+            }).catch(error => {
+                console.log(error.response.data.message);
+            });
+        },
+
+
         editLibro: function (libro) {
             this.fillLibro.ISBN = libro.ISBN;
             this.fillLibro.Titulo = libro.Titulo;
@@ -27203,17 +27231,14 @@ new Vue({
             this.fillLibro.Volumen = libro.Volumen;
             this.fillLibro.Ejemplares = libro.Ejemplares;
             this.fillLibro.EjemDisp = libro.EjemDisp;
-       
             this.fillLibro.FechaRegistro = libro.FechaRegistro;
             console.log(this.fillLibro);
-            
             $('#edit').modal('show');
         },
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
             axios.put(url, this.fillLibro)
             .then(response => {
-                alert (url);
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',
@@ -27227,7 +27252,6 @@ new Vue({
                     'Volumen':'',
                     'Ejemplares':'',
                     'EjemDisp':'',
-                  
                     'FechaRegistro':''
                 };
                 this.errors = [];
