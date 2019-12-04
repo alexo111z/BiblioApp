@@ -15,6 +15,6 @@ class Libros extends Model
     public function scopeSearch($query,$search)
     {
         if($search && $search != "")
-            return $query -> where('Titulo', 'LIKE', "%$search%");
+        return $query -> where('Titulo', 'LIKE', "%$search%")-> orWhere('ISBN', 'LIKE', "%$search%")-> orWhere('tblautores.Nombre', 'LIKE', "%$search%")->orWhere('tblautores.Apellidos', 'LIKE', "%$search%");
 }
 }
