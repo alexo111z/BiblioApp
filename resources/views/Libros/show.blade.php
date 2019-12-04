@@ -26,6 +26,7 @@
                              <h5><b>Ejemplares:</b> @{{fillLibro.Ejemplares}}</h5>
                              <h5><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>
                              <h5><b>Fecha de registro:</b> @{{fillLibro.FechaRegistro}}</h5>  
+                            </div>
                         </div>
                     </div>
             </div>
