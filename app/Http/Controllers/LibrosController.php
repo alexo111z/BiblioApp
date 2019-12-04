@@ -155,7 +155,6 @@ class LibrosController extends Controller
             'Volumen' => 'required',
             'Ejemplares' => 'required',
             'EjemDisp' => 'required',
-           
             'FechaRegistro' => 'required'
         ]);
 
