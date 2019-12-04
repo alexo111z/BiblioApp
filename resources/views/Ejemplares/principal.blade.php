@@ -28,7 +28,7 @@
                     <th>ISBN</th>
                     <th>Fecha Registro</th>
                     <th>CD</th>
-                    <th colspan="2">Acciones</th>
+                    <th colspan="3">Acciones</th>
                 </tr>
             </thead>
             <tbody v-if="ejemplares.length==0">
@@ -44,6 +44,9 @@
                     <td> @{{ejemplar.CD}} </td>
                     <td width="20px">
                     <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editEjemplar(ejemplar)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
+                    </td>
+                    <td width="10px">
+                        <a href="javascript:void()" class="btn btn-success btn-sm" v-on:click.prevent="imprimirEjemplar(ejemplar)"><i class="fa fa-barcode"></i></a>
                     </td>
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteEjemplar(ejemplar)"><i class="fa fa-user-times"></i></a>
