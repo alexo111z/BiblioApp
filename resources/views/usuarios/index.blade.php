@@ -179,7 +179,7 @@
                         v-model="userType"
                         @change="getUsers()">
                         <option :value="1">Administrador</option>
-                        <option :value="2">Colaborador</option>
+                        <option :value="2">Bibliotecario</option>
                     </select>
                 </div>
             </div>
@@ -201,7 +201,7 @@
                         @{{ value }}
                     </td>
                     <td v-if="userType == 1">Administrador</td>
-                    <td v-if="userType == 2">Colaborador</td>
+                    <td v-if="userType == 2">Bibliotecario</td>
                     <td width="10px">
                         <a
                             class="btn btn-warning btn-sm"
