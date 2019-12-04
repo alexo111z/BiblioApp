@@ -28,6 +28,26 @@ class EjemplaresController extends Controller
         ];
     }
 
+          /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {        
+      $this->validate($request, [
+        'Codigo' => 'required',
+        'ISBN' => 'required',
+        'FechaRegistro' => 'required',
+        'CD' => 'required'
+      ]);
+
+      Ejemplares::create($request->all());
+
+      return;
+    }
+
         /**
      * Update the specified resource in storage.
      *
