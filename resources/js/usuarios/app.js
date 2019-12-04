@@ -271,7 +271,7 @@ new Vue({
                 );
                 this.users.pop();
             }).catch(() => {
-                toastr.error('El usuario pudo ser creado, intenta de nuevo', '¡Error!');
+                toastr.error('El usuario no pudo ser creado, intenta de nuevo', '¡Error!');
             });
         },
         edit: function() {
@@ -308,7 +308,7 @@ new Vue({
 
                 toastr.success('El colaborador fue editado exitosamente', 'Todo bien');
             }).catch(() => {
-                toastr.error('El colaborador pudo ser editado, intenta de nuevo', '¡Error!');
+                toastr.error('El colaborador no pudo ser editado, intenta de nuevo', '¡Error!');
             });
         },
         remove: function(user) {

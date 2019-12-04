@@ -66,7 +66,9 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Prestamos</a></li>
-                        <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
+                        @if(\App\User::isAdmin())
+                            <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
+                        @endif
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -80,16 +82,18 @@
                         <li><a href="{{asset('editoriales')}}">Editoriales</a></li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Control de usuarios   <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="{{route('usuarios')}}">Colaboradores</a></li>
-                        <li><a href="{{route('prestatarios')}}">Prestatarios</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="{{asset('carrera')}}">Carreras</a></li>
-                    </ul>
-                </li>
-                <li><a href="{{asset('reportes')}}">Reportes</a></li>
+                @if(\App\User::isAdmin())
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Control de usuarios   <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{route('usuarios')}}">Bibliotecarios</a></li>
+                            <li><a href="{{route('prestatarios')}}">Prestatarios</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{asset('carrera')}}">Carreras</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{asset('reportes')}}">Reportes</a></li>
+                @endif
                 <li><a @click="onLogOut()" style="cursor:pointer;">Cerrar sesión</a></li>
             </ul>
         </div>
