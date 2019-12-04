@@ -15,6 +15,6 @@ class Ejemplares extends Model
     public function scopeSearch($query,$search)
     {
         if($search && $search != "")
-            return $query -> where('Codigo', 'LIKE', "%$search%");
+            return $query -> where('ISBN', 'LIKE', "%$search%");
 }
 }

@@ -34,8 +34,8 @@
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-circle"></i></div>
                                      <select name="cd" id="cd" class="form-control" required v-model="newEjemplar.CD">
-                                     <option value="0">No</option>
-                                     <option value="1">Si</option>
+                                     <option value="No">No</option>
+                                     <option value="Si">Si</option>
                                      </select>
                                 </div>
                             </div>

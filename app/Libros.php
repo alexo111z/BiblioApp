@@ -9,7 +9,7 @@ class Libros extends Model
     public $table = "tbllibros";
     protected $primaryKey = 'ISBN';
     public $incrementing = false;
-    protected $fillable = ['ISBN','Titulo','IdAutor','IdEditorial','IdCarrera','dewey','Edicion','Year','Volumen','Ejemplares','EjemDisp','Imagen','FechaRegistro', 'Existe'];
+    protected $fillable = ['ISBN','Titulo','IdAutor','IdEditorial','IdCarrera','dewey','Edicion','Year','Volumen','Ejemplares','EjemDisp','CD','Imagen','FechaRegistro', 'Existe'];
     public $timestamps = false;
 
     public function scopeSearch($query,$search)

@@ -27101,7 +27101,8 @@ new Vue({
             'Edicion':'',
             'Year':'',
             'Volumen':'',
-            'Ejemplares':''
+            'Ejemplares':'',
+            'CD':''
         },
         offset: 3,
         errors: [],
@@ -27177,7 +27178,8 @@ new Vue({
                     'Edicion':'',
                     'Year':'',
                     'Volumen':'',
-                    'Ejemplares':''
+                    'Ejemplares':'',
+                    'CD':''
                 };
                 this.errors = [];
                 $("#create").modal('hide');
@@ -27201,6 +27203,7 @@ new Vue({
             this.fillLibro.Volumen = libro.Volumen;
             this.fillLibro.Ejemplares = libro.Ejemplares;
             this.fillLibro.EjemDisp = libro.EjemDisp;
+            this.fillLibro.CD = libro.CD;
             this.fillLibro.FechaRegistro = libro.FechaRegistro;
             console.log(this.fillLibro);
             $('#show').modal('show');

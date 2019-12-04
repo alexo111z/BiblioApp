@@ -134,6 +134,18 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                        <label for="cd">CD</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                     <div class="input-group-addon"><i class="fa fa-circle"></i></div>
+                                     <select name="cd" id="cd" class="form-control" required v-model="newLibro.CD">
+                                     <option value="No">No</option>
+                                     <option value="Si">Si</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
