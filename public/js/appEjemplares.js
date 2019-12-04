@@ -27067,11 +27067,11 @@ return /******/ (function(modules) { // webpackBootstrap
 //# sourceMappingURL=axios.map
 
 new Vue({
-    el: "#librosCRUD",
+    el: "#ejemplaresCRUD",
     created: function () {
-        this.getLibros();
+        this.getEjemplares();
         toastr.options = {
-            showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+            showMethod: 'fadeIn', 
             showDuration: 500,
             showEasing: 'swing',
             hideMethod: 'fadeOut',
@@ -27082,7 +27082,7 @@ new Vue({
         };
     },
     data: {
-        libros: [],
+        ejemplares: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27091,33 +27091,20 @@ new Vue({
             'from': 0,
             'to': 0,
         },
-        newLibro: {
+        newEjemplar: {
+            'Codigo':'',
             'ISBN':'',
-            'Titulo':'',
-            'IdAutor':'',
-            'IdEditorial':'',
-            'IdCarrera':'',
-            'dewey':'',
-            'Edicion':'',
-            'Year':'',
-            'Volumen':'',
-            'Ejemplares':'',
-            'Existe':1
+            'FechaRegistro':'',
+            'CD':'',
         },
         offset: 3,
         errors: [],
         search: '',
-        fillLibro:{
+        fillEjemplar:{
+            'Codigo':'',
             'ISBN':'',
-            'Titulo':'',
-            'IdAutor':'',
-            'IdEditorial':'',
-            'IdCarrera':'',
-            'dewey':'',
-            'Edicion':'',
-            'Year':'',
-            'Volumen':'',
-            'Ejemplares':''
+            'FechaRegistro':'',
+            'CD':''
         }
     },
     computed:{
@@ -27150,112 +27137,60 @@ new Vue({
     methods: {
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getLibros(page);
+            this.getEjemplares(page);
         },
-        getLibros: function (page) {
-            var url = 'libro?page=' + page +'&search='+this.search;
-            //var url = 'libro';
+        getEjemplares: function (page) {
+            var url = 'ejemplar?page=' + page +'&search='+this.search;
             axios.get(url).then(response => {
-                //this.libros = response.data;
-                this.libros = response.data.libro.data;
+                this.ejemplares = response.data.ejemplar.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
             });
         },
-        createLibro: function () {
-            var url = 'libro';
-            axios.post(url, this.newLibro)
+        createEjemplar: function () {
+            var url = 'ejemplar';
+            axios.post(url, this.newEjemplar)
             .then(response => {
-                this.getLibros();
-                this.newLibro = {
+                this.getEjemplares();
+                this.newEjemplar = {
+                    'Codigo':'',
                     'ISBN':'',
-                    'Titulo':'',
-                    'IdAutor':'',
-                    'IdEditorial':'',
-                    'IdCarrera':'',
-                    'dewey':'',
-                    'Edicion':'',
-                    'Year':'',
-                    'Volumen':'',
-                    'Ejemplares':'',
-                    'Existe':1
+                    'FechaRegistro':'',
+                    'CD':''
                 };
                 this.errors = [];
                 $("#create").modal('hide');
-                toastr.success("Libro registrado con éxito.", "Tarea completada!");
+                toastr.success("Ejemplar registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
                 
             }).catch(error => {
-                toastr.error("ISBN duplicado, por favor corrija el dato registrado");
+                toastr.error("Codigo duplicado, por favor corrija el dato registrado");
             });
         },
 
-        showLibro: function (libro) {
-            this.fillLibro.ISBN = libro.ISBN;
-            this.fillLibro.Titulo = libro.Titulo;
-            this.fillLibro.IdAutor = libro.Nombre + " "+ libro.Ape;
-            this.fillLibro.IdEditorial = libro.Editorial;
-            this.fillLibro.IdCarrera = libro.Carrera;
-            this.fillLibro.dewey = libro.Dewey;
-            this.fillLibro.Edicion = libro.Edicion;
-            this.fillLibro.Year = libro.Year;
-            this.fillLibro.Volumen = libro.Volumen;
-            this.fillLibro.Ejemplares = libro.Ejemplares;
-            this.fillLibro.EjemDisp = libro.EjemDisp;
-            this.fillLibro.FechaRegistro = libro.FechaRegistro;
-            console.log(this.fillLibro);
-            $('#show').modal('show');
-        },
-
-        getShow: function () {
-            var url = 'libros/getShow/' + this.fillLibro.ISBN;
-            axios.get(url).then(response => {
-                this.libros = response.data
-            }).catch(error => {
-                console.log(error.response.data.message);
-            });
-        },
-
-
-        editLibro: function (libro) {
-            this.fillLibro.ISBN = libro.ISBN;
-            this.fillLibro.Titulo = libro.Titulo;
-            this.fillLibro.IdAutor = libro.IdAutor;
-            this.fillLibro.IdEditorial = libro.IdEditorial;
-            this.fillLibro.IdCarrera = libro.IdCarrera;
-            this.fillLibro.dewey = libro.dewey;
-            this.fillLibro.Edicion = libro.Edicion;
-            this.fillLibro.Year = libro.Year;
-            this.fillLibro.Volumen = libro.Volumen;
-            this.fillLibro.Ejemplares = libro.Ejemplares;
-            this.fillLibro.EjemDisp = libro.EjemDisp;
-            this.fillLibro.FechaRegistro = libro.FechaRegistro;
-            console.log(this.fillLibro);
+        editEjemplar: function (ejemplar) {
+            this.fillEjemplar.Codigo = ejemplar.Codigo;
+            this.fillEjemplar.ISBN = ejemplar.ISBN;
+            this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
+            this.fillEjemplar.CD = ejemplar.CD;
+            console.log(this.fillEjemplar);
             $('#edit').modal('show');
         },
-        updateLibro: function (ISBN) {
-            var url = 'libro/'+ ISBN;
-            axios.put(url, this.fillLibro)
+        updateEjemplar: function (Codigo) {
+            var url = 'ejemplar/'+ Codigo;
+            axios.put(url, this.fillEjemplar)
             .then(response => {
-                this.getLibros();
-                this.fillLibro = {
+                this.getEjemplares();
+                this.fillEjemplar = {
+                    'Codigo':'',
                     'ISBN':'',
-                    'Titulo':'',
-                    'IdAutor':'',
-                    'IdEditorial':'',
-                    'IdCarrera':'',
-                    'dewey':'',
-                    'Edicion':'',
-                    'Year':'',
-                    'Volumen':'',
-                    'Ejemplares':'',
-                    'EjemDisp':'',
-                    'FechaRegistro':''
+                    'FechaRegistro':'',
+                    'CD':''
                 };
                 this.errors = [];
                 $("#edit").modal("hide");
-                toastr.success("Libro actualizado con exito.", "Tarea completada!");
+                toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{
                 this.errors = error.response.data;
@@ -27263,21 +27198,21 @@ new Vue({
             });
         },
               
-        deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
-                var url = 'libro/' + libro.ISBN;
+        deleteEjemplar: function (ejemplar) {
+            if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
+                var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
-                    this.getLibros();
-                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
+                    this.getEjemplares();
+                    toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");
                 });
             }
         },
 
-        searchLibro: function () {
+        searchEjemplar: function () {
             this.search = $('#search').val();
-            this.getLibros();
+            this.getEjemplares();
         }
     }
 });

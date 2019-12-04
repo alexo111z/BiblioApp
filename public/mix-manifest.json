@@ -7,5 +7,6 @@
     "/js/appCarrera.js": "/js/appCarrera.js",
     "/js/appAdeudos.js": "/js/appAdeudos.js",
     "/js/appMateriales.js": "/js/appMateriales.js",
-    "/js/appLibros.js": "/js/appLibros.js"
+    "/js/appLibros.js": "/js/appLibros.js",
+    "/js/appEjemplares.js": "/js/appEjemplares.js"
 }

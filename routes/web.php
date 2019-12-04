@@ -59,5 +59,11 @@ Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit'
 Route::get('/libros', function (){
     return view('Libros.principal');
 });
-
 Route::get('libros', 'LibrosController@selects')->name('varios');
+//Ejemplares
+Route::resource('ejemplar', 'EjemplaresController', ['except' =>'show','create','store','edit']);
+
+Route::get('/ejemplares', function (){
+    return view('Ejemplares.principal');
+});
+

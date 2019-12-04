@@ -80,6 +80,16 @@ mix.scripts([
     'resources/js/axios.js',
     'resources/js/libros/Libros.js'], 
     'public/js/appLibros.js') ;
+//Ejemplares
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/ejemplares/Ejemplares.js'], 
+    'public/js/appEjemplares.js') ;
+ 
  
  
     
