@@ -202,6 +202,9 @@
                     <td v-for="(value, key) of user" v-if="key !== 'IdUsuario' && key !== 'IdCarrera'">
                         @{{ value }}
                     </td>
+                    <td v-if="userType == 3">Docente</td>
+                    <td v-if="userType == 4">Alumno</td>
+                    <td v-if="userType == 5">Administrativo</td>
                     <td width="10px">
                         <a
                             class="btn btn-warning btn-sm"

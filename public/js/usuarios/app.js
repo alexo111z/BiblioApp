@@ -27276,6 +27276,7 @@ new Vue({
                 'Nombre de usuario',
                 'Nombre',
                 'Apellidos',
+                'Tipo de usuario',
                 'Acciones',
             ],
             [
@@ -27283,6 +27284,7 @@ new Vue({
                 'Nombre de usuario',
                 'Nombre',
                 'Apellidos',
+                'Tipo de usuario',
                 'Acciones',
             ],
             [
@@ -27292,6 +27294,7 @@ new Vue({
                 'Apellidos',
                 'Teléfono',
                 'Correo electrónico',
+                'Tipo de usuario',
                 'Acciones',
             ],
             [
@@ -27302,6 +27305,7 @@ new Vue({
                 'Teléfono',
                 'Correo electrónico',
                 'Carrera',
+                'Tipo de usuario',
                 'Acciones',
             ],
             [
@@ -27312,6 +27316,7 @@ new Vue({
                 'Teléfono',
                 'Correo electrónico',
                 'Puesto',
+                'Tipo de usuario',
                 'Acciones',
             ],
         ],
