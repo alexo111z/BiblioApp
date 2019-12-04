@@ -27140,7 +27140,8 @@ new Vue({
         errors: [],
         search: '',
         fechaInicio: '',
-        fechaFinal: ''
+        fechaFinal: '',
+        tipo: 0,
     },
     computed: {
         isActived: function () {
@@ -27201,14 +27202,19 @@ new Vue({
         searchAdeudo: function () {
             var search = $("#search").val();
             this.search = search;
-            console.log('Folios');
+            //console.log('Folios');
             this.getAdeudos();
         },
         filtrarFecha: function () {
             if (this.fechaInicio && this.fechaFinal) {
-                console.log('Fechas');
+                //console.log('Fechas');
                 this.getAdeudos();
             }
+        },
+        filtrarTipo: function(){
+            var filtro = $('#tipo').val();
+            //this.tipo = filtro;
+            this.getAdeudos();
         },
         clearDataInput: function() {
             this.fechaInicio = '';
@@ -27217,14 +27223,14 @@ new Vue({
         },
         //Modulo Carreras
         getAdeudos: function (page) { //param: page
-            console.log('Index');
+            //console.log('Index');
             let inicio = '';
             let final = '';
             if (this.fechaInicio && this.fechaFinal) {
                 inicio = new Date(this.fechaInicio).toUTCString();
                 final = new Date(this.fechaFinal).toUTCString();
             }
-            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final +'&tipo=' + this.tipo;
             axios.get(url).then(response => {
                 this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
