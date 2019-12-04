@@ -27499,7 +27499,7 @@ new Vue({
                 );
                 this.users.pop();
             }).catch(() => {
-                toastr.error('El prestatario pudo ser creado, intenta de nuevo', '¡Error!');
+                toastr.error('El prestatario no pudo ser creado, intenta de nuevo', '¡Error!');
             });
         },
         edit: function() {
@@ -27536,7 +27536,7 @@ new Vue({
 
                 toastr.success('El prestatario fue editado exitosamente', 'Todo bien');
             }).catch(() => {
-                toastr.error('El prestatario pudo ser editado, intenta de nuevo', '¡Error!');
+                toastr.error('El prestatario no pudo ser editado, intenta de nuevo', '¡Error!');
             });
         },
         remove: function(user) {

@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Support\Facades\Session;
 
 class User implements Authenticatable
 {
@@ -27,6 +28,8 @@ class User implements Authenticatable
         self::TYPE_STUDENT,
         self::TYPE_ADMINISTRATIVE,
     ];
+
+    const SESSION_DATA_KEY = 'userData';
 
     const TABLE_CAREERS = 'tblcarreras';
 
@@ -128,6 +131,33 @@ class User implements Authenticatable
         $this->data = array_filter($paramsToFilter);
     }
 
+    public static function getSession(): array
+    {
+        return Session::get(self::SESSION_DATA_KEY, []);
+    }
+
+    public static function isAdmin(): bool
+    {
+        $sessionData = static::getSession();
+
+        if (!empty($sessionData)) {
+            return ($sessionData[static::ADMINS_FIELD_TYPE] == static::TYPE_ADMIN);
+        }
+
+        return false;
+    }
+
+    public static function isCollaborator(): bool
+    {
+        $sessionData = static::getSession();
+
+        if (!empty($sessionData)) {
+            return ($sessionData[static::ADMINS_FIELD_TYPE] == static::TYPE_COLLABORATOR);
+        }
+
+        return false;
+    }
+
     public static function getAdministrators(int $adminType = 1): LengthAwarePaginator
     {
         /** @var LengthAwarePaginator $users */
@@ -138,6 +168,7 @@ class User implements Authenticatable
                 self::FIELD_NAME,
                 self::FIELD_LAST_NAME,
             ])
+            ->where('Tipo', $adminType)
             ->orderBy(self::FIELD_USER_ID, 'DESC')
             ->paginate(self::PAGINATION_OFFSET);
 

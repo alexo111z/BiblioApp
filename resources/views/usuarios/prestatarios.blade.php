@@ -31,7 +31,7 @@
                             <form autocomplete="off">
                                 <input type="hidden" name="id" v-model="user.IdUsuario">
                                 <div class="form-group">
-                                    <label for="modalUserType">Selecciona el tipo de usuario</label>
+                                    <label for="modalUserType">Selecciona el tipo de prestatario</label>
                                     <select
                                         id="modalUserType"
                                         class="form-control"
@@ -173,7 +173,8 @@
             </div>
 
             <div class="row">
-                <div class="col-md-4 col-md-offset-4">
+                <div class="col-md-4 col-md-offset-4 form-group">
+                    <label for="userType">Selecciona el tipo de prestatario</label>
                     <select
                         class="form-control"
                         v-model="userType"
