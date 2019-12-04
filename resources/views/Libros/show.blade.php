@@ -10,21 +10,22 @@
                 </div>
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-xs-7">
-                                    <img src="http://127.0.0.1:8000/images/template.png" width="290" >
-                            </div>                
-                             <h5 style="font-weight:light;margin-left:2rem"><b>ISBN:</b> @{{fillLibro.ISBN}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Titulo:</b> @{{fillLibro.Titulo}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Autor:</b> @{{fillLibro.IdAutor}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Editorial:</b> @{{fillLibro.IdEditorial}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Carrera:</b> @{{fillLibro.IdCarrera}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>dewey:</b> @{{fillLibro.dewey}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Edicion:</b> @{{fillLibro.Edicion}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Año:</b> @{{fillLibro.Year}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Volumen:</b> @{{fillLibro.Volumen}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Ejemplares:</b> @{{fillLibro.Ejemplares}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>
-                             <h5 style="font-weight:light;margin-left:2rem"><b>Fecha de registro:</b> @{{fillLibro.FechaRegistro}}</h5>  
+                            <div class="col-xs-6">
+                                    <img src="http://127.0.0.1:8000/images/template.png" width="280" >
+                            </div>    
+                            <div class="col-xs-6">            
+                             <h5><b>ISBN:</b> @{{fillLibro.ISBN}}</h5>
+                             <h5><b>Titulo:</b> @{{fillLibro.Titulo}}</h5>
+                             <h5><b>Autor:</b> @{{fillLibro.IdAutor}}</h5>
+                             <h5><b>Editorial:</b> @{{fillLibro.IdEditorial}}</h5>
+                             <h5><b>Carrera:</b> @{{fillLibro.IdCarrera}}</h5>
+                             <h5><b>dewey:</b> @{{fillLibro.dewey}}</h5>
+                             <h5><b>Edicion:</b> @{{fillLibro.Edicion}}</h5>
+                             <h5><b>Año:</b> @{{fillLibro.Year}}</h5>
+                             <h5><b>Volumen:</b> @{{fillLibro.Volumen}}</h5>
+                             <h5><b>Ejemplares:</b> @{{fillLibro.Ejemplares}}</h5>
+                             <h5><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>
+                             <h5><b>Fecha de registro:</b> @{{fillLibro.FechaRegistro}}</h5>  
                         </div>
                     </div>
             </div>

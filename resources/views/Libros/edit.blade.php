@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <input type="text" name="titulo" id="titulo" class="form-control" required v-model="fillLibro.Titulo">
+                                    <input type="text" name="titulo" id="titulo" class="form-control" maxlength="100" required v-model="fillLibro.Titulo">
                                     <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                                  </div>
                             </div>
@@ -86,7 +86,7 @@
                              <label for="edicion">Edicion</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" required v-model="fillLibro.Edicion">
+                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" max="9999" required v-model="fillLibro.Edicion">
                                 </div>
                              </div>
                         </div>
@@ -98,8 +98,8 @@
                                      <?php
                                      $cont = date('Y');
                                      ?>
-                                     <select name="year" id="year" class="form-control" required v-model="fillLibro.Year">
-                                     <?php while ($cont >= 1950) { ?>
+                                     <select name="year" id="year" class="form-control" required max="9999" v-model="fillLibro.Year">
+                                     <?php while ($cont >= 1900) { ?>
                                      <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                      <?php $cont = ($cont-1); } ?>
                                      </select>
@@ -111,7 +111,7 @@
                              <label for="volumen">Volumen</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" required v-model="fillLibro.Volumen">
+                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" max="9999" required v-model="fillLibro.Volumen">
                                 </div>
                              </div>
                         </div>
@@ -120,7 +120,7 @@
                              <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" required v-model="fillLibro.Ejemplares">
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
                         </div>
@@ -129,7 +129,7 @@
                              <label for="ejemDisp">Ejemplares Disponibles</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemDisp" id="ejemDisp" class="form-control" required min="1" v-model="fillLibro.EjemDisp">
+                                    <input type="number" name="ejemDisp" id="ejemDisp" class="form-control" required min="1" max="9999" v-model="fillLibro.EjemDisp">
                                 </div>
                              </div>
                         </div>

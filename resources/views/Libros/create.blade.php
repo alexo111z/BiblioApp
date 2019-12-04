@@ -15,7 +15,7 @@
                                 <label for="isbn">ISBN</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="isbn" id="isbn" class="form-control" required
+                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" max="99999999999999999999" required
                                         v-model="newLibro.ISBN">
                                 </div>
                             </div>
@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <input type="text" name="titulo" id="titulo" class="form-control" required
+                                    <input type="text" name="titulo" id="titulo" class="form-control" maxlength="100" required
                                         v-model="newLibro.Titulo">
                                 </div>
                                 <span v-for="error in errors" class="text-danger">@{{ error }}</span>
@@ -93,7 +93,7 @@
                                 <label for="edicion">Edicion</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" required
+                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" max="9999" required
                                         v-model="newLibro.Edicion">
                                 </div>
                             </div>
@@ -106,8 +106,8 @@
                                     <?php
                                      $cont = date('Y');
                                      ?>
-                                    <select name="year" id="year" class="form-control" required v-model="newLibro.Year">
-                                        <?php while ($cont >= 1950) { ?>
+                                    <select name="year" id="year" class="form-control" max="9999" required v-model="newLibro.Year">
+                                        <?php while ($cont >= 1900) { ?>
                                         <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                         <?php $cont = ($cont-1); } ?>
                                     </select>
@@ -119,7 +119,7 @@
                                 <label for="volumen">Volumen</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" required
+                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" max="9999" required
                                         v-model="newLibro.Volumen">
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                                 <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" required
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required
                                         v-model="newLibro.Ejemplares">
                                 </div>
                             </div>
