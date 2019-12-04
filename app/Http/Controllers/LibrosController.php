@@ -100,8 +100,8 @@ class LibrosController extends Controller
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
        $imagen = "http://127.0.0.1:8000/images/template.png";
-      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
-        #########################
+       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
+        #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;
         }else if($dewey >= 10 && $dewey <100){
@@ -132,39 +132,6 @@ class LibrosController extends Controller
             DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,1,1)");
         }
         return $codigo;
-    }
-   /* public function generarCodigos($dewey, $edicion, $ejemplares)
-    {
-        if ($dewey < 10) {
-            $dewey = "00".$dewey;
-        }else if($dewey >= 10 && $dewey <100){
-            $dewey = "0".$dewey;
-        }
-        $codigo = "1".$dewey;
-        $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}");
-        foreach ($ejemplaresdewey as $key) {
-                if (($key->ejemplaresdewey) < 10) {
-                    $cant = "00".($key->ejemplaresdewey);
-                }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
-                    $cant = "0".($key->ejemplaresdewey);
-                }else {
-                    $cant = ($key->ejemplaresdewey);
-                }
-        }
-        $codigo= $codigo.$cant;
-        if($edicion <10)
-            $edicion = "0".$edicion;
-        $codigo = $codigo . $edicion;
-        for ($x=0; $x < $ejemplares; $x++) { 
-            if($x<10){
-                $codigo = $codigo . "00".$x;
-            }else if ($x>=10 && $x <100) {
-                $codigo = $codigo . "0".$x;
-            }
-            DB::insert("insert into tblejemplares values({$codigo}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
-        }
-        
-
     }
 
         /**

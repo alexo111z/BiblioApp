@@ -18,6 +18,7 @@
                                     <input type="number" name="isbn" id="isbn" class="form-control" min="1" max="99999999999999999999" required
                                         v-model="newLibro.ISBN">
                                 </div>
+                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -25,10 +26,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <input type="text" name="titulo" id="titulo" class="form-control" maxlength="100" required
+                                    <input type="text" name="titulo" id="titulo" maxlength="100" class="form-control" required
                                         v-model="newLibro.Titulo">
                                 </div>
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
