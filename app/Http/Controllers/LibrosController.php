@@ -40,7 +40,6 @@ class LibrosController extends Controller
                     'tbllibros.FechaRegistro'
                    
                 )
-                ->where('tbllibros.Existe', '=', 1)
                 ->orderby('ISBN', 'ASC')
                 ->search($search)
                 ->paginate(10); 
@@ -100,7 +99,7 @@ class LibrosController extends Controller
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
        $imagen = "http://127.0.0.1:8000/images/template.png";
-       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
+       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE)");
         #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;
@@ -165,8 +164,7 @@ class LibrosController extends Controller
     //Remove the specified resource from storage.
     public function destroy($ISBN)
     {
-        $libro = Libros::findOrFail($ISBN);
-        $libro->Existe = 0;
-        $libro->save();
+        
+        Libros::where('ISBN', '=', $ISBN)->delete();
     }
 }

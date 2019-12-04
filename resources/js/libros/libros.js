@@ -33,8 +33,7 @@ new Vue({
             'Edicion':'',
             'Year':'',
             'Volumen':'',
-            'Ejemplares':'',
-            'Existe':1
+            'Ejemplares':''
         },
         offset: 3,
         errors: [],
@@ -110,8 +109,7 @@ new Vue({
                     'Edicion':'',
                     'Year':'',
                     'Volumen':'',
-                    'Ejemplares':'',
-                    'Existe':1
+                    'Ejemplares':''
                 };
                 this.errors = [];
                 $("#create").modal('hide');
@@ -202,7 +200,7 @@ new Vue({
                     this.getLibros();
                     toastr.success("Libro eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error4!");
+                    toastr.error("No es posible eliminar el libro ya que cuenta con ejemplares disponibles, por favor elimine los ejemplares primero!");
                 });
             }
         },
