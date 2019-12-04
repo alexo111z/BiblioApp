@@ -27187,8 +27187,7 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+                toastr.error("ISBN duplicdo, por favor corrija el dato registrado");
             });
         },
 
