@@ -24,7 +24,11 @@ new Vue({
         },
         catalogo:[],
         tipoPrestatario:'',
-        prestamosAdministrativos:[]
+        prestamosAdministrativos:[],
+        Multas:{
+            total:0,
+            lista:[]
+        },
     },
     methods:{
         getClasificacion: function(){
@@ -108,6 +112,20 @@ new Vue({
             })
             .then(response =>{
                 this.prestamosAdministrativos = response.data;
+            });
+        },
+        consultarMultas: function () {
+            var monto = 0;
+            if (this.inicio=='' || this.fin == '') {
+                toastr.error("Seleccione un rango de fecha correcto", "Error!");
+                return;
+            }
+            axios.post(this.url+"/consultaMultas",{
+                'inicio':this.inicio,
+                'fin':this.fin
+            })
+            .then(response =>{
+                this.Multas = response.data;
             });
         }
     }
