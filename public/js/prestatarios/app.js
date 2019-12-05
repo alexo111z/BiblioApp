@@ -27488,6 +27488,7 @@ new Vue({
                 let userCreated = response.data.user;
 
                 toastr.success('El prestatario fue creado exitosamente', 'Todo bien');
+                this.$refs.closeButton.click();
 
                 if (this.userType === 4) {
                     setTimeout(() => {
@@ -27520,6 +27521,7 @@ new Vue({
                 endpointUrl,
                 userToSend
             ).then(() => {
+                this.$refs.closeButton.click();
 
                 if (this.userType === 4) {
                     setTimeout(() => {

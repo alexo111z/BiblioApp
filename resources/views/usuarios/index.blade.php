@@ -155,7 +155,8 @@
                             <button
                                 type="button"
                                 class="btn btn-secondary"
-                                data-dismiss="modal">Cerrar</button>
+                                data-dismiss="modal"
+                                ref="closeButton">Cerrar</button>
                             <button
                                 type="button"
                                 class="btn btn-primary"
