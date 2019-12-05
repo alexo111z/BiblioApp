@@ -9,7 +9,7 @@ class Ejemplares extends Model
     public $table = "tblejemplares";
     protected $primaryKey = 'Codigo';
     public $incrementing = false;
-    protected $fillable = ['Codigo','ISBN','FechaRegistro','CD'];
+    protected $fillable = ['Codigo','ISBN','FechaRegistro','CD','Existe'];
     public $timestamps = false;
 
     public function scopeSearch($query,$search)

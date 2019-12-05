@@ -131,7 +131,7 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,{$cd})");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,{$cd},1)");
         }
         return $codigo;
     }

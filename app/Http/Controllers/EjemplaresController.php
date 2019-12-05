@@ -14,7 +14,7 @@ class EjemplaresController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $ejemplares = Ejemplares::search($search)->paginate(10);
+        $ejemplares = Ejemplares::where('Existe','=',1)->search($search)->paginate(10);
         return [
             'pagination' => [
                 'total'         => $ejemplares->total(),
@@ -70,6 +70,8 @@ class EjemplaresController extends Controller
     //Remove the specified resource from storage.
     public function destroy($Codigo)
     {
-        Ejemplares::where('Codigo', '=', $Codigo)->delete();
+        $ejemplar = Ejemplares::findOrFail($Codigo);
+        $ejemplar->Existe = 0;
+        $ejemplar->save();
     }
 }

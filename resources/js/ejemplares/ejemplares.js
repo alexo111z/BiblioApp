@@ -28,6 +28,7 @@ new Vue({
             'ISBN':'',
             'FechaRegistro':'',
             'CD':'',
+            'Existe':1
         },
         offset: 3,
         errors: [],
@@ -89,7 +90,8 @@ new Vue({
                     'Codigo':'',
                     'ISBN':'',
                     'FechaRegistro':'',
-                    'CD':''
+                    'CD':'',
+                    'Existe':1
                 };
                 this.errors = [];
                 $("#create").modal('hide');
@@ -97,7 +99,7 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                toastr.error("Codigo duplicado, por favor corrija el dato registrado");
+                toastr.error(error.response.data.message,"Codigo duplicado, por favor corrija el dato registrado");
             });
         },
 
