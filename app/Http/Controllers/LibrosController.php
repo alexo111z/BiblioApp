@@ -37,7 +37,6 @@ class LibrosController extends Controller
                     'tbllibros.Ejemplares',
                     'tbllibros.EjemDisp',
                     'tbllibros.Imagen',
-                    'tbllibros.CD',
                     'tbllibros.FechaRegistro'
                    
                 )
@@ -103,7 +102,7 @@ class LibrosController extends Controller
        $ejemplares = $request->post("Ejemplares");
        $cd = $request->post("CD");
        $imagen = "http://127.0.0.1:8000/images/template.png";
-       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$cd', '$imagen', CURRENT_DATE)");
+       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
         #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;

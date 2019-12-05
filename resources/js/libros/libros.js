@@ -122,7 +122,7 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                toastr.error("ISBN duplicado, por favor corrija el dato registrado");
+                toastr.error(error.response.data.message,"ISBN duplicado, por favor corrija el dato registrado");
             });
         },
 

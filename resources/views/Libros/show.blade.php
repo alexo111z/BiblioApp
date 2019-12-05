@@ -24,13 +24,7 @@
                              <h5><b>Año:</b> @{{fillLibro.Year}}</h5>
                              <h5><b>Volumen:</b> @{{fillLibro.Volumen}}</h5>
                              <h5><b>Ejemplares:</b> @{{fillLibro.Ejemplares}}</h5>
-                             <h5><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>
-                             <h5><b>CD disponible:</b>/h5>
-                             if(fillLibro.CD=1){
-                                Si
-                             }  else{
-                                No
-                             }
+                             <h5><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>                        
                              <h5><b>Fecha de registro:</b> @{{fillLibro.FechaRegistro}}</h5>  
                             </div>
                         </div>
