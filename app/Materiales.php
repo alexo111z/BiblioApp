@@ -8,7 +8,7 @@ class Materiales extends Model
 {
     public $table = "tblmateriales";
     protected $primaryKey = 'Id';
-    protected $fillable = ['Titulo','Clave','Year','Ejemplares','Tipo', 'Existe'];
+    protected $fillable = ['Titulo','IdCarrera','Year','Ejemplares','Tipo', 'Existe'];
     public $timestamps = false;
 
     public function scopeSearch($query,$search)
@@ -16,5 +16,6 @@ class Materiales extends Model
         if($search && $search != "")
             return $query -> where('Titulo', 'LIKE', "%$search%");
     }
+
 }
 

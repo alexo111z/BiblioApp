@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use Illuminate\Http\Request;
 use App\Materiales;
+
 
 class MaterialesController extends Controller
 {
@@ -14,9 +16,23 @@ class MaterialesController extends Controller
      */
    
     public function index(Request $request)
-    {
+    {   
         $search = $request->get('search');
-        $materiales = Materiales::where('Existe','=',1)->search($search)->orderBy('id','DESC')->paginate(30);
+
+        $materiales = Materiales::join('tblcarreras', 'tblcarreras.Clave', '=', 'tblmateriales.IdCarrera')
+                ->select(
+                    'tblmateriales.Id',
+                    'tblmateriales.Titulo',
+                    'tblcarreras.Nombre as Clave',
+                    'tblmateriales.IdCarrera as IdCarrera',
+                    'tblmateriales.year as Year',
+                    'tblmateriales.Ejemplares',
+                    'tblmateriales.Tipo'
+                )
+                ->where('tblmateriales.Existe', '=', 1)
+                ->orderby('id', 'DESC')
+                ->search($search)
+                ->paginate(10); 
         return [
             'pagination' => [
                 'total'         => $materiales->total(),
@@ -30,6 +46,18 @@ class MaterialesController extends Controller
         ];
     }
 
+
+    public function cla()
+    {   
+        $claves= DB::table('tblcarreras')->get();
+        return view('Materiales.principal', compact('claves'));
+    }
+    public function getCarreras()
+    {
+        $claves= DB::table('tblcarreras')->get();
+        return $claves;
+    }
+
         /**
      * Store a newly created resource in storage.
      *
@@ -37,10 +65,10 @@ class MaterialesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
       $this->validate($request, [
         'Titulo' => 'required',
-        'Clave' => 'required',
+        'IdCarrera' => 'required',
         'Year' => 'required',
         'Ejemplares' => 'required',
         'Tipo' => 'required'
@@ -63,7 +91,7 @@ class MaterialesController extends Controller
     {
         $this->validate($request, [
             'Titulo' => 'required',
-            'Clave' => 'required',
+            'IdCarrera' => 'required',
             'Year' => 'required',
             'Ejemplares' => 'required',
             'Tipo' => 'required'

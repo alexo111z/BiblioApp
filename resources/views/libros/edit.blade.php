@@ -15,7 +15,7 @@
                              <label for="isbn">ISBN</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="isbn" id="isbn" class="form-control" placeholder="ISBN" v-model="fillLibro.ISBN">
+                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" max="99999999999999999999" disabled v-model="fillLibro.ISBN">
                                 </div>
                              </div>
                         </div>
@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" v-model="fillLibro.Titulo">
+                                    <input type="text" name="titulo" id="titulo" class="form-control" maxlength="100" required v-model="fillLibro.Titulo">
                                     <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                                  </div>
                             </div>
@@ -33,10 +33,11 @@
                         <label for="autor">Autor</label>
                             <div class="form-group">
                                 <div class="input-group">
-                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="idAutor" id="idAutor" class="form-control" v-model="fillLibro.IdAutor">
-                                     <option value="1">1</option>
-                                     <option value="2">2</option>
+                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                     <select name="idAutor" id="idAutor" class="form-control" required v-model="fillLibro.IdAutor">
+                                     @foreach($autores as $autor)
+                                     <option value ="{{ $autor->IdAutor }}"> {{ $autor->Nombre}} {{ $autor->Apellidos}}</option> 
+                                     @endforeach
                                      </select>
                                 </div>
                             </div>
@@ -45,10 +46,11 @@
                             <div class="form-group">
                             <label for="idEeditorial">Editorial</label>
                                 <div class="input-group">
-                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="idEditorial" id="idEditorial" class="form-control" v-model="fillLibro.IdEditorial">
-                                     <option value="1">1</option>
-                                     <option value="2">2</option>
+                                     <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
+                                     <select name="idEditorial" id="idEditorial" class="form-control" required v-model="fillLibro.IdEditorial">
+                                     @foreach($editoriales as $editorial)
+                                     <option value ="{{ $editorial->Id }}"> {{ $editorial->Nombre}}</option> 
+                                     @endforeach
                                      </select>
                                 </div>
                             </div>
@@ -57,10 +59,11 @@
                             <div class="form-group">
                             <label for="carrera">Carrera</label>
                                 <div class="input-group">
-                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="idCarrera" id="idCarrera" class="form-control" v-model="fillLibro.IdCarrera">
-                                     <option value="1">1</option>
-                                     <option value="2">2</option>
+                                     <div class="input-group-addon"><i class="fa fa-graduation-cap"></i></div>
+                                     <select name="idCarrera" id="idCarrera" class="form-control" required v-model="fillLibro.IdCarrera">
+                                     @foreach($carreras as $carrera)
+                                     <option value ="{{ $carrera->Clave }}"> {{ $carrera->Nombre}}</option> 
+                                     @endforeach
                                      </select>
                                 </div>
                             </div>
@@ -70,9 +73,10 @@
                             <label for="dewey">dewey</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="dewey" id="dewey" class="form-control" v-model="fillLibro.dewey">
-                                     <option value="1">1</option>
-                                     <option value="2">2</option>
+                                     <select name="dewey" id="dewey" class="form-control" disabled v-model="fillLibro.dewey">
+                                     @foreach($deweys as $dewey)
+                                     <option value ="{{ $dewey->Id }}"> {{ $dewey->Nombre}}</option> 
+                                     @endforeach
                                      </select>
                                 </div>
                             </div>
@@ -82,7 +86,7 @@
                              <label for="edicion">Edicion</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="edicion" id="edicion" class="form-control" placeholder="Edicion" v-model="fillLibro.Edicion">
+                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" max="9999" disabled v-model="fillLibro.Edicion">
                                 </div>
                              </div>
                         </div>
@@ -94,8 +98,8 @@
                                      <?php
                                      $cont = date('Y');
                                      ?>
-                                     <select name="year" id="year" class="form-control" v-model="fillLibro.Year">
-                                     <?php while ($cont >= 1950) { ?>
+                                     <select name="year" id="year" class="form-control" required max="9999" v-model="fillLibro.Year">
+                                     <?php while ($cont >= 1900) { ?>
                                      <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                      <?php $cont = ($cont-1); } ?>
                                      </select>
@@ -107,7 +111,7 @@
                              <label for="volumen">Volumen</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="volumen" id="volumen" class="form-control" placeholder="Volumen" v-model="fillLibro.Volumen">
+                                    <input type="number" name="volumen" id="volumen" class="form-control" min="1" max="9999" required v-model="fillLibro.Volumen">
                                 </div>
                              </div>
                         </div>
@@ -116,34 +120,16 @@
                              <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" placeholder="Ejemplares" v-model="fillLibro.Ejemplares">
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" disabled v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
-                        </div>
-                        <div class="col-sm-6">
-                             <div class="form-group">
-                             <label for="ejemDisp">Ejemplares Disponibles</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemDisp" id="ejemDisp" class="form-control" placeholder="EjemDisp" v-model="fillLibro.EjemDisp">
-                                </div>
-                             </div>
-                        </div>
-                        <div class="col-sm-6">
-                             <div class="form-group">
-                             <label for="imagen">Imagen</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="text" name="imagen" id="imagen" class="form-control" placeholder="Imagen" v-model="fillLibro.Imagen">
-                                </div>
-                             </div>
-                        </div>
+                        </div>                     
                         <div class="col-sm-6">
                              <div class="form-group">
                              <label for="fechaRegistro">Fecha de Registro</label>
                                 <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" placeholder="Fecga de Registro" v-model="fillLibro.FechaRegistro">
+                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" disabled v-model="fillLibro.FechaRegistro">
                                 </div>
                              </div>
                         </div>

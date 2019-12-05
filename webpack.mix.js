@@ -89,7 +89,22 @@ mix.scripts([
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
     'resources/js/vue.js',
-    'resources/js/axios.js',], 'public/js/libros/app.js');
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/libros/Libros.js'], 
+    'public/js/appLibros.js') ;
+
+//Ejemplares
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/ejemplares/Ejemplares.js'], 
+    'public/js/appEjemplares.js') ;
+
 //Prestamos
 mix.scripts([
         'resources/js/Jquery.js',
@@ -146,7 +161,7 @@ mix.scripts(
     ],
     'public/js/prestatarios/app.js'
 );
-//
+//Dashboard
 mix.scripts(
     [
         'resources/js/jquery.js',

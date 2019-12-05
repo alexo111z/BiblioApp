@@ -14,5 +14,8 @@
     "/js/login/logout.js": "/js/login/logout.js",
     "/js/usuarios/app.js": "/js/usuarios/app.js",
     "/js/prestatarios/app.js": "/js/prestatarios/app.js",
-    "/js/dashboard/app.js": "/js/dashboard/app.js"
+    "/js/dashboard/app.js": "/js/dashboard/app.js",
+    "/js/appLibros.js": "/js/appLibros.js",
+    "/js/appEjemplares.js": "/js/appEjemplares.js"
+
 }

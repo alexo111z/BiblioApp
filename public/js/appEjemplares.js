@@ -27066,35 +27066,12 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
-const authMiddleware = () => {
-    const sessionData = localStorage.getItem('userData');
-    const redirectTo = '/login';
-    const homeRoute = '/home';
-
-    if (sessionData === null && location.pathname !== redirectTo) {
-        toastr.error('No estás autenticado, inicia sesión');
-
-        setTimeout(() => {
-            location.href = location.origin + redirectTo;
-        }, 2500);
-    } else if (sessionData !== null && location.pathname === redirectTo) {
-        location.href = location.origin + homeRoute;
-    }
-};
-
-if (window.addEventListener) {
-    window.addEventListener('load', authMiddleware, false);
-} else {
-    window.attachEvent('onload', authMiddleware);
-}
-
 new Vue({
-    el: "#materialesCRUD",
+    el: "#ejemplaresCRUD",
     created: function () {
-        this.getMateriales();
-        this.getCarreras();
+        this.getEjemplares();
         toastr.options = {
-            showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
+            showMethod: 'fadeIn', 
             showDuration: 500,
             showEasing: 'swing',
             hideMethod: 'fadeOut',
@@ -27105,7 +27082,7 @@ new Vue({
         };
     },
     data: {
-        materiales: [],
+        ejemplares: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27114,26 +27091,22 @@ new Vue({
             'from': 0,
             'to': 0,
         },
-        newMaterial: {
-            'Titulo':'',
-            'IdCarrera':'',
-            'Year':'',
-            'Ejemplares':'',
-            'Tipo':'',
+        newEjemplar: {
+            'Codigo':'',
+            'ISBN':'',
+            'FechaRegistro':'',
+            'CD':'',
             'Existe':1
         },
         offset: 3,
         errors: [],
         search: '',
-        fillMaterial:{
-            'Id':'',
-            'Titulo':'',
-            'IdCarrera':'',
-            'Year':'',
-            'Ejemplares':'',
-            'Tipo':''
-        },
-        carreras:[]
+        fillEjemplar:{
+            'Codigo':'',
+            'ISBN':'',
+            'FechaRegistro':'',
+            'CD':''
+        }
     },
     computed:{
         isActived:function () {
@@ -27165,73 +27138,61 @@ new Vue({
     methods: {
         changePage: function (page) {
             this.pagination.current_page = page;
-            this.getMateriales(page);
+            this.getEjemplares(page);
         },
-        getMateriales: function (page) {
-            var url = 'material?page=' + page +'&search='+this.search;
-            //var url = 'material';
+        getEjemplares: function (page) {
+            var url = 'ejemplar?page=' + page +'&search='+this.search;
             axios.get(url).then(response => {
-                //this.materiales = response.data;
-                this.materiales = response.data.material.data;
+                this.ejemplares = response.data.ejemplar.data;
                 this.pagination = response.data.pagination;
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
             });
-        },getCarreras: function () {  /*ejemplo cmb */
-            axios.get("material/carreras")
-            .then(response =>{
-                this.carreras=response.data;
-            });
-        }
-        ,
-        createMaterial: function () {
-            var url = 'material';
-            axios.post(url, this.newMaterial)
+        },
+        createEjemplar: function () {
+            var url = 'ejemplar';
+            axios.post(url, this.newEjemplar)
             .then(response => {
-                this.getMateriales();
-                this.newMaterial = {
-                    'Titulo':'',
-                    'IdCarrera':'',
-                    'Year':'',
-                    'Ejemplares':'',
-                    'Tipo':'',
+                this.getEjemplares();
+                this.newEjemplar = {
+                    'Codigo':'',
+                    'ISBN':'',
+                    'FechaRegistro':'',
+                    'CD':'',
                     'Existe':1
                 };
                 this.errors = [];
                 $("#create").modal('hide');
-                toastr.success("Material registrado con exito.", "Tarea completada!");
+                toastr.success("Ejemplar registrado con éxito.", "Tarea completada!");
+                console.log(response.data);
+                
             }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+                toastr.error(error.response.data.message,"Codigo duplicado, por favor corrija el dato registrado");
             });
         },
-        editMaterial: function (material) {
-            this.fillMaterial.Id = material.Id;
-            this.fillMaterial.Titulo = material.Titulo;
-            this.fillMaterial.IdCarrera = material.IdCarrera;
-            this.fillMaterial.Year = material.Year;
-            this.fillMaterial.Ejemplares = material.Ejemplares;
-            this.fillMaterial.Tipo = material.Tipo;
-            console.log(this.fillMaterial);
-            
+
+        editEjemplar: function (ejemplar) {
+            this.fillEjemplar.Codigo = ejemplar.Codigo;
+            this.fillEjemplar.ISBN = ejemplar.ISBN;
+            this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
+            this.fillEjemplar.CD = ejemplar.CD;
+            console.log(this.fillEjemplar);
             $('#edit').modal('show');
         },
-        updateMaterial: function (id) {
-            var url = 'material/'+ id;
-            axios.put(url, this.fillMaterial)
+        updateEjemplar: function (Codigo) {
+            var url = 'ejemplar/'+ Codigo;
+            axios.put(url, this.fillEjemplar)
             .then(response => {
-                this.getMateriales();
-                this.fillMaterial = {
-                    'Id':'',
-                    'Titulo':'',
-                    'IdCarrera':'',
-                    'Year':'',
-                    'Ejemplares':'',
-                    'Tipo':''
+                this.getEjemplares();
+                this.fillEjemplar = {
+                    'Codigo':'',
+                    'ISBN':'',
+                    'FechaRegistro':'',
+                    'CD':''
                 };
                 this.errors = [];
                 $("#edit").modal("hide");
-                toastr.success("Material actualizado con exito.", "Tarea completada!");
+                toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{
                 this.errors = error.response.data;
@@ -27239,21 +27200,21 @@ new Vue({
             });
         },
               
-        deleteMaterial: function (material) {
-            if (confirm('¿Esta seguro de eliminar el material ' + material.Titulo + '?')) {
-                var url = 'material/' + material.Id;
+        deleteEjemplar: function (ejemplar) {
+            if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
+                var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
-                    this.getMateriales();
-                    toastr.success("Material eliminado con exito.", "Tarea completada!");
+                    this.getEjemplares();
+                    toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");
                 });
             }
         },
 
-        searchMaterial: function () {
+        searchEjemplar: function () {
             this.search = $('#search').val();
-            this.getMateriales();
+            this.getEjemplares();
         }
     }
 });
