@@ -156,8 +156,7 @@ class LibrosController extends Controller
             'Year' => 'required',
             'Volumen' => 'required',
             'Ejemplares' => 'required',
-            'EjemDisp' => 'required',
-            'FechaRegistro' => 'required'
+          
         ]);
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());

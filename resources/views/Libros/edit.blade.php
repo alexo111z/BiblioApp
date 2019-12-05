@@ -124,15 +124,6 @@
                                 </div>
                              </div>
                         </div>                     
-                        <div class="col-sm-6">
-                             <div class="form-group">
-                             <label for="fechaRegistro">Fecha de Registro</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" disabled v-model="fillLibro.FechaRegistro">
-                                </div>
-                             </div>
-                        </div>
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>

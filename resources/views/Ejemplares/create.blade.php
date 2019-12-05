@@ -15,7 +15,7 @@
                              <label for="codigo">Codigo</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="codigo" id="codigo" class="form-control" min="1" max="99999999999999999999" require v-model="newEjemplar.Codigo">
+                                    <input type="number" name="codigo" id="codigo" class="form-control" min="1" max="99999999999999999999" required v-model="newEjemplar.Codigo">
                                 </div>
                              </div>
                         </div>
@@ -24,7 +24,7 @@
                              <label for="isbn">ISBN</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" max="99999999999999999999" require v-model="newEjemplar.ISBN">
+                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" max="99999999999999999999" required v-model="newEjemplar.ISBN">
                                 </div>
                              </div>
                         </div>
@@ -40,15 +40,7 @@
                                 </div>
                             </div>
                         </div>                 
-                        <div class="col-sm-6">
-                             <div class="form-group">
-                             <label for="fechaRegistro">Fecha de Registro</label>
-                                <div class="input-group">
-                                    <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                    <input type="date" name="fechaRegistro" id="fechaRegistro" class="form-control" require v-model="newEjemplar.FechaRegistro">
-                                </div>
-                             </div>
-                        </div>
+                      
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>

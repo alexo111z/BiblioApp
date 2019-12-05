@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Ejemplares;
 use Illuminate\Http\Request;
+use DB;
 
 class EjemplaresController extends Controller
 {
@@ -39,11 +40,17 @@ class EjemplaresController extends Controller
       $this->validate($request, [
         'Codigo' => 'required',
         'ISBN' => 'required',
-        'FechaRegistro' => 'required',
         'CD' => 'required'
       ]);
+      $cod = $request->post("Codigo");
+      $isbn= $request->post("ISBN");
+      $cd = $request->post("CD");
 
-      Ejemplares::create($request->all());
+      DB::insert("INSERT INTO tblejemplares VALUES('$cod', '$isbn', CURRENT_DATE, '$cd', 1)");
+    
+
+
+
 
       return;
     }
