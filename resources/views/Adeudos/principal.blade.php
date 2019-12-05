@@ -94,7 +94,7 @@
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="showAdeudo(adeudo, totalAdeudo[index])"><i class="fa fa-list"></i></a>
                     </td>
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo,totalAdeudo[index],adeudo.existe)" ><i class="fa fa-user-times"></i></a>
+                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo,totalAdeudo[index],adeudo.existe,{{ Session::get('userData')['Tipo'] }})" ><i class="fa fa-user-times"></i></a>
                     </td>
                 </tr>
                 </tbody>
