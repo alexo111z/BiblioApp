@@ -27102,7 +27102,8 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':'',
-            'CD':''
+            'CD':'',
+            'Existe':1
         },
         offset: 3,
         errors: [],
@@ -27179,7 +27180,9 @@ new Vue({
                     'Year':'',
                     'Volumen':'',
                     'Ejemplares':'',
-                    'CD':''
+                    'CD':'',
+                    'Existe':1
+
                 };
                 this.errors = [];
                 $("#create").modal('hide');
@@ -27262,18 +27265,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-        },
-              
-        deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
-                var url = 'libro/' + libro.ISBN;
-                axios.delete(url).then(response => {
-                    this.getLibros();
-                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error("No es posible eliminar el libro ya que cuenta con ejemplares disponibles, por favor elimine los ejemplares primero!");
-                });
-            }
         },
 
         searchLibro: function () {

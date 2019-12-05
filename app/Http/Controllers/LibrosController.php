@@ -41,6 +41,7 @@ class LibrosController extends Controller
                     'tbllibros.FechaRegistro'
                    
                 )
+                ->where('tbllibros.Existe', '=', 1)
                 ->orderby('ISBN', 'ASC')
                 ->search($search)
                 ->paginate(10); 
@@ -163,11 +164,4 @@ class LibrosController extends Controller
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
-    
-    //Remove the specified resource from storage.
-    public function destroy($ISBN)
-    {
-        
-        Libros::where('ISBN', '=', $ISBN)->delete();
-    }
 }
