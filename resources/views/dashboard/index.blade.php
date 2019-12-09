@@ -111,12 +111,12 @@
                                 <p class="section-title">Carreras</p>
                             </a>
                         </div>
-                        <div class="col-md-4">
+                        <!--<div class="col-md-4">
                             <a href="#">
                                 <i class="fa fa-qrcode"></i>
                                 <p class="section-title">Código de libro</p>
                             </a>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             @elseif (\App\User::isCollaborator())
@@ -161,14 +161,14 @@
                         </a>
                     </div>
                 </div>
-                <div class="row section">
+                <!--<div class="row section">
                     <div class="col-md-4">
                         <a href="#">
                             <i class="fa fa-qrcode"></i>
                             <p class="section-title">Código de libro</p>
                         </a>
                     </div>
-                </div>
+                </div>-->
             </div>
             @endif
     </div>

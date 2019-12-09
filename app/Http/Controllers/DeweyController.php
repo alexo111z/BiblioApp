@@ -30,7 +30,7 @@ class DeweyController extends Controller
         $lista = DEWEY::where([
             ['Id', '>', $id],
             ['Id', '<', ($id+100)],
-        ])->paginate(25);
+        ])->paginate(15);
         return [
             'pagination' => [
                 'total'         => $lista->total(),
@@ -42,5 +42,14 @@ class DeweyController extends Controller
             ],
             'lista' =>$lista
         ];
+    }
+    public function obtenerTopico($id)
+    {
+        $topico = DEWEY::where([
+            ['Id', '>', $id],
+            ['Id', '<', ($id+100)]
+            ])->get();
+
+        return $topico;
     }
 }

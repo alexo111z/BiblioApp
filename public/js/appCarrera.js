@@ -27110,6 +27110,7 @@ new Vue({
     },
 
     data: {
+        url: 'carrera',
         carreras: [],
         ClaveCarrera: '',
         NombreCarrera: '',
@@ -27158,7 +27159,7 @@ new Vue({
             this.pagination.current_page = page;
             this.getCarreras(page);
         },
-        searchAutor: function () {
+        searchCarrera: function () {
             var search = $("#search").val();
             this.search = search;
             this.getCarreras();
@@ -27166,7 +27167,7 @@ new Vue({
 
         //Modulo Carreras
         getCarreras: function (page) {
-            var url = 'carreras?page=' + page;
+            var url = this.url + '?page=' + page + '&search=' + this.search;
             axios.get(url).then(response => {
                 this.carreras = response.data.carreras.data;
                 this.pagination = response.data.pagination;
@@ -27174,7 +27175,7 @@ new Vue({
         },
         deleteCarrera: function (carrera) {
             if (confirm('¿Esta seguro de eliminar la carrera: ' + carrera.Nombre + '?')) {
-                var url = 'carreras/' + carrera.Clave;
+                var url = this.url + '/' + carrera.Clave;
                 axios.delete(url).then(response => {
                     this.getCarreras();
                     swal.close();
@@ -27185,7 +27186,8 @@ new Vue({
             }
         },
         createCarrera: function () {
-            var url = 'carreras';
+            var url = this.url;
+            this.errors = [];
             axios.post(url, {
                 Clave: this.ClaveCarrera,
                 Nombre: this.NombreCarrera,
@@ -27199,15 +27201,17 @@ new Vue({
                 toastr.success("Carrera registrada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
         },
         editCarrera: function (carrera) {
             this.fillCarrera.Clave  = carrera.Clave;
             this.fillCarrera.Nombre = carrera.Nombre;
+            this.errors = [];
             $('#editCarrera').modal('show');
         },
         updateCarrera: function (id) {
-            var url = 'carreras/' + id;
+            var url = this.url + '/' + id;
             axios.put(url, this.fillCarrera).then(response => {
                 this.getCarreras();
                 this.fillCarrera = {'Clave': '', 'Nombre': ''};
@@ -27216,8 +27220,9 @@ new Vue({
                 toastr.success("Carrera actualizada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
-        }
+        },
 
     }
 });

@@ -15,10 +15,9 @@
                                 <label for="isbn">ISBN</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" required
+                                    <input type="number" name="isbn" id="isbn" class="form-control" required
                                         v-model="newLibro.ISBN">
                                 </div>
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -29,6 +28,7 @@
                                     <input type="text" name="titulo" id="titulo" class="form-control" required
                                         v-model="newLibro.Titulo">
                                 </div>
+                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -107,7 +107,7 @@
                                      $cont = date('Y');
                                      ?>
                                     <select name="year" id="year" class="form-control" required v-model="newLibro.Year">
-                                        <?php while ($cont >= 1900) { ?>
+                                        <?php while ($cont >= 1950) { ?>
                                         <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                         <?php $cont = ($cont-1); } ?>
                                     </select>

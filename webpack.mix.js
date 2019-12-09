@@ -13,7 +13,12 @@ const mix = require('laravel-mix');
 //Css general
 mix.styles([
     'resources/css/bootstrap.css',
-    'resources/css/toastr.css'], 'public/css/app.css');
+    'resources/css/toastr.css'
+    ], 'public/css/app.css');
+//Js general
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js'], 'public/js/app.js');
 //editoriales
 mix.scripts([
     'resources/js/jquery.js',
@@ -87,8 +92,16 @@ mix.scripts([
     'resources/js/axios.js',
     'resources/js/login/middleware.js',
     'resources/js/libros/Libros.js'],
-    'public/js/appLibros.js') ;
-
+    'public/js/libros/app.js') ;
+//Prestamos
+mix.scripts([
+        'resources/js/Jquery.js',
+        'resources/js/Bootstrap.js',
+        'resources/js/Toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/login/middleware.js',
+        'resources/js/prestamos/app.js'], 'public/js/prestamos/app.js');
 // Login
 mix.scripts(
     [

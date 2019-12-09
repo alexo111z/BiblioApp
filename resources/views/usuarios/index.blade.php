@@ -155,8 +155,12 @@
                             <button
                                 type="button"
                                 class="btn btn-secondary"
+<<<<<<< HEAD
                                 data-dismiss="modal"
                                 ref="closeButton">Cerrar</button>
+=======
+                                data-dismiss="modal">Cerrar</button>
+>>>>>>> Avance-Final
                             <button
                                 type="button"
                                 class="btn btn-primary"

@@ -15,7 +15,7 @@
                              <label for="isbn">ISBN</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="isbn" id="isbn" class="form-control" min="1" disabled v-model="fillLibro.ISBN">
+                                    <input type="number" name="isbn" id="isbn" class="form-control" disabled v-model="fillLibro.ISBN">
                                 </div>
                              </div>
                         </div>
@@ -99,7 +99,7 @@
                                      $cont = date('Y');
                                      ?>
                                      <select name="year" id="year" class="form-control" required v-model="fillLibro.Year">
-                                     <?php while ($cont >= 1900) { ?>
+                                     <?php while ($cont >= 1950) { ?>
                                      <option value="<?php echo($cont); ?>"><?php echo($cont); ?></option>
                                      <?php $cont = ($cont-1); } ?>
                                      </select>

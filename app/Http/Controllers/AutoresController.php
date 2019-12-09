@@ -15,7 +15,7 @@ class AutoresController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $autores = Autores::where('Existe','=',1)->search($search)->paginate(50);
+        $autores = Autores::where('Existe','=',1)->search($search)->paginate(15);
         return [
             'pagination' => [
                 'total'         => $autores->total(),
