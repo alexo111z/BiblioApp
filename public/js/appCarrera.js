@@ -27181,7 +27181,8 @@ new Vue({
                     swal.close();
                     toastr.success("La carrera ha sido eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    //ex.response.data.message
+                    toastr.error('Hubo un problema y no se pudo completar la acción', "Error!");
                 });
             }
         },
@@ -27207,8 +27208,8 @@ new Vue({
                     $('#createCarrera').modal('hide');
                     toastr.success("Carrera registrada con exito.", "Tarea completada!");
                 }).catch(error => {
-                    this.errors = error.response.data.message;
-                    toastr.error(error.response.data.message, "Error!");
+                    this.errors = 'Error: Hubo un problema y no se pudo completar la acción';//error.response.data.message;
+                    toastr.error('Hubo un problema y no se pudo completar la acción', "Error!");
                 });
             }else{
                 toastr.error('Esta carrera ya existe, no es posible agregarla de nuevo','Aviso!');
@@ -27239,8 +27240,8 @@ new Vue({
                     $('#editCarrera').modal('hide');
                     toastr.success("Carrera actualizada con exito.", "Tarea completada!");
                 }).catch(error => {
-                    this.errors = error.response.data;
-                    toastr.error(error.response.data.message, "Error!");
+                    this.errors = 'Hubo un problema y no se pudo completar la acción';//error.response.data.message;
+                    toastr.error('Hubo un problema y no se pudo completar la acción', "Error!");
                 });
             }else{
                 toastr.error('Esta carrera ya existe, no es posible realizar el cambio','Aviso!');

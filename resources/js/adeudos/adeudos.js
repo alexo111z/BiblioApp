@@ -148,7 +148,11 @@ new Vue({
         },
         deleteAdeudo: function (adeudo, monto, estado, tipoU) {
             if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
-                var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto;
+                if ( confirm('¿Se entregó los ejemplares prestados?') ){
+                    var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=1';
+                }else{
+                    var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=0';
+                }
                 //console.log(tipoU);
                 if (tipoU == 1){
                     if (estado == 1) {  
@@ -157,7 +161,8 @@ new Vue({
                             //swal.close();
                             toastr.success("El estado del adeudo se a cambiado con exito.", "Tarea completada!");
                         }).catch(ex => {
-                            toastr.error(ex.response.data, "Error!");
+                            //ex.response.data
+                            toastr.error('Hubo un problema y no se pudo completar la acción', "Error!");
                         });
                     }else{
                         toastr.error('El adeudo ya ha sido pagado.','Aviso!');
