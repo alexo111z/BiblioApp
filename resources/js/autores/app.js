@@ -130,7 +130,7 @@ new Vue({
                     this.getAutores();
                     toastr.success("Autor eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    toastr.error('No puedes eliminar un autor con titulos asignados.', "Error!");
                 });
             }
         },

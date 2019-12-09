@@ -2,7 +2,7 @@
 @section('titulo', "Bibliotecarios | BiblioApp")
 @section('content')
     <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
-        <li><a href="#">Inicio</a></li>
+        <li><a href="{{route('home')}}">Inicio</a></li>
         <li class="active">Bibliotecarios</li>
     </ol>
     <div class="row" id="content" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
@@ -155,12 +155,8 @@
                             <button
                                 type="button"
                                 class="btn btn-secondary"
-<<<<<<< HEAD
                                 data-dismiss="modal"
                                 ref="closeButton">Cerrar</button>
-=======
-                                data-dismiss="modal">Cerrar</button>
->>>>>>> Avance-Final
                             <button
                                 type="button"
                                 class="btn btn-primary"
