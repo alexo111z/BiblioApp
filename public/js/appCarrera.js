@@ -27189,12 +27189,22 @@ new Vue({
         createCarrera: function () {
             var url = this.url;
             this.errors = [];
-            var condition = 0;
-            this.carreras.forEach( carrera => {
-                if ( carrera.Nombre.toString().toLowerCase().localeCompare(this.NombreCarrera.toString().toLowerCase()) == 0 ){
-                    condition = 1;
-                }
+            axios.post(url, {
+                Clave: this.ClaveCarrera,
+                Nombre: this.NombreCarrera,
+                Existe: 1
+            }).then(response => {
+                this.getCarreras();
+                this.ClaveCarrera = '';
+                this.NombreCarrera = '';
+                this.errors = [];
+                $('#createCarrera').modal('hide');
+                toastr.success("Carrera registrada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
+<<<<<<< HEAD
             if (condition != 1){
                 axios.post(url, {
                     Clave: this.ClaveCarrera,
@@ -27215,6 +27225,8 @@ new Vue({
                 toastr.error('Esta carrera ya existe, no es posible agregarla de nuevo','Aviso!');
                 this.errors = 'Esta carrera ya existe, no es posible agregarla de nuevo';
             }
+=======
+>>>>>>> 90296d61103a7056e578a85f3822334f916111cb
         },
         editCarrera: function (carrera) {
             this.fillCarrera.Clave  = carrera.Clave;
@@ -27224,14 +27236,17 @@ new Vue({
         },
         updateCarrera: function (id) {
             var url = this.url + '/' + id;
-
-            this.errors = [];
-            var condition = 0;
-            this.carreras.forEach( carrera => {
-                if ( carrera.Nombre.toString().toLowerCase().localeCompare(this.fillCarrera['Nombre'].toString().toLowerCase()) == 0 ){
-                    condition = 1;
-                }
+            axios.put(url, this.fillCarrera).then(response => {
+                this.getCarreras();
+                this.fillCarrera = {'Clave': '', 'Nombre': ''};
+                this.errors = [];
+                $('#editCarrera').modal('hide');
+                toastr.success("Carrera actualizada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
+<<<<<<< HEAD
             if (condition != 1){
                 axios.put(url, this.fillCarrera).then(response => {
                     this.getCarreras();
@@ -27247,6 +27262,8 @@ new Vue({
                 toastr.error('Esta carrera ya existe, no es posible realizar el cambio','Aviso!');
                 this.errors = 'Esta carrera ya existe, no es posible realizar el cambio';
             }
+=======
+>>>>>>> 90296d61103a7056e578a85f3822334f916111cb
         },
 
     }

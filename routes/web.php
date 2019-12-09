@@ -1,4 +1,5 @@
 <?php
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,10 +46,13 @@ Route::post('reporte/consultaPrestatarios', 'ReportesController@getAdministrativ
 Route::get('reportes/imprimirreportePrestatarios', 'ReportesController@imprimirPrestatarios')->name('printPrestatarios');
 Route::post('reporte/consultaMultas', 'reportesController@getMultas')->name('getMultas');
 Route::get('reportes/imprimirMultas', 'ReportesController@imprimirMultas')->name('printMultas');
+//Libros
+Route::resource('libros','LibrosController');
 //Adeudos
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
 Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
 Route::get('adeudo/det/{folio}', 'AdeudoController@show');
+
 Route::get('/adeudos', function (){
     return view('Adeudos.principal');
 });
@@ -57,6 +61,7 @@ Route::resource('carrera', 'CarreraController', ['except' => 'create', 'edit', '
 Route::get('/carreras', function(){
     return view('Carreras.carreras');
 });
+
 //Prestamos
 Route::get('/prestamos', function () {
     return view('prestamos/index');
@@ -68,6 +73,7 @@ Route::get('/prestamos/filter', function () {
 Route::post('prestamos/nuevoprestamo/', 'PrestamosController@nuevoprestamo')->name('nuevoprestamo');
 Route::post('prestamos', 'PrestamosController@buscarprestamos')->name('buscarprestamos');
 Route::get('prestamos/detalles/{folio}/{nombre}/{vigente}', 'PrestamosController@detalles')->name('detalles');
+
 Route::Resource('tasks','PrestamosController');
 Route::get('prestamos/array/', 'PrestamosController@array')->name('array');
 Route::get('prestamos/getdetails/{folio}', 'PrestamosController@getdetails')->name('getdetails');
@@ -87,21 +93,16 @@ Route::post('/usuarios/all', 'UsersController@getAll');
 Route::post('/usuarios', 'UsersController@create');
 Route::post('/usuarios/update', 'UsersController@update');
 Route::post('/usuarios/remove', 'UsersController@delete');
-//Materiales
-Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
-Route::get('/materiales', function (){
-    return view('Materiales.principal');
-});
+
+
 Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
+
 Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
 //Libros
 Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
+
 Route::get('/libros', function (){
     return view('Libros.principal');
 });
+
 Route::get('libros', 'LibrosController@selects')->name('varios');
-//Ejemplares
-Route::resource('ejemplar', 'EjemplaresController', ['except' =>'show','create','store','edit']);
-Route::get('/ejemplares', function (){
-    return view('Ejemplares.principal');
-});

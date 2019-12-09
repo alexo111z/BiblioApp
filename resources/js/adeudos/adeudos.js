@@ -50,8 +50,7 @@ new Vue({
         errors: [],
         search: '',
         fechaInicio: '',
-        fechaFinal: '',
-        tipo: 0,
+        fechaFinal: ''
     },
     computed: {
         isActived: function () {
@@ -112,19 +111,14 @@ new Vue({
         searchAdeudo: function () {
             var search = $("#search").val();
             this.search = search;
-            //console.log('Folios');
+            console.log('Folios');
             this.getAdeudos();
         },
         filtrarFecha: function () {
             if (this.fechaInicio && this.fechaFinal) {
-                //console.log('Fechas');
+                console.log('Fechas');
                 this.getAdeudos();
             }
-        },
-        filtrarTipo: function(){
-            var filtro = $('#tipo').val();
-            //this.tipo = filtro;
-            this.getAdeudos();
         },
         clearDataInput: function() {
             this.fechaInicio = '';
@@ -133,20 +127,20 @@ new Vue({
         },
         //Modulo Carreras
         getAdeudos: function (page) { //param: page
-            //console.log('Index');
+            console.log('Index');
             let inicio = '';
             let final = '';
             if (this.fechaInicio && this.fechaFinal) {
                 inicio = new Date(this.fechaInicio).toUTCString();
                 final = new Date(this.fechaFinal).toUTCString();
             }
-            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final +'&tipo=' + this.tipo;
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
             axios.get(url).then(response => {
                 this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
             });
         },
-        deleteAdeudo: function (adeudo, monto, estado, tipoU) {
+        deleteAdeudo: function (adeudo, monto, estado) {
             if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
                 if ( confirm('¿Se entregó los ejemplares prestados?') ){
                     var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=1';
@@ -168,7 +162,7 @@ new Vue({
                         toastr.error('El adeudo ya ha sido pagado.','Aviso!');
                     }
                 }else{
-                    toastr.error('No cuentas con los permisos necesarios para realizar esta acción.','Aviso!');
+                    toastr.error('El adeudo ya ha sido pagado.','Aviso!');
                 }
             }
         },

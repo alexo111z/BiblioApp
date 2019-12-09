@@ -55,6 +55,8 @@ class CarreraController extends Controller
    //Remove the specified resource from storage.
     public function destroy($id)
     {
-        $carrera = Carrera::where('Clave', '=', $id)->delete();
+        $carrera = Carrera::findOrFail($id);
+        $carrera->delete();
+        return;
     }
 }

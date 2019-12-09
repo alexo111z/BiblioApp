@@ -41,7 +41,6 @@ class LibrosController extends Controller
                    
                 )
                 ->where('tbllibros.Existe', '=', 1)
-                ->orderby('ISBN', 'ASC')
                 ->search($search)
                 ->paginate(10); 
         return [
@@ -87,8 +86,7 @@ class LibrosController extends Controller
         'Edicion' => 'required',
         'Year' => 'required',
         'Volumen' => 'required',
-        'Ejemplares' => 'required',
-        'CD' => 'required'
+        'Ejemplares' => 'required'
       ]);
       $isbn = $request->post("ISBN");
       $titulo = $request->post("Titulo");
@@ -100,10 +98,9 @@ class LibrosController extends Controller
        $year = $request->post("Year");
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
-       $cd = $request->post("CD");
        $imagen = "http://127.0.0.1:8000/images/template.png";
-       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
-        #########################//generacion de codigo
+      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
+        #########################
         if ($dewey < 10) {
             $dewey = "00".$dewey;
         }else if($dewey >= 10 && $dewey <100){
@@ -131,9 +128,42 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,{$cd},1)");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
         }
         return $codigo;
+    }
+   /* public function generarCodigos($dewey, $edicion, $ejemplares)
+    {
+        if ($dewey < 10) {
+            $dewey = "00".$dewey;
+        }else if($dewey >= 10 && $dewey <100){
+            $dewey = "0".$dewey;
+        }
+        $codigo = "1".$dewey;
+        $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}");
+        foreach ($ejemplaresdewey as $key) {
+                if (($key->ejemplaresdewey) < 10) {
+                    $cant = "00".($key->ejemplaresdewey);
+                }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
+                    $cant = "0".($key->ejemplaresdewey);
+                }else {
+                    $cant = ($key->ejemplaresdewey);
+                }
+        }
+        $codigo= $codigo.$cant;
+        if($edicion <10)
+            $edicion = "0".$edicion;
+        $codigo = $codigo . $edicion;
+        for ($x=0; $x < $ejemplares; $x++) { 
+            if($x<10){
+                $codigo = $codigo . "00".$x;
+            }else if ($x>=10 && $x <100) {
+                $codigo = $codigo . "0".$x;
+            }
+            DB::insert("insert into tblejemplares values({$codigo}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
+        }
+        
+
     }
 
         /**
@@ -157,10 +187,19 @@ class LibrosController extends Controller
             'Volumen' => 'required',
             'Ejemplares' => 'required',
             'EjemDisp' => 'required',
+           
             'FechaRegistro' => 'required'
         ]);
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
+    
+    //Remove the specified resource from storage.
+    public function destroy($ISBN)
+    {
+        $libro = Libros::findOrFail($ISBN);
+        $libro->Existe = 0;
+        $libro->save();
+    }
 }

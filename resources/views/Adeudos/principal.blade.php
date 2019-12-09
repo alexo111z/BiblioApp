@@ -16,8 +16,12 @@
         {{--    Contenido--}}
         <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
             <div class="row">
-                {{--Filtro fechas--}}
-                <div class="form-inline col-sm-6" style="float: left;">
+                <div class="col-sm-6">
+                    {{--                Boton de registro--}}
+{{--                    <a href="#" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createCarrera">--}}
+{{--                        <i class="fa fa-pencil"></i> Registrar carrera--}}
+{{--                    </a>--}}
+                <div class="form-inline">
                     <label class="h4">Periodo </label>
                     <div class="input-group">
                         <span class="input-group-addon">Del</span>
@@ -31,23 +35,14 @@
                         Limpiar
                     </button>
                 </div>
-                {{-- Filto Tipo de usuario --}}
-                <div class="input-group col-sm-3" style="float: left;">
-                    <select name="tipo" id="tipo" class="form-control" v-model="tipo" @change="filtrarTipo()">
-                      <option value="4" selected hidden>Tipo de usuario</option>
-                      <option value="1">Seleccionar alumnos</option>
-                      <option value="2">Seleccionar docentes</option>
-                      <option value="3">Seleccionar administradores</option>
-                      <option value="0">Seleccionar todos</option>
-                    </select>
                 </div>
-                {{-- Buscador--}}
-                <div class="col-sm-3" style="float: left;">
+                {{--            Buscador--}}
+                <div class="col-sm-6" style="text-align: right;">
                     <input v-model="search" v-on:keyup="searchAdeudo()" type="text" id="search" placeholder="Buscar folio..." style="padding: .5rem;">
                 </div>
             </div>
 
-            {{-- Tabla datos--}}
+            {{--        Tabla datos--}}
             <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
                 <thead>
                 <tr>
@@ -95,7 +90,7 @@
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="showAdeudo(adeudo, totalAdeudo[index])"><i class="fa fa-list"></i></a>
                     </td>
                     <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo,totalAdeudo[index],adeudo.existe,{{ Session::get('userData')['Tipo'] }})" ><i class="fa fa-user-times"></i></a>
+                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteAdeudo(adeudo,totalAdeudo[index],adeudo.existe)" ><i class="fa fa-user-times"></i></a>
                     </td>
                 </tr>
                 </tbody>

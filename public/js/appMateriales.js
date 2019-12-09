@@ -27116,7 +27116,7 @@ new Vue({
         },
         newMaterial: {
             'Titulo':'',
-            'IdCarrera':'',
+            'Clave':'',
             'Year':'',
             'Ejemplares':'',
             'Tipo':'',
@@ -27128,7 +27128,7 @@ new Vue({
         fillMaterial:{
             'Id':'',
             'Titulo':'',
-            'IdCarrera':'',
+            'Clave':'',
             'Year':'',
             'Ejemplares':'',
             'Tipo':''
@@ -27191,7 +27191,7 @@ new Vue({
                 this.getMateriales();
                 this.newMaterial = {
                     'Titulo':'',
-                    'IdCarrera':'',
+                    'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':'',
@@ -27208,7 +27208,7 @@ new Vue({
         editMaterial: function (material) {
             this.fillMaterial.Id = material.Id;
             this.fillMaterial.Titulo = material.Titulo;
-            this.fillMaterial.IdCarrera = material.IdCarrera;
+            this.fillMaterial.Clave = material.IDCarrera;
             this.fillMaterial.Year = material.Year;
             this.fillMaterial.Ejemplares = material.Ejemplares;
             this.fillMaterial.Tipo = material.Tipo;
@@ -27224,7 +27224,7 @@ new Vue({
                 this.fillMaterial = {
                     'Id':'',
                     'Titulo':'',
-                    'IdCarrera':'',
+                    'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':''

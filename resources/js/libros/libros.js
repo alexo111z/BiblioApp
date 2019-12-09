@@ -34,7 +34,6 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':'',
-            'CD':'',
             'Existe':1
         },
         offset: 3,
@@ -112,9 +111,7 @@ new Vue({
                     'Year':'',
                     'Volumen':'',
                     'Ejemplares':'',
-                    'CD':'',
                     'Existe':1
-
                 };
                 this.errors = [];
                 $("#create").modal('hide');
@@ -122,7 +119,8 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                toastr.error(error.response.data.message,"ISBN duplicado, por favor corrija el dato registrado");
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error2!");
             });
         },
 
@@ -138,7 +136,6 @@ new Vue({
             this.fillLibro.Volumen = libro.Volumen;
             this.fillLibro.Ejemplares = libro.Ejemplares;
             this.fillLibro.EjemDisp = libro.EjemDisp;
-            this.fillLibro.CD = libro.CD;
             this.fillLibro.FechaRegistro = libro.FechaRegistro;
             console.log(this.fillLibro);
             $('#show').modal('show');
@@ -197,6 +194,18 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
+        },
+              
+        deleteLibro: function (libro) {
+            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
+                var url = 'libro/' + libro.ISBN;
+                axios.delete(url).then(response => {
+                    this.getLibros();
+                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
+                }).catch(ex => {
+                    toastr.error(ex.response.data.message, "Error4!");
+                });
+            }
         },
 
         searchLibro: function () {

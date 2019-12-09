@@ -18,19 +18,19 @@ class MaterialesController extends Controller
     public function index(Request $request)
     {   
         $search = $request->get('search');
+       /*   $materiales = DB::select("SELECT tblmateriales.Titulo,tblcarreras.Nombre as Clave, tblmateriales.year as Year, tblmateriales.Ejemplares , tblmateriales.Tipo from tblmateriales , tblcarreras WHERE tblmateriales.Clave=tblcarreras.Clave and tblmateriales.existe=1")->paginate(30);*/
 
-        $materiales = Materiales::join('tblcarreras', 'tblcarreras.Clave', '=', 'tblmateriales.IdCarrera')
+        $materiales = Materiales::join('tblcarreras', 'tblcarreras.clave', '=', 'tblmateriales.clave')
                 ->select(
                     'tblmateriales.Id',
                     'tblmateriales.Titulo',
                     'tblcarreras.Nombre as Clave',
-                    'tblmateriales.IdCarrera as IdCarrera',
+                    'tblmateriales.Clave as IDCarrera',
                     'tblmateriales.year as Year',
                     'tblmateriales.Ejemplares',
                     'tblmateriales.Tipo'
                 )
                 ->where('tblmateriales.Existe', '=', 1)
-                ->orderby('id', 'DESC')
                 ->search($search)
                 ->paginate(10); 
         return [
@@ -38,17 +38,19 @@ class MaterialesController extends Controller
                 'total'         => $materiales->total(),
                 'current_page'  => $materiales->currentPage(),
                 'per_page'      => $materiales->perPage(),
+                
                 'last_page'     => $materiales->lastPage(),
                 'from'          => $materiales->firstItem(),
                 'to'            => $materiales->lastItem(),
             ],
             'material' =>$materiales
         ];
-    }
 
+    }
 
     public function cla()
     {   
+        //return DB::table('tblcarreras')->select('Nombre')->get();
         $claves= DB::table('tblcarreras')->get();
         return view('Materiales.principal', compact('claves'));
     }
@@ -68,7 +70,7 @@ class MaterialesController extends Controller
     {        
       $this->validate($request, [
         'Titulo' => 'required',
-        'IdCarrera' => 'required',
+        'Clave' => 'required',
         'Year' => 'required',
         'Ejemplares' => 'required',
         'Tipo' => 'required'
@@ -91,7 +93,7 @@ class MaterialesController extends Controller
     {
         $this->validate($request, [
             'Titulo' => 'required',
-            'IdCarrera' => 'required',
+            'Clave' => 'required',
             'Year' => 'required',
             'Ejemplares' => 'required',
             'Tipo' => 'required'
