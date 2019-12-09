@@ -28,8 +28,8 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_final',
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
-                )
-                ->where('tblprestamos.existe', '=', '1');
+                );
+                
 
 
             $datab = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
@@ -42,8 +42,7 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_final',
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
-                )
-                ->where('tblprestamos.existe', '=', '1');
+                );
 
             $datas = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
                 ->join('tbladministrativos', 'tbladministrativos.idusuario', '=', 'tblusuarios.id')
@@ -55,8 +54,7 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_final',
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
-                )
-                ->where('tblprestamos.existe', '=', '1')
+                )                
                 ->union($dataa)
                 ->union($datab)
                 ->orderby('fecha_final', 'DESC')
@@ -73,7 +71,7 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
                 )
-                ->where('tblprestamos.existe', '=', '1')->where('tblalumnos.NoControl', 'like', $search . '%')
+                ->where('tblalumnos.NoControl', 'like', $search . '%')
                 ->orWhere('tblalumnos.Apellidos', 'like', $search . '%');
 
 
@@ -88,7 +86,7 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
                 )
-                ->where('tblprestamos.existe', '=', '1')->where('tbldocentes.NoNomina', 'like', $search . '%')
+                ->where('tbldocentes.NoNomina', 'like', $search . '%')
                 ->orWhere('tbldocentes.Apellidos', 'like', $search . '%');
 
             $datas = DB::table('tblprestamos')->join('tblusuarios', 'tblusuarios.id', '=', 'tblprestamos.idprestatario')
@@ -102,7 +100,7 @@ class PrestamosController extends Controller
                     'tblprestamos.fecha_entrega',
                     'tblprestamos.renovaciones'
                 )
-                ->where('tblprestamos.existe', '=', '1')->where('tbladministrativos.NoNomina', 'like', $search . '%')
+                ->where('tbladministrativos.NoNomina', 'like', $search . '%')
                 ->orWhere('tbladministrativos.Apellidos', 'like', $search . '%')
                 ->union($dataa)
                 ->union($datab)
@@ -171,7 +169,7 @@ class PrestamosController extends Controller
                 'tblautores.apellidos AS apellidoautor'
             )
             ->where('tblprestamos.folio', '=', $folio)
-            ->where('tblprestamos.existe', '=', '1')
+            
             ->get();
         return $detailsdata;
     }
@@ -413,7 +411,30 @@ class PrestamosController extends Controller
         $fecha_i = $request->input('fecha_i');
         $dias = $request->input('dias');
 
-        $fechaf = date('Y-m-d', strtotime($fecha_i . ' + ' . $dias . ' days'));
+        //$fechaf = date('Y-m-d', strtotime($fecha_i . ' + ' . $dias . ' days'));
+
+        $fechaf=$fecha_i;
+        while($dias>0){    
+            if($nameOfDay = date('l', strtotime($fechaf))=='Friday'||$nameOfDay = date('l', strtotime($fechaf))=='Saturday'){                
+                $fechaf = date('Y-m-d', strtotime($fechaf . ' + ' . '1' . ' days'));         
+            }else{            
+                $fechaf = date('Y-m-d', strtotime($fechaf . ' + ' . '1' . ' days'));
+                $dias=$dias-1;                
+            }        
+        };
+
+
+
+        $adeudos = DB::table('tblprestamos')
+                ->where('idprestatario', '=', $iduser)
+                ->where('existe', '=', '1')
+                ->where('fecha_final', '<', DB::raw('curdate()'))
+                ->whereNull('fecha_entrega')                
+                ->groupBy('folio')->count();
+
+
+
+
 
         $prestamos = DB::table('tblprestamos')->select('Folio')
             ->where('idprestatario', '=', $iduser)
@@ -431,64 +452,77 @@ class PrestamosController extends Controller
         }
 
 
+        if($adeudos>0){
+            $respuesta = "Usted No Ha Entregado Uno o Mas Libros, Vaya A Multas";
+        }else{
 
-        if ($lprestados < 3) {
-            if ($lprestados + count($codigos) <= 3) {
-                $stock = 1;
-                for ($i = 0; $i < count($codigos); $i++) {
-                    $isbn = DB::table('tblejemplares')
-                        ->select('ISBN')
-                        ->where('Codigo', '=', $codigos[$i])
-                        ->where('existe', '=', '1')
-                        ->get();
-
-                    $stocklibro = DB::table('tbllibros')
-                        ->select('ejemdisp')
-                        ->where('ISBN', '=', $isbn[0]->ISBN)
-                        ->where('existe', '=', '1')
-                        ->get();
-                    if ($stocklibro[0]->ejemdisp < 2) {
-                        $respuesta = "El Ejemplar " . $codigos[$i] . " Es unico ejemplar, no se puede prestar";
-                        $stock = 0;
-                    }
-                }
-
-                if ($stock == 1) {
-                    $id = DB::table('tblprestamos')->insertGetId([
-                        'idprestatario' => $iduser,
-                        'fecha_inicio' => $fecha_i,
-                        'fecha_final' => $fechaf,
-                        'renovaciones' => 0,
-                        'existe' => 1,
-                    ]);
+            if ($lprestados < 3) {
+                if ($lprestados + count($codigos) <= 3) {
+                    $stock = 1;
                     for ($i = 0; $i < count($codigos); $i++) {
-                        DB::table('tbldetprestamos')->insert([
-                            'folio' => $id,
-                            'codigo' => $codigos[$i],
-                        ]);
-
-                        $isbnstock = DB::table('tblejemplares')
+                        $isbn = DB::table('tblejemplares')
                             ->select('ISBN')
                             ->where('Codigo', '=', $codigos[$i])
                             ->where('existe', '=', '1')
                             ->get();
-
-                        DB::table('tbllibros')
-                            ->where('ISBN', '=', $isbnstock[0]->ISBN)
-                            ->decrement('EjemDisp', 1);
-
-                        DB::table('tblejemplares')
-                            ->where('Codigo', '=', $codigos[$i])
-                            ->update(['Existe' => 0]);
+    
+                        $stocklibro = DB::table('tbllibros')
+                            ->select('ejemdisp')
+                            ->where('ISBN', '=', $isbn[0]->ISBN)
+                            ->where('existe', '=', '1')
+                            ->get();
+                        if ($stocklibro[0]->ejemdisp < 2) {
+                            $respuesta = "El Ejemplar " . $codigos[$i] . " Es unico ejemplar, no se puede prestar";
+                            $stock = 0;
+                        }
                     }
-                    $respuesta = "1";
+    
+                    if ($stock == 1) {
+                        $id = DB::table('tblprestamos')->insertGetId([
+                            'idprestatario' => $iduser,
+                            'fecha_inicio' => $fecha_i,
+                            'fecha_final' => $fechaf,
+                            'renovaciones' => 0,
+                            'existe' => 1,
+                        ]);
+                        for ($i = 0; $i < count($codigos); $i++) {
+                            DB::table('tbldetprestamos')->insert([
+                                'folio' => $id,
+                                'codigo' => $codigos[$i],
+                            ]);
+    
+                            $isbnstock = DB::table('tblejemplares')
+                                ->select('ISBN')
+                                ->where('Codigo', '=', $codigos[$i])
+                                ->where('existe', '=', '1')
+                                ->get();
+    
+                            DB::table('tbllibros')
+                                ->where('ISBN', '=', $isbnstock[0]->ISBN)
+                                ->decrement('EjemDisp', 1);
+    
+                            DB::table('tblejemplares')
+                                ->where('Codigo', '=', $codigos[$i])
+                                ->update(['Existe' => 0]);
+                        }
+                        $respuesta = "1";
+                    }
+                } else {
+                    $respuesta = "Usted excede el limite de prestamo, quite libros";
                 }
             } else {
-                $respuesta = "Usted excede el limite de prestamo, quite libros";
+                $respuesta = "No podemos prestarle más de 3 libros a la vez";
             }
-        } else {
-            $respuesta = "No podemos prestarle más de 3 libros a la vez";
+    
+
+
         }
+
+
+        
+
+
+        
         return response()->json(['id' => $respuesta]);
     }
 
@@ -569,7 +603,19 @@ class PrestamosController extends Controller
         $fecha_final = $request->input('fecha_final');
         $renovaciones = $request->input('renovaciones');
         $renovaciones = $renovaciones + 1;
-        $fechaff = date('Y-m-d', strtotime($fecha_final . ' + ' . $moredays . ' days'));
+        //$fechaff = date('Y-m-d', strtotime($fecha_final . ' + ' . $moredays . ' days'));
+        $fechaff=$fecha_final;
+        while($moredays>0){    
+            if($nameOfDay = date('l', strtotime($fechaff))=='Friday'||$nameOfDay = date('l', strtotime($fechaff))=='Saturday'){                
+                $fechaff = date('Y-m-d', strtotime($fechaff . ' + ' . '1' . ' days'));         
+            }else{            
+                $fechaff = date('Y-m-d', strtotime($fechaff . ' + ' . '1' . ' days'));
+                $moredays=$moredays-1;                
+            }        
+        };
+
+
+
         $tasks = DB::table('tblprestamos')->where('Folio', '=', $id)->update(['fecha_final' => $fechaff, 'renovaciones' => $renovaciones]);
         return;
     }

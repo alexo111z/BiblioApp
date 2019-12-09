@@ -55,7 +55,7 @@
                     <td style="color:green" v-if="keep.Estado=='Entregado'">@{{keep.Estado}}</td>
                     <td>@{{keep.renovaciones}}</td>
                     <td width="30px"><a href="#" class="btn btn-sm" style="background:#363636;color:white;" v-on:click.prevent="details(keep)">Detalles</a></td>
-                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#2da19a;color:white;" v-on:click.prevent="renew(keep)" v-if="keep.renovaciones<3 && keep.Estado!='Entregado'">Renovar Prestamo</a></td>
+                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#2da19a;color:white;" v-on:click.prevent="renew(keep)" v-if="keep.renovaciones<3 && keep.Estado=='Vigente'">Renovar Prestamo</a></td>
                 </tr>
             </tbody>
         </table>
