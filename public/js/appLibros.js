@@ -27206,15 +27206,16 @@ new Vue({
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
+                
                 this.newAutor = {
                     'Nombre':'',
                     'Apellidos':'',
                     'Existe':1
                 };
+                
                 this.errors = [];
                 $("#create").modal('hide');
                 toastr.success("Autor registrado con exito.", "Tarea completada!");
-                console.log(response.data);
             }).catch(error => {
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
@@ -27229,7 +27230,7 @@ new Vue({
                     'Existe':1
                 };
                 this.errors = [];
-                $("#create3").modal('hide');
+                $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;

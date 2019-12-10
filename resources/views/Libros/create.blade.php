@@ -51,7 +51,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="idEeditorial">Editorial</label>
-                                <a href="" data-toggle="modal" data-target="#create3">
+                                <a href="" data-toggle="modal" data-target="#createEditorials">
                     <i class="fa fa-pencil"></i> Registrar editorial </a>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
