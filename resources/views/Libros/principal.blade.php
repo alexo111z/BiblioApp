@@ -14,7 +14,7 @@
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
             <div class="col-sm-6">
-                <a href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#create">
+                <a href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#create2">
                     <i class="fa fa-pencil"></i> Registrar Libro</a>
                 <!--Mostrar
                     <select id="values" @change.prevent="changeListSize()">
@@ -92,7 +92,9 @@
         </div>
         @include('libros.create')
         @include('libros.edit')      
-        @include('libros.show')   
+        @include('libros.show')  
+        @include('autores.create') 
+        @include('editoriales.create')
     </div>
 </div>
 
