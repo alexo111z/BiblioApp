@@ -140,7 +140,7 @@ new Vue({
                 this.pagination = response.data.pagination;
             });
         },
-        deleteAdeudo: function (adeudo, monto, estado) {
+        deleteAdeudo: function (adeudo, monto, estado,tipoU) {
             if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
                 if ( confirm('¿Se entregó los ejemplares prestados?') ){
                     var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=1';
@@ -149,7 +149,7 @@ new Vue({
                 }
                 //console.log(tipoU);
                 if (tipoU == 1){
-                    if (estado == 1) {  
+                    if (estado == 1) {
                         axios.post(url).then(response => {
                             this.getAdeudos();
                             //swal.close();
@@ -162,7 +162,7 @@ new Vue({
                         toastr.error('El adeudo ya ha sido pagado.','Aviso!');
                     }
                 }else{
-                    toastr.error('El adeudo ya ha sido pagado.','Aviso!');
+                    toastr.error('Los colaboradores no pueden borrar adeudos.','Aviso!');
                 }
             }
         },
@@ -192,7 +192,7 @@ new Vue({
         getProfs: function (page) { //param: page
             var url = this.urlAdeudos+'/get/prof';
             axios.get(url).then(response => {
-                this.docentes = response.data;//.carreras.data;  
+                this.docentes = response.data;//.carreras.data;
             });
         },
         getAdms: function (page) { //param: page

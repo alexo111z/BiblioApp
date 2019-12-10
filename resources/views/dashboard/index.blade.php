@@ -32,7 +32,7 @@
             margin: 30px;
         }
     </style>
-
+<div class="row" id="content" style="background-color: #fafafa;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
     <div class="dashboard">
           <h1>Panel de control</h1>
             @if(\App\User::isAdmin())
@@ -155,6 +155,12 @@
                         </a>
                     </div>
                     <div class="col-md-4">
+                        <a href="{{asset('adeudos')}}">
+                            <i class="fa fa-money"></i>
+                            <p class="section-title">adeudos</p>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
                         <a href="{{asset('dewey')}}">
                             <i class="fa fa-tags"></i>
                             <p class="section-title">Clasificación</p>
@@ -172,6 +178,6 @@
             </div>
             @endif
     </div>
-
+</div>
     <script src="{{asset('js/dashboard/app.js')}}"></script>
 @endsection
