@@ -6,11 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Autores extends Model
 {
-    protected $fillable = ['nombre', 'apellidos'];
+    public $table = "tblautores";
+    protected $fillable = ['Nombre','Apellidos','Existe'];
+    public $timestamps = false;
 
-    public function scopeSearch($query, $search)
+    public function scopeSearch($query,$search)
     {
         if($search && $search != "")
-            return $query -> where('nombre', 'LIKE', "%$search%")->orWhere('apellidos', 'LIKE', "%$search%");
+            return $query -> where('Nombre', 'LIKE', "%$search%")->orWhere('Apellidos', 'LIKE', "%$search%");
     }
+    
 }
+

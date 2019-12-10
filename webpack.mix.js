@@ -10,17 +10,154 @@ const mix = require('laravel-mix');
  | file for the application as well as bundling up all the JS files.
  |
  */
-
+//Css general
+mix.styles([
+    'resources/css/bootstrap.css',
+    'resources/css/toastr.css'
+    ], 'public/css/app.css');
+//Js general
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js'], 'public/js/app.js');
+//editoriales
 mix.scripts([
     'resources/js/jquery.js',
     'resources/js/bootstrap.js',
     'resources/js/toastr.js',
-    'resources/js/sweetalert.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/app.js'], 'public/js/app.js')
-    .styles([
-    'resources/css/bootstrap.css',
-    'resources/css/toastr.css',
-    'resources/css/sweetalert.css',
-    ], 'public/css/app.css');
+    'resources/js/login/middleware.js',
+    'resources/js/editoriales/app.js'], 'public/js/editoriales/app.js');
+//autores
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/autores/app.js'], 'public/js/autores/app.js');
+//Dewey
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/dewey/app.js'], 'public/js/dewey/app.js');
+//Reportes
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/reportes/app.js'], 'public/js/reportes/app.js');
+//Carreras
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/carreras/carrera.js'], 'public/js/appCarrera.js');
+//Adeudos
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/adeudos/adeudos.js'], 'public/js/appAdeudos.js');
+//Materiales
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/materiales/materiales.js'],
+    'public/js/appMateriales.js') ;
+//Libros
+mix.scripts([
+    'resources/js/jquery.js',
+    'resources/js/bootstrap.js',
+    'resources/js/toastr.js',
+    'resources/js/vue.js',
+    'resources/js/axios.js',
+    'resources/js/login/middleware.js',
+    'resources/js/libros/Libros.js'],
+    'public/js/libros/app.js') ;
+//Prestamos
+mix.scripts([
+        'resources/js/Jquery.js',
+        'resources/js/Bootstrap.js',
+        'resources/js/Toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/login/middleware.js',
+        'resources/js/prestamos/app.js'], 'public/js/prestamos/app.js');
+// Login
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/login/middleware.js',
+        'resources/js/login/app.js',
+    ],
+    'public/js/login/app.js'
+);
+
+// Logout
+mix.scripts(
+    [
+        'resources/js/login/logout.js',
+    ],
+    'public/js/login/logout.js'
+);
+//Usuarios
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/lodash.js',
+        'resources/js/login/middleware.js',
+        'resources/js/usuarios/app.js'
+    ],
+    'public/js/usuarios/app.js'
+);
+//Prestatarios
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+        'resources/js/axios.js',
+        'resources/js/lodash.js',
+        'resources/js/login/middleware.js',
+        'resources/js/prestatarios/app.js'
+    ],
+    'public/js/prestatarios/app.js'
+);
+//
+mix.scripts(
+    [
+        'resources/js/jquery.js',
+        'resources/js/bootstrap.js',
+        'resources/js/toastr.js',
+        'resources/js/vue.js',
+    ],
+    'public/js/dashboard/app.js'
+);
