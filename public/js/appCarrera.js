@@ -27204,7 +27204,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-<<<<<<< HEAD
             if (condition != 1){
                 axios.post(url, {
                     Clave: this.ClaveCarrera,
@@ -27225,8 +27224,6 @@ new Vue({
                 toastr.error('Esta carrera ya existe, no es posible agregarla de nuevo','Aviso!');
                 this.errors = 'Esta carrera ya existe, no es posible agregarla de nuevo';
             }
-=======
->>>>>>> 90296d61103a7056e578a85f3822334f916111cb
         },
         editCarrera: function (carrera) {
             this.fillCarrera.Clave  = carrera.Clave;
@@ -27246,7 +27243,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-<<<<<<< HEAD
             if (condition != 1){
                 axios.put(url, this.fillCarrera).then(response => {
                     this.getCarreras();
@@ -27262,8 +27258,6 @@ new Vue({
                 toastr.error('Esta carrera ya existe, no es posible realizar el cambio','Aviso!');
                 this.errors = 'Esta carrera ya existe, no es posible realizar el cambio';
             }
-=======
->>>>>>> 90296d61103a7056e578a85f3822334f916111cb
         },
 
     }

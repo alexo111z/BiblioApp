@@ -27232,7 +27232,6 @@ new Vue({
         },
         deleteAdeudo: function (adeudo, monto, estado) {
             if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
-<<<<<<< HEAD
                 if ( confirm('¿Se entregó los ejemplares prestados?') ){
                     var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=1';
                 }else{
@@ -27252,18 +27251,6 @@ new Vue({
                     }else{
                         toastr.error('El adeudo ya ha sido pagado.','Aviso!');
                     }
-=======
-                var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto;
-                console.log(monto);
-                if (estado == 1) {  
-                    axios.post(url).then(response => {
-                        this.getAdeudos();
-                        //swal.close();
-                        toastr.success("El estado del adeudo se a cambiado con exito.", "Tarea completada!");
-                    }).catch(ex => {
-                        toastr.error(ex.response.data, "Error!");
-                    });
->>>>>>> 90296d61103a7056e578a85f3822334f916111cb
                 }else{
                     toastr.error('El adeudo ya ha sido pagado.','Aviso!');
                 }
