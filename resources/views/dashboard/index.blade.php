@@ -79,7 +79,7 @@
                     </div>
                     <div class="row section">
                         <div class="col-md-4">
-                            <a href="#">
+                            <a href="{{asset('prestamos')}}">
                                 <i class="fa fa-handshake-o"></i>
                                 <p class="section-title">Prestamos</p>
                             </a>
@@ -149,7 +149,7 @@
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="#">
+                        <a href="{{asset('prestamos')}}">
                             <i class="fa fa-handshake-o"></i>
                             <p class="section-title">Prestamos</p>
                         </a>
