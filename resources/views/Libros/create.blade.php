@@ -1,5 +1,5 @@
 <form method="POST" v-on:submit.prevent="createLibro" enctype="multipart/form-data">
-    <div class="modal fade" id="create">
+    <div class="modal fade" id="create2">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -33,6 +33,8 @@
                         </div>
                         <div class="col-sm-6">
                             <label for="autor">Autor</label>
+                            <a href=""   data-toggle="modal" data-target="#create">
+                    <i class="fa fa-pencil"></i> Registrar autor</a>
                             <div class="form-group">
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
@@ -49,6 +51,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="idEeditorial">Editorial</label>
+                                <a href="" data-toggle="modal" data-target="#create3">
+                    <i class="fa fa-pencil"></i> Registrar editorial </a>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
                                     <select name="idEditorial" id="idEditorial" class="form-control" required
@@ -150,6 +154,7 @@
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
                 <div class="modal-footer">
+              
                     <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i
                             class="fa fa-save"></i> Guardar</button>
                 </div>

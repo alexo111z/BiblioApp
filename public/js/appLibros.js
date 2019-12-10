@@ -27105,6 +27105,15 @@ new Vue({
             'CD':'',
             'Existe':1
         },
+        newAutor: {
+            'Nombre':'',
+            'Apellidos':'',
+            'Existe':1
+        },
+        newEditorial: {
+            'Nombre':'',
+            'Existe':1
+        },
         offset: 3,
         errors: [],
         search: '',
@@ -27185,12 +27194,46 @@ new Vue({
 
                 };
                 this.errors = [];
-                $("#create").modal('hide');
+                $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
                 
             }).catch(error => {
                 toastr.error(error.response.data.message,"ISBN duplicado, por favor corrija el dato registrado");
+            });
+        },
+        createAutor: function () {
+            var url = 'autors';
+            axios.post(url, this.newAutor)
+            .then(response => {
+                this.newAutor = {
+                    'Nombre':'',
+                    'Apellidos':'',
+                    'Existe':1
+                };
+                this.errors = [];
+                $("#create").modal('hide');
+                toastr.success("Autor registrado con exito.", "Tarea completada!");
+                console.log(response.data);
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
+            });
+        },
+        createEditorial: function () {
+            var url = 'editorials';
+            axios.post(url, this.newEditorial)
+            .then(response => {
+                this.newEditorial = {
+                    'Nombre':'',
+                    'Existe':1
+                };
+                this.errors = [];
+                $("#create3").modal('hide');
+                toastr.success("Editorial registrada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
         },
 
@@ -27273,3 +27316,4 @@ new Vue({
         }
     }
 });
+

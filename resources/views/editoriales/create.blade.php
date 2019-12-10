@@ -1,5 +1,5 @@
 <form method="POST" v-on:submit.prevent="createEditorial">
-    <div class="modal fade" id="create">
+    <div class="modal fade" id="create3">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
