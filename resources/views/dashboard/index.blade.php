@@ -155,6 +155,12 @@
                         </a>
                     </div>
                     <div class="col-md-4">
+                        <a href="{{asset('adeudos')}}">
+                            <i class="fa fa-money"></i>
+                            <p class="section-title">adeudos</p>
+                        </a>
+                    </div>
+                    <div class="col-md-4">
                         <a href="{{asset('dewey')}}">
                             <i class="fa fa-tags"></i>
                             <p class="section-title">Clasificación</p>

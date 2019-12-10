@@ -66,9 +66,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Servicios   <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{asset('prestamos')}}">Prestamos</a></li>
-                        @if(\App\User::isAdmin())
-                            <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
-                        @endif
+                        <li><a href="{{asset('adeudos')}}">Adeudos</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
