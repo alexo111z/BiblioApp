@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Session;
 use App\DetPrestamo;
 use App\Prestamo;
 use App\Multa;
+use App\Ejemplares;
+use App\libros;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -132,17 +134,31 @@ class AdeudoController extends Controller{
 //    }
 
    //Remove the specified resource from storage.
-    public function delete($id, $monto)
+    public function delete($id, $monto, Request $request)
     {
+        $back = (int) $request->get('back');
         $user = Session::get('userData');
         if ($user == null OR $user == 0 OR $user == '') {
             $notes = 'Persona a cargo: No identificada';
         }else{
             if ($monto > 100) {
-                $notes = 'Recibió donación: '.$user['Nombre'].' '.$user['Apellidos'];
+                $notes = $user['Nombre'].' '.$user['Apellidos'];
                 $monto = 0;
             }else{
-                $notes = 'Persona a cargo: '.$user['Nombre'].' '.$user['Apellidos'];
+                $notes = $user['Nombre'].' '.$user['Apellidos'];
+            }
+        }
+        if( $back == 0 ){
+            $monto = 0;
+        }else{
+            $cods = DetPrestamo::where('Folio', '=', $id)->get();
+            foreach ($cods as $cod) {
+                $ejm = Ejemplares::find($cod->Codigo);
+                $ejm->Existe = 1;
+                $ejm->save();
+                $libro = libros::find($ejm->ISBN);
+                $libro->EjemDisp = $libro->EjemDisp + 1;
+                $libro->save();
             }
         }
 
@@ -156,6 +172,5 @@ class AdeudoController extends Controller{
             'Fecha' => $date,
             'Notas' => $notes,
         ]);
-        
     }
 }

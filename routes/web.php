@@ -46,7 +46,6 @@ Route::resource('cdewey', 'DeweyController',['except' =>'create', 'edit', 'store
 Route::get('/reportes',function (){
     return view('reportes.reportes');
 });
-
 Route::resource('reporte', 'ReportesController',['except' =>'show', 'create', 'edit']);
 Route::get('reporte/carreras', 'ReportesController@getCarreras')->name('getCarreras');
 Route::post('reporte/consultaprestamos','ReportesController@getReportes')->name('getReportes');

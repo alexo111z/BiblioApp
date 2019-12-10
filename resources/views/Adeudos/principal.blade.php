@@ -71,13 +71,14 @@
                         @{{ adeudo.fecha_final }}
                     </td>
                     <td>
-                        @{{ adeudo.fecha_entrega }}
+                        @{{ adeudo.fecha_entrega !=null ? adeudo.fecha_entrega : 'No Entregado' }}
                     </td>
+                    {{-- Adeudo --}}
                     <td v-if="totalAdeudo[index]>100">
                         Donación
                     </td>
-                    <td v-else>@{{  totalAdeudo[index] }}</td>
-{{--                Cantidad libros prestados--}}
+                    <td v-else>@{{ adeudo.fecha_entrega !=null ? totalAdeudo[index] : 'Donación' }}</td>
+                    {{-- Estado --}}
                     <td v-if="adeudo.existe==1">
                         <strong class="text-danger">Adeudo</strong>
                     </td>

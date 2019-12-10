@@ -123,7 +123,6 @@ mix.scripts(
     ],
     'public/js/login/logout.js'
 );
-
 //Usuarios
 mix.scripts(
     [
@@ -138,7 +137,6 @@ mix.scripts(
     ],
     'public/js/usuarios/app.js'
 );
-
 //Prestatarios
 mix.scripts(
     [
@@ -153,7 +151,6 @@ mix.scripts(
     ],
     'public/js/prestatarios/app.js'
 );
-
 //
 mix.scripts(
     [
