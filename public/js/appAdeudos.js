@@ -27230,7 +27230,7 @@ new Vue({
                 this.pagination = response.data.pagination;
             });
         },
-        deleteAdeudo: function (adeudo, monto, estado, tipoU) {
+        deleteAdeudo: function (adeudo, monto, estado,tipoU) {
             if (confirm('¿Desea cambiar el estado de adeudo del Folio: ' + adeudo.folio + '?')) {
                 if ( confirm('¿Se entregó los ejemplares prestados?') ){
                     var url = this.urlAdeudos + '/' + adeudo.folio + '/' + monto + '?back=1';

@@ -87,13 +87,13 @@ new Vue({
             }).catch(error =>{
                 toastr.error(error.response.data.message, "Error1!");
             });
-        },getCarreras: function () {  /*ejemplo cmb */
+        },
+        getCarreras: function () {  /*ejemplo cmb */
             axios.get("material/carreras")
             .then(response =>{
                 this.carreras=response.data;
             });
-        }
-        ,
+        },
         createMaterial: function () {
             var url = 'material';
             axios.post(url, this.newMaterial)
