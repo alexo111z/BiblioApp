@@ -41,6 +41,7 @@ class LibrosController extends Controller
                    
                 )
                 ->where('tbllibros.Existe', '=', 1)
+                ->orderby('ISBN', 'ASC')
                 ->search($search)
                 ->paginate(10); 
         return [
@@ -86,7 +87,8 @@ class LibrosController extends Controller
         'Edicion' => 'required',
         'Year' => 'required',
         'Volumen' => 'required',
-        'Ejemplares' => 'required'
+        'Ejemplares' => 'required',
+        'CD' => 'required'
       ]);
       $isbn = $request->post("ISBN");
       $titulo = $request->post("Titulo");
@@ -98,9 +100,10 @@ class LibrosController extends Controller
        $year = $request->post("Year");
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
+       $cd = $request->post("CD");
        $imagen = "http://127.0.0.1:8000/images/template.png";
-      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
-        #########################
+       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
+        #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;
         }else if($dewey >= 10 && $dewey <100){
@@ -128,10 +131,18 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,{$cd},1)");
         }
         return $codigo;
     }
+
+        /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $ISBN)
     {
         $this->validate($request, [
@@ -144,7 +155,8 @@ class LibrosController extends Controller
             'Edicion' => 'required',
             'Year' => 'required',
             'Volumen' => 'required',
-            'Ejemplares' => 'required'
+            'Ejemplares' => 'required',
+          
         ]);
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
