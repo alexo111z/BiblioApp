@@ -108,6 +108,11 @@ Route::post('/usuarios/update', 'UsersController@update');
 Route::post('/usuarios/remove', 'UsersController@delete');
 
 
+//Materiales
+Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
+Route::get('/materiales', function (){
+    return view('Materiales.principal');
+});
 Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
 
 Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');

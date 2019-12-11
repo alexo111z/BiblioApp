@@ -25,7 +25,7 @@
                                 <label for="claveCarrera">Clave de carrera</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="clave" id="clave" class="form-control" required="" v-model="newMaterial.Clave">
+                                     <select name="clave" id="clave" class="form-control" required="" v-model="newMaterial.IdCarrera">
                                      @foreach($claves as $clave)
                                      <option value ="{{ $clave->Clave }}"> {{ $clave->Nombre}}</option> 
                                      @endforeach
@@ -79,4 +79,5 @@
         </div>
     </div>
 </form>
+
 
