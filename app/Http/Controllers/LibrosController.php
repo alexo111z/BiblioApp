@@ -158,8 +158,66 @@ class LibrosController extends Controller
             'Ejemplares' => 'required',
           
         ]);
-
-        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+        
+        
+        $isbn = $request->post("ISBN");
+        $titulo = $request->post("Titulo");
+        $Idautor = $request->post("IdAutor");
+        $IdEdi = $request->post("IdEditorial");
+          $IdCar = $request->post("IdCarrera");
+         $dewey = $request->post("dewey");
+         $edicion = $request->post("Edicion");
+         $year = $request->post("Year");
+         $volu = $request->post("Volumen");
+         $ejemplares = $request->post("Ejemplares");
+         $imagen = "http://127.0.0.1:8000/images/template.png";
+ 
+        LIBROS::where('ISBN', '=', $ISBN)->update(array(
+                                            'ISBN'=>$isbn,
+                                            'Titulo'=>$titulo,
+                                            'IdAutor'=>$Idautor,
+                                            'IdEditorial'=>$IdEdi,
+                                            'IdCarrera'=>$IdCar,
+                                            'dewey'=>$dewey,
+                                            'Edicion'=>$edicion,
+                                            'Year'=>$year,
+                                            'Volumen'=>$volu,
+                                            'Ejemplares'=>$ejemplares,
+                                            'Imagen'=>$imagen
+        ));
+        if ($dewey < 10) {
+            $dewey = "00".$dewey;
+        }else if($dewey >= 10 && $dewey <100){
+            $dewey = "0".$dewey;
+        }
+        $codigo = "1".$dewey;
+        $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}");
+        foreach ($ejemplaresdewey as $key) {
+                if (($key->ejemplaresdewey) < 10) {
+                    $cant = "00".($key->ejemplaresdewey);
+                }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
+                    $cant = "0".($key->ejemplaresdewey);
+                }else {
+                    $cant = ($key->ejemplaresdewey);
+                }
+        }
+        $codigo= $codigo.$cant;
+        if($edicion <10)
+            $edicion = "0".$edicion;
+        $codigo = $codigo . $edicion;
+        $ejemli = DB::select("select (count(*)+1) as ejemli from  tblejemplares where tblejemplares.ISBN = {$isbn}");
+        $ejem= (int)$ejemli;
+        for ($x = 1; $x <= $ejemplares; $x++) {
+            $id = ''; 
+            if($x<10){
+                $id = $codigo . "00".$x;
+            }else if ($x>=10 && $x <100) {
+                $id = $codigo . "0".$x;
+            }
+            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,1,1)");
+        }
+        return $codigo;
     }
 
 }
+/*$ejemplaresdewey = DB::select("select (count(*)) as ejemplaresdewey from  tblejemplares where tblejemplares.ISBN = {$isbn}");*/

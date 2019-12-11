@@ -120,10 +120,11 @@
                              <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" disabled v-model="fillLibro.Ejemplares">
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
-                        </div>                     
+                        </div>
+                                           
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
