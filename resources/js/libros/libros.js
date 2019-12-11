@@ -129,7 +129,7 @@ new Vue({
                 
             }).catch(error => {
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+                toastr.error(error.response.data.message, "ErrorISBN!");
             });
         },
         createAutor: function () {

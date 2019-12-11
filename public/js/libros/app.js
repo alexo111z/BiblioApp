@@ -27219,7 +27219,7 @@ new Vue({
                 
             }).catch(error => {
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+                toastr.error(error.response.data.message, "ErrorISBN!");
             });
         },
         createAutor: function () {
@@ -27328,18 +27328,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-        },
-              
-        deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
-                var url = 'libro/' + libro.ISBN;
-                axios.delete(url).then(response => {
-                    this.getLibros();
-                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error4!");
-                });
-            }
         },
 
         searchLibro: function () {
