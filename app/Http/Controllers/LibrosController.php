@@ -132,47 +132,6 @@ class LibrosController extends Controller
         }
         return $codigo;
     }
-   /* public function generarCodigos($dewey, $edicion, $ejemplares)
-    {
-        if ($dewey < 10) {
-            $dewey = "00".$dewey;
-        }else if($dewey >= 10 && $dewey <100){
-            $dewey = "0".$dewey;
-        }
-        $codigo = "1".$dewey;
-        $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}");
-        foreach ($ejemplaresdewey as $key) {
-                if (($key->ejemplaresdewey) < 10) {
-                    $cant = "00".($key->ejemplaresdewey);
-                }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
-                    $cant = "0".($key->ejemplaresdewey);
-                }else {
-                    $cant = ($key->ejemplaresdewey);
-                }
-        }
-        $codigo= $codigo.$cant;
-        if($edicion <10)
-            $edicion = "0".$edicion;
-        $codigo = $codigo . $edicion;
-        for ($x=0; $x < $ejemplares; $x++) { 
-            if($x<10){
-                $codigo = $codigo . "00".$x;
-            }else if ($x>=10 && $x <100) {
-                $codigo = $codigo . "0".$x;
-            }
-            DB::insert("insert into tblejemplares values({$codigo}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
-        }
-        
-
-    }
-
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $ISBN)
     {
         $this->validate($request, [
@@ -191,12 +150,4 @@ class LibrosController extends Controller
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
-    
-    //Remove the specified resource from storage.
-    public function destroy($ISBN)
-    {
-        $libro = Libros::findOrFail($ISBN);
-        $libro->Existe = 0;
-        $libro->save();
-    }
 }

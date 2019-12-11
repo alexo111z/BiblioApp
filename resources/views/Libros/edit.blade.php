@@ -73,7 +73,7 @@
                             <label for="dewey">dewey</label>
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                     <select name="dewey" id="dewey" class="form-control" required v-model="fillLibro.dewey">
+                                     <select name="dewey" id="dewey" class="form-control" disabled v-model="fillLibro.dewey">
                                      @foreach($deweys as $dewey)
                                      <option value ="{{ $dewey->Id }}"> {{ $dewey->Nombre}}</option> 
                                      @endforeach
@@ -86,7 +86,7 @@
                              <label for="edicion">Edicion</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" required v-model="fillLibro.Edicion">
+                                    <input type="number" name="edicion" id="edicion" class="form-control" min="1" disabled v-model="fillLibro.Edicion">
                                 </div>
                              </div>
                         </div>
