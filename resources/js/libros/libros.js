@@ -128,8 +128,8 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "ErrorISBN!");
+                //this.errors = error.response.data;
+                toastr.error("ISBN duplicado!");
             });
         },
         createAutor: function () {

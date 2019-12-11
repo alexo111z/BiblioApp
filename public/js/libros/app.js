@@ -27219,7 +27219,7 @@ new Vue({
                 
             }).catch(error => {
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "ErrorISBN!");
+                toastr.error(error.response.data.message, "ISBN duplicado!");
             });
         },
         createAutor: function () {

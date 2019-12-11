@@ -27066,28 +27066,6 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
-const authMiddleware = () => {
-    const sessionData = localStorage.getItem('userData');
-    const redirectTo = '/login';
-    const homeRoute = '/home';
-
-    if (sessionData === null && location.pathname !== redirectTo) {
-        toastr.error('No estás autenticado, inicia sesión');
-
-        setTimeout(() => {
-            location.href = location.origin + redirectTo;
-        }, 2500);
-    } else if (sessionData !== null && location.pathname === redirectTo) {
-        location.href = location.origin + homeRoute;
-    }
-};
-
-if (window.addEventListener) {
-    window.addEventListener('load', authMiddleware, false);
-} else {
-    window.attachEvent('onload', authMiddleware);
-}
-
 new Vue({
     el: "#librosCRUD",
     created: function () {
@@ -27218,8 +27196,8 @@ new Vue({
                 console.log(response.data);
                 
             }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+                //this.errors = error.response.data;
+                toastr.error("ISBN duplicado!");
             });
         },
         createAutor: function () {
@@ -27328,18 +27306,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-        },
-              
-        deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
-                var url = 'libro/' + libro.ISBN;
-                axios.delete(url).then(response => {
-                    this.getLibros();
-                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error4!");
-                });
-            }
         },
 
         searchLibro: function () {
