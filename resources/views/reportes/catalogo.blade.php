@@ -5,19 +5,19 @@
         <!--FILTRADO-->
         <div class="row col-sm-12">
             <!-- Boton para consultar el catalogo de libros ORDENADO POR CARRERAS-->
-            <a href="#" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:145px;" data-toggle="" data-target="#">consultar</a>
-        </div> 
+            <a @click.prevent="obtenercatalogo" class="btn btn-primary" style="background-color: #6d356c; margin:25px 15px ;width:145px;" data-toggle="" data-target="#">consultar</a>
+        </div>
         <div class="col-sm-12">
-        <div class="col-sm-8 text-center"><h3>Catálogo de libros:</h3></div>
+        <div class="col-sm-8 text-center"><h3>Catálogo de libros</h3></div>
         <div class="col-sm-4" >
             <!-- boton para imprimir Catalogo-->
-            <a href="#" class="btn btn-danger" style=" margin:15px;" data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
+            <a href="{{route('printCatalogo')}}" target="_blank" class="btn btn-danger" style=" margin:15px;" data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
         </div>
     </div>
         <!--TABLA DE catalogo,SE IMPRIME, se muestran todos los libros en el sistema, ORDENADOS POR CARRERA -->
 
     <div class="row col-xs-12" style="margin-bottom:10px;max-height:500px; overflow:auto;">
-        <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+        <table class="table table-hover table-striped" style="margin-top: 1.5rem;  max-height:300px; overflow:scroll;">
             <thead>
                 <tr>
                     <th style="padding:3px;">#</th>
@@ -31,22 +31,27 @@
                     <th style="padding:3px;">Fecha</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody v-if="catalogo.length==0">
+                    <tr>
+                        <td colspan="9" class="text-center">Sin resultados...</td>
+                    </tr>
+                </tbody>
+            <tbody v-else v-for="registro in catalogo">
                 <tr>
                 <!--datos del libro -->
-                    <td style="padding:3px;">1</td>
-                    <td style="padding:3px;">Matemáticas 2 Cálculo integral</td>
-                    <td style="padding:3px;">Zill Dennis G.</td>
-                    <td style="padding:3px;">Mcgraw Hill</td>
-                    <td style="padding:3px;">Ingeniería en Sistemas Computacionales</td>
-                    <td style="padding:3px;">700</td>
-                    <td style="padding:3px;">1</td>
-                    <td style="padding:3px;">1</td>
-                    <td style="padding:3px;">2013/01/09</td>
+                    <td style="padding:3px;">*</td>
+                    <td style="padding:3px;">@{{registro.Titulo}}</td>
+                    <td style="padding:3px;">@{{registro.Autor}}</td>
+                    <td style="padding:3px;">@{{registro.Editorial}}</td>
+                    <td style="padding:3px;">@{{registro.Carrera}}</td>
+                    <td style="padding:3px;">@{{registro.Dewey}}</td>
+                    <td style="padding:3px;">@{{registro.Edicion}}</td>
+                    <td style="padding:3px;">@{{registro.Ejemplares}}</td>
+                    <td style="padding:3px;">@{{registro.Registro}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <!--Fin de la tabla-->
-    </div>    
+    </div>
 </div>

@@ -27066,6 +27066,28 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el:"#content",
     created:function(){
@@ -27158,7 +27180,7 @@ new Vue({
                     'Existe':1
                 };
                 this.errors = [];
-                $("#create").modal('hide');
+                $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;
@@ -27195,7 +27217,7 @@ new Vue({
                     this.getEditoriales();
                     toastr.success("Editorial eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex, "Error!");
+                    toastr.error('No puedes eliminar una editorial que tiene titulos asignados.', "Error!");
                 });
             }
         },

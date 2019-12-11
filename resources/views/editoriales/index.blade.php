@@ -2,7 +2,7 @@
 @section('titulo', "Editoriales | BiblioApp")
 @section('content')
 <ol class="breadcrumb" style="background-color: #FFF; padding: 15px 10px;">
-    <li><a href="javascript:void();">Inicio</a></li>
+    <li><a href="{{route('home')}}">Inicio</a></li>
     <li class="active">Editoriales</li>
 </ol>
 <div class="row" id="content" style="background-color: #fbfbfb;box-shadow: 0px 0px 3px 0px rgba(194,194,194,1); padding: 3rem;">
@@ -12,7 +12,7 @@
     <div class="col-xs-12" style="background-color: #FFF; padding: 3rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
         <div class="row">
             <div class="col-sm-6">
-                <a href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#create">
+                <a href="" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createEditorials">
                     <i class="fa fa-pencil"></i> Registrar editorial
                 </a>
                 <!--Mostrar

@@ -34,7 +34,15 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':'',
-            'CD':'',
+            'Existe':1
+        },
+        newAutor: {
+            'Nombre':'',
+            'Apellidos':'',
+            'Existe':1
+        },
+        newEditorial: {
+            'Nombre':'',
             'Existe':1
         },
         offset: 3,
@@ -112,17 +120,51 @@ new Vue({
                     'Year':'',
                     'Volumen':'',
                     'Ejemplares':'',
-                    'CD':'',
                     'Existe':1
-
                 };
                 this.errors = [];
-                $("#create").modal('hide');
+                $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
                 
             }).catch(error => {
-                toastr.error(error.response.data.message,"ISBN duplicado, por favor corrija el dato registrado");
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error2!");
+            });
+        },
+        createAutor: function () {
+            var url = 'autors';
+            axios.post(url, this.newAutor)
+            .then(response => {
+                
+                this.newAutor = {
+                    'Nombre':'',
+                    'Apellidos':'',
+                    'Existe':1
+                };
+                
+                this.errors = [];
+                $("#create").modal('hide');
+                toastr.success("Autor registrado con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
+            });
+        },
+        createEditorial: function () {
+            var url = 'editorials';
+            axios.post(url, this.newEditorial)
+            .then(response => {
+                this.newEditorial = {
+                    'Nombre':'',
+                    'Existe':1
+                };
+                this.errors = [];
+                $("#createEditorials").modal('hide');
+                toastr.success("Editorial registrada con exito.", "Tarea completada!");
+            }).catch(error => {
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
             });
         },
 
@@ -138,7 +180,6 @@ new Vue({
             this.fillLibro.Volumen = libro.Volumen;
             this.fillLibro.Ejemplares = libro.Ejemplares;
             this.fillLibro.EjemDisp = libro.EjemDisp;
-            this.fillLibro.CD = libro.CD;
             this.fillLibro.FechaRegistro = libro.FechaRegistro;
             console.log(this.fillLibro);
             $('#show').modal('show');
@@ -198,6 +239,18 @@ new Vue({
                 toastr.error(error.response.data.message, "Error!");
             });
         },
+              
+        deleteLibro: function (libro) {
+            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
+                var url = 'libro/' + libro.ISBN;
+                axios.delete(url).then(response => {
+                    this.getLibros();
+                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
+                }).catch(ex => {
+                    toastr.error(ex.response.data.message, "Error4!");
+                });
+            }
+        },
 
         searchLibro: function () {
             this.search = $('#search').val();
@@ -205,3 +258,4 @@ new Vue({
         }
     }
 });
+

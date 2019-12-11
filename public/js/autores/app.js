@@ -27066,6 +27066,28 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el: "#content",
     created: function () {
@@ -27198,7 +27220,7 @@ new Vue({
                     this.getAutores();
                     toastr.success("Autor eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error!");
+                    toastr.error('No puedes eliminar un autor con titulos asignados.', "Error!");
                 });
             }
         },

@@ -27066,6 +27066,28 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el: "#materialesCRUD",
     created: function () {
@@ -27094,7 +27116,7 @@ new Vue({
         },
         newMaterial: {
             'Titulo':'',
-            'IdCarrera':'',
+            'Clave':'',
             'Year':'',
             'Ejemplares':'',
             'Tipo':'',
@@ -27106,7 +27128,7 @@ new Vue({
         fillMaterial:{
             'Id':'',
             'Titulo':'',
-            'IdCarrera':'',
+            'Clave':'',
             'Year':'',
             'Ejemplares':'',
             'Tipo':''
@@ -27169,7 +27191,7 @@ new Vue({
                 this.getMateriales();
                 this.newMaterial = {
                     'Titulo':'',
-                    'IdCarrera':'',
+                    'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':'',
@@ -27186,7 +27208,7 @@ new Vue({
         editMaterial: function (material) {
             this.fillMaterial.Id = material.Id;
             this.fillMaterial.Titulo = material.Titulo;
-            this.fillMaterial.IdCarrera = material.IdCarrera;
+            this.fillMaterial.Clave = material.IDCarrera;
             this.fillMaterial.Year = material.Year;
             this.fillMaterial.Ejemplares = material.Ejemplares;
             this.fillMaterial.Tipo = material.Tipo;
@@ -27202,7 +27224,7 @@ new Vue({
                 this.fillMaterial = {
                     'Id':'',
                     'Titulo':'',
-                    'IdCarrera':'',
+                    'Clave':'',
                     'Year':'',
                     'Ejemplares':'',
                     'Tipo':''

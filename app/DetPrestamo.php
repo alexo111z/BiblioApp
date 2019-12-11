@@ -14,7 +14,10 @@ class DetPrestamo extends Model
         'Folio',
         'Codigo',
     ];
-
+    public function ejemplar()
+    {
+        return $this->belongsTo(Ejemplares::class, 'Codigo', 'Codigo');
+    }
 //    function prestamo(){
 //        return $this->hasMany(DetPrestamo::class, 'Folio');
 //    }

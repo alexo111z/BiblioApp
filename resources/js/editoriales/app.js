@@ -90,7 +90,7 @@ new Vue({
                     'Existe':1
                 };
                 this.errors = [];
-                $("#create").modal('hide');
+                $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
             }).catch(error => {
                 this.errors = error.response.data;
@@ -127,7 +127,7 @@ new Vue({
                     this.getEditoriales();
                     toastr.success("Editorial eliminada con exito.", "Tarea completada!");
                 }).catch(ex => {
-                    toastr.error(ex, "Error!");
+                    toastr.error('No puedes eliminar una editorial que tiene titulos asignados.', "Error!");
                 });
             }
         },

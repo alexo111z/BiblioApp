@@ -1,89 +1,69 @@
 
 <div class="col-xs-12" style="background-color: #FFF; padding: 1rem; box-shadow: 0px 0px 5px 0px rgba(194,194,194,1); border-radius:5px;">
-    <div class="row col-xs-12" style="margin-bottom:10px;">
-        <!--TABLA DE Adeudos/multas EN SISTEMA en el perioso, no se imprime-->
-        <div class="col-sm-7">
-            <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3 class="page-header">consultar Multas del periodo</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <a @click.prevent="consultarMultas" class="btn btn-primary btn-block"style="background-color: #6d356c;">consultar <i class="fa fa-search"></i></a>
+                </div>
+                <div class="col-sm-6">
+                    <form action="{{route('printMultas')}}" target="_blank" method="GET">
+                        <input type="hidden" name="inicio" :value="inicio">
+                        <input type="hidden" name="fin" :value="fin">
+                        <button type="submit" class="btn btn-danger btn-block">Imprimir reporte <i class="fa fa-file-pdf-o"></i></button>
+                    </form>
+                </div>
+            </div>
+            <h4 class="page-header">Concentrado</h4>
+            <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th colspan="2"><h4>Resumen de multas por periodo</h4></th>
-                    </tr>
-                    <tr>
-                        <th >Multas</th>
-                        <th >Total</th>
-                        <th >Monto total</th>
+                        <th>Multas</th>
+                        <th>Total acumulado</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Todas</td>
-                        <td>123</td><!-- Número de todas multas en el periodo -->
-                        <td>$1234.00</td> <!--Monto total de las multas en el periodo-->
-                    </tr>
-                    <tr>
-                        <td>Activas</td>
-                        <td>123</td><!-- Número de multas activas en el periodo -->
-                        <td>$1234.00</td> <!--Monto total de multas activas en el periodo-->
-                    </tr>
-                    <tr>
-                        <td>Inactivas</td>
-                        <td>123</td><!-- Número de multas inactivas en el periodo -->
-                        <td>$1234.00</td> <!--Monto de multas inactivas  en el periodo-->
+                        <td>@{{Multas.lista.length}}</td>
+                        <td>$@{{Multas.total}}.00</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <!--FIN TABLA DE multas en el periodo-->
-    </div>   
-    <div class="col-sm-12">
-    <hr > 
-        <div class="col-sm-12"><h3>Multas del periodo</h3></div>
-        <div class="col-sm-7">
-            <label>Ver:</label>
-                <select style="padding: .5rem;" >
-                    <option>Todas</option>
-                    <option>Activas</option>
-                    <option>Inactivas</option>
-                </select>
-                <!-- boton para consultar la tabla de multas del periodo-->
-                <a href="#" class="btn btn-primary" style="background-color: #6d356c; " data-toggle="" data-target="#">consultar</a>
-        </div>
-        <div class="col-sm-4 text-right" >
-            <!-- boton para imprimir la tabla de multas del periodo-->
-            <a href="#" class="btn btn-danger"  data-toggle="" data-target="#">Imprimir <i class="fa fa-file-pdf-o"></i></a>
+        <div class="col-sm-8">
+            <h3 class="page-header">Multas del periodo</h3>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th style="padding:3px;">Folio</th>
+                        <th style="padding:3px;">No. Control/Nomina</th>
+                        <th style="padding:3px;">Nombre</th>
+                        <th style="padding:3px;">Tipo</th>
+                        <th style="padding:3px;">Fecha de prestamo</th>
+                        <th style="padding:3px;">Fecha de pago</th>
+                        <th style="padding:3px;">Monto</th>
+                        <th style="padding:3px;">Comentarios</th>
+                    </tr>
+                </thead>
+                <tbody v-if="Multas.lista.length == 0">
+                    <tr>
+                        <td colspan="8" class="text-center">Sin resultados...</td>
+                    </tr>
+                </tbody>
+                <tbody v-else v-for="registro in Multas.lista">
+                    <tr>
+                        <td style="padding:3px;">@{{registro.Folio}}</td>
+                        <td style="padding:3px;">@{{registro.NoControl}}</td>
+                        <td style="padding:3px;">@{{registro.Nombre}} @{{registro.Apellidos}}</td>
+                        <td style="padding:3px;">@{{registro.Tipo}}</td>
+                        <td style="padding:3px;">@{{registro.FechaInicio}}</td>
+                        <td style="padding:3px;">@{{registro.FechaPago}}</td>
+                        <td style="padding:3px;">$@{{registro.Monto}}.00</td>
+                        <td style="padding:3px;">@{{registro.Comentarios}}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-        <!--TABLA DE Multas por periodo,SE IMPRIME, se puede filtrar por todas, activas o inactivas -->
-
-    <div class="row col-xs-12" style="margin-bottom:10px;max-height:350px; overflow:auto;">
-        <table class="table table-hover table-striped" style="margin-top: 1.5rem;">
-            <thead>
-            
-                <tr>
-                    <th style="padding:3px;">Folio</th>
-                    <th style="padding:3px;">No. Control</th>
-                    <th style="padding:3px;">Nombre</th>
-                    <th style="padding:3px;">Tipo</th>
-                    <th style="padding:3px;">Fecha</th>
-                    <th style="padding:3px;">Fecha pago</th>
-                    <th style="padding:3px;">Monto</th>
-                    <th style="padding:3px;">Usuario</th>
-                </tr>
-
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding:3px;">261018-0007</td><!--Folio de la multa-->
-                    <td style="padding:3px;">15021049</td> <!--No. Control del usuario multado-->
-                    <td style="padding:3px;">María Guadalupe González Hernández</td><!--Nombre del usuario multado-->
-                    <td style="padding:3px;">Alumno</td><!--Tipo de usuario multado-->
-                    <td style="padding:3px;">2018/11/05</td><!--Fecha de la multa-->
-                    <td style="padding:3px;">2018/11/12</td><!--Fecha de pago de la multa-->
-                    <td style="padding:3px;">$640.00</td><!--Monto de la multa-->
-                    <td style="padding:3px;">Martha Ramírez Quiñonez</td><!--usuario que marco como pagada la multa-->
-                </tr>
-            </tbody>
-        </table>
-    </div> 
-    <!--FIn de la tabla de multas del periodo-->
 </div>
