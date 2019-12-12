@@ -10,7 +10,10 @@
                 </div>
                     <div class="modal-body">
                         <div class="row">
-                             <div class="col-md-12">
+                        <div class="col-xs-6">
+                                    <img src="http://127.0.0.1:8000/images/template.png" width="280" >
+                            </div> 
+                             <div class="col-md-6">
                                  <h5 style="font-weight:light;margin-left:2rem"><b>ISBN:</b> @{{fillLibro.ISBN}}</h5>
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Titulo:</b> @{{fillLibro.Titulo}}</h5>
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Autor:</b> @{{fillLibro.IdAutor}}</h5>
