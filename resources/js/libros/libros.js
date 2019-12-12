@@ -50,6 +50,7 @@ new Vue({
         search: '',
         fillLibro:{
             'ISBN':'',
+            'Imagen': '',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -126,23 +127,22 @@ new Vue({
                 $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
-                
-            }).catch(error => {
-                //this.errors = error.response.data;
-                toastr.error("ISBN duplicado!");
+
+            }).catch(() => {
+                toastr.error("Hubo un error al crear este libro, inténtalo de nuevo");
             });
         },
         createAutor: function () {
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
-                
+
                 this.newAutor = {
                     'Nombre':'',
                     'Apellidos':'',
                     'Existe':1
                 };
-                
+
                 this.errors = [];
                 $("#create").modal('hide');
                 toastr.success("Autor registrado con exito.", "Tarea completada!");
@@ -170,6 +170,7 @@ new Vue({
 
         showLibro: function (libro) {
             this.fillLibro.ISBN = libro.ISBN;
+            this.fillLibro.Imagen = libro.Imagen;
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.Nombre + " "+ libro.Ape;
             this.fillLibro.IdEditorial = libro.Editorial;
