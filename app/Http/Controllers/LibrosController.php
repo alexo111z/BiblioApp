@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Libros;
 use DB;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS1D;
 
 class LibrosController extends Controller
 {
@@ -16,8 +17,8 @@ class LibrosController extends Controller
     {
         $search = $request->get('search');
         $libros = Libros::join('tblcarreras', 'tblcarreras.clave', '=', 'tbllibros.IdCarrera')
-                ->join('tbleditoriales' , 'tbleditoriales.Id','=','tbllibros.IdEditorial')  
-                ->join('tbldewey' , 'tbldewey.Id','=','tbllibros.dewey')  
+                ->join('tbleditoriales' , 'tbleditoriales.Id','=','tbllibros.IdEditorial')
+                ->join('tbldewey' , 'tbldewey.Id','=','tbllibros.dewey')
                 ->join('tblautores','tblautores.IdAutor','=','tbllibros.IdAutor')
                 ->select(
                     'tbllibros.ISBN',
@@ -26,8 +27,8 @@ class LibrosController extends Controller
                     'tbllibros.IdEditorial',
                     'tbllibros.IdCarrera',
                     'tbllibros.dewey',
-                    'tblAutores.Nombre as Nombre',
-                    'tblAutores.Apellidos as Ape',
+                    'tblautores.Nombre as Nombre',
+                    'tblautores.Apellidos as Ape',
                     'tbleditoriales.Nombre as Editorial',
                     'tblcarreras.Nombre as Carrera',
                     'tbldewey.Nombre as Dewey',
@@ -38,12 +39,12 @@ class LibrosController extends Controller
                     'tbllibros.EjemDisp',
                     'tbllibros.Imagen',
                     'tbllibros.FechaRegistro'
-                   
+
                 )
                 ->where('tbllibros.Existe', '=', 1)
                 ->orderby('ISBN', 'ASC')
                 ->search($search)
-                ->paginate(10); 
+                ->paginate(10);
         return [
             'pagination' => [
                 'total'         => $libros->total(),
@@ -57,9 +58,9 @@ class LibrosController extends Controller
         ];
     }
 
-    
+
     public function selects()
-    {   
+    {
         $autores= DB::table('tblautores')->get();
         $editoriales= DB::table('tbleditoriales')->get();
         $carreras= DB::table('tblcarreras')->get();
@@ -77,6 +78,8 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
+        $barCodeGenerator = new DNS1D();
+
       $this->validate($request, [
         'ISBN' => 'required',
         'Titulo' => 'required',
@@ -101,7 +104,9 @@ class LibrosController extends Controller
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
        $cd = $request->post("CD");
-       $imagen = "http://127.0.0.1:8000/images/template.png";
+       $imagen = $barCodeGenerator->getBarcodePNG($isbn, 'C39+');
+
+
        DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
         #########################//generacion de codigo
         if ($dewey < 10) {
@@ -125,13 +130,13 @@ class LibrosController extends Controller
             $edicion = "0".$edicion;
         $codigo = $codigo . $edicion;
         for ($x=1; $x <= $ejemplares; $x++) {
-            $id = ''; 
+            $id = '';
             if($x<10){
                 $id = $codigo . "00".$x;
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,{$cd},1)");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd}, '', 1)");
         }
         return $codigo;
     }
@@ -156,7 +161,7 @@ class LibrosController extends Controller
             'Year' => 'required',
             'Volumen' => 'required',
             'Ejemplares' => 'required',
-          
+
         ]);
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
