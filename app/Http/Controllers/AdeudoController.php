@@ -165,6 +165,7 @@ class AdeudoController extends Controller{
         $date = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', now())->format('Y-m-d');
         $deudor = Prestamo::findOrFail($id);
         $deudor ->Existe = 0;
+        $deudor ->Fecha_entrega = $date;
         $deudor->save();
         Multa::create([
             'Folio' => $id,

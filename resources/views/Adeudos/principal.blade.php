@@ -62,7 +62,7 @@
                         @{{ adeudo.folio }}
                     </th>
                     <td >
-                        @{{ adeudo.control }}
+                        @{{ adeudo.nombre +' '+ adeudo.apellidos }}
                     </td>-
                     <td>
                         @{{ adeudo.fecha_inicio }}
