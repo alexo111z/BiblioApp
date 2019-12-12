@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Autores;
 
@@ -27,6 +28,30 @@ class AutoresController extends Controller
             ],
             'autores' =>$autores
         ];
+    }
+
+    public function all()
+    {
+        $authors = DB::table('tblautores')
+            ->where('Existe', 1)
+            ->get();
+
+        return $this->transformAuthors($authors);
+    }
+
+    private function transformAuthors($authors): array
+    {
+        $output = [];
+
+        foreach ($authors as $author) {
+            $output[] = [
+                'IdAutor' => $author->IdAutor,
+                'Nombre' => $author->Nombre,
+                'Apellidos' => $author->Apellidos,
+            ];
+        }
+
+        return $output;
     }
 
     /**

@@ -2,6 +2,8 @@ new Vue({
     el: "#librosCRUD",
     created: function () {
         this.getLibros();
+        this.getAutores();
+        this.getEditoriales();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -15,6 +17,8 @@ new Vue({
     },
     data: {
         libros: [],
+        autores: [],
+        editoriales: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -105,6 +109,26 @@ new Vue({
                 toastr.error(error.response.data.message, "Error1!");
             });
         },
+        getAutores: function () {
+            const autoresUrl = 'autores/all';
+
+            this.autores = [];
+
+            axios.get(autoresUrl)
+                .then((response) => {
+                   this.autores = response.data;
+                });
+        },
+        getEditoriales: function () {
+            const editorialesUrl = 'editoriales/all';
+
+            this.editoriales = [];
+
+            axios.get(editorialesUrl)
+                .then((response) => {
+                    this.editoriales = response.data;
+                });
+        },
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
@@ -137,7 +161,7 @@ new Vue({
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
-
+                this.getAutores();
                 this.newAutor = {
                     'Nombre':'',
                     'Apellidos':'',
@@ -156,6 +180,8 @@ new Vue({
             var url = 'editorials';
             axios.post(url, this.newEditorial)
             .then(response => {
+                this.getEditoriales();
+
                 this.newEditorial = {
                     'Nombre':'',
                     'Existe':1
