@@ -27177,6 +27177,8 @@ new Vue({
             var url = 'libro';
             axios.post(url, this.newLibro)
             .then(response => {
+                open(location.origin + '/libros/descargar/' + this.newLibro.ISBN);
+
                 this.getLibros();
                 this.newLibro = {
                     'ISBN':'',
@@ -27195,7 +27197,6 @@ new Vue({
                 $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
-
             }).catch(() => {
                 toastr.error("Hubo un error al crear este libro, inténtalo de nuevo");
             });

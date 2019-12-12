@@ -124,6 +124,10 @@ Route::get('/libros', function (){
     return view('Libros.principal');
 });
 
+Route::get('/libros/imprimir/{isbn}', 'PrintBookBarcodeController@index');
+
+Route::get('/libros/descargar/{isbn}', 'PrintBookBarcodeController@downloadPdf');
+
 Route::get('libros', 'LibrosController@selects')->name('varios');
 
 //Usuarios
