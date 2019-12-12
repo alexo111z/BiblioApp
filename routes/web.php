@@ -26,12 +26,16 @@ Route::get('/autores', function () {
     return view('autores.index');
 });
 
+Route::get('/autores/all', 'AutoresController@all');
+
 Route::resource('autors', 'AutoresController',['except' =>'show', 'create', 'edit']);
 
 //Editoriales
 Route::get('/editoriales', function () {
     return view('editoriales.index');
 });
+
+Route::get('/editoriales/all', 'EditorialesController@all');
 
 Route::resource('editorials', 'EditorialesController',['except' =>'show', 'create', 'edit']);
 

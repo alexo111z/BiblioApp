@@ -35,9 +35,7 @@
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                      <select name="idAutor" id="idAutor" class="form-control" required v-model="fillLibro.IdAutor">
-                                     @foreach($autores as $autor)
-                                     <option value ="{{ $autor->IdAutor }}"> {{ $autor->Nombre}} {{ $autor->Apellidos}}</option> 
-                                     @endforeach
+                                        <option v-for="autor of autores" :value="autor.IdAutor"> @{{autor.Nombre}} @{{autor.Apellidos}}</option>
                                      </select>
                                 </div>
                             </div>
@@ -48,9 +46,7 @@
                                 <div class="input-group">
                                      <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
                                      <select name="idEditorial" id="idEditorial" class="form-control" required v-model="fillLibro.IdEditorial">
-                                     @foreach($editoriales as $editorial)
-                                     <option value ="{{ $editorial->Id }}"> {{ $editorial->Nombre}}</option> 
-                                     @endforeach
+                                        <option v-for="editorial of editoriales" :value="editorial.Id"> @{{editorial.Nombre}}</option>
                                      </select>
                                 </div>
                             </div>
@@ -62,7 +58,7 @@
                                      <div class="input-group-addon"><i class="fa fa-graduation-cap"></i></div>
                                      <select name="idCarrera" id="idCarrera" class="form-control" required v-model="fillLibro.IdCarrera">
                                      @foreach($carreras as $carrera)
-                                     <option value ="{{ $carrera->Clave }}"> {{ $carrera->Nombre}}</option> 
+                                        <option value ="{{ $carrera->Clave }}"> {{ $carrera->Nombre}}</option>
                                      @endforeach
                                      </select>
                                 </div>
@@ -75,7 +71,7 @@
                                      <div class="input-group-addon"><i class="fa fa-key"></i></div>
                                      <select name="dewey" id="dewey" class="form-control" disabled v-model="fillLibro.dewey">
                                      @foreach($deweys as $dewey)
-                                     <option value ="{{ $dewey->Id }}"> {{ $dewey->Nombre}}</option> 
+                                        <option value ="{{ $dewey->Id }}"> {{ $dewey->Nombre}}</option>
                                      @endforeach
                                      </select>
                                 </div>
@@ -123,7 +119,7 @@
                                     <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
-                        </div>                     
+                        </div>
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
