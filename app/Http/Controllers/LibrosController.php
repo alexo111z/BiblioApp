@@ -106,8 +106,8 @@ class LibrosController extends Controller
        $cd = $request->post("CD");
        $imagen = $barCodeGenerator->getBarcodePNG($isbn, 'C39+');
 
-
        DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
+
         #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;
@@ -129,6 +129,7 @@ class LibrosController extends Controller
         if($edicion <10)
             $edicion = "0".$edicion;
         $codigo = $codigo . $edicion;
+
         for ($x=1; $x <= $ejemplares; $x++) {
             $id = '';
             if($x<10){
@@ -136,7 +137,7 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd}, '', 1)");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, '', {$cd},  1)");
         }
         return $codigo;
     }
