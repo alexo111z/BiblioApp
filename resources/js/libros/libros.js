@@ -2,6 +2,8 @@ new Vue({
     el: "#librosCRUD",
     created: function () {
         this.getLibros();
+        this.getAutores();
+        this.getEditoriales();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -15,6 +17,8 @@ new Vue({
     },
     data: {
         libros: [],
+        autores: [],
+        editoriales: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -50,6 +54,7 @@ new Vue({
         search: '',
         fillLibro:{
             'ISBN':'',
+            'Imagen': '',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -104,10 +109,32 @@ new Vue({
                 toastr.error(error.response.data.message, "Error1!");
             });
         },
+        getAutores: function () {
+            const autoresUrl = 'autores/all';
+
+            this.autores = [];
+
+            axios.get(autoresUrl)
+                .then((response) => {
+                   this.autores = response.data;
+                });
+        },
+        getEditoriales: function () {
+            const editorialesUrl = 'editoriales/all';
+
+            this.editoriales = [];
+
+            axios.get(editorialesUrl)
+                .then((response) => {
+                    this.editoriales = response.data;
+                });
+        },
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
             .then(response => {
+                open(location.origin + '/libros/descargar/' + this.newLibro.ISBN);
+
                 this.getLibros();
                 this.newLibro = {
                     'ISBN':'',
@@ -126,23 +153,21 @@ new Vue({
                 $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
-                
-            }).catch(error => {
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error2!");
+            }).catch(() => {
+                toastr.error("Hubo un error al crear este libro, inténtalo de nuevo");
             });
         },
         createAutor: function () {
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
-                
+                this.getAutores();
                 this.newAutor = {
                     'Nombre':'',
                     'Apellidos':'',
                     'Existe':1
                 };
-                
+
                 this.errors = [];
                 $("#create").modal('hide');
                 toastr.success("Autor registrado con exito.", "Tarea completada!");
@@ -155,6 +180,8 @@ new Vue({
             var url = 'editorials';
             axios.post(url, this.newEditorial)
             .then(response => {
+                this.getEditoriales();
+
                 this.newEditorial = {
                     'Nombre':'',
                     'Existe':1
@@ -170,6 +197,7 @@ new Vue({
 
         showLibro: function (libro) {
             this.fillLibro.ISBN = libro.ISBN;
+            this.fillLibro.Imagen = libro.Imagen;
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.Nombre + " "+ libro.Ape;
             this.fillLibro.IdEditorial = libro.Editorial;
@@ -238,18 +266,6 @@ new Vue({
                 this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
-        },
-              
-        deleteLibro: function (libro) {
-            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
-                var url = 'libro/' + libro.ISBN;
-                axios.delete(url).then(response => {
-                    this.getLibros();
-                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
-                }).catch(ex => {
-                    toastr.error(ex.response.data.message, "Error4!");
-                });
-            }
         },
 
         searchLibro: function () {

@@ -60,9 +60,6 @@
                     <td width="10px">
                     <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editLibro(libro)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                     </td>
-                    <td width="10px">
-                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteLibro(libro)"><i class="fa fa-user-times"></i></a>
-                    </td>
                 </tr>
             </tbody>
         </table>

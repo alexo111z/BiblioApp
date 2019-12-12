@@ -25,7 +25,7 @@
                                 <label for="ClaveCarrera">Clave de carrera</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-key"></i></div>
-                                    <select name="clave" id="clave" class="form-control" required="" v-model="fillMaterial.Clave">
+                                    <select name="clave" id="clave" class="form-control" required="" v-model="fillMaterial.IdCarrera">
                                         <option v-for="carrera in carreras" :value ="carrera.Clave"> @{{carrera.Nombre}}</option> 
                                     </select>
                                 </div>
