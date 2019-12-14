@@ -15,19 +15,21 @@
 
                         <div class="row">
                             <div class="col-sm-6">
+                                <label for="ClaveCarrera">Clave de la carrera</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
                                     <input type="text" name="ClaveCarrera" id="ClaveCarrera" class="form-control" placeholder="Clave carrera..."  v-model="fillCarrera.Clave" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-6">
+                                <label for="NombreCarrera">Nombre de la carrera</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-id-card"></i></div>
                                     <input type="text" name="NombreCarrera" id="NombreCarrera" class="form-control" placeholder="Nombre carrera..." v-model="fillCarrera.Nombre">
                                 </div>
                             </div>
                         </div>
-                        {{--<span v-for="error in errors" class="text-danger">@{{error}}</span>--}}
+                        <span v-for="error in errors" class="text-danger">@{{error}}</span>
 
                     </div><!--Fin Body -->
 

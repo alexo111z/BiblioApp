@@ -77,7 +77,7 @@
                     <td v-if="totalAdeudo[index]>100">
                         Donación
                     </td>
-                    <td v-else>@{{ adeudo.fecha_entrega !=null ? totalAdeudo[index] : 'Donación' }}</td>
+                    <td v-else>@{{ adeudo.fecha_entrega }}</td>
                     {{-- Estado --}}
                     <td v-if="adeudo.existe==1">
                         <strong class="text-danger">Adeudo</strong>
