@@ -90,6 +90,7 @@
         @include('libros.create')
         @include('libros.edit')      
         @include('libros.show')  
+        @include('libros.ejemplares')  
         @include('autores.create') 
         @include('editoriales.create')
     </div>
