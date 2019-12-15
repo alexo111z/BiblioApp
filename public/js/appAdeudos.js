@@ -27118,6 +27118,7 @@ new Vue({
             'folio': '',
             'control': '',
             'nombre': '',
+            'fullname': '',
             'apellidos': '',
             'fecha_inicio': '',
             'fecha_final': '',
@@ -27267,10 +27268,15 @@ new Vue({
             this.fillAdeudos.apellidos = adeudo.apellidos;
             this.fillAdeudos.fecha_inicio = adeudo.fecha_inicio;
             this.fillAdeudos.fecha_final = adeudo.fecha_final;
-            this.fillAdeudos.fecha_entrega = adeudo.fecha_entrega;
+            if(adeudo.fecha_entrega != null){
+                this.fillAdeudos.fecha_entrega = adeudo.fecha_entrega;
+            }else{
+                this.fillAdeudos.fecha_entrega = 'No Entrego';
+            }
             this.fillAdeudos.renovaciones = adeudo.renovaciones;
             this.fillAdeudos.existe = adeudo.existe;
             this.fillAdeudos.monto = adeudo.monto;
+            this.fillAdeudos.fullname = adeudo.nombre+' '+adeudo.apellidos;
             $('#detalles').modal('show');
         },
         /*getAlums: function (page) { //param: page

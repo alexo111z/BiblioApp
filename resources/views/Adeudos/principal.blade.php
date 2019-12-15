@@ -48,11 +48,11 @@
                 <tr>
                     <th width="10px">Folio</th>
                     <th>Prestatario</th>
-                    <th>Fecha prestamo</th>
-                    <th>Fecha a entregar</th>
-                    <th>Fecha entregado</th>
-                    <th>Adeudo</th>
+                    <th>Fecha de inicio</th>
+                    <th>Fecha de término</th>
+                    <th>Entregado</th>
                     <th>Estado</th>
+                    <th>Adeudo</th>
                     <th width="20px" colspan="2">Acciones</th>
                 </tr>
                 </thead>
@@ -73,11 +73,6 @@
                     <td>
                         @{{ adeudo.fecha_entrega !=null ? adeudo.fecha_entrega : 'No Entregado' }}
                     </td>
-                    {{-- Adeudo --}}
-                    <td v-if="totalAdeudo[index]>100">
-                        Donación
-                    </td>
-                    <td v-else>@{{ adeudo.fecha_entrega }}</td>
                     {{-- Estado --}}
                     <td v-if="adeudo.existe==1">
                         <strong class="text-danger">Adeudo</strong>
@@ -85,6 +80,11 @@
                     <td v-else>
                         <p class="text-success">Pagado</p>
                     </td>
+                    {{-- Adeudo --}}
+                    <td v-if="totalAdeudo[index]>100">
+                        Donación
+                    </td>
+                    <td v-else>@{{ totalAdeudo[index] }}</td>
 
                     <td width="10px">
                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" data-toggle="tooltip" data-placement="top" title="Tooltip on top" v-on:click.prevent="showAdeudo(adeudo, totalAdeudo[index])"><i class="fa fa-list"></i></a>
