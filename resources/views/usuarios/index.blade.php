@@ -38,7 +38,7 @@
                                         v-model="modalUser"
                                         v-bind:disabled="modal.operation === 'edit'">
                                         <option :value="1" selected>Administrador</option>
-                                        <option :value="2">Bibliotecario</option>
+                                        <option :value="2">Colaborador</option>
                                     </select>
                                 </div>
 
@@ -51,7 +51,8 @@
                                         class="form-control"
                                         id="control_number"
                                         name="control_number"
-                                        v-model="user.NoControl">
+                                        v-model="user.NoControl"
+                                        autocomplete="off">
                                 </div>
 
                                 <div
@@ -61,8 +62,11 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="payroll" name="payroll"
-                                        v-model="user.NoNomina">
+                                        id="payroll"
+                                        name="payroll"
+                                        autocomplete="off"
+                                        v-model="user.NoNomina"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group" v-if="modalUser == 1 || modalUser == 2">
@@ -72,7 +76,8 @@
                                         class="form-control"
                                         id="userName"
                                         name="userName"
-                                        v-model="user.Nick">
+                                        v-model="user.Nick"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
@@ -82,7 +87,8 @@
                                         class="form-control"
                                         id="name"
                                         name="name"
-                                        v-model="user.Nombre">
+                                        v-model="user.Nombre"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group">
@@ -92,7 +98,8 @@
                                         class="form-control"
                                         id="lastName"
                                         name="lastName"
-                                        v-model="user.Apellidos">
+                                        v-model="user.Apellidos"
+                                        autocomplete="off">
                                 </div>
 
                                 <div class="form-group" v-if="modalUser >= 3">
@@ -147,7 +154,8 @@
                                         type="text"
                                         class="form-control"
                                         id="position"
-                                        name="position" v-model="user.Puesto">
+                                        name="position" v-model="user.Puesto"
+                                        autocomplete="off">
                                 </div>
                             </form>
                         </div>
@@ -180,7 +188,7 @@
                         v-model="userType"
                         @change="getUsers()">
                         <option :value="1">Administrador</option>
-                        <option :value="2">Bibliotecario</option>
+                        <option :value="2">Colaborador</option>
                     </select>
                 </div>
             </div>
@@ -202,7 +210,7 @@
                         @{{ value }}
                     </td>
                     <td v-if="userType == 1">Administrador</td>
-                    <td v-if="userType == 2">Bibliotecario</td>
+                    <td v-if="userType == 2">Colaborador</td>
                     <td width="10px">
                         <a
                             class="btn btn-warning btn-sm"
@@ -220,7 +228,7 @@
             </table>
             <div class="row">
                 <div class="col-md-6 col-12">
-                    Mostrando usuarios del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} usuarios
+                    Mostrando colaboradores del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}}
                 </div>
                 <div class="col-md-6 col-12">
                     <nav style="float: right;">

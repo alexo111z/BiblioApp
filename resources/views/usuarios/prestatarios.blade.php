@@ -45,13 +45,14 @@
 
                                 <div
                                     class="form-group"
-                                    v-if="userType == 4">
+                                    v-if="modalUser == 4">
                                     <label for="control_number">Número de control</label>
                                     <input
                                         type="text"
                                         class="form-control"
                                         id="control_number"
                                         name="control_number"
+                                        autocomplete="off"
                                         v-model="user.NoControl">
                                 </div>
 
@@ -62,7 +63,9 @@
                                     <input
                                         type="text"
                                         class="form-control"
-                                        id="payroll" name="payroll"
+                                        id="payroll"
+                                        name="payroll"
+                                        autocomplete="off"
                                         v-model="user.NoNomina">
                                 </div>
 
@@ -73,6 +76,7 @@
                                         class="form-control"
                                         id="userName"
                                         name="userName"
+                                        autocomplete="off"
                                         v-model="user.Nick">
                                 </div>
 
@@ -83,6 +87,7 @@
                                         class="form-control"
                                         id="name"
                                         name="name"
+                                        autocomplete="off"
                                         v-model="user.Nombre">
                                 </div>
 
@@ -93,6 +98,7 @@
                                         class="form-control"
                                         id="lastName"
                                         name="lastName"
+                                        autocomplete="off"
                                         v-model="user.Apellidos">
                                 </div>
 
@@ -223,7 +229,7 @@
             </table>
             <div class="row">
                 <div class="col-md-6 col-12">
-                    Mostrando usuarios del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}} usuarios
+                    Mostrando prestatarios del @{{pagination.from}} al @{{pagination.to}} de un total de @{{pagination.total}}
                 </div>
                 <div class="col-md-6 col-12">
                     <nav style="float: right;">
