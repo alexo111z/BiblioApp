@@ -164,6 +164,7 @@ class LibrosController extends Controller
             'Ejemplares' => 'required',
 
         ]);
+<<<<<<< HEAD
         
         
         $isbn = $request->post("ISBN");
@@ -235,5 +236,11 @@ class LibrosController extends Controller
         $libro->save();
     }
 =======
+>>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
+=======
+
+        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+    }
+
 >>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
 }
