@@ -87,7 +87,7 @@
                             <li><a href="{{route('usuarios')}}">Bibliotecarios</a></li>
                             <li><a href="{{route('prestatarios')}}">Prestatarios</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="{{asset('carrera')}}">Carreras</a></li>
+                            <li><a href="{{asset('carreras')}}">Carreras</a></li>
                         </ul>
                     </li>
                     <li><a href="{{asset('reportes')}}">Reportes</a></li>

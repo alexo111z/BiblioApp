@@ -18,7 +18,7 @@
             <div class="row">
                 <div class="col-sm-6">
 {{--                Boton de registro--}}
-                    <a href="#" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createCarrera">
+                    <a href="#" v-on:click="limpiar()" class="btn btn-primary" style="background-color: #6d356c; border-color: #6d356c;" data-toggle="modal" data-target="#createCarrera">
                         <i class="fa fa-pencil"></i> Registrar carrera
                     </a>
 

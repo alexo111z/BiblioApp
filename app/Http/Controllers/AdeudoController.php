@@ -18,7 +18,9 @@ class AdeudoController extends Controller{
         $fechaFinal = strtotime($request->get('fechaFinal'));
         $fechaInicio = strtotime($request->get('fechaInicio'));
         $condicionFecha = '';
+        $condA = '';
         $condB = '';
+        $condC = '';
 
         if ($fechaFinal && $fechaInicio) {
             $fechaFinal = date('Y-m-d', $fechaFinal);
@@ -27,9 +29,13 @@ class AdeudoController extends Controller{
             //\dd($condicionFecha);
         }
         if ($search && $search != ""){
-            $condB = ' AND (tblprestamos.folio = '.$search.')';//\dd($condB);
+            $condA = ' AND (tblprestamos.folio LIKE \'%'.$search.'%\' OR tblalumnos.NoControl LIKE \'%'.$search.'%\' OR tblalumnos.nombre LIKE \'%'.$search.'%\' OR tblalumnos.apellidos LIKE \'%'.$search.'%\')';//\dd($condA);
+            $condB = ' AND (tblprestamos.folio LIKE \'%'.$search.'%\' OR tbldocentes.NoNomina LIKE \'%'.$search.'%\' OR tbldocentes.nombre LIKE \'%'.$search.'%\' OR tbldocentes.apellidos LIKE \'%'.$search.'%\')';
+            $condC = ' AND (tblprestamos.folio LIKE \'%'.$search.'%\' OR tbladministrativos.NoNomina LIKE \'%'.$search.'%\' OR tbladministrativos.nombre LIKE \'%'.$search.'%\' OR tbladministrativos.apellidos LIKE \'%'.$search.'%\')';
         }else{
-            $condB = '';//\dd($condB);
+            $condA = '';//\dd($condA);
+            $condB = '';
+            $condC = '';
         }
 
         // ->whereRaw('(tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega and tblprestamos.Existe = 1) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null and tblprestamos.Existe = 1)');
@@ -37,7 +43,7 @@ class AdeudoController extends Controller{
         ->join('tblalumnos','tblalumnos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tblalumnos.NoControl as control','tblalumnos.nombre','tblalumnos.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condA);
         
         $b = DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
         ->join('tbldocentes','tbldocentes.idusuario','=','tblusuarios.id')
@@ -45,36 +51,16 @@ class AdeudoController extends Controller{
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
         ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
         
-        //$c utilizado para pruebas
-        $c = DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
-        ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio',
-        'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB);
-
-
         //if (trim($search) == null or trim($search) == '') {
         $adeudos = DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
         ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
         ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio',
         'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condB)
+        ->whereRaw('((tblprestamos.Fecha_final < tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null))'.$condicionFecha.$condC)
         ->union($a)->union($b)
         ->orderby('folio')->paginate(10);
         
-        /*}else{
-            $adeudos =DB::table('tblprestamos')->join('tblusuarios','tblusuarios.id','=','tblprestamos.idprestatario')
-        ->join('tbladministrativos','tbladministrativos.idusuario','=','tblusuarios.id')
-        ->select('tblprestamos.folio','tbladministrativos.NoNomina as control','tbladministrativos.nombre','tbladministrativos.apellidos','tblprestamos.fecha_inicio'
-        ,'tblprestamos.fecha_final','tblprestamos.fecha_entrega','tblprestamos.renovaciones','tblprestamos.existe')
-        ->where('tblprestamos.folio', $search)//->where('control', 'LIKE', "%$search%")
-        ->whereRaw('(tblprestamos.Fecha_final <= tblprestamos.Fecha_entrega) OR (tblprestamos.Fecha_final < now() and tblprestamos.Fecha_entrega is null)')
-        ->union($a)->union($b)
-        ->orderby('folio')->paginate(10);
-        }*/
 
-        //$adeudos = Prestamo::whereRaw('((Fecha_final <= Fecha_entrega) OR (Fecha_final < now() and Fecha_entrega is null))'.$condicionFecha.$condB)
-        //->paginate(10);
 
         return [
             'pagination' => [
@@ -125,14 +111,6 @@ class AdeudoController extends Controller{
         return $detalles;
     }
    
-    //form para editar, id -> datos elemento editar
-//    public function edit($id)
-//    {
-//        $deudor = Prestamo::findOrFail($id);
-//        $deudor ->Existe = 0;
-//        $deudor->save();
-//    }
-
    //Remove the specified resource from storage.
     public function delete($id, $monto, Request $request)
     {
