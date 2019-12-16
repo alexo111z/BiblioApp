@@ -90,9 +90,8 @@ mix.scripts([
     'resources/js/toastr.js',
     'resources/js/vue.js',
     'resources/js/axios.js',
-    'resources/js/login/middleware.js',
-    'resources/js/libros/Libros.js'],
-    'public/js/libros/app.js') ;
+    'resources/js/libros/Libros.js'], 
+    'public/js/appLibros.js') ;
 //Prestamos
 mix.scripts([
         'resources/js/Jquery.js',
