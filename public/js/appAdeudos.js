@@ -27141,7 +27141,8 @@ new Vue({
         errors: [],
         search: '',
         fechaInicio: '',
-        fechaFinal: ''
+        fechaFinal: '',
+        tipo: 0,
     },
     computed: {
         isActived: function () {
@@ -27202,14 +27203,19 @@ new Vue({
         searchAdeudo: function () {
             var search = $("#search").val();
             this.search = search;
-            console.log('Folios');
+            //console.log('Folios');
             this.getAdeudos();
         },
         filtrarFecha: function () {
             if (this.fechaInicio && this.fechaFinal) {
-                console.log('Fechas');
+                //console.log('Fechas');
                 this.getAdeudos();
             }
+        },
+        filtrarTipo: function(){
+            var filtro = $('#tipo').val();
+            //this.tipo = filtro;
+            this.getAdeudos();
         },
         clearDataInput: function() {
             this.fechaInicio = '';
@@ -27218,14 +27224,14 @@ new Vue({
         },
         //Modulo Carreras
         getAdeudos: function (page) { //param: page
-            console.log('Index');
+            //console.log('Index');
             let inicio = '';
             let final = '';
             if (this.fechaInicio && this.fechaFinal) {
                 inicio = new Date(this.fechaInicio).toUTCString();
                 final = new Date(this.fechaFinal).toUTCString();
             }
-            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final;
+            var url = this.urlAdeudos+'?page=' + page + '&search=' + this.search + '&fechaInicio='+ inicio+'&fechaFinal='+final +'&tipo=' + this.tipo;
             axios.get(url).then(response => {
                 this.adeudos = response.data.adeudos.data;//.carreras.data;
                 this.pagination = response.data.pagination;
@@ -27279,51 +27285,5 @@ new Vue({
             this.fillAdeudos.fullname = adeudo.nombre+' '+adeudo.apellidos;
             $('#detalles').modal('show');
         },
-        /*getAlums: function (page) { //param: page
-            var url = this.urlAdeudos+'/get/alum';
-            axios.get(url).then(response => {
-                this.alumnos = response.data;//.carreras.data;
-            });
-        },
-        getProfs: function (page) { //param: page
-            var url = this.urlAdeudos+'/get/prof';
-            axios.get(url).then(response => {
-                this.docentes = response.data;//.carreras.data;
-            });
-        },
-        getAdms: function (page) { //param: page
-            var url = this.urlAdeudos+'/get/adm';
-            axios.get(url).then(response => {
-                this.administrativos = response.data;//.carreras.data;
-            });
-        },
-        getUsu: function() {
-            var count = [];
-            this.adeudos.forEach(adeudo => {
-                const url = this.urlAdeudos + '/usu/' + adeudo.IdPrestatario;
-                axios.get(url).then(response => {
-                    count.push(response.data);
-                    this.usuario = count;
-                });
-            });
-        },*/
-        // editCarrera: function (carrera) {
-        //     this.fillCarrera.Clave  = carrera.Clave;
-        //     this.fillCarrera.Nombre = carrera.Nombre;
-        //     $('#editCarrera').modal('show');
-        // },
-        // updateCarrera: function (id) {
-        //     var url = 'carreras/' + id;
-        //     axios.put(url, this.fillCarrera).then(response => {
-        //         this.getCarreras();
-        //         this.fillCarrera = {'Clave': '', 'Nombre': ''};
-        //         this.errors = [];
-        //         $('#editCarrera').modal('hide');
-        //         toastr.success("Carrera actualizada con exito.", "Tarea completada!");
-        //     }).catch(error => {
-        //         this.errors = error.response.data;
-        //     });
-        // }
-
     }
 });
