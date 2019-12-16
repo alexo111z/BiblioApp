@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Libros;
 use DB;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS1D;
 
 class LibrosController extends Controller
 {
@@ -16,8 +17,8 @@ class LibrosController extends Controller
     {
         $search = $request->get('search');
         $libros = Libros::join('tblcarreras', 'tblcarreras.clave', '=', 'tbllibros.IdCarrera')
-                ->join('tbleditoriales' , 'tbleditoriales.Id','=','tbllibros.IdEditorial')  
-                ->join('tbldewey' , 'tbldewey.Id','=','tbllibros.dewey')  
+                ->join('tbleditoriales' , 'tbleditoriales.Id','=','tbllibros.IdEditorial')
+                ->join('tbldewey' , 'tbldewey.Id','=','tbllibros.dewey')
                 ->join('tblautores','tblautores.IdAutor','=','tbllibros.IdAutor')
                 ->select(
                     'tbllibros.ISBN',
@@ -26,8 +27,8 @@ class LibrosController extends Controller
                     'tbllibros.IdEditorial',
                     'tbllibros.IdCarrera',
                     'tbllibros.dewey',
-                    'tblAutores.Nombre as Nombre',
-                    'tblAutores.Apellidos as Ape',
+                    'tblautores.Nombre as Nombre',
+                    'tblautores.Apellidos as Ape',
                     'tbleditoriales.Nombre as Editorial',
                     'tblcarreras.Nombre as Carrera',
                     'tbldewey.Nombre as Dewey',
@@ -38,11 +39,12 @@ class LibrosController extends Controller
                     'tbllibros.EjemDisp',
                     'tbllibros.Imagen',
                     'tbllibros.FechaRegistro'
-                   
+
                 )
                 ->where('tbllibros.Existe', '=', 1)
+                ->orderby('ISBN', 'ASC')
                 ->search($search)
-                ->paginate(10); 
+                ->paginate(10);
         return [
             'pagination' => [
                 'total'         => $libros->total(),
@@ -56,9 +58,9 @@ class LibrosController extends Controller
         ];
     }
 
-    
+
     public function selects()
-    {   
+    {
         $autores= DB::table('tblautores')->get();
         $editoriales= DB::table('tbleditoriales')->get();
         $carreras= DB::table('tblcarreras')->get();
@@ -76,6 +78,8 @@ class LibrosController extends Controller
      */
     public function store(Request $request)
     {
+        $barCodeGenerator = new DNS1D();
+
       $this->validate($request, [
         'ISBN' => 'required',
         'Titulo' => 'required',
@@ -86,7 +90,8 @@ class LibrosController extends Controller
         'Edicion' => 'required',
         'Year' => 'required',
         'Volumen' => 'required',
-        'Ejemplares' => 'required'
+        'Ejemplares' => 'required',
+        'CD' => 'required'
       ]);
       $isbn = $request->post("ISBN");
       $titulo = $request->post("Titulo");
@@ -98,9 +103,12 @@ class LibrosController extends Controller
        $year = $request->post("Year");
        $volu = $request->post("Volumen");
        $ejemplares = $request->post("Ejemplares");
-       $imagen = "http://127.0.0.1:8000/images/template.png";
-      DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares','$imagen', CURRENT_DATE, 1)");
-        #########################
+       $cd = $request->post("CD");
+       $imagen = $barCodeGenerator->getBarcodePNG($isbn, 'C39+');
+
+       DB::insert("INSERT INTO tbllibros VALUES('$isbn', '$titulo', '$Idautor', '$IdEdi', '$IdCar', '$dewey','$edicion','$year','$volu' ,'$ejemplares', '$ejemplares', '$imagen', CURRENT_DATE,1)");
+
+        #########################//generacion de codigo
         if ($dewey < 10) {
             $dewey = "00".$dewey;
         }else if($dewey >= 10 && $dewey <100){
@@ -121,49 +129,17 @@ class LibrosController extends Controller
         if($edicion <10)
             $edicion = "0".$edicion;
         $codigo = $codigo . $edicion;
+
         for ($x=1; $x <= $ejemplares; $x++) {
-            $id = ''; 
+            $id = '';
             if($x<10){
                 $id = $codigo . "00".$x;
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
-            DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
+            DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd},  1)");
         }
         return $codigo;
-    }
-   /* public function generarCodigos($dewey, $edicion, $ejemplares)
-    {
-        if ($dewey < 10) {
-            $dewey = "00".$dewey;
-        }else if($dewey >= 10 && $dewey <100){
-            $dewey = "0".$dewey;
-        }
-        $codigo = "1".$dewey;
-        $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}");
-        foreach ($ejemplaresdewey as $key) {
-                if (($key->ejemplaresdewey) < 10) {
-                    $cant = "00".($key->ejemplaresdewey);
-                }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
-                    $cant = "0".($key->ejemplaresdewey);
-                }else {
-                    $cant = ($key->ejemplaresdewey);
-                }
-        }
-        $codigo= $codigo.$cant;
-        if($edicion <10)
-            $edicion = "0".$edicion;
-        $codigo = $codigo . $edicion;
-        for ($x=0; $x < $ejemplares; $x++) { 
-            if($x<10){
-                $codigo = $codigo . "00".$x;
-            }else if ($x>=10 && $x <100) {
-                $codigo = $codigo . "0".$x;
-            }
-            DB::insert("insert into tblejemplares values({$codigo}, {$isbn},CURRENT_DATE,'No hay nota',1,1)");
-        }
-        
-
     }
 
         /**
@@ -185,7 +161,8 @@ class LibrosController extends Controller
             'Edicion' => 'required',
             'Year' => 'required',
             'Volumen' => 'required',
-            'Ejemplares' => 'required'
+            'Ejemplares' => 'required',
+
         ]);
         
         
@@ -248,6 +225,7 @@ class LibrosController extends Controller
         return $codigo;
     }
 
+<<<<<<< HEAD
     
     //Remove the specified resource from storage.
     public function destroy($ISBN)
@@ -256,4 +234,6 @@ class LibrosController extends Controller
         $libro->Existe = 0;
         $libro->save();
     }
+=======
+>>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
 }

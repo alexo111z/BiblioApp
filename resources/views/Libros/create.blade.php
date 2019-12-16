@@ -40,10 +40,7 @@
                                     <div class="input-group-addon"><i class="fa fa-user"></i></div>
                                     <select name="idAutor" id="idAutor" class="form-control" required
                                         v-model="newLibro.IdAutor">
-                                        @foreach($autores as $autor)
-                                        <option value="{{ $autor->IdAutor }}"> {{ $autor->Nombre}}
-                                            {{ $autor->Apellidos}}</option>
-                                        @endforeach
+                                        <option v-for="autor of autores" :value="autor.IdAutor"> @{{autor.Nombre}} @{{autor.Apellidos}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -57,9 +54,7 @@
                                     <div class="input-group-addon"><i class="fa fa-file-text-o"></i></div>
                                     <select name="idEditorial" id="idEditorial" class="form-control" required
                                         v-model="newLibro.IdEditorial">
-                                        @foreach($editoriales as $editorial)
-                                        <option value="{{ $editorial->Id }}"> {{ $editorial->Nombre}}</option>
-                                        @endforeach
+                                        <option v-for="editorial of editoriales" :value="editorial.Id"> @{{editorial.Nombre}}</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,11 +133,23 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                        <label for="cd">CD</label>
+                            <div class="form-group">
+                                <div class="input-group">
+                                     <div class="input-group-addon"><i class="fa fa-circle"></i></div>
+                                     <select name="cd" id="cd" class="form-control" required v-model="newLibro.CD">
+                                     <option value="0">No</option>
+                                     <option value="1">Si</option>
+                                     </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
                 <div class="modal-footer">
-              
+
                     <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i
                             class="fa fa-save"></i> Guardar</button>
                 </div>

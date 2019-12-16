@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Editoriales;
+use Illuminate\Support\Facades\DB;
 
 class EditorialesController extends Controller
 {
@@ -27,6 +28,28 @@ class EditorialesController extends Controller
             ],
             'editoriales' =>$editoriales
         ];
+    }
+
+    public function all()
+    {
+        $editorials = DB::table('tbleditoriales')
+            ->where('Existe', 1)
+            ->get();
+
+        return $this->transformEditorials($editorials);
+    }
+
+    private function transformEditorials($editorials): array
+    {
+        $output = [];
+
+        foreach ($editorials as $editorial) {
+            $output[] = [
+                'Id' => $editorial->Id,
+                'Nombre' => $editorial->Nombre,
+            ];
+        }
+        return $output;
     }
 
     /**
