@@ -112,10 +112,6 @@ Route::post('/usuarios/update', 'UsersController@update');
 Route::post('/usuarios/remove', 'UsersController@delete');
 
 
-<<<<<<< HEAD
-//Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
-//Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
-=======
 //Materiales
 Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
 Route::get('/materiales', function (){
@@ -124,7 +120,6 @@ Route::get('/materiales', function (){
 Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
 
 Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
->>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
 
 //Libros
 Route::resource('libro', 'LibrosController', ['except' =>'show','create', 'edit']);
