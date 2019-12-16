@@ -4,6 +4,7 @@ new Vue({
         this.getLibros();
         this.getAutores();
         this.getEditoriales();
+        this.getEjemplares();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -19,6 +20,7 @@ new Vue({
         libros: [],
         autores: [],
         editoriales: [],
+        ejemplares: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -64,6 +66,12 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':''
+        },
+        fillEjemplar:{
+            'Codigo':'',
+            'ISBN':'',
+            'FechaRegistro':'',
+            'CD':''
         }
     },
     computed:{
@@ -129,6 +137,17 @@ new Vue({
                     this.editoriales = response.data;
                 });
         },
+        getEjemplares: function () {
+            const ejemplaresUrl = 'ejemplar/ISBN';
+
+            this.ejemplares = [];
+
+            axios.get(ejemplaresUrl)
+                .then((response) => {
+                    this.ejemplares = response.data;
+                });
+        },
+        
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
@@ -267,6 +286,48 @@ new Vue({
                 toastr.error(error.response.data.message, "Error!");
             });
         },
+
+        editEjemplar: function (ejemplar) {
+            this.fillEjemplar.Codigo = ejemplar.Codigo;
+            this.fillEjemplar.ISBN = ejemplar.ISBN;
+            this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
+            this.fillEjemplar.CD = ejemplar.CD;
+            console.log(this.fillEjemplar);
+            $('#editEjemplar').modal('show');
+        },
+        updateEjemplar: function (Codigo) {
+            var url = 'ejemplar/'+ Codigo;
+            axios.put(url, this.fillEjemplar)
+            .then(response => {
+                this.getEjemplares();
+                this.fillEjemplar = {
+                    'Codigo':'',
+                    'ISBN':'',
+                    'FechaRegistro':'',
+                    'CD':''
+                };
+                this.errors = [];
+                $("#editEjemplar").modal("hide");
+                toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
+            })
+            .catch(error =>{
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Error!");
+            });
+        },
+              
+        deleteEjemplar: function (ejemplar) {
+            if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
+                var url = 'ejemplar/' + ejemplar.Codigo;
+                axios.delete(url).then(response => {
+                    this.getEjemplares();
+                    toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
+                }).catch(ex => {
+                    toastr.error(ex.response.data.message, "Error4!");
+                });
+            }
+        },
+
 
         searchLibro: function () {
             this.search = $('#search').val();
