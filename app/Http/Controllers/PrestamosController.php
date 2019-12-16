@@ -452,7 +452,7 @@ class PrestamosController extends Controller
 
 
         if($adeudos>0){
-            $respuesta = "Usted No Ha Entregado Uno o Mas Libros, Vaya A Multas";
+            $respuesta = "Usted ho ha entregado uno o más libros, pase a pagar su multa";
         }else{
 
             if ($lprestados < 3) {
@@ -471,7 +471,7 @@ class PrestamosController extends Controller
                             ->where('existe', '=', '1')
                             ->get();
                         if ($stocklibro[0]->ejemdisp < 2) {
-                            $respuesta = "El Ejemplar " . $codigos[$i] . " Es unico ejemplar, no se puede prestar";
+                            $respuesta = "El ejemplar " . $codigos[$i] . " Es ejemplar único, no es posible sea prestado";
                             $stock = 0;
                         }
                     }
@@ -507,7 +507,7 @@ class PrestamosController extends Controller
                         $respuesta = "1";
                     }
                 } else {
-                    $respuesta = "Usted excede el limite de prestamo, quite libros";
+                    $respuesta = "Usted excede el limite de prestamo, quite libros de la lista";
                 }
             } else {
                 $respuesta = "No podemos prestarle más de 3 libros a la vez";
