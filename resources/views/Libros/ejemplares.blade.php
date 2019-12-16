@@ -15,9 +15,7 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <select name="ejemplar" id="ejemplar" class="form-control" >
-                                        
-                                        <option></option>
-                            
+                                    <option v-for="ejemplar of ejemplares" :value="ejemplar.Codigo"> @{{ejemplar.Codigo}}</option>
                                     </select>
                                 </div>
                             </div>

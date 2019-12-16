@@ -27205,14 +27205,17 @@ new Vue({
                     this.editoriales = response.data;
                 });
         },
-        getEjemplares: function (ISBN) {
-            var url = 'ejemplar/' + ISBN;
-            axios.get(url).then(response => {
-                this.ejemplares = response.data.ejemplar.data;
-            }).catch(error =>{
-                toastr.error(error.response.data.message, "ErrorEjemplares!");
-            });
+        getEjemplares: function () {
+            const ejemplaresUrl = 'ejemplar/ISBN';
+
+            this.ejemplares = [];
+
+            axios.get(ejemplaresUrl)
+                .then((response) => {
+                    this.ejemplares = response.data;
+                });
         },
+        
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
