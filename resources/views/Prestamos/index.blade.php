@@ -36,7 +36,7 @@
                     <th>Prestatario</th>
                     <th>Fecha De Inicio</th>
                     <th>Fecha De Término</th>
-                    <th>Entregado El</th>
+                    <th>Entregado</th>
                     <th>Estado</th>
                     <th>Renovaciones</th>
 
@@ -54,8 +54,8 @@
                     <td style="color:orange" v-if="keep.Estado=='Vigente'">@{{keep.Estado}}</td>
                     <td style="color:green" v-if="keep.Estado=='Entregado'">@{{keep.Estado}}</td>
                     <td>@{{keep.renovaciones}}</td>
-                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#363636;color:white;" v-on:click.prevent="details(keep)">Detalles</a></td>
-                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#2da19a;color:white;" v-on:click.prevent="renew(keep)" v-if="keep.renovaciones<3 && keep.Estado=='Vigente'">Renovar Prestamo</a></td>
+                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#363636;color:white;" v-on:click.prevent="details(keep)"><i class="fa fa-folder-open"></i></a></td>
+                    <td width="30px"><a href="#" class="btn btn-sm" style="background:#2da19a;color:white;" v-on:click.prevent="renew(keep)" v-if="keep.renovaciones<3 && keep.Estado=='Vigente'"><i class="fa fa-refresh"></i></a></td>
                 </tr>
             </tbody>
         </table>

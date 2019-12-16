@@ -168,7 +168,7 @@ new Vue({
                 }
 
             } else {
-                alert('Solo Pueden Prestarse 3 Libros');
+                alert('El limite de libros por prestatario son 3');
                 this.limpiardatos();
             }
         },
@@ -250,7 +250,7 @@ new Vue({
                 };
                 this.errors = [];
                 $('#renew').modal('hide');
-                toastr.success('Actualizado Correctamente');
+                toastr.success('Actualizado correctamente');
             }).catch(error => {
                 this.errors = error.response.data;
                 toastr.error('no se Pudo actualizar');
@@ -285,7 +285,7 @@ new Vue({
             axios.get(urlkeeps).then(response => {
                 this.getkeeps();
                 $('#detalles').modal('hide');
-                alert("Libros Devueltos correctamente");
+                alert("Libros devueltos correctamente");
                 //console.log(response.data.entrega);
                 //toastr.warning(response.data.entrega);
             }).catch(error => {
@@ -302,7 +302,7 @@ new Vue({
 
             axios.delete(url).then(response => {
                 this.getkeeps();
-                toastr.success('Eliminado Correctamente');
+                toastr.success('Eliminado correctamente');
             }).catch(error => {
                 console.log(this.errors);
                 this.errors = error.response.data;
@@ -315,7 +315,7 @@ new Vue({
             var fecha_i = $("#f_inicio").val();
             var diass = $("#diasselect").val();
             if (iduser == "") {
-                toastr.warning('Agregue Un Prestatario');
+                toastr.warning('Agregue un prestatario');
                 return;
             } else {
                 if (this.fillcreate.ncontrol == "") {
@@ -323,7 +323,7 @@ new Vue({
                     return;
                 } else {
                     if (this.colalibros.length < 1) {
-                        toastr.warning('Agregue Uno O Mas Libros Por Prestar');
+                        toastr.warning('Favor de agregar uno O más libros por prestar');
                         return;
                     } else {
                         var url = 'tasks';
@@ -345,7 +345,7 @@ new Vue({
                                 this.cardlibros = [];
                                 $('#searchcontrol').val("");
                                 $('#create').modal('hide');
-                                toastr.success('Libros Prestados Correctamente');
+                                toastr.success('Prestamo realizado correctamente');
 
                             } else {
                                 alert(response.data.id);
