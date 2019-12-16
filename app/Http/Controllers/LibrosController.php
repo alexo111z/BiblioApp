@@ -164,8 +164,7 @@ class LibrosController extends Controller
             'Ejemplares' => 'required',
 
         ]);
-<<<<<<< HEAD
-        
+
         
         $isbn = $request->post("ISBN");
         $titulo = $request->post("Titulo");
@@ -224,23 +223,12 @@ class LibrosController extends Controller
             DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,1,1)");
         }
         return $codigo;
-    }
-
-<<<<<<< HEAD
-    
-    //Remove the specified resource from storage.
-    public function destroy($ISBN)
-    {
-        $libro = Libros::findOrFail($ISBN);
-        $libro->Existe = 0;
-        $libro->save();
-    }
-=======
->>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
-=======
-
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
->>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
+
+
+
+
+
 }
