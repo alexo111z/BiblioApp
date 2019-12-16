@@ -27072,7 +27072,6 @@ new Vue({
         this.getLibros();
         this.getAutores();
         this.getEditoriales();
-        this.getEjemplares();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -27206,7 +27205,7 @@ new Vue({
                 });
         },
         getEjemplares: function () {
-            const ejemplaresUrl = 'ejemplar/ISBN';
+            const ejemplaresUrl = 'ejemplar/' + this.fillLibro.ISBN;
 
             this.ejemplares = [];
 
@@ -27215,7 +27214,7 @@ new Vue({
                     this.ejemplares = response.data;
                 });
         },
-        
+
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
@@ -27367,7 +27366,6 @@ new Vue({
             var url = 'ejemplar/'+ Codigo;
             axios.put(url, this.fillEjemplar)
             .then(response => {
-                this.getEjemplares();
                 this.fillEjemplar = {
                     'Codigo':'',
                     'ISBN':'',
@@ -27383,12 +27381,11 @@ new Vue({
                 toastr.error(error.response.data.message, "Error!");
             });
         },
-              
+
         deleteEjemplar: function (ejemplar) {
             if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
                 var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
-                    this.getEjemplares();
                     toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");
