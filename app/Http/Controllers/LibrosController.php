@@ -65,9 +65,8 @@ class LibrosController extends Controller
         $editoriales= DB::table('tbleditoriales')->get();
         $carreras= DB::table('tblcarreras')->get();
         $deweys= DB::table('tbldewey')->get();
-        $ejemplares= DB::table('tblejemplares')->get();
 
-        return view('Libros.principal', compact('autores', 'editoriales','carreras','deweys','ejemplares'));
+        return view('Libros.principal', compact('autores', 'editoriales','carreras','deweys'));
     }
 
         /**

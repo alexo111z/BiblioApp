@@ -14,11 +14,10 @@
                                 <label for="dewey">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
-                                    <select name="ejemplar" id="ejemplar" class="form-control" required
-                                        v-model="fillLibro.Ejemplares">
-                                        @foreach($ejemplares as $ejemplar)
-                                        <option value="{{ $ejemplar->Codigo }}"> {{ $ejemplar->Codigo}}</option>
-                                        @endforeach
+                                    <select name="ejemplar" id="ejemplar" class="form-control" >
+                                        
+                                        <option></option>
+                            
                                     </select>
                                 </div>
                             </div>
@@ -27,10 +26,10 @@
                 </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i
-                            class="fa fa-pencil"></i>Editar</button>
-                    <button type="submit" class="btn btn-primary" style="background-color: #6d356c;"><i
-                            class="fa fa-save"></i>Eliminar</button>
+                            <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editEjemplar(ejemplar)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
+                            <td width="10px">
+                        <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteEjemplar(ejemplar)"><i class="fa fa-user-times"></i></a>
+                    </td>
                 </div>
             </div>
         </div>

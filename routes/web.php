@@ -144,3 +144,10 @@ Route::post('/usuarios', 'UsersController@create');
 Route::post('/usuarios/update', 'UsersController@update');
 
 Route::post('/usuarios/remove', 'UsersController@delete');
+
+//Ejemplares
+Route::resource('ejemplar', 'EjemplaresController', ['except' =>'show','create','store','edit']);
+Route::get('/ejemplar/{isbn}', 'EjemplaresController@obtenerISBN');
+
+
+
