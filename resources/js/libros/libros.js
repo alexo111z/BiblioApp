@@ -55,7 +55,6 @@ new Vue({
         search: '',
         fillLibro:{
             'ISBN':'',
-            'Imagen': '',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
