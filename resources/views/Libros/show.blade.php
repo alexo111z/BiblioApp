@@ -24,7 +24,9 @@
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Año:</b> @{{fillLibro.Year}}</h5>
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Volumen:</b> @{{fillLibro.Volumen}}</h5>
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Ejemplares:</b> @{{fillLibro.Ejemplares}}
-                                    <a
+                                 </h5>
+                                 <h5 style="font-weight:light;margin-left:2rem"><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}
+                                 <a
                                         href="#"
                                         data-toggle="modal"
                                         data-target="#ejemplar"
@@ -32,7 +34,6 @@
                                         <i class="fa fa-info"></i>Detalles
                                     </a>
                                  </h5>
-                                 <h5 style="font-weight:light;margin-left:2rem"><b>Ejem. Disponibles:</b> @{{fillLibro.EjemDisp}}</h5>
                                  <h5 style="font-weight:light;margin-left:2rem"><b>Fecha de registro:</b> @{{fillLibro.FechaRegistro}}</h5>
                              </div>
                             <div class="col-md-12" style="text-align: center">
