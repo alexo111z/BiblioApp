@@ -69,7 +69,6 @@ class LibrosController extends Controller
         return view('Libros.principal', compact('autores', 'editoriales','carreras','deweys'));
     }
 
-
         /**
      * Store a newly created resource in storage.
      *
