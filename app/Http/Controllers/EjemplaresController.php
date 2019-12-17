@@ -61,5 +61,15 @@ class EjemplaresController extends Controller
         $ejemplar = ejemplares::findOrFail($Codigo);
         $ejemplar->Existe = 0;
         $ejemplar->save();
+
+        $isbns = DB::select("select  ISBN  from tblejemplares where tblejemplares.Codigo = {$Codigo}");
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('Ejemplares', 1);
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('EjemDisp', 1);
     }
 }
