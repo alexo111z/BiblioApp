@@ -17,6 +17,9 @@ class EjemplaresController extends Controller
     {
         $ejemplares = Ejemplares::orderBy('Codigo')->where ('Existe', 1,) ->get();
         return $ejemplares; 
+
+
+    
     }
 
         public function obtenerISBN (string $ISBN){            
@@ -63,12 +66,22 @@ class EjemplaresController extends Controller
         $ejemplar->Existe = 0;
         $ejemplar->save();
 
-        $ejeeliminar=  DB::select("select  (ejemplares -1) as ejeeliminar from tbllibros where tbllibros.ISBN = {$ISBN}");
-        
-        LIBROS::where('ISBN', '=', $ISBN)->update(array(
-            
-            'Ejemplares'=>$ejeeliminar
+      
+        $isbns = DB::select("select  ISBN  from tblejemplares where tblejemplares.Codigo = {$Codigo}");
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('Ejemplares', 1);
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('EjemDisp', 1);
+
+
      
-));
+       
+        
+
+           
     }
 }
