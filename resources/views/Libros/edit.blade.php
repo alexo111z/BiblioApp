@@ -119,6 +119,7 @@
                                     <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
+
                         </div>
 
                     </div>
