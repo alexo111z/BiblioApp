@@ -1,5 +1,5 @@
 <form method="POST" v-on:submit.prevent="updateEjemplar(fillEjemplar.Codigo)">
-    <div class="modal fade" id="editEjemplar">
+    <div class="modal fade" id="editE">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

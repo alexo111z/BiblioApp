@@ -27072,7 +27072,6 @@ new Vue({
         this.getLibros();
         this.getAutores();
         this.getEditoriales();
-        this.getEjemplares();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -27206,7 +27205,7 @@ new Vue({
                 });
         },
         getEjemplares: function () {
-            const ejemplaresUrl = 'ejemplar/ISBN';
+            const ejemplaresUrl = 'ejemplar/' + this.fillLibro.ISBN;
 
             this.ejemplares = [];
 
@@ -27215,7 +27214,7 @@ new Vue({
                     this.ejemplares = response.data;
                 });
         },
-        
+
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
@@ -27361,7 +27360,7 @@ new Vue({
             this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
             this.fillEjemplar.CD = ejemplar.CD;
             console.log(this.fillEjemplar);
-            $('#editEjemplar').modal('show');
+            $('#editE').modal('show');
         },
         updateEjemplar: function (Codigo) {
             var url = 'ejemplar/'+ Codigo;
@@ -27375,7 +27374,7 @@ new Vue({
                     'CD':''
                 };
                 this.errors = [];
-                $("#editEjemplar").modal("hide");
+                $("#editE").modal("hide");
                 toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{

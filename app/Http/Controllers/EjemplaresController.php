@@ -14,12 +14,12 @@ class EjemplaresController extends Controller
      */
     public function index(Request $request)
     {
-        //$ejemplares= DB::table('tblejemplares')->pluck('Codigo');
-        //return $ejemplares;
+        $ejemplares = Ejemplares::orderBy('Codigo')->where ('Existe', 1,) ->get();
+        return $ejemplares; 
     }
 
         public function obtenerISBN (string $ISBN){            
-                $ejemplares = Ejemplares::orderBy('Codigo')->where ([ ['Existe', 1],['ISBN', $ISBN],]) ->pluck('Codigo');
+                $ejemplares = Ejemplares::orderBy('Codigo')->where ([ ['Existe', 1],['ISBN', $ISBN],]) ->get();
                 return $ejemplares;   
                      
         }
@@ -58,7 +58,7 @@ class EjemplaresController extends Controller
     //Remove the specified resource from storage.
     public function destroy($Codigo)
     {
-        $ejemplar = Ejemplares::findOrFail($Codigo);
+        $ejemplar = ejemplares::findOrFail($Codigo);
         $ejemplar->Existe = 0;
         $ejemplar->save();
     }

@@ -11,7 +11,7 @@
             .barcode-container {
                 border: 1px solid black;
                 padding: 10px 10px 0 10px;
-                width: 460px;
+                width: 200px;
                 text-align: center;
                 font-family: Arial, sans-serif;
                 margin-left: calc(50% - 230px);
@@ -19,14 +19,14 @@
             }
 
             .barcode-container > img {
-                width: 460px;
-                height: 50px;
+                width: 200px;
+                height: 70px;
             }
 
             .barcode-container > p {
-                font-size: 18px;
-                margin: 0;
-                padding: 0;
+                font-size: 14px;
+                margin: 10;
+                padding: 5;
             }
         </style>
     </head>
