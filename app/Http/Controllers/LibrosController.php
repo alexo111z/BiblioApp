@@ -176,7 +176,11 @@ class LibrosController extends Controller
          $volu = $request->post("Volumen");
          $ejemplares = $request->post("Ejemplares");
          $imagen = "http://127.0.0.1:8000/images/template.png";
- 
+
+        $conejemp = DB::select("select  ejemplares from tbllibros where tbllibros.ISBN = {$isbn}");
+        foreach ($conejemp as $ke) {
+        if (($ke->$conejemp) < $ejempla) {
+            
         LIBROS::where('ISBN', '=', $ISBN)->update(array(
                                             'ISBN'=>$isbn,
                                             'Titulo'=>$titulo,
@@ -222,7 +226,9 @@ class LibrosController extends Controller
             DB::insert("insert into tblejemplares values({$id}, {$isbn},CURRENT_DATE,1,1)");
         }
         return $codigo;
-        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+    }
+       /* LIBROS::where('ISBN', '=', $ISBN)->update($request->all());*/
+    }
     }
 
 

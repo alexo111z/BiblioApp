@@ -120,13 +120,7 @@
                                 </div>
                              </div>
                         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                                           
-=======
->>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
-=======
->>>>>>> 7401baddf30c0875f42401b7f4ba857e29166bc8
+
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>
