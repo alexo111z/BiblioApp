@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Ejemplares;
+USE App\Libros;
 use Illuminate\Http\Request;
 use DB;
 
@@ -61,5 +62,13 @@ class EjemplaresController extends Controller
         $ejemplar = ejemplares::findOrFail($Codigo);
         $ejemplar->Existe = 0;
         $ejemplar->save();
+
+        $ejeeliminar=  DB::select("select  (ejemplares -1) as ejeeliminar from tbllibros where tbllibros.ISBN = {$ISBN}");
+        
+        LIBROS::where('ISBN', '=', $ISBN)->update(array(
+            
+            'Ejemplares'=>$ejeeliminar
+     
+));
     }
 }
