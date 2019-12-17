@@ -292,12 +292,13 @@ new Vue({
             this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
             this.fillEjemplar.CD = ejemplar.CD;
             console.log(this.fillEjemplar);
-            $('#editEjemplar').modal('show');
+            $('#editE').modal('show');
         },
         updateEjemplar: function (Codigo) {
             var url = 'ejemplar/'+ Codigo;
             axios.put(url, this.fillEjemplar)
             .then(response => {
+                this.getEjemplares();
                 this.fillEjemplar = {
                     'Codigo':'',
                     'ISBN':'',
@@ -305,7 +306,7 @@ new Vue({
                     'CD':''
                 };
                 this.errors = [];
-                $("#editEjemplar").modal("hide");
+                $("#editE").modal("hide");
                 toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{
@@ -313,11 +314,12 @@ new Vue({
                 toastr.error(error.response.data.message, "Error!");
             });
         },
-
+              
         deleteEjemplar: function (ejemplar) {
             if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
                 var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
+                    this.getEjemplares();
                     toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");
