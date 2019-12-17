@@ -173,24 +173,24 @@ class LibrosController extends Controller
 
         $conejemp = $conejemp[0];
 
-        if ($conejemp->Ejemplares != $ejemplares) {
-            LIBROS::where('ISBN', '=', $ISBN)
-                ->update(
-                    [
-                        'ISBN' => $isbn,
-                        'Titulo' => $titulo,
-                        'IdAutor' => $Idautor,
-                        'IdEditorial' => $IdEdi,
-                        'IdCarrera' => $IdCar,
-                        'dewey' => $dewey,
-                        'Edicion' => $edicion,
-                        'Year' => $year,
-                        'Volumen' => $volu,
-                        'Ejemplares' => $ejemplares,
-                        'Imagen' => $imagen
-                    ]
-                );
+        LIBROS::where('ISBN', '=', $ISBN)
+            ->update(
+                [
+                    'ISBN' => $isbn,
+                    'Titulo' => $titulo,
+                    'IdAutor' => $Idautor,
+                    'IdEditorial' => $IdEdi,
+                    'IdCarrera' => $IdCar,
+                    'dewey' => $dewey,
+                    'Edicion' => $edicion,
+                    'Year' => $year,
+                    'Volumen' => $volu,
+                    'Ejemplares' => $ejemplares,
+                    'Imagen' => $imagen
+                ]
+            );
 
+        if ($conejemp->Ejemplares != $ejemplares) {
             DB::table('tblejemplares')
                 ->where('ISBN', $ISBN)
                 ->delete();
