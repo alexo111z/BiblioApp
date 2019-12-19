@@ -30,7 +30,7 @@
                                         <th> @{{ejemplar.Codigo}}</th>
                                         <td> @{{ejemplar.ISBN}} </td>
                                         <td> @{{ejemplar.FechaRegistro}}</td>
-                                        <td> @{{ejemplar.CD}} </td>
+                                        <td> @{{ejemplar.CD ? 'Sí' :'No'}} </td>
                                         <td width="20px">
                                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editEjemplar(ejemplar)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                                         </td>
