@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Ejemplares;
+USE App\Libros;
 use Illuminate\Http\Request;
 use DB;
 
@@ -16,6 +17,9 @@ class EjemplaresController extends Controller
     {
         $ejemplares = Ejemplares::orderBy('Codigo')->where('Existe', 1)->get();
         return $ejemplares; 
+
+
+    
     }
 
         public function obtenerISBN (string $ISBN){            
