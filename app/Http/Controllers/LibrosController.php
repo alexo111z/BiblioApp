@@ -143,7 +143,6 @@ class LibrosController extends Controller
     public function update(Request $request, $ISBN)
     {
         $libro = Libros::find($ISBN);
-       /* $barCodeGenerator = new DNS1D();*/
         $atributos = $this->validate($request, [
             'ISBN' => 'required',
             'Titulo' => 'required',
@@ -206,14 +205,9 @@ class LibrosController extends Controller
 
         }
     }
-
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
-
-   /* return new JsonResponse(null, 200);*/
-
 }
-
 
 }

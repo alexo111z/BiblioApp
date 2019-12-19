@@ -260,6 +260,7 @@ new Vue({
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
             this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
+            open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
             axios.put(url, this.fillLibro)
             .then(response => {
                 this.getLibros();
