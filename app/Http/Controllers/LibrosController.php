@@ -131,6 +131,9 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
+            else{
+                $id = $codigo.$x;
+            }
             DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd},  1)");
         }
 
@@ -167,11 +170,11 @@ class LibrosController extends Controller
         $ejemplares = $request->post("Ejemplares");
         $imagen = "http://127.0.0.1:8000/images/template.png";
 
-        $conejemp = DB::select(
+    /*    $conejemp = DB::select(
             "select Ejemplares from tbllibros where ISBN = {$isbn}"
         );
 
-        $conejemp = $conejemp[0];
+        $conejemp = $conejemp[0];*/
 
         LIBROS::where('ISBN', '=', $ISBN)
             ->update(
@@ -186,14 +189,11 @@ class LibrosController extends Controller
                     'Year' => $year,
                     'Volumen' => $volu,
                     'Ejemplares' => $ejemplares,
+                    'EjemDisp'=> $ejemplares,
                     'Imagen' => $imagen
                 ]
             );
 
-        if ($conejemp->Ejemplares != $ejemplares) {
-            DB::table('tblejemplares')
-                ->where('ISBN', $ISBN)
-                ->delete();
 
             if ($dewey < 10) {
                 $dewey = "00" . $dewey;
@@ -224,19 +224,27 @@ class LibrosController extends Controller
 
             $codigo = $codigo . $edicion;
 
-            for ($x = 1; $x <= $ejemplares; $x++) {
+            $ejemp = DB::select(
+                "select (count(*)+1) as ejemp from tblejemplares where tblejemplares.ISBN =  {$isbn}"
+            );
+
+            foreach ($ejemp as $k) {
+            for ($x = ($k->ejemp); $x <= $ejemplares; $x++) {
                 $id = '';
                 if ($x < 10) {
                     $id = $codigo . "00" . $x;
-                } else {
-                    if ($x >= 10 && $x < 100) {
+                } 
+                elseif ($x >= 10 && $x < 100) {
                         $id = $codigo . "0" . $x;
                     }
+                else{
+                    $id = $codigo.$x;
                 }
                 DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, 1, 1)");
             }
         }
+        
 
-        return new JsonResponse(null, 200);
+        
     }
 }
