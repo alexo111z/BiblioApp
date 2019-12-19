@@ -15,7 +15,7 @@
                 text-align: center;
                 font-family: Arial, sans-serif;
                 margin-left: calc(50% - 230px);
-                margin-top: 30px;
+                margin-top: 25px;
             }
 
             .barcode-container > img {
