@@ -48,6 +48,7 @@ class PrintBookBarcodeController extends Controller
 
         $bookVersions = DB::table('tblejemplares')
             ->where('ISBN', $isbn)
+            ->where('Existe', 1)
             ->get(['Codigo'])
             ->toArray();
 

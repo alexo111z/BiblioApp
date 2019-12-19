@@ -128,7 +128,7 @@
                                 <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="99" required
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="999" required
                                         v-model="newLibro.Ejemplares">
                                 </div>
                             </div>
