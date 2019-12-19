@@ -55,7 +55,6 @@ new Vue({
         search: '',
         fillLibro:{
             'ISBN':'',
-            'Imagen': '',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -259,6 +258,7 @@ new Vue({
         },
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
+            this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
             axios.put(url, this.fillLibro)
             .then(response => {
                 this.getLibros();
@@ -320,6 +320,8 @@ new Vue({
                 var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
                     this.getEjemplares();
+                    this.fillLibro.Ejemplares--;
+                    this.fillLibro.EjemDisp--;
                     toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");

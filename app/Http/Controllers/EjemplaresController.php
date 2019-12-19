@@ -15,7 +15,7 @@ class EjemplaresController extends Controller
      */
     public function index(Request $request)
     {
-        $ejemplares = Ejemplares::orderBy('Codigo')->where ('Existe', 1,) ->get();
+        $ejemplares = Ejemplares::orderBy('Codigo')->where('Existe', 1)->get();
         return $ejemplares; 
 
 
@@ -66,7 +66,6 @@ class EjemplaresController extends Controller
         $ejemplar->Existe = 0;
         $ejemplar->save();
 
-      
         $isbns = DB::select("select  ISBN  from tblejemplares where tblejemplares.Codigo = {$Codigo}");
 
         DB::table('tbllibros')
@@ -76,12 +75,5 @@ class EjemplaresController extends Controller
         DB::table('tbllibros')
         ->where('ISBN', '=', $isbns[0]->ISBN)
         ->decrement('EjemDisp', 1);
-
-
-     
-       
-        
-
-           
     }
 }

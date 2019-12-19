@@ -142,64 +142,60 @@ class LibrosController extends Controller
 
     public function update(Request $request, $ISBN)
     {
-        $this->validate(
-            $request,
-            [
-                'ISBN' => 'required',
-                'Titulo' => 'required',
-                'IdAutor' => 'required',
-                'IdEditorial' => 'required',
-                'IdCarrera' => 'required',
-                'dewey' => 'required',
-                'Edicion' => 'required',
-                'Year' => 'required',
-                'Volumen' => 'required',
-                'Ejemplares' => 'required',
-            ]
-        );
+        $libro = Libros::find($ISBN);
 
-        $isbn = $request->post("ISBN");
-        $titulo = $request->post("Titulo");
-        $Idautor = $request->post("IdAutor");
-        $IdEdi = $request->post("IdEditorial");
-        $IdCar = $request->post("IdCarrera");
-        $dewey = $request->post("dewey");
-        $edicion = $request->post("Edicion");
-        $year = $request->post("Year");
-        $volu = $request->post("Volumen");
-        $ejemplares = $request->post("Ejemplares");
-        $imagen = "http://127.0.0.1:8000/images/template.png";
-
-    /*    $conejemp = DB::select(
-            "select Ejemplares from tbllibros where ISBN = {$isbn}"
-        );
-
-        $conejemp = $conejemp[0];*/
-
-        LIBROS::where('ISBN', '=', $ISBN)
-            ->update(
-                [
-                    'ISBN' => $isbn,
-                    'Titulo' => $titulo,
-                    'IdAutor' => $Idautor,
-                    'IdEditorial' => $IdEdi,
-                    'IdCarrera' => $IdCar,
-                    'dewey' => $dewey,
-                    'Edicion' => $edicion,
-                    'Year' => $year,
-                    'Volumen' => $volu,
-                    'Ejemplares' => $ejemplares,
-                    'EjemDisp'=> $ejemplares,
-                    'Imagen' => $imagen
-                ]
-            );
-
-
-            if ($dewey < 10) {
-                $dewey = "00" . $dewey;
-            } elseif ($dewey >= 10 && $dewey < 100) {
-                $dewey = "0" . $dewey;
+        $atributos = $this->validate($request, [
+            'ISBN' => 'required',
+            'Titulo' => 'required',
+            'IdAutor' => 'required',
+            'IdEditorial' => 'required',
+            'IdCarrera' => 'required',
+            'dewey' => 'required',
+            'Edicion' => 'required',
+            'Year' => 'required',
+            'Volumen' => 'required',
+            'Ejemplares' => 'required',
+        ]);
+        
+        if ($atributos['Ejemplares'] < $libro->EjemDisp) {
+            return response('El número no puede ser menor que los ejemplares disponibles', 400);
+        } else if ($atributos['Ejemplares'] - $libro->EjmpDisp) {
+            $nuevos = true;
+            if ($atributos['dewey'] < 10) {
+                $atributos['dewey'] = "00".$atributos['dewey'];
+            }else if($atributos['dewey'] >= 10 && $atributos['dewey'] < 100){
+                $atributos['dewey'] = "0".$atributos['dewey'];
             }
+            $codigo = "1".$atributos['dewey'];
+            $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$atributos['dewey']}");
+            foreach ($ejemplaresdewey as $key) {
+                    if (($key->ejemplaresdewey) < 10) {
+                        $cant = "00".($key->ejemplaresdewey);
+                    }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
+                        $cant = "0".($key->ejemplaresdewey);
+                    }else {
+                        $cant = ($key->ejemplaresdewey);
+                    }
+            }
+            $codigo= $codigo.$cant;
+            if($atributos['Edicion'] <10)
+            $atributos['Edicion'] = "0".$atributos['Edicion'];
+            $codigo = $codigo . $atributos['Edicion'];
+            for ($x=($libro->EjemDisp + 1); $x <= $atributos['Ejemplares']; $x++) {
+                $id = '';
+                if($x<10){
+                    $id = $codigo . "00".$x;
+                }else if ($x>=10 && $x <100) {
+                    $id = $codigo . "0".$x;
+                }
+                $cd = DB::table('tblejemplares')->where('ISBN', $ISBN)->value('CD');
+                DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
+            }
+
+        }
+
+        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+    }
 
             $codigo = "1" . $dewey;
             $ejemplaresdewey = DB::select(
