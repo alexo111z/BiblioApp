@@ -158,7 +158,7 @@ class LibrosController extends Controller
         ]);
         
         if ($atributos['Ejemplares'] < $libro->EjemDisp) {
-            return response('', 400);
+            return response(' ', 400);
         } else if ($atributos['Ejemplares'] - $libro->EjmpDisp) {
             $nuevos = true;
             if ($atributos['dewey'] < 10) {
