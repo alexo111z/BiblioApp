@@ -166,7 +166,7 @@ class LibrosController extends Controller
         ]);
         
         if ($atributos['Ejemplares'] < $libro->EjemDisp) {
-            return response('Para eliminar ejemplares dirijase a la ventana detalles libros', 400);
+            return response('No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros', 400);
         } else if ($atributos['Ejemplares'] - $libro->EjmpDisp) {
             $nuevos = true;
             if ($atributos['dewey'] < 10) {

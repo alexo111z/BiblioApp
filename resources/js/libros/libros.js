@@ -321,6 +321,7 @@ new Vue({
                 var url = 'ejemplar/' + ejemplar.Codigo;
                 axios.delete(url).then(response => {
                     this.getEjemplares();
+                    this.getLibros();
                     this.fillLibro.Ejemplares--;
                     this.fillLibro.EjemDisp--;
                     toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
