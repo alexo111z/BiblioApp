@@ -28,7 +28,7 @@
                                     <input type="text" name="titulo" id="titulo" class="form-control" required
                                         v-model="newLibro.Titulo">
                                 </div>
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                            
                             </div>
                         </div>
                         <div class="col-sm-6">
