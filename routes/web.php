@@ -62,8 +62,7 @@ Route::post('reporte/consultaPrestatarios', 'ReportesController@getAdministrativ
 Route::get('reportes/imprimirreportePrestatarios', 'ReportesController@imprimirPrestatarios')->name('printPrestatarios');
 Route::post('reporte/consultaMultas', 'reportesController@getMultas')->name('getMultas');
 Route::get('reportes/imprimirMultas', 'ReportesController@imprimirMultas')->name('printMultas');
-//Libros
-Route::resource('libros','LibrosController');
+
 //Adeudos
 Route::resource('adeudo', 'AdeudoController', ['except' => 'create', 'edit','destroy']);
 Route::post('adeudo/{adeudo}/{monto}', 'AdeudoController@delete');
@@ -129,9 +128,7 @@ Route::get('/libros', function (){
 });
 
 Route::get('/libros/imprimir/{isbn}', 'PrintBookBarcodeController@index');
-
 Route::get('/libros/descargar/{isbn}', 'PrintBookBarcodeController@downloadPdf');
-
 Route::get('libros', 'LibrosController@selects')->name('varios');
 
 //Usuarios
@@ -146,3 +143,10 @@ Route::post('/usuarios', 'UsersController@create');
 Route::post('/usuarios/update', 'UsersController@update');
 
 Route::post('/usuarios/remove', 'UsersController@delete');
+
+//Ejemplares
+Route::resource('ejemplar', 'EjemplaresController', ['except' =>'show','create','store','edit']);
+Route::get('/ejemplar/{isbn}', 'EjemplaresController@obtenerISBN');
+
+
+

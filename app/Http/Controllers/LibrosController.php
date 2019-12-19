@@ -5,6 +5,7 @@ use App\Libros;
 use DB;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LibrosController extends Controller
 {
@@ -69,13 +70,6 @@ class LibrosController extends Controller
         return view('Libros.principal', compact('autores', 'editoriales','carreras','deweys'));
     }
 
-
-        /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $barCodeGenerator = new DNS1D();
@@ -137,21 +131,19 @@ class LibrosController extends Controller
             }else if ($x>=10 && $x <100) {
                 $id = $codigo . "0".$x;
             }
+            else{
+                $id = $codigo.$x;
+            }
             DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd},  1)");
         }
-        return $codigo;
+
+        return new JsonResponse(null, 200);
     }
 
-        /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $ISBN)
     {
-        $this->validate($request, [
+        $libro = Libros::find($ISBN);
+        $atributos = $this->validate($request, [
             'ISBN' => 'required',
             'Titulo' => 'required',
             'IdAutor' => 'required',
@@ -162,10 +154,60 @@ class LibrosController extends Controller
             'Year' => 'required',
             'Volumen' => 'required',
             'Ejemplares' => 'required',
-
         ]);
+        
+        if ($atributos['Ejemplares'] < $libro->EjemDisp) {
+            return response(' ', 400);
+        } else if ($atributos['Ejemplares'] - $libro->EjmpDisp) {
+            $nuevos = true;
+            if ($atributos['dewey'] < 10) {
+                $atributos['dewey'] = "00".$atributos['dewey'];
+            }else if($atributos['dewey'] >= 10 && $atributos['dewey'] < 100){
+                $atributos['dewey'] = "0".$atributos['dewey'];
+            }
+            $codigo = "1".$atributos['dewey'];
 
+            $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$atributos['dewey']}");
+            foreach ($ejemplaresdewey as $key) {
+                    if (($key->ejemplaresdewey) < 10) {
+                        $cant = "00".($key->ejemplaresdewey);
+                    }else if (($key->ejemplaresdewey) >= 10 &&  ($key->ejemplaresdewey)<100) {
+                        $cant = "0".($key->ejemplaresdewey);
+                    }else {
+                        $cant = ($key->ejemplaresdewey);
+                    }
+            }
+            $codigo= $codigo.$cant;
+            if($atributos['Edicion'] <10)
+            $atributos['Edicion'] = "0".$atributos['Edicion'];
+            $codigo = $codigo . $atributos['Edicion'];
+            
+            $ejemp = DB::select(
+                "select (count(*)+1) as ejemp from tblejemplares where tblejemplares.ISBN =  {$atributos['ISBN']}"
+            );
+
+            foreach ($ejemp as $k) {
+            for ($x = ($k->ejemp); $x <= $atributos['Ejemplares']; $x++) {
+                $id = '';
+                if ($x < 10) {
+                    $id = $codigo . "00" . $x;
+                } 
+                elseif ($x >= 10 && $x < 100) {
+                        $id = $codigo . "0" . $x;
+                    }
+                else{
+                    $id = $codigo.$x;
+                }
+
+                $cd = DB::table('tblejemplares')->where('ISBN', $ISBN)->value('CD');
+                DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
+            
+
+        }
+    }
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
+
+}
 
 }

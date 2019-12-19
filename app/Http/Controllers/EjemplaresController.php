@@ -14,20 +14,16 @@ class EjemplaresController extends Controller
      */
     public function index(Request $request)
     {
-        $search = $request->get('search');
-        $ejemplares = Ejemplares::where('Existe','=',1)->search($search)->paginate(10);
-        return [
-            'pagination' => [
-                'total'         => $ejemplares->total(),
-                'current_page'  => $ejemplares->currentPage(),
-                'per_page'      => $ejemplares->perPage(),
-                'last_page'     => $ejemplares->lastPage(),
-                'from'          => $ejemplares->firstItem(),
-                'to'            => $ejemplares->lastItem(),
-            ],
-            'ejemplar' =>$ejemplares
-        ];
+        $ejemplares = Ejemplares::orderBy('Codigo')->where('Existe', 1)->get();
+        return $ejemplares; 
     }
+
+        public function obtenerISBN (string $ISBN){            
+                $ejemplares = Ejemplares::orderBy('Codigo')->where ([ ['Existe', 1],['ISBN', $ISBN],]) ->get();
+                return $ejemplares;   
+                     
+        }
+      
 
           /**
      * Store a newly created resource in storage.
@@ -36,23 +32,8 @@ class EjemplaresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {        
-      $this->validate($request, [
-        'Codigo' => 'required',
-        'ISBN' => 'required',
-        'CD' => 'required'
-      ]);
-      $cod = $request->post("Codigo");
-      $isbn= $request->post("ISBN");
-      $cd = $request->post("CD");
-
-      DB::insert("INSERT INTO tblejemplares VALUES('$cod', '$isbn', CURRENT_DATE, '$cd', 1)");
-    
-
-
-
-
-      return;
+    {
+        
     }
 
         /**
@@ -77,8 +58,18 @@ class EjemplaresController extends Controller
     //Remove the specified resource from storage.
     public function destroy($Codigo)
     {
-        $ejemplar = Ejemplares::findOrFail($Codigo);
+        $ejemplar = ejemplares::findOrFail($Codigo);
         $ejemplar->Existe = 0;
         $ejemplar->save();
+
+        $isbns = DB::select("select  ISBN  from tblejemplares where tblejemplares.Codigo = {$Codigo}");
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('Ejemplares', 1);
+
+        DB::table('tbllibros')
+        ->where('ISBN', '=', $isbns[0]->ISBN)
+        ->decrement('EjemDisp', 1);
     }
 }

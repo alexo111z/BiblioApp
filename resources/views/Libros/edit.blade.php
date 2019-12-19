@@ -25,7 +25,6 @@
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-book"></i></div>
                                     <input type="text" name="titulo" id="titulo" class="form-control" required v-model="fillLibro.Titulo">
-                                    <span v-for="error in errors" class="text-danger">@{{ error }}</span>
                                  </div>
                             </div>
                         </div>
@@ -116,7 +115,7 @@
                              <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="9999" required v-model="fillLibro.Ejemplares">
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
                         </div>

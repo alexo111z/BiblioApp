@@ -27087,6 +27087,7 @@ new Vue({
         libros: [],
         autores: [],
         editoriales: [],
+        ejemplares: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27122,7 +27123,6 @@ new Vue({
         search: '',
         fillLibro:{
             'ISBN':'',
-            'Imagen': '',
             'Titulo':'',
             'IdAutor':'',
             'IdEditorial':'',
@@ -27132,6 +27132,12 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':''
+        },
+        fillEjemplar:{
+            'Codigo':'',
+            'ISBN':'',
+            'FechaRegistro':'',
+            'CD':''
         }
     },
     computed:{
@@ -27197,6 +27203,17 @@ new Vue({
                     this.editoriales = response.data;
                 });
         },
+        getEjemplares: function () {
+            const ejemplaresUrl = 'ejemplar/' + this.fillLibro.ISBN;
+
+            this.ejemplares = [];
+
+            axios.get(ejemplaresUrl)
+                .then((response) => {
+                    this.ejemplares = response.data;
+                });
+        },
+
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
@@ -27222,7 +27239,8 @@ new Vue({
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
             }).catch(() => {
-                toastr.error("Hubo un error al crear este libro, inténtalo de nuevo");
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Hubo un error al crear este libro, inténtalo de nuevo");
             });
         },
         createAutor: function () {
@@ -27309,6 +27327,8 @@ new Vue({
         },
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
+            this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
+            open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
             axios.put(url, this.fillLibro)
             .then(response => {
                 this.getLibros();
@@ -27332,9 +27352,54 @@ new Vue({
             })
             .catch(error =>{
                 this.errors = error.response.data;
+                toastr.error(error.response.data.message, "No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros!");
+            });
+        },
+
+        editEjemplar: function (ejemplar) {
+            this.fillEjemplar.Codigo = ejemplar.Codigo;
+            this.fillEjemplar.ISBN = ejemplar.ISBN;
+            this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
+            this.fillEjemplar.CD = ejemplar.CD;
+            console.log(this.fillEjemplar);
+            $('#editE').modal('show');
+        },
+        updateEjemplar: function (Codigo) {
+            var url = 'ejemplar/'+ Codigo;
+            axios.put(url, this.fillEjemplar)
+            .then(response => {
+                this.getEjemplares();
+                this.fillEjemplar = {
+                    'Codigo':'',
+                    'ISBN':'',
+                    'FechaRegistro':'',
+                    'CD':''
+                };
+                this.errors = [];
+                $("#editE").modal("hide");
+                toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
+            })
+            .catch(error =>{
+                this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
         },
+              
+        deleteEjemplar: function (ejemplar) {
+            if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
+                var url = 'ejemplar/' + ejemplar.Codigo;
+                axios.delete(url).then(response => {
+                    this.getEjemplares();
+                    this.getLibros();
+                    this.fillLibro.Ejemplares--;
+                    this.fillLibro.EjemDisp--;
+                    toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
+                }).catch(ex => {
+                    toastr.error(ex.response.data.message, "Error4!");
+                });
+            }
+        },
+
 
         searchLibro: function () {
             this.search = $('#search').val();

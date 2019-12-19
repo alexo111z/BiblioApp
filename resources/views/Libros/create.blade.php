@@ -28,7 +28,7 @@
                                     <input type="text" name="titulo" id="titulo" class="form-control" required
                                         v-model="newLibro.Titulo">
                                 </div>
-                                <span v-for="error in errors" class="text-danger">@{{ error }}</span>
+                            
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -128,7 +128,7 @@
                                 <label for="ejemplares">Ejemplares</label>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-sort-numeric-asc"></i></div>
-                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" required
+                                    <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="999" required
                                         v-model="newLibro.Ejemplares">
                                 </div>
                             </div>
