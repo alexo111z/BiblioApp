@@ -27351,7 +27351,7 @@ new Vue({
             })
             .catch(error =>{
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
+                toastr.error(error.response.data.message, "No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros!");
             });
         },
 
