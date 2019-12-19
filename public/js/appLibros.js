@@ -27239,7 +27239,8 @@ new Vue({
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
             }).catch(() => {
-                toastr.error("Hubo un error al crear este libro, inténtalo de nuevo");
+                this.errors = error.response.data;
+                toastr.error(error.response.data.message, "Hubo un error al crear este libro, inténtalo de nuevo");
             });
         },
         createAutor: function () {
