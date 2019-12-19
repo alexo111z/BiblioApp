@@ -167,6 +167,7 @@ class LibrosController extends Controller
                 $atributos['dewey'] = "0".$atributos['dewey'];
             }
             $codigo = "1".$atributos['dewey'];
+
             $ejemplaresdewey = DB::select("select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$atributos['dewey']}");
             foreach ($ejemplaresdewey as $key) {
                     if (($key->ejemplaresdewey) < 10) {
@@ -188,6 +189,9 @@ class LibrosController extends Controller
                 }else if ($x>=10 && $x <100) {
                     $id = $codigo . "0".$x;
                 }
+                else{
+                    $id = $codigo.$x;
+                }
                 $cd = DB::table('tblejemplares')->where('ISBN', $ISBN)->value('CD');
                 DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
             }
@@ -197,50 +201,6 @@ class LibrosController extends Controller
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
     }
 
-            $codigo = "1" . $dewey;
-            $ejemplaresdewey = DB::select(
-                "select (count(*)+1) as ejemplaresdewey from tbllibros, tblejemplares where tblejemplares.ISBN = tbllibros.ISBN and tbllibros.dewey = {$dewey}"
-            );
 
-            foreach ($ejemplaresdewey as $key) {
-                if (($key->ejemplaresdewey) < 10) {
-                    $cant = "00" . ($key->ejemplaresdewey);
-                } elseif (($key->ejemplaresdewey) >= 10 && ($key->ejemplaresdewey) < 100) {
-                    $cant = "0" . ($key->ejemplaresdewey);
-                } else {
-                    $cant = ($key->ejemplaresdewey);
-                }
-            }
 
-            $codigo = $codigo . $cant;
-
-            if ($edicion < 10) {
-                $edicion = "0" . $edicion;
-            }
-
-            $codigo = $codigo . $edicion;
-
-            $ejemp = DB::select(
-                "select (count(*)+1) as ejemp from tblejemplares where tblejemplares.ISBN =  {$isbn}"
-            );
-
-            foreach ($ejemp as $k) {
-            for ($x = ($k->ejemp); $x <= $ejemplares; $x++) {
-                $id = '';
-                if ($x < 10) {
-                    $id = $codigo . "00" . $x;
-                } 
-                elseif ($x >= 10 && $x < 100) {
-                        $id = $codigo . "0" . $x;
-                    }
-                else{
-                    $id = $codigo.$x;
-                }
-                DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, 1, 1)");
-            }
-        }
-        
-
-        
-    }
 }
