@@ -14,7 +14,7 @@ class EjemplaresController extends Controller
      */
     public function index(Request $request)
     {
-        $ejemplares = Ejemplares::orderBy('Codigo')->where ('Existe', 1,) ->get();
+        $ejemplares = Ejemplares::orderBy('Codigo')->where('Existe', 1)->get();
         return $ejemplares; 
     }
 
