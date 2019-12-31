@@ -27247,6 +27247,7 @@ new Vue({
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
+                this.newLibro.IdAutor = response.data.id;
                 this.getAutores();
                 this.newAutor = {
                     'Nombre':'',
@@ -27267,11 +27268,12 @@ new Vue({
             axios.post(url, this.newEditorial)
             .then(response => {
                 this.getEditoriales();
-
                 this.newEditorial = {
                     'Nombre':'',
                     'Existe':1
                 };
+                this.newLibro.IdEditorial = response.data.id;
+
                 this.errors = [];
                 $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
@@ -27330,6 +27332,33 @@ new Vue({
             this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
             axios.put(url, this.fillLibro)
             .then(response => {
+
+                console.log(response);
+                
+                // const link = document.createElement('a');
+                // link.setAttribute('href', response.data);
+                // link.setAttribute('download', 'test.pdf');
+                // link.style.display = 'none';
+                // document.body.appendChild(link);
+                // link.click();
+                // document.body.removeChild(link);
+
+
+
+                // let blob = new Blob([response], {type: 'application/pdf'});
+                let blob = response.data;
+                let foo = window.document.createElement('a');
+                foo.href = window.URL.createObjectURL(blob);
+                foo.download = 'test.pdf';
+                document.body.appendChild(foo);
+                foo.click();
+                document.body.removeChild(foo);
+
+                
+
+            
+
+
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',
@@ -27350,8 +27379,9 @@ new Vue({
                 toastr.success("Libro actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Error!");
+                console.log(error);
+                // this.errors = error.response.data;
+                // toastr.error(error.response.data.message, "Error!");
             });
         },
 

@@ -41,6 +41,8 @@ class PrintBookBarcodeController extends Controller
         return $barcodePdf->download($pdfFileName);
     }
 
+
+    
     private function generateImagesFromIsbn(string $isbn): array
     {
         $barcodeImageGenerator = new DNS1D();

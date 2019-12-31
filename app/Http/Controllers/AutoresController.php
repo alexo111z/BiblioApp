@@ -34,6 +34,7 @@ class AutoresController extends Controller
     {
         $authors = DB::table('tblautores')
             ->where('Existe', 1)
+            ->orderBy('Nombre')
             ->get();
 
         return $this->transformAuthors($authors);
@@ -67,9 +68,7 @@ class AutoresController extends Controller
             'Apellidos' => 'required'
         ]);
 
-        Autores::create($request->all());
-
-        return;
+        return Autores::create($request->all());
     }
     /**
      * Update the specified resource in storage.

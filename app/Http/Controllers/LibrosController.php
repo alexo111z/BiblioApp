@@ -5,7 +5,7 @@ use App\Libros;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use PDF;
 
 class LibrosController extends Controller
 {
@@ -182,6 +182,13 @@ class LibrosController extends Controller
             if($atributos['Edicion'] <10)
             $atributos['Edicion'] = "0".$atributos['Edicion'];
             $codigo = $codigo . $atributos['Edicion'];
+
+            $pdfFileName = sprintf(
+                'codigo-de-barras-isbn-%s.pdf',
+                $ISBN
+            );
+            $barcodeImageGenerator = new DNS1D();
+            $barcodeImages = [];
             for ($x=($libro->EjemDisp + 1); $x <= $atributos['Ejemplares']; $x++) {
                 $id = '';
                 if($x<10){
@@ -194,11 +201,27 @@ class LibrosController extends Controller
                 }
                 $cd = DB::table('tblejemplares')->where('ISBN', $ISBN)->value('CD');
                 DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
+
+                $barcodeImages[] = [
+                    'code' => $codigo,
+                    'image' => $barcodeImageGenerator->getBarcodePNG(
+                        $codigo,
+                        'C39+'
+                    ),
+                ];
             }
 
+            $barcodePdf = PDF::loadView(
+                'Libros.barcode',
+                [
+                    'isbn' => $ISBN,
+                    'barcodeImages' => $barcodeImages,
+                ]
+            );
         }
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+        return $barcodePdf->download($pdfFileName);
     }
 
 

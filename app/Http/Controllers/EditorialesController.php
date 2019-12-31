@@ -34,6 +34,7 @@ class EditorialesController extends Controller
     {
         $editorials = DB::table('tbleditoriales')
             ->where('Existe', 1)
+            ->orderBy('Nombre')
             ->get();
 
         return $this->transformEditorials($editorials);
@@ -64,7 +65,7 @@ class EditorialesController extends Controller
             'Nombre' => 'required',
         ]);
 
-        Editoriales::create($request->all());
+        return Editoriales::create($request->all());
     }
 
     /**
