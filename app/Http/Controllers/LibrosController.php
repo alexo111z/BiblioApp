@@ -221,12 +221,5 @@ class LibrosController extends Controller
             );
         }
     }
-        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
-        return $barcodePdf->download($pdfFileName);
+    
     }
-
-
-
-}
-
-}
