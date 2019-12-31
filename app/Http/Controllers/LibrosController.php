@@ -144,6 +144,7 @@ class LibrosController extends Controller
     public function update(Request $request, $ISBN)
     {
         $libro = Libros::find($ISBN);
+
         $atributos = $this->validate($request, [
             'ISBN' => 'required',
             'Titulo' => 'required',
@@ -158,7 +159,7 @@ class LibrosController extends Controller
         ]);
         
         if ($atributos['Ejemplares'] < $libro->EjemDisp) {
-            return response(' ', 400);
+            return response('No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros', 400);
         } else if ($atributos['Ejemplares'] - $libro->EjmpDisp) {
             $nuevos = true;
             if ($atributos['dewey'] < 10) {
@@ -191,12 +192,11 @@ class LibrosController extends Controller
             $barcodeImages = [];
             for ($x=($libro->EjemDisp + 1); $x <= $atributos['Ejemplares']; $x++) {
                 $id = '';
-                if ($x < 10) {
-                    $id = $codigo . "00" . $x;
-                } 
-                elseif ($x >= 10 && $x < 100) {
-                        $id = $codigo . "0" . $x;
-                    }
+                if($x<10){
+                    $id = $codigo . "00".$x;
+                }else if ($x>=10 && $x <100) {
+                    $id = $codigo . "0".$x;
+                }
                 else{
                     $id = $codigo.$x;
                 }
@@ -220,6 +220,11 @@ class LibrosController extends Controller
                 ]
             );
         }
+
+        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+        return $barcodePdf->download($pdfFileName);
     }
-    
-    }
+
+
+
+}
