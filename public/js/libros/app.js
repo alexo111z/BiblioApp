@@ -27066,12 +27066,32 @@ return /******/ (function(modules) { // webpackBootstrap
 ;
 //# sourceMappingURL=axios.map
 
+const authMiddleware = () => {
+    const sessionData = localStorage.getItem('userData');
+    const redirectTo = '/login';
+    const homeRoute = '/home';
+
+    if (sessionData === null && location.pathname !== redirectTo) {
+        toastr.error('No estás autenticado, inicia sesión');
+
+        setTimeout(() => {
+            location.href = location.origin + redirectTo;
+        }, 2500);
+    } else if (sessionData !== null && location.pathname === redirectTo) {
+        location.href = location.origin + homeRoute;
+    }
+};
+
+if (window.addEventListener) {
+    window.addEventListener('load', authMiddleware, false);
+} else {
+    window.attachEvent('onload', authMiddleware);
+}
+
 new Vue({
     el: "#librosCRUD",
     created: function () {
         this.getLibros();
-        this.getAutores();
-        this.getEditoriales();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
             showDuration: 500,
@@ -27085,9 +27105,6 @@ new Vue({
     },
     data: {
         libros: [],
-        autores: [],
-        editoriales: [],
-        ejemplares: [],
         pagination: {
             'total': 0,
             'current_page': 0,
@@ -27132,12 +27149,6 @@ new Vue({
             'Year':'',
             'Volumen':'',
             'Ejemplares':''
-        },
-        fillEjemplar:{
-            'Codigo':'',
-            'ISBN':'',
-            'FechaRegistro':'',
-            'CD':''
         }
     },
     computed:{
@@ -27183,43 +27194,10 @@ new Vue({
                 toastr.error(error.response.data.message, "Error1!");
             });
         },
-        getAutores: function () {
-            const autoresUrl = 'autores/all';
-
-            this.autores = [];
-
-            axios.get(autoresUrl)
-                .then((response) => {
-                   this.autores = response.data;
-                });
-        },
-        getEditoriales: function () {
-            const editorialesUrl = 'editoriales/all';
-
-            this.editoriales = [];
-
-            axios.get(editorialesUrl)
-                .then((response) => {
-                    this.editoriales = response.data;
-                });
-        },
-        getEjemplares: function () {
-            const ejemplaresUrl = 'ejemplar/' + this.fillLibro.ISBN;
-
-            this.ejemplares = [];
-
-            axios.get(ejemplaresUrl)
-                .then((response) => {
-                    this.ejemplares = response.data;
-                });
-        },
-
         createLibro: function () {
             var url = 'libro';
             axios.post(url, this.newLibro)
             .then(response => {
-                open(location.origin + '/libros/descargar/' + this.newLibro.ISBN);
-
                 this.getLibros();
                 this.newLibro = {
                     'ISBN':'',
@@ -27238,23 +27216,23 @@ new Vue({
                 $("#create2").modal('hide');
                 toastr.success("Libro registrado con éxito.", "Tarea completada!");
                 console.log(response.data);
-            }).catch(() => {
+                
+            }).catch(error => {
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "Hubo un error al crear este libro, inténtalo de nuevo");
+                toastr.error(error.response.data.message, "Error2!");
             });
         },
         createAutor: function () {
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
-                this.newLibro.IdAutor = response.data.id;
-                this.getAutores();
+                
                 this.newAutor = {
                     'Nombre':'',
                     'Apellidos':'',
                     'Existe':1
                 };
-
+                
                 this.errors = [];
                 $("#create").modal('hide');
                 toastr.success("Autor registrado con exito.", "Tarea completada!");
@@ -27267,13 +27245,10 @@ new Vue({
             var url = 'editorials';
             axios.post(url, this.newEditorial)
             .then(response => {
-                this.getEditoriales();
                 this.newEditorial = {
                     'Nombre':'',
                     'Existe':1
                 };
-                this.newLibro.IdEditorial = response.data.id;
-
                 this.errors = [];
                 $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
@@ -27285,7 +27260,6 @@ new Vue({
 
         showLibro: function (libro) {
             this.fillLibro.ISBN = libro.ISBN;
-            this.fillLibro.Imagen = libro.Imagen;
             this.fillLibro.Titulo = libro.Titulo;
             this.fillLibro.IdAutor = libro.Nombre + " "+ libro.Ape;
             this.fillLibro.IdEditorial = libro.Editorial;
@@ -27329,37 +27303,8 @@ new Vue({
         },
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
-            this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
-            open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
             axios.put(url, this.fillLibro)
             .then(response => {
-
-                console.log(response);
-                
-                // const link = document.createElement('a');
-                // link.setAttribute('href', response.data);
-                // link.setAttribute('download', 'test.pdf');
-                // link.style.display = 'none';
-                // document.body.appendChild(link);
-                // link.click();
-                // document.body.removeChild(link);
-
-
-
-                // let blob = new Blob([response], {type: 'application/pdf'});
-                let blob = response.data;
-                let foo = window.document.createElement('a');
-                foo.href = window.URL.createObjectURL(blob);
-                foo.download = 'test.pdf';
-                document.body.appendChild(foo);
-                foo.click();
-                document.body.removeChild(foo);
-
-                
-
-            
-
-
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',
@@ -27381,54 +27326,21 @@ new Vue({
             })
             .catch(error =>{
                 this.errors = error.response.data;
-                toastr.error(error.response.data.message, "No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros!");
-            });
-        },
-
-        editEjemplar: function (ejemplar) {
-            this.fillEjemplar.Codigo = ejemplar.Codigo;
-            this.fillEjemplar.ISBN = ejemplar.ISBN;
-            this.fillEjemplar.FechaRegistro = ejemplar.FechaRegistro;
-            this.fillEjemplar.CD = ejemplar.CD;
-            console.log(this.fillEjemplar);
-            $('#editE').modal('show');
-        },
-        updateEjemplar: function (Codigo) {
-            var url = 'ejemplar/'+ Codigo;
-            axios.put(url, this.fillEjemplar)
-            .then(response => {
-                this.getEjemplares();
-                this.fillEjemplar = {
-                    'Codigo':'',
-                    'ISBN':'',
-                    'FechaRegistro':'',
-                    'CD':''
-                };
-                this.errors = [];
-                $("#editE").modal("hide");
-                toastr.success("Ejemplar actualizado con exito.", "Tarea completada!");
-            })
-            .catch(error =>{
-                this.errors = error.response.data;
                 toastr.error(error.response.data.message, "Error!");
             });
         },
               
-        deleteEjemplar: function (ejemplar) {
-            if (confirm('¿Esta seguro de eliminar el ejemplar ' + ejemplar.Codigo + '?')) {
-                var url = 'ejemplar/' + ejemplar.Codigo;
+        deleteLibro: function (libro) {
+            if (confirm('¿Esta seguro de eliminar el libro ' + libro.Titulo + '?')) {
+                var url = 'libro/' + libro.ISBN;
                 axios.delete(url).then(response => {
-                    this.getEjemplares();
                     this.getLibros();
-                    this.fillLibro.Ejemplares--;
-                    this.fillLibro.EjemDisp--;
-                    toastr.success("Ejemplar eliminado con exito.", "Tarea completada!");
+                    toastr.success("Libro eliminado con exito.", "Tarea completada!");
                 }).catch(ex => {
                     toastr.error(ex.response.data.message, "Error4!");
                 });
             }
         },
-
 
         searchLibro: function () {
             this.search = $('#search').val();

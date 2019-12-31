@@ -131,6 +131,15 @@ Route::get('/libros/imprimir/{isbn}', 'PrintBookBarcodeController@index');
 Route::get('/libros/descargar/{isbn}', 'PrintBookBarcodeController@downloadPdf');
 Route::get('libros', 'LibrosController@selects')->name('varios');
 
+//Materiales
+Route::resource('material', 'MaterialesController', ['except' =>'show','create', 'edit']);
+Route::get('/materiales', function (){
+    return view('Materiales.principal');
+});
+Route::get('material/carreras','MaterialesController@getCarreras')->name('getCarreras');
+
+Route::get('materiales', 'MaterialesController@cla')->name('clavesCarreras');
+
 //Usuarios
 Route::get('/usuarios', 'UsersController@index')->name('usuarios');
 
