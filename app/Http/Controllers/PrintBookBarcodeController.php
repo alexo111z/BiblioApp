@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Milon\Barcode\DNS1D;
 use PDF;
@@ -23,16 +24,38 @@ class PrintBookBarcodeController extends Controller
         );
     }
 
-    public function downloadPdf(string $isbn)
+    public function downloadPdf(string $isbn ,Request $request)
     {
-        $barcodePdf = PDF::loadView(
-            'Libros.barcode',
-            [
-                'isbn' => $isbn,
-                'barcodeImages' => $this->generateImagesFromIsbn($isbn),
-            ]
-        );
 
+        if ($request->query('esCodigo')) {
+            $codigo = $isbn;
+            $isbn = DB::table('tblejemplares')->where('Codigo', $isbn)->value('ISBN');
+            $barcodeImageGenerator = new DNS1D();
+            $barcodePdf = PDF::loadView(
+                'Libros.barcode',
+                [
+                    'isbn' => $isbn,
+                    'barcodeImages' => [
+                        [
+                            'code' => $codigo,
+                            'image' => $barcodeImageGenerator->getBarcodePNG(
+                                $codigo,
+                                self::BARCODE_ENCODER
+                            ),
+                        ]
+                    ]
+                ]
+            );
+        } else {
+            $barcodePdf = PDF::loadView(
+                'Libros.barcode',
+                [
+                    'isbn' => $isbn,
+                    'barcodeImages' => $this->generateImagesFromIsbn($isbn),
+                ]
+            );
+        }
+        
         $pdfFileName = sprintf(
             'codigo-de-barras-isbn-%s.pdf',
             $isbn
@@ -49,7 +72,10 @@ class PrintBookBarcodeController extends Controller
         $barcodeImages = [];
 
         $bookVersions = DB::table('tblejemplares')
-            ->where('ISBN', $isbn)
+            ->where([
+                ['ISBN', $isbn],
+                ['Existe',1]
+            ])
             ->get(['Codigo'])
             ->toArray();
 

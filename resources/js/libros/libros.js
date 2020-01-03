@@ -267,27 +267,13 @@ new Vue({
 
                 console.log(response);
                 
-                // const link = document.createElement('a');
-                // link.setAttribute('href', response.data);
-                // link.setAttribute('download', 'test.pdf');
-                // link.style.display = 'none';
-                // document.body.appendChild(link);
-                // link.click();
-                // document.body.removeChild(link);
-
-
-
-                let blob = new Blob([response.data], {type: 'application/pdf'});
-                let foo = window.document.createElement('a');
-                foo.href = window.URL.createObjectURL(blob);
-                foo.download = 'test.pdf';
-                document.body.appendChild(foo);
-                foo.click();
-                document.body.removeChild(foo);
-
-                
-
-            
+                const link = document.createElement('a');
+                link.setAttribute('href', 'data:application/pdf;base64, ' + encodeURI(response.data));
+                link.setAttribute('download', 'test.pdf');
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);            
 
 
                 this.getLibros();

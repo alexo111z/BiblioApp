@@ -37,6 +37,11 @@
                                         <td width="10px">
                                             <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteEjemplar(ejemplar)"><i class="fa fa-user-times"></i></a>
                                         </td>
+                                        <td>
+                                        <a
+                                    :href="'/libros/descargar/' + ejemplar.Codigo +'?esCodigo=true'"
+                                    class="btn btn-primary btn-sm"><i class="fa fa-print"></i></a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>                              

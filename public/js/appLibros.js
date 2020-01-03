@@ -27335,24 +27335,29 @@ new Vue({
 
                 console.log(response);
                 
-                // const link = document.createElement('a');
-                // link.setAttribute('href', response.data);
-                // link.setAttribute('download', 'test.pdf');
-                // link.style.display = 'none';
-                // document.body.appendChild(link);
-                // link.click();
-                // document.body.removeChild(link);
+                const link = document.createElement('a');
+                link.setAttribute('href', 'data:application/pdf;base64, ' + encodeURI(response.data));
+                link.setAttribute('download', 'test.pdf');
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+          
 
 
+             /*var pdf= window.open("")
+      pdf.document.write("<iframe width='100%' height='100%'"+
+      " src='data:application/pdf;base64, " + encodeURI(response.data)+"'></iframe>") */
 
-                // let blob = new Blob([response], {type: 'application/pdf'});
-                let blob = response.data;
+                /*let blob = new Blob([response.data], {type: 'application/pdf'});
                 let foo = window.document.createElement('a');
                 foo.href = window.URL.createObjectURL(blob);
                 foo.download = 'test.pdf';
                 document.body.appendChild(foo);
                 foo.click();
                 document.body.removeChild(foo);
+                */
 
                 
 

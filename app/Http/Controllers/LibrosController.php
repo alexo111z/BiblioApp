@@ -137,7 +137,7 @@ class LibrosController extends Controller
             DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd},  1)");
         }
 
-        return new JsonResponse(null, 200);
+        return response(200);
     }
 
     public function update(Request $request, $ISBN)
@@ -203,9 +203,9 @@ class LibrosController extends Controller
                 DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
 
                 $barcodeImages[] = [
-                    'code' => $codigo,
+                    'code' => $id,
                     'image' => $barcodeImageGenerator->getBarcodePNG(
-                        $codigo,
+                        $id,
                         'C39+'
                     ),
                 ];
@@ -221,7 +221,7 @@ class LibrosController extends Controller
         }
 
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
-        return $barcodePdf->download($pdfFileName);
+        return base64_encode($barcodePdf->stream());
     }
 
 
