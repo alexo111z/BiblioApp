@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
 use PDF;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class LibrosController extends Controller
 {
@@ -219,13 +220,9 @@ class LibrosController extends Controller
                 ]
             );
         }
-    }
-        LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+        Libros::where('ISBN', '=', $ISBN)->update($request->all());
         return base64_encode($barcodePdf->stream());
-    }
-
-
-
+    }  
+    
 }
-
-}
+       
