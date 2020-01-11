@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Libros;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Milon\Barcode\DNS1D;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use PDF;
 
 class LibrosController extends Controller
 {
@@ -137,7 +137,7 @@ class LibrosController extends Controller
             DB::insert("insert into tblejemplares values({$id}, {$isbn}, CURRENT_DATE, {$cd},  1)");
         }
 
-        return new JsonResponse(null, 200);
+        return response(200);
     }
 
     public function update(Request $request, $ISBN)
@@ -181,13 +181,14 @@ class LibrosController extends Controller
             if($atributos['Edicion'] <10)
             $atributos['Edicion'] = "0".$atributos['Edicion'];
             $codigo = $codigo . $atributos['Edicion'];
-            
-            $ejemp = DB::select(
-                "select (count(*)+1) as ejemp from tblejemplares where tblejemplares.ISBN =  {$atributos['ISBN']}"
-            );
 
-            foreach ($ejemp as $k) {
-            for ($x = ($k->ejemp); $x <= $atributos['Ejemplares']; $x++) {
+            $pdfFileName = sprintf(
+                'codigo-de-barras-isbn-%s.pdf',
+                $ISBN
+            );
+            $barcodeImageGenerator = new DNS1D();
+            $barcodeImages = [];
+            for ($x=($libro->EjemDisp + 1); $x <= $atributos['Ejemplares']; $x++) {
                 $id = '';
                 if ($x < 10) {
                     $id = $codigo . "00" . $x;
@@ -198,15 +199,32 @@ class LibrosController extends Controller
                 else{
                     $id = $codigo.$x;
                 }
-
                 $cd = DB::table('tblejemplares')->where('ISBN', $ISBN)->value('CD');
                 DB::insert("insert into tblejemplares values({$id}, {$ISBN}, CURRENT_DATE, {$cd},  1)");
-            
 
+                $barcodeImages[] = [
+                    'code' => $id,
+                    'image' => $barcodeImageGenerator->getBarcodePNG(
+                        $id,
+                        'C39+'
+                    ),
+                ];
+            }
+
+            $barcodePdf = PDF::loadView(
+                'Libros.barcode',
+                [
+                    'isbn' => $ISBN,
+                    'barcodeImages' => $barcodeImages,
+                ]
+            );
         }
     }
         LIBROS::where('ISBN', '=', $ISBN)->update($request->all());
+        return base64_encode($barcodePdf->stream());
     }
+
+
 
 }
 

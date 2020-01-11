@@ -118,7 +118,9 @@
                                     <input type="number" name="ejemplares" id="ejemplares" class="form-control" min="1" max="999" required v-model="fillLibro.Ejemplares">
                                 </div>
                              </div>
+
                         </div>
+
                     </div>
                     <span v-for="error in errors" class="text-danger">@{{error}}</span>
                 </div>

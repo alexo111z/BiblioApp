@@ -179,6 +179,7 @@ new Vue({
             var url = 'autors';
             axios.post(url, this.newAutor)
             .then(response => {
+                this.newLibro.IdAutor = response.data.id;
                 this.getAutores();
                 this.newAutor = {
                     'Nombre':'',
@@ -199,11 +200,12 @@ new Vue({
             axios.post(url, this.newEditorial)
             .then(response => {
                 this.getEditoriales();
-
                 this.newEditorial = {
                     'Nombre':'',
                     'Existe':1
                 };
+                this.newLibro.IdEditorial = response.data.id;
+
                 this.errors = [];
                 $("#createEditorials").modal('hide');
                 toastr.success("Editorial registrada con exito.", "Tarea completada!");
@@ -263,6 +265,18 @@ new Vue({
             open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
             axios.put(url, this.fillLibro)
             .then(response => {
+
+                console.log(response);
+                
+                const link = document.createElement('a');
+                link.setAttribute('href', 'data:application/pdf;base64, ' + encodeURI(response.data));
+                link.setAttribute('download', 'test.pdf');
+                link.style.display = 'none';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);            
+
+
                 this.getLibros();
                 this.fillLibro = {
                     'ISBN':'',
@@ -283,8 +297,9 @@ new Vue({
                 toastr.success("Libro actualizado con exito.", "Tarea completada!");
             })
             .catch(error =>{
-                this.errors = error.response.data;
-                toastr.error(error.response.data.message, "No es posible disminuir la cantidad de ejemplares desde esta ventana, ya que debe elegir un ejemplar en especifico. Por favor dirijase a la ventana detalles libros!");
+                console.log(error);
+                // this.errors = error.response.data;
+                // toastr.error(error.response.data.message, "Error!");
             });
         },
 
