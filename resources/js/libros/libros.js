@@ -262,7 +262,7 @@ new Vue({
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
             this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
-            open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
+            
             axios.put(url, this.fillLibro)
             .then(response => {
 
@@ -299,7 +299,7 @@ new Vue({
             .catch(error =>{
                 console.log(error);
                 // this.errors = error.response.data;
-                // toastr.error(error.response.data.message, "Error!");
+                   toastr.error(error.response.data.message, "No es posible disminuir los ejemplares desde esta ventana, por favor dirijase a DETALLES LIBROS!");
             });
         },
 

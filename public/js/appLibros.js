@@ -27330,7 +27330,7 @@ new Vue({
         updateLibro: function (ISBN) {
             var url = 'libro/'+ ISBN;
             this.fillLibro.EjemDisp = this.fillLibro.Ejemplares;
-            open(location.origin + '/libros/descargar/' + this.fillLibro.ISBN);
+            
             axios.put(url, this.fillLibro)
             .then(response => {
 
@@ -27342,27 +27342,7 @@ new Vue({
                 link.style.display = 'none';
                 document.body.appendChild(link);
                 link.click();
-                document.body.removeChild(link);
-
-          
-
-
-             /*var pdf= window.open("")
-      pdf.document.write("<iframe width='100%' height='100%'"+
-      " src='data:application/pdf;base64, " + encodeURI(response.data)+"'></iframe>") */
-
-                /*let blob = new Blob([response.data], {type: 'application/pdf'});
-                let foo = window.document.createElement('a');
-                foo.href = window.URL.createObjectURL(blob);
-                foo.download = 'test.pdf';
-                document.body.appendChild(foo);
-                foo.click();
-                document.body.removeChild(foo);
-                */
-
-                
-
-            
+                document.body.removeChild(link);            
 
 
                 this.getLibros();
@@ -27387,7 +27367,7 @@ new Vue({
             .catch(error =>{
                 console.log(error);
                 // this.errors = error.response.data;
-                // toastr.error(error.response.data.message, "Error!");
+                   toastr.error(error.response.data.message, "No es posible disminuir los ejemplares desde esta ventana, por favor dirijase a DETALLES LIBROS!");
             });
         },
 
