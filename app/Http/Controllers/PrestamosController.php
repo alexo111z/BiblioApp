@@ -504,6 +504,10 @@ class PrestamosController extends Controller
                             DB::table('tblejemplares')
                                 ->where('Codigo', '=', $codigos[$i])
                                 ->update(['Existe' => 0]);
+                            
+                    
+
+
                         }
                         $respuesta = "1";
                     }
@@ -512,8 +516,7 @@ class PrestamosController extends Controller
                 }
             } else {
                 $respuesta = "No podemos prestarle más de 3 libros a la vez";
-            }
-    
+            }  
 
 
         }
@@ -523,7 +526,7 @@ class PrestamosController extends Controller
 
 
         
-        return response()->json(['id' => $respuesta]);
+        return response()->json(['id' => $respuesta,'folio' => $id,'f_i' => $fecha_i,'f_f' => $fechaf]);
     }
 
     /**

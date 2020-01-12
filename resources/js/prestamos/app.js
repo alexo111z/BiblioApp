@@ -1,9 +1,9 @@
 new Vue({
-
+    
     el: '#prestamosindex',
-
+    
     created: function () {
-
+        
         this.getkeeps();
         toastr.options = {
             showMethod: 'fadeIn', //fadeIn, slideDown, and show are built into jQuery
@@ -58,6 +58,11 @@ new Vue({
             'renovaciones': ''
         },
         fillcreate: {
+            'f_f': '',
+            'f_i': '',
+            'rfolio': '',
+            'napellidos': '',
+            'ctrlprestatario': '',
             'codigos': '',
             'ncontrol': '',
             'fecha_inicial': '',
@@ -69,8 +74,10 @@ new Vue({
         numcontrol: '',
         cuantoslibros: 0,
     },
-
+    
     computed:{
+
+        
         isActived:function () {
             return this.pagination.current_page;
         },
@@ -213,6 +220,9 @@ new Vue({
         getselectedcontrol: function (control) {
             $('#searchcontrol').val(control.control1);
             this.fillcreate.ncontrol = control.id;
+            this.fillcreate.ctrlprestatario = control.control1;
+            this.fillcreate.napellidos = control.nombre+" "+control.apellidos;
+            
             this.limpiardatos();
         },
 
@@ -310,6 +320,9 @@ new Vue({
             });
         },
 
+
+        
+
         crearprestamo: function () {
             var iduser = $("#searchcontrol").val();
             var fecha_i = $("#f_inicio").val();
@@ -338,14 +351,20 @@ new Vue({
                             
                             console.log(response.data.id);
 
-                            if (response.data.id === '1') {
-                                this.colalibros = [];
+                            if (response.data.id === '1') {                                
                                 this.limpiardatos();
                                 this.getkeeps();
                                 this.cardlibros = [];
                                 $('#searchcontrol').val("");
                                 $('#create').modal('hide');
+                                this.fillcreate.rfolio=response.data.folio;
+                                this.fillcreate.f_f=response.data.f_f;
+                                this.fillcreate.f_i=response.data.f_i;
+                                
+                                this.createPDF();
                                 toastr.success('Prestamo realizado correctamente');
+                                
+
 
                             } else {
                                 alert(response.data.id);
@@ -366,8 +385,33 @@ new Vue({
 
             }
 
+            
+
 
         },
 
+        createPDF:function() {
+            let pdfName = 'prestamo_numero'; 
+            var doc = new jsPDF();
+            doc.text("TEC MM CAMPUS PUERTO VALLARTA", 50, 20);
+               
+            doc.text("Folio # "+this.fillcreate.rfolio, 15, 50);
+            doc.text("Prestamo hecho a "+this.fillcreate.napellidos, 15, 60);
+            doc.text("Fecha de inicio: "+this.fillcreate.f_i, 15, 70);
+            doc.text("Fecha de término: "+this.fillcreate.f_f, 15,80);
+
+
+            if(this.colalibros[0]!=null){
+                doc.text("Codigo de libro prestado #1: "+this.colalibros[0], 15,100);
+            }
+            if(this.colalibros[1]!=null){
+                doc.text("Codigo de libro prestado #2: "+this.colalibros[1], 15,110);
+            }
+            if(this.colalibros[2]!=null){
+                doc.text("Codigo de libro prestado #3: "+this.colalibros[2], 15,120);
+            }
+            doc.output('dataurlnewwindow');
+            this.colalibros = [];
+          },
     }
 });
