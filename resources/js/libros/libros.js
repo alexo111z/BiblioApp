@@ -299,7 +299,7 @@ new Vue({
             .catch(error =>{
                 console.log(error);
                 // this.errors = error.response.data;
-                   toastr.error(error.response.data.message, "No es posible disminuir los ejemplares desde esta ventana, por favor dirijase a DETALLES LIBROS!");
+                   toastr.error(error.response.data.message, "No es posible disminuir el número de ejemplares");
             });
         },
 

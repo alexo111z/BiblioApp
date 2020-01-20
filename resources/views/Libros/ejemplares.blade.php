@@ -34,9 +34,9 @@
                                         <td width="20px">
                                         <a href="javascript:void()" class="btn btn-warning btn-sm" style="background-color: #2da19a; border-color: #2da19a;" v-on:click.prevent="editEjemplar(ejemplar)" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa fa-edit"></i></a>
                                         </td>
-                                        <td width="10px">
-                                            <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteEjemplar(ejemplar)"><i class="fa fa-user-times"></i></a>
-                                        </td>
+                                        <!--<td width="10px">
+                                           <a href="javascript:void()" class="btn btn-danger btn-sm" v-on:click.prevent="deleteEjemplar(ejemplar)"><i class="fa fa-user-times"></i></a>
+                                        </td>-->
                                         <td>
                                         <a
                                     :href="'/libros/descargar/' + ejemplar.Codigo +'?esCodigo=true'"
